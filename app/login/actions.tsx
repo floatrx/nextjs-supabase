@@ -2,9 +2,10 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { emailLoginSchema } from '@/validators/auth';
 import { createClient } from '@/lib/supabase/server';
 
-export async function login(formData: FormData) {
+async function auth(action: 'signInWithPassword' | 'signUp', formData: FormData) {
   const supabase = await createClient();
 
   const credentials = {
@@ -12,14 +13,32 @@ export async function login(formData: FormData) {
     password: formData.get('password') as string,
   };
 
-  const { error } = await supabase.auth.signInWithPassword(credentials);
+  try {
+    // Validate the credentials object
+    const isValidCredentials = emailLoginSchema.parse(credentials);
 
+    if (!isValidCredentials) {
+      throw new Error('Invalid credentials');
+    }
+  } catch (e) {
+    redirect('/login?message=Invalid credentials');
+  }
+
+  const { error } = await supabase.auth[action](credentials);
   if (error) {
-    redirect('/error');
+    redirect('/login?message=Invalid credentials');
   }
 
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/protected');
+}
+
+export async function login(formData: FormData) {
+  return auth('signInWithPassword', formData);
+}
+
+export async function signup(formData: FormData) {
+  return auth('signUp', formData);
 }
 
 export async function googleLogin() {
@@ -61,26 +80,4 @@ export async function githubLogin() {
 
   // Proceed to the URL provided by the OAuth provider
   redirect(data.url);
-}
-
-export async function signup(formData: FormData) {
-  const supabase = await createClient();
-
-  const credentials = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  };
-
-  try {
-    const { error } = await supabase.auth.signUp(credentials);
-    if (error) {
-      console.log('Signup failed');
-      await login(formData);
-    }
-  } catch (e) {
-    console.log(e);
-  }
-
-  revalidatePath('/', 'layout');
-  redirect('/');
 }

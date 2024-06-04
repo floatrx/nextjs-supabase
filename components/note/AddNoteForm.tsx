@@ -24,15 +24,6 @@ export const AddNoteForm = () => {
         >
           Add Note
         </Submit>
-        <button
-          className="border bg-button text-button-foreground rounded-md px-4 py-2 hover:bg-success/90"
-          type="button"
-          onClick={() => {
-            ref.current?.reset();
-          }}
-        >
-          Reset
-        </button>
       </div>
     </Form>
   );

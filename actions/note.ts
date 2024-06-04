@@ -6,7 +6,12 @@ import { createClient } from '@/lib/supabase/server';
 export async function createNote(formData: FormData) {
   const supabase = await createClient();
   const title = formData.get('title') as string;
-  const { error } = await supabase.from('notes').insert({ title });
+  const { error } = await supabase.from('notes').insert(
+    { title },
+    {
+      count: 'exact',
+    },
+  );
 
   if (error) {
     console.error('Error adding note:', error);

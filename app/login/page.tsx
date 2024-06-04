@@ -6,14 +6,14 @@ import { GitHubIcon } from '@/components/icons/GitHubIcon';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
 import { HomeButton } from '@/components/layout/HomeButton';
 
-export default function LoginPage() {
+export default function LoginPage({ searchParams }: { searchParams: { message: string } }) {
   return (
     <div className="container flex flex-col w-full px-8 sm:max-w-md justify-center gap-4">
       <HomeButton />
       <h1 className="text-4xl">Login</h1>
       <Form className="flex flex-col gap-2">
-        <Input name="email" placeholder="you@example.com" required />
-        <Input type="password" name="password" placeholder="••••••••" required />
+        <Input name="email" placeholder="you@example.com" />
+        <Input type="password" name="password" placeholder="••••••••" />
         <Submit
           formAction={login}
           className="bg-success text-success-foreground rounded-md px-4 py-2 mb-2 hover:bg-success/90"
@@ -40,6 +40,8 @@ export default function LoginPage() {
           <GitHubIcon /> GitHub
         </Submit>
       </Form>
+
+      {searchParams?.message && <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">{searchParams.message}</p>}
     </div>
   );
 }
