@@ -6,6 +6,7 @@ import type { Database } from '@/types/schema';
 /**
  * TODO: Research best practices to create
  *  a Supabase client for server-side rendering.
+ * @see https://supabase.com/docs/guides/auth/server-side/nextjs
  */
 export const createClient = () => {
   const cookieStore = cookies();
@@ -26,7 +27,7 @@ export const createClient = () => {
       },
       remove(name: string, options: CookieOptions) {
         try {
-          cookieStore.set({ name, value: '', ...options });
+          cookieStore.delete({ name, ...options });
         } catch (error) {
           // The `delete` method was called from a Server Component.
           // This can be ignored if you have middleware refreshing
