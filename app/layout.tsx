@@ -1,9 +1,10 @@
+import { Providers } from '@/app/providers';
 import { DEFAULT_URL } from '@/const';
 import { GeistSans } from 'geist/font/sans';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/header';
 // Styles
-import './globals.css';
+import './styles/globals.css';
 
 export const metadata = {
   metadataBase: new URL(DEFAULT_URL),
@@ -13,12 +14,14 @@ export const metadata = {
 
 const RootLayout: FC = ({ children }) => {
   return (
-    <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
+    <html lang="en" className={GeistSans.className} suppressHydrationWarning>
+      <body>
         <main className="min-h-screen flex flex-col items-center">
-          <Header />
-          <div className="flex-1 w-full">{children}</div>
-          <Footer />
+          <Providers>
+            <Header />
+            <div className="flex-1 w-full">{children}</div>
+            <Footer />
+          </Providers>
         </main>
       </body>
     </html>

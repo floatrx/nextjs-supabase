@@ -33,18 +33,10 @@ export default function LoginPage() {
           <span className="flex-shrink mx-4 text-gray-400">Or</span>
           <div className="flex-grow border-t"></div>
         </div>
-        <Submit
-          formAction={googleLogin}
-          className="stack justify-center border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing in..."
-        >
+        <Submit formAction={googleLogin} className="stack justify-center border rounded-md px-4 py-2 mb-2" pendingText="Signing in...">
           <GoogleIcon /> Google
         </Submit>
-        <Submit
-          formAction={githubLogin}
-          className="stack justify-center border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing in..."
-        >
+        <Submit formAction={githubLogin} className="stack justify-center border rounded-md px-4 py-2 mb-2" pendingText="Signing in...">
           <GitHubIcon /> GitHub
         </Submit>
       </Form>

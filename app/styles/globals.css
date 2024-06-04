@@ -1,0 +1,49 @@
+@import 'colors.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-foreground/20;
+  }
+
+  body {
+    @apply h-screen text-foreground antialiased;
+  }
+
+  button {
+    &[disabled] {
+      @apply pointer-events-none cursor-not-allowed opacity-60;
+    }
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--background) inset !important;
+}
+
+@layer utilities {
+  .stack {
+    @apply flex items-center gap-2;
+  }
+}
+
+.animate-in {
+  animation: animateIn 0.3s ease 0.15s both;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

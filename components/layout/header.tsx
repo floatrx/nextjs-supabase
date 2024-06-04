@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ThemeSwitch from '@/components/ThemeSwitch';
 import AuthButton from '@/components/auth/AuthButton';
 import Logo from '@/components/layout/Logo';
 
@@ -10,7 +11,10 @@ export const Header = async () => {
           <Logo />
           <span className="sr-only">Supabase</span>
         </Link>
-        <AuthButton />
+        <div className="stack">
+          <ThemeSwitch />
+          <AuthButton />
+        </div>
       </div>
     </header>
   );
