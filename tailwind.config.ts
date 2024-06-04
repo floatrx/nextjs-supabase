@@ -1,8 +1,14 @@
 import type { Config } from 'tailwindcss';
 
+import { nextui } from '@nextui-org/theme';
+
 const config: Config = {
   darkMode: 'class',
-  content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
+  content: [
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
       container: {
@@ -44,8 +50,13 @@ const config: Config = {
           foreground: 'hsl(var(--accent-foreground))',
         },
       },
+      fontFamily: {
+        sans: ['var(--font-sans)'],
+        mono: ['var(--font-geist-mono)'],
+      },
     },
   },
-  plugins: [],
+  plugins: [nextui()],
 };
+
 export default config;

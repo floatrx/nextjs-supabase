@@ -1,9 +1,10 @@
 'use client';
 
 import { useRef } from 'react';
-import { createNote } from '@/actions/note';
+import { Input } from '@nextui-org/input';
+
+import { createNote } from '@/app/notes/note';
 import { Form } from '@/components/form/Form';
-import { Input } from '@/components/form/Input';
 import { Submit } from '@/components/form/Submit';
 
 export const AddNoteForm = () => {
@@ -11,16 +12,16 @@ export const AddNoteForm = () => {
   const ref = useRef<HTMLFormElement>(null);
 
   return (
-    <Form className="stack mt-4 gap-5 text-xl" ref={ref}>
-      <Input name="title" placeholder="Add new note..." type="text" autofocus />
+    <Form ref={ref} className="stack mt-4 gap-5 text-xl">
+      <Input name="title" placeholder="Add new note..." type="text" />
       <div className="stack">
         <Submit
-          pendingText="Adding note..."
+          className="rounded-md bg-success px-4 py-2 text-success-foreground hover:bg-success/90"
           formAction={async (formData) => {
             await createNote(formData);
             ref.current?.reset();
           }}
-          className="bg-success text-success-foreground rounded-md px-4 py-2 hover:bg-success/90"
+          pendingText="Adding note..."
         >
           Add Note
         </Submit>

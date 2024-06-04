@@ -1,31 +1,44 @@
-import { Providers } from '@/app/providers';
-import { DEFAULT_URL } from '@/const';
-import { GeistSans } from 'geist/font/sans';
+import clsx from 'clsx';
+import { Metadata, Viewport } from 'next';
+
 import { Footer } from '@/components/layout/Footer';
-import { Header } from '@/components/layout/header';
-// Styles
-import './styles/globals.css';
+import { Header } from '@/components/layout/Header';
+import { Providers } from '@/app/providers';
+import { fontSans } from '@/config/fonts';
+import { siteConfig } from '@/config/site';
 
-export const metadata = {
-  metadataBase: new URL(DEFAULT_URL),
-  title: 'Next.js and Supabase Starter Kit',
-  description: 'The fastest way to build apps with Next.js and Supabase',
+import '@/styles/globals.css';
+
+export const metadata: Metadata = {
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
-const RootLayout: FC = ({ children }) => {
-  return (
-    <html lang="en" className={GeistSans.className} suppressHydrationWarning>
-      <body>
-        <main className="min-h-screen flex flex-col items-center">
-          <Providers>
-            <Header />
-            <div className="flex-1 w-full">{children}</div>
-            <Footer />
-          </Providers>
-        </main>
-      </body>
-    </html>
-  );
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
 };
+
+const RootLayout: FC = ({ children }) => (
+  <html suppressHydrationWarning lang="en">
+    <body className={clsx('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+      <Providers attribute="class" defaultTheme="dark">
+        <div className="relative flex h-screen flex-col">
+          <Header />
+          <main className="container mx-auto max-w-7xl flex-grow px-6 pt-16">{children}</main>
+          <Footer />
+        </div>
+      </Providers>
+    </body>
+  </html>
+);
 
 export default RootLayout;

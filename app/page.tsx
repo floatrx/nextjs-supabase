@@ -1,16 +1,14 @@
-import { createClient } from '@/lib/supabase/server';
+import { title } from '@/components/primitives';
 
-export default async function Index() {
-  const supabase = await createClient();
-  const user = await supabase.auth.getUser().then((res) => res.data.user);
+export default function Home() {
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <div className="container">
-        <h1 className="text-4xl">Testing</h1>
-        <p>Next.js and Supabase test project</p>
-
-        <pre>User: {user ? JSON.stringify(user, null, 2) : 'Unauthorized'}</pre>
+    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      <div className="inline-block max-w-lg justify-center text-center">
+        <h1>
+          <span className={title()}>Testing&nbsp;</span>
+          <span className={title({ color: 'green' })}>Supabase&nbsp;</span>
+        </h1>
       </div>
-    </div>
+    </section>
   );
 }

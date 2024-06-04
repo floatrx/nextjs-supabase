@@ -1,47 +1,46 @@
+import { Input } from '@nextui-org/input';
+
 import { githubLogin, googleLogin, login, signup } from '@/app/login/actions';
 import { Form } from '@/components/form/Form';
-import { Input } from '@/components/form/Input';
 import { Submit } from '@/components/form/Submit';
-import { GitHubIcon } from '@/components/icons/GitHubIcon';
+import { GitHubIcon } from '@/components/icons/GithubIcon';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
-import { HomeButton } from '@/components/layout/HomeButton';
 
 export default function LoginPage({ searchParams }: { searchParams: { message: string } }) {
   return (
-    <div className="container flex flex-col w-full px-8 sm:max-w-md justify-center gap-4">
-      <HomeButton />
+    <div className="container flex w-full flex-col justify-center gap-4 px-8 sm:max-w-md">
       <h1 className="text-4xl">Login</h1>
       <Form className="flex flex-col gap-2">
         <Input name="email" placeholder="you@example.com" />
-        <Input type="password" name="password" placeholder="••••••••" />
+        <Input name="password" placeholder="••••••••" type="password" />
         <Submit
+          className="mb-2 rounded-md bg-success px-4 py-2 text-success-foreground hover:bg-success/90"
           formAction={login}
-          className="bg-success text-success-foreground rounded-md px-4 py-2 mb-2 hover:bg-success/90"
           pendingText="Signing In..."
         >
           Sign In
         </Submit>
         <Submit
+          className="mb-2 rounded-md border border-foreground/20 px-4 py-2 text-foreground"
           formAction={signup}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
           pendingText="Signing Up..."
         >
           Sign Up
         </Submit>
-        <div className="relative flex py-2 items-center">
-          <div className="flex-grow border-t"></div>
-          <span className="flex-shrink mx-4 text-gray-400">Or</span>
-          <div className="flex-grow border-t"></div>
+        <div className="relative flex items-center py-2">
+          <div className="flex-grow border-t" />
+          <span className="mx-4 flex-shrink text-gray-400">Or</span>
+          <div className="flex-grow border-t" />
         </div>
-        <Submit formAction={googleLogin} className="stack justify-center border rounded-md px-4 py-2 mb-2" pendingText="Signing in...">
+        <Submit className="stack mb-2 justify-center rounded-md border px-4 py-2" formAction={googleLogin} pendingText="Signing in...">
           <GoogleIcon /> Google
         </Submit>
-        <Submit formAction={githubLogin} className="stack justify-center border rounded-md px-4 py-2 mb-2" pendingText="Signing in...">
+        <Submit className="stack mb-2 justify-center rounded-md border px-4 py-2" formAction={githubLogin} pendingText="Signing in...">
           <GitHubIcon /> GitHub
         </Submit>
       </Form>
 
-      {searchParams?.message && <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">{searchParams.message}</p>}
+      {searchParams?.message && <p className="mt-4 bg-foreground/10 p-4 text-center text-foreground">{searchParams.message}</p>}
     </div>
   );
 }

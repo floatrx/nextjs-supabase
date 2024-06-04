@@ -1,9 +1,11 @@
 'use server';
 
-import { cookies } from 'next/headers';
-import { SUPABASE_KEY, SUPABASE_URL } from '@/const';
-import { type CookieOptions, createServerClient } from '@supabase/ssr';
 import type { Database } from '@/types/schema';
+
+import { cookies } from 'next/headers';
+import { type CookieOptions, createServerClient } from '@supabase/ssr';
+
+import { SUPABASE_KEY, SUPABASE_URL } from '@/const';
 
 /**
  * TODO: Research best practices to create

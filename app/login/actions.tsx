@@ -2,7 +2,8 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { emailLoginSchema } from '@/validators/auth';
+
+import { emailLoginSchema } from '@/validators';
 import { createClient } from '@/lib/supabase/server';
 
 async function auth(action: 'signInWithPassword' | 'signUp', formData: FormData) {
@@ -25,12 +26,13 @@ async function auth(action: 'signInWithPassword' | 'signUp', formData: FormData)
   }
 
   const { error } = await supabase.auth[action](credentials);
+
   if (error) {
     redirect('/login?message=Invalid credentials');
   }
 
   revalidatePath('/', 'layout');
-  redirect('/protected');
+  redirect('/notes');
 }
 
 export async function login(formData: FormData) {
@@ -54,6 +56,7 @@ export async function googleLogin() {
 
   if (error) {
     console.log('Google login failed');
+
     return;
   }
 
@@ -73,6 +76,7 @@ export async function githubLogin() {
 
   if (error) {
     console.log('Github login failed');
+
     return;
   }
 
