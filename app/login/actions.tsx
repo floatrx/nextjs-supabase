@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 
 export async function login(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const credentials = {
     email: formData.get('email') as string,
@@ -23,13 +23,13 @@ export async function login(formData: FormData) {
 }
 
 export async function googleLogin() {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
       scopes: 'email profile',
-      redirectTo: 'http://localhost:3000/auth/callback/google',
+      redirectTo: 'http://localhost:3000/auth/callback',
     },
   });
 
@@ -42,8 +42,29 @@ export async function googleLogin() {
   redirect(data.url);
 }
 
+export async function githubLogin() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'github',
+    options: {
+      redirectTo: 'http://localhost:3000/auth/callback',
+    },
+  });
+
+  if (error) {
+    console.log('Github login failed');
+    return;
+  }
+
+  console.log('GIT', data);
+
+  // Proceed to the URL provided by the OAuth provider
+  redirect(data.url);
+}
+
 export async function signup(formData: FormData) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   const credentials = {
     email: formData.get('email') as string,

@@ -3,7 +3,7 @@ import NoteItem from '@/components/note/NoteItem';
 import { createClient } from '@/lib/supabase/server';
 
 export default async function ProtectedPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: notes } = await supabase.from('notes').select();
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">

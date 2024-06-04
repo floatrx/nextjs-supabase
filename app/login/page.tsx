@@ -1,10 +1,12 @@
-import { googleLogin, login, signup } from '@/app/login/actions';
+import { githubLogin, googleLogin, login, signup } from '@/app/login/actions';
 import { Form } from '@/components/form/Form';
 import { Input } from '@/components/form/Input';
 import { Submit } from '@/components/form/Submit';
+import { GitHubIcon } from '@/components/icons/GitHubIcon';
+import { GoogleIcon } from '@/components/icons/GoogleIcon';
 import { HomeButton } from '@/components/layout/HomeButton';
 
-export default function Login() {
+export default function LoginPage() {
   return (
     <div className="container flex flex-col w-full px-8 sm:max-w-md justify-center gap-4">
       <HomeButton />
@@ -26,12 +28,24 @@ export default function Login() {
         >
           Sign Up
         </Submit>
+        <div className="relative flex py-2 items-center">
+          <div className="flex-grow border-t"></div>
+          <span className="flex-shrink mx-4 text-gray-400">Or</span>
+          <div className="flex-grow border-t"></div>
+        </div>
         <Submit
           formAction={googleLogin}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing Up..."
+          className="stack justify-center border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
+          pendingText="Signing in..."
         >
-          Google
+          <GoogleIcon /> Google
+        </Submit>
+        <Submit
+          formAction={githubLogin}
+          className="stack justify-center border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
+          pendingText="Signing in..."
+        >
+          <GitHubIcon /> GitHub
         </Submit>
       </Form>
     </div>

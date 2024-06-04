@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 
 export default async function Index() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const user = await supabase.auth.getUser().then((res) => res.data.user);
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
