@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { Metadata, Viewport } from 'next';
+import NextTopLoader from 'nextjs-toploader';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
@@ -7,6 +8,7 @@ import { Providers } from '@/app/providers';
 import { fontSans } from '@/config/fonts';
 import { siteConfig } from '@/config/site';
 
+// Styles
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
@@ -30,6 +32,7 @@ export const viewport: Viewport = {
 const RootLayout: FC = ({ children }) => (
   <html suppressHydrationWarning lang="en">
     <body className={clsx('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+      <NextTopLoader />
       <Providers attribute="class" defaultTheme="dark">
         <div className="relative flex h-screen flex-col">
           <Header />

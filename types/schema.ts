@@ -6,15 +6,121 @@ export type Database = {
       notes: {
         Row: {
           id: number;
+          id_author: string | null;
+          id_status: number | null;
+          is_done: boolean | null;
           title: string | null;
         };
         Insert: {
           id?: number;
+          id_author?: string | null;
+          id_status?: number | null;
+          is_done?: boolean | null;
           title?: string | null;
         };
         Update: {
           id?: number;
+          id_author?: string | null;
+          id_status?: number | null;
+          is_done?: boolean | null;
           title?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'notes_id_author_fkey';
+            columns: ['id_author'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'notes_id_status_fkey';
+            columns: ['id_status'];
+            isOneToOne: false;
+            referencedRelation: 'statuses';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      profiles: {
+        Row: {
+          avatar: string | null;
+          created_at: string | null;
+          email: string | null;
+          id: string;
+          id_role: number | null;
+          updated_at: string | null;
+          username: string | null;
+        };
+        Insert: {
+          avatar?: string | null;
+          created_at?: string | null;
+          email?: string | null;
+          id: string;
+          id_role?: number | null;
+          updated_at?: string | null;
+          username?: string | null;
+        };
+        Update: {
+          avatar?: string | null;
+          created_at?: string | null;
+          email?: string | null;
+          id?: string;
+          id_role?: number | null;
+          updated_at?: string | null;
+          username?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'profiles_auth_users_id_fkey';
+            columns: ['id'];
+            isOneToOne: true;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'profiles_email_fkey';
+            columns: ['email'];
+            isOneToOne: true;
+            referencedRelation: 'users';
+            referencedColumns: ['email'];
+          },
+          {
+            foreignKeyName: 'profiles_id_role_fkey';
+            columns: ['id_role'];
+            isOneToOne: false;
+            referencedRelation: 'roles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      roles: {
+        Row: {
+          id: number;
+          name: string;
+        };
+        Insert: {
+          id?: number;
+          name: string;
+        };
+        Update: {
+          id?: number;
+          name?: string;
+        };
+        Relationships: [];
+      };
+      statuses: {
+        Row: {
+          id: number;
+          name: string | null;
+        };
+        Insert: {
+          id?: number;
+          name?: string | null;
+        };
+        Update: {
+          id?: number;
+          name?: string | null;
         };
         Relationships: [];
       };

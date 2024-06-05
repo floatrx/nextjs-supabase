@@ -6,12 +6,12 @@ import { useRouter } from 'next/navigation';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { ThemeProviderProps } from 'next-themes/dist/types';
 
-export function Providers(props: ThemeProviderProps) {
+export function Providers({ children, ...props }: ThemeProviderProps) {
   const router = useRouter();
 
   return (
     <NextUIProvider navigate={router.push}>
-      <NextThemesProvider {...props} />
+      <NextThemesProvider {...props}>{children}</NextThemesProvider>
     </NextUIProvider>
   );
 }
