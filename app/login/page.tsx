@@ -1,6 +1,6 @@
 import { Input } from '@nextui-org/input';
 
-import { githubLogin, googleLogin, login, signup } from '@/app/login/actions';
+import { githubLogin, googleLogin, login, signup } from '@/actions/login';
 import { Form } from '@/components/form/Form';
 import { Submit } from '@/components/form/Submit';
 import { GitHubIcon } from '@/components/icons/GithubIcon';

@@ -73,6 +73,7 @@
         "prev": ["const", "let", "var"],
         "next": ["const", "let", "var"]
       }
-    ]
+    ],
+    "jsx-a11y/no-autofocus": "off"
   }
 }

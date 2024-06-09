@@ -1,3 +1,4 @@
+// TODO: Replace hard-coded URLs with environment variables!
 'use server';
 
 import { revalidatePath } from 'next/cache';
@@ -55,7 +56,7 @@ export async function googleLogin() {
   });
 
   if (error) {
-    console.log('Google login failed');
+    console.error('Google login failed');
 
     return;
   }
@@ -75,12 +76,10 @@ export async function githubLogin() {
   });
 
   if (error) {
-    console.log('Github login failed');
+    console.error('Github login failed');
 
     return;
   }
-
-  console.log('GIT', data);
 
   // Proceed to the URL provided by the OAuth provider
   redirect(data.url);

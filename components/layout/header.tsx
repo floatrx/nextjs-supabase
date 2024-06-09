@@ -6,12 +6,12 @@ import clsx from 'clsx';
 
 import { siteConfig } from '@/config/site';
 import { AuthButton } from '@/components/auth/AuthButton';
-import { DiscordIcon, GithubIcon, TwitterIcon, Logo } from '@/components/icons';
+import { GithubIcon, Logo } from '@/components/icons';
 import { ThemeSwitch } from '@/components/ThemeSwitch';
 
 export const Header = () => {
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar maxWidth="full" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="max-w-fit gap-3">
           <NextLink className="flex items-center justify-start gap-1" href="/">
@@ -35,12 +35,6 @@ export const Header = () => {
 
       <NavbarContent className="hidden basis-1/5 sm:flex sm:basis-full" justify="end">
         <NavbarItem className="hidden gap-2 sm:flex">
-          <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
-            <TwitterIcon className="text-default-500" />
-          </Link>
-          <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
-            <DiscordIcon className="text-default-500" />
-          </Link>
           <Link isExternal aria-label="Github" href={siteConfig.links.github}>
             <GithubIcon className="text-default-500" />
           </Link>

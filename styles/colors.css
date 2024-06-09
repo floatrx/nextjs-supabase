@@ -1,9 +1,7 @@
 /* Light theme */
 :root {
-  --background: 210 40% 96.1;
+  --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
-
-  --header-bg: 0 0% 100%;
 
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
@@ -14,7 +12,7 @@
   --primary: 222.2 47.4% 11.2%;
   --primary-foreground: 210 40% 98%;
 
-  --secondary: 210 40% 92%;
+  --secondary: 210 40% 96.1%;
   --secondary-foreground: 222.2 47.4% 11.2%;
 
   --muted: 210 40% 96.1%;
@@ -25,9 +23,6 @@
 
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
-
-  --success: 122.7 39.6% 49.8%;
-  --success-foreground: 210 40% 98%;
 
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
@@ -40,8 +35,6 @@
 .dark {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
-
-  --header-bg: 228 88% 3%;
 
   --card: 222.2 84% 4.9%;
   --card-foreground: 210 40% 98%;

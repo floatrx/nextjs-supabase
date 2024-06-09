@@ -8,6 +8,12 @@ const nextConfig = {
       {
         hostname: 'lh3.googleusercontent.com',
       },
+      {
+        hostname: 'floatrx.s3.eu-central-1.amazonaws.com'
+      },
+      {
+        hostname: 'nextui.org'
+      }
     ],
   },
 };

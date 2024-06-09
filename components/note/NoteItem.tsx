@@ -1,10 +1,10 @@
 'use client';
 
-import type { TNote } from '@/types/tables';
+import type { TNote } from '@/types/note';
 
 import { useState } from 'react';
 
-import { removeNote } from '@/app/notes/note';
+import { removeNote } from '@/actions/notes';
 
 export default function NoteItem({ note }: { note: TNote }) {
   const [loading, setLoading] = useState(false);

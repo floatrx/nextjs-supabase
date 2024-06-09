@@ -42,33 +42,86 @@ export type Database = {
           },
         ];
       };
-      profiles: {
+      posts: {
         Row: {
-          avatar: string | null;
-          created_at: string | null;
-          email: string | null;
-          id: string;
-          id_role: number | null;
-          updated_at: string | null;
-          username: string | null;
+          content: string;
+          created_at: string;
+          id: number;
+          id_author: string;
+          is_published: boolean;
+          published_at: string | null;
+          seo_description: string | null;
+          seo_title: string | null;
+          slug: string;
+          thumbnail: string | null;
+          title: string;
+          updated_at: string;
         };
         Insert: {
-          avatar?: string | null;
-          created_at?: string | null;
-          email?: string | null;
-          id: string;
-          id_role?: number | null;
-          updated_at?: string | null;
-          username?: string | null;
+          content?: string;
+          created_at?: string;
+          id?: number;
+          id_author?: string;
+          is_published?: boolean;
+          published_at?: string | null;
+          seo_description?: string | null;
+          seo_title?: string | null;
+          slug?: string;
+          thumbnail?: string | null;
+          title?: string;
+          updated_at?: string;
         };
         Update: {
-          avatar?: string | null;
-          created_at?: string | null;
-          email?: string | null;
-          id?: string;
-          id_role?: number | null;
+          content?: string;
+          created_at?: string;
+          id?: number;
+          id_author?: string;
+          is_published?: boolean;
+          published_at?: string | null;
+          seo_description?: string | null;
+          seo_title?: string | null;
+          slug?: string;
+          thumbnail?: string | null;
+          title?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'posts_id_author_fkey1';
+            columns: ['id_author'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      profiles: {
+        Row: {
+          avatar: string;
+          created_at: string;
+          email: string;
+          id: string;
+          id_role: number;
+          updated_at: string | null;
+          username: string;
+        };
+        Insert: {
+          avatar?: string;
+          created_at?: string;
+          email?: string;
+          id: string;
+          id_role?: number;
           updated_at?: string | null;
-          username?: string | null;
+          username?: string;
+        };
+        Update: {
+          avatar?: string;
+          created_at?: string;
+          email?: string;
+          id?: string;
+          id_role?: number;
+          updated_at?: string | null;
+          username?: string;
         };
         Relationships: [
           {
@@ -121,6 +174,21 @@ export type Database = {
         Update: {
           id?: number;
           name?: string | null;
+        };
+        Relationships: [];
+      };
+      tags: {
+        Row: {
+          id: number;
+          name: string;
+        };
+        Insert: {
+          id?: number;
+          name?: string;
+        };
+        Update: {
+          id?: number;
+          name?: string;
         };
         Relationships: [];
       };

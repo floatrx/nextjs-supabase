@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import { Input } from '@nextui-org/input';
 
-import { createNote } from '@/app/notes/note';
+import { createNote } from '@/actions/notes';
 import { Form } from '@/components/form/Form';
 import { Submit } from '@/components/form/Submit';
 

@@ -36,7 +36,7 @@ const RootLayout: FC = ({ children }) => (
       <Providers attribute="class" defaultTheme="dark">
         <div className="relative flex h-screen flex-col">
           <Header />
-          <main className="container mx-auto max-w-7xl flex-grow px-6 pt-16">{children}</main>
+          <main className="container flex-1 py-5">{children}</main>
           <Footer />
         </div>
       </Providers>

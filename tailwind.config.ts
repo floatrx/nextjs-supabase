@@ -7,7 +7,7 @@ const config: Config = {
   content: [
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@nextui-org/theme/dist/components/(avatar|breadcrumbs|button|card|chip|code|image|input|kbd|link|navbar|pagination|popover|snippet|spinner|toggle|ripple).js',
   ],
   theme: {
     extend: {
@@ -15,7 +15,7 @@ const config: Config = {
         center: true,
         padding: '1rem',
         screens: {
-          '2xl': '1000px',
+          '2xl': '1400px',
         },
       },
       colors: {
@@ -25,6 +25,9 @@ const config: Config = {
           background: 'hsl(var(--btn-background))',
           'background-hover': 'hsl(var(--btn-background-hover))',
         },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -37,10 +40,6 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
-        success: {
-          DEFAULT: 'hsl(var(--success))',
-          foreground: 'hsl(var(--success-foreground))',
-        },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
@@ -49,6 +48,19 @@ const config: Config = {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
         sans: ['var(--font-sans)'],
@@ -56,7 +68,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [nextui()],
-};
+  plugins: [nextui(), require('@tailwindcss/typography'), require('tailwindcss-animate')],
+} satisfies Config;
 
 export default config;

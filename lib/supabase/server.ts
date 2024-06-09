@@ -1,6 +1,6 @@
 'use server';
 
-import type { Database } from '@/types/schema';
+import type { Database } from '@/types/';
 
 import { cookies } from 'next/headers';
 import { type CookieOptions, createServerClient } from '@supabase/ssr';
