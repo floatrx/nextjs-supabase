@@ -34,6 +34,7 @@ export const postCreate: FormAction = async (_, data) => {
 
   return { statusText, status };
 };
+
 export const postUpdate: FormAction = async (_, data) => {
   const formData = Object.fromEntries(data);
 

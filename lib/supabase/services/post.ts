@@ -1,3 +1,7 @@
+/**
+ * TODO: Move all the logic related to
+ *  the post entity here (validations & queries)
+ */
 import { createClient } from '@/lib/supabase/server';
 import { postSearchSchema } from '@/validators/postSchema';
 
