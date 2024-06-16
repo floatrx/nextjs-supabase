@@ -1,8 +1,10 @@
-import { UserCircle } from 'lucide-react';
+import { Button } from '@nextui-org/button';
+import { UserCircle, LogIn, LogOut } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
+import { Submit } from '@/components/form/Submit';
 import { createClient } from '@/lib/supabase/server';
 
 export const AuthButton = async () => {
@@ -28,13 +30,16 @@ export const AuthButton = async () => {
         <UserCircle />
       )}
       {user.email}
-      <form action={signOut}>
-        <button className="rounded-md bg-btn-background px-4 py-2 no-underline hover:bg-btn-background-hover">Logout</button>
+      <form>
+        <Submit isIconOnly formAction={signOut} title="Logout" variant="bordered">
+          <LogOut size={16} />
+        </Submit>
       </form>
     </div>
   ) : (
-    <Link className="flex rounded-md bg-btn-background px-3 py-2 text-foreground no-underline hover:bg-btn-background-hover" href="/login">
+    <Button as={Link} href="/login">
+      <LogIn size={16} />
       Login
-    </Link>
+    </Button>
   );
 };

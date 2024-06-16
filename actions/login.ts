@@ -1,13 +1,16 @@
-// TODO: Replace hard-coded URLs with environment variables!
 'use server';
+
+import type { SignInWithOAuthCredentials } from '@supabase/auth-js';
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+import { baseUrl } from '@/config';
 import { createClient } from '@/lib/supabase/server';
 import { emailLoginSchema } from '@/validators';
 
-async function auth(action: 'signInWithPassword' | 'signUp', formData: FormData) {
+// Login with email
+const authBase = async (action: 'signInWithPassword' | 'signUp', formData: FormData) => {
   const supabase = await createClient();
 
   const credentials = {
@@ -34,53 +37,44 @@ async function auth(action: 'signInWithPassword' | 'signUp', formData: FormData)
 
   revalidatePath('/', 'layout');
   redirect('/notes');
-}
+};
 
-export async function login(formData: FormData) {
-  return auth('signInWithPassword', formData);
-}
+export const login = async (formData: FormData) => authBase('signInWithPassword', formData);
+export const signup = async (formData: FormData) => authBase('signUp', formData);
 
-export async function signup(formData: FormData) {
-  return auth('signUp', formData);
-}
-
-export async function googleLogin() {
+// Login with OAuth providers
+const oauthBase = async ({ options, ...credentials }: SignInWithOAuthCredentials) => {
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
+    ...credentials,
+    options: {
+      ...options,
+      redirectTo: `${baseUrl}/api/auth/callback`,
+    },
+  });
+
+  if (error) {
+    console.error(`${credentials.provider} login failed`);
+
+    return;
+  }
+
+  // Proceed to the URL provided by the OAuth provider
+  redirect(data.url);
+};
+
+export const googleLogin = async () => {
+  return oauthBase({
     provider: 'google',
     options: {
       scopes: 'email profile',
-      redirectTo: 'http://localhost:3000/auth/callback',
     },
   });
+};
 
-  if (error) {
-    console.error('Google login failed');
-
-    return;
-  }
-
-  // Proceed to the URL provided by the OAuth provider
-  redirect(data.url);
-}
-
-export async function githubLogin() {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
+export const githubLogin = async () => {
+  return oauthBase({
     provider: 'github',
-    options: {
-      redirectTo: 'http://localhost:3000/auth/callback',
-    },
   });
-
-  if (error) {
-    console.error('Github login failed');
-
-    return;
-  }
-
-  // Proceed to the URL provided by the OAuth provider
-  redirect(data.url);
-}
+};
