@@ -1,13 +1,13 @@
 import { Link } from '@nextui-org/link';
 import { NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, Navbar as NextUINavbar } from '@nextui-org/navbar';
 import { link as linkStyles } from '@nextui-org/theme';
-import NextLink from 'next/link';
 import clsx from 'clsx';
+import NextLink from 'next/link';
 
-import { siteConfig } from '@/config/site';
 import { AuthButton } from '@/components/auth/AuthButton';
 import { GithubIcon, Logo } from '@/components/icons';
 import { ThemeSwitch } from '@/components/ThemeSwitch';
+import { siteConfig } from '@/config/site';
 
 export const Header = () => {
   return (

@@ -20,10 +20,7 @@ import { siteConfig } from '@/config/site';
  *  }
  */
 export const getMetadata = (title: string, overrides?: Omit<Metadata, 'title'>): Metadata => ({
-  title: {
-    default: title,
-    template: `%s • ${siteConfig.name}`,
-  },
+  title: `${title} • ${siteConfig.name}`,
   description: siteConfig.description,
   icons: {
     icon: '/favicon.ico',

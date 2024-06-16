@@ -4,7 +4,7 @@ import { Plus } from 'lucide-react';
 
 import { PostsCards } from '@/app/PostsCards';
 import { title } from '@/components/primitives';
-import { getMetadata } from '@/lib/metadata';
+import { getMetadata } from '@/lib/getMetadata';
 import { postService } from '@/lib/supabase/services/post';
 
 export const metadata = getMetadata('Home');

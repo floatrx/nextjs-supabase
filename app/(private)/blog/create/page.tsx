@@ -1,6 +1,6 @@
 import { PostForm } from '@/components/features/post/PostForm';
 import { title } from '@/components/primitives';
-import { getMetadata } from '@/lib/metadata';
+import { getMetadata } from '@/lib/getMetadata';
 
 export const metadata = getMetadata('Create new Post');
 
