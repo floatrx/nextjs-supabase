@@ -3,10 +3,10 @@
  */
 'use client';
 import { Button } from '@nextui-org/button';
-import { toast } from 'sonner';
+import { Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
-import { Trash } from 'lucide-react';
+import { toast } from 'sonner';
 
 import { createClient } from '@/lib/supabase/client';
 

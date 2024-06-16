@@ -1,5 +1,8 @@
 import { PostForm } from '@/components/features/post/PostForm';
 import { title } from '@/components/primitives';
+import { getMetadata } from '@/lib/metadata';
+
+export const metadata = getMetadata('Create new Post');
 
 export default async function CreatePostPage() {
   return (

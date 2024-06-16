@@ -1,7 +1,7 @@
 import { Link } from '@nextui-org/link';
 
-import { createClient } from '@/lib/supabase/server';
 import { title } from '@/components/primitives';
+import { createClient } from '@/lib/supabase/server';
 
 export default async function PostSinglePage({ params }: any) {
   const { slug } = params;

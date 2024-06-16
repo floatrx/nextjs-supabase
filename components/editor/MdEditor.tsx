@@ -1,12 +1,13 @@
-import { useEffect, useRef, forwardRef } from 'react';
 import { MDXEditor, type MDXEditorMethods, type MDXEditorProps } from '@mdxeditor/editor';
+import { useEffect, useRef, forwardRef } from 'react';
 
+// Import all plugins
+import { getMarkdownEditorPlugins } from '@/components/editor/mdEditor.plugins';
 import { cn } from '@/lib/utils';
+
 // Styles
 import '@/styles/editor.css';
 import '@mdxeditor/editor/style.css';
-// Import all plugins
-import { getMarkdownEditorPlugins } from '@/components/editor/editor.plugins';
 
 interface IProps extends Omit<MDXEditorProps, 'markdown'> {
   value: string;

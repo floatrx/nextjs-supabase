@@ -25,3 +25,7 @@ export const postUpdateSchema = z.object({
   title,
   content,
 });
+
+export const postSearchSchema = z.object({
+  title: z.string().optional(),
+});

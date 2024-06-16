@@ -2,8 +2,8 @@
 
 import type { Database } from '@/types/';
 
-import { cookies } from 'next/headers';
 import { type CookieOptions, createServerClient } from '@supabase/ssr';
+import { cookies } from 'next/headers';
 
 import { SUPABASE_KEY, SUPABASE_URL } from '@/const';
 

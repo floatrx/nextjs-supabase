@@ -4,8 +4,8 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { emailLoginSchema } from '@/validators';
 import { createClient } from '@/lib/supabase/server';
+import { emailLoginSchema } from '@/validators';
 
 async function auth(action: 'signInWithPassword' | 'signUp', formData: FormData) {
   const supabase = await createClient();

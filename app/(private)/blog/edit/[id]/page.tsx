@@ -1,6 +1,9 @@
 import { PostForm } from '@/components/features/post/PostForm';
 import { title } from '@/components/primitives';
+import { getMetadata } from '@/lib/metadata';
 import { createClient } from '@/lib/supabase/server';
+
+export const metadata = getMetadata('Edit post');
 
 export default async function CreateArticle({ params }: { params: { id: string } }) {
   const supabase = await createClient();

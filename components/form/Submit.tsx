@@ -1,7 +1,7 @@
 'use client';
 
-import { useFormStatus } from 'react-dom';
 import { Button, type ButtonProps } from '@nextui-org/button';
+import { useFormStatus } from 'react-dom';
 
 interface IProps extends ButtonProps {
   pendingText?: string;

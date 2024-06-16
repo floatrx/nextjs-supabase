@@ -4,6 +4,7 @@ export type FormState<T = null> = {
   status: number;
   issues?: string[];
   initialValues?: T;
+  timestamp?: number;
 };
 
 export type FormAction = (prevState: FormState, data: FormData) => Promise<FormState>;

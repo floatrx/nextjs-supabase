@@ -10,5 +10,5 @@ export type TPostWithAuthor = TPost & {
     | null;
 };
 
-export type TPostInsert = TablesInsert<'posts'>;
+export type TPostCreate = TablesInsert<'posts'>;
 export type TPostUpdate = TablesUpdate<'posts'>;

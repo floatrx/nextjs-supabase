@@ -1,15 +1,15 @@
 import type { TPostWithAuthor } from '@/types/post';
 
-import { Image } from '@nextui-org/image';
-import { Card, CardHeader, CardBody } from '@nextui-org/card';
-import { Link } from '@nextui-org/link';
-import { Chip } from '@nextui-org/chip';
 import { Avatar } from '@nextui-org/avatar';
-import { PenBox } from 'lucide-react';
 import { Button } from '@nextui-org/button';
+import { Card, CardHeader, CardBody } from '@nextui-org/card';
+import { Chip } from '@nextui-org/chip';
+import { Image } from '@nextui-org/image';
+import { Link } from '@nextui-org/link';
+import { PenBox } from 'lucide-react';
 
-import { upperFirst, getExcerpt } from '@/lib/utils';
 import { DeletePost } from '@/components/features/post/DeletePost';
+import { upperFirst, getExcerpt } from '@/lib/utils';
 
 interface IProps {
   post: TPostWithAuthor;
@@ -21,7 +21,7 @@ export const PostCard: C<IProps> = ({ post }) => {
 
   return (
     <article>
-      <Card className="py-4">
+      <Card className="p-4">
         <CardHeader className="flex-col items-start gap-2 px-4 pb-0 pt-2">
           <div className="stack w-full">
             <small className="text-default-500">

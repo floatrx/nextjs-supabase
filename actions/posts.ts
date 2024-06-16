@@ -1,10 +1,12 @@
+'use server';
+
 import type { FormAction } from '@/types/form';
 
 import { revalidatePath } from 'next/cache';
 
-import { postCreateSchema, postUpdateSchema } from '@/validators/postSchema';
-import { getMessageFromIssues } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/server';
+import { getMessageFromIssues } from '@/lib/utils';
+import { postCreateSchema, postUpdateSchema } from '@/validators/postSchema';
 
 export const postCreate: FormAction = async (_, data) => {
   const formData = Object.fromEntries(data);
@@ -19,7 +21,6 @@ export const postCreate: FormAction = async (_, data) => {
   }
 
   const supabase = await createClient();
-
   let payload: Record<string, string | number> = {
     title: parsed.data.title,
     slug: parsed.data.slug,

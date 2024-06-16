@@ -1,33 +1,16 @@
 import clsx from 'clsx';
-import { Metadata, Viewport } from 'next';
 import NextTopLoader from 'nextjs-toploader';
 
+import { Providers } from '@/app/providers';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
-import { Providers } from '@/app/providers';
 import { fontSans } from '@/config/fonts';
-import { siteConfig } from '@/config/site';
+import { getMetadata } from '@/lib/metadata';
 
 // Styles
 import '@/styles/globals.css';
 
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  icons: {
-    icon: '/favicon.ico',
-  },
-};
-
-export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
-  ],
-};
+export const metadata = getMetadata('Home');
 
 const RootLayout: FC = ({ children }) => (
   <html suppressHydrationWarning lang="en">

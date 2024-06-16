@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
 import { Input } from '@nextui-org/input';
+import { useRef } from 'react';
 
 import { createNote } from '@/actions/notes';
 import { Form } from '@/components/form/Form';

@@ -1,106 +1,106 @@
 /* Toolbar */
 div.mdxeditor-toolbar {
-    @apply rounded-xl border bg-card text-card-foreground;
+  @apply rounded-xl border bg-card text-card-foreground;
 }
 
 /* Editor */
 .mdxeditor-root-contenteditable {
-    @apply prose mt-2 max-w-full rounded-xl border bg-transparent p-3 text-xl dark:prose-invert;
+  @apply prose mt-2 max-w-full rounded-xl border bg-transparent p-3 text-xl dark:prose-invert;
 
-    div[class*="_placeholder"] {
-        @apply pt-6; /* perfect pixel */
-    }
+  div[class*='_placeholder'] {
+    @apply pt-6; /* perfect pixel */
+  }
 }
 
 .cm-editor {
-    .cm-gutterElement {
-        @apply text-xl;
-    }
-    .cm-line {
-        @apply text-xl text-foreground;
-    }
-    .cm-lineNumbers {
-        @apply text-foreground;
-    }
+  .cm-gutterElement {
+    @apply text-xl;
+  }
+  .cm-line {
+    @apply text-xl text-foreground;
+  }
+  .cm-lineNumbers {
+    @apply text-foreground;
+  }
 }
 
 .mdxeditor-diff-source-wrapper {
-    @apply mt-2 rounded-xl border p-4;
+  @apply mt-2 rounded-xl border p-4;
 }
 
 /* Popups */
 /*noinspection CssUnusedSymbol*/
 .mdxeditor-popup-container {
-    button,
-    & {
-        color: black;
-        .dark & {
-            color: white;
-        }
+  button,
+  & {
+    color: black;
+    .dark & {
+      color: white;
     }
+  }
 }
 
 .dark .dark-editor {
-    --font-body: inherit;
-    --font-sans: inherit;
-    --accentBase: var(--sky-1);
-    --accentBgSubtle: var(--sky-2);
-    --accentBg: var(--sky-3);
-    --accentBgHover: var(--sky-4);
-    --accentBgActive: var(--sky-5);
-    --accentLine: var(--sky-6);
-    --accentBorder: var(--sky-7);
-    --accentBorderHover: var(--sky-8);
-    --accentSolid: var(--sky-9);
-    --accentSolidHover: var(--sky-10);
-    --accentText: var(--sky-11);
-    --accentTextContrast: var(--sky-12);
+  --font-body: inherit;
+  --font-sans: inherit;
+  --accentBase: var(--sky-1);
+  --accentBgSubtle: var(--sky-2);
+  --accentBg: var(--sky-3);
+  --accentBgHover: var(--sky-4);
+  --accentBgActive: var(--sky-5);
+  --accentLine: var(--sky-6);
+  --accentBorder: var(--sky-7);
+  --accentBorderHover: var(--sky-8);
+  --accentSolid: var(--sky-9);
+  --accentSolidHover: var(--sky-10);
+  --accentText: var(--sky-11);
+  --accentTextContrast: var(--sky-12);
 
-    --baseBase: var(--gray-1);
-    --baseBgSubtle: var(--gray-2);
-    --baseBg: var(--gray-1);
-    --baseBgHover: var(--gray-4);
-    --baseBgActive: var(--gray-5);
-    --baseLine: var(--gray-6);
-    --baseBorder: var(--gray-7);
-    --baseBorderHover: var(--gray-8);
-    --baseSolid: var(--gray-9);
-    --baseSolidHover: var(--gray-10);
-    --baseText: var(--gray-11);
-    --baseTextContrast: var(--gray-12);
+  --baseBase: var(--gray-1);
+  --baseBgSubtle: var(--gray-2);
+  --baseBg: var(--gray-1);
+  --baseBgHover: var(--gray-4);
+  --baseBgActive: var(--gray-5);
+  --baseLine: var(--gray-6);
+  --baseBorder: var(--gray-7);
+  --baseBorderHover: var(--gray-8);
+  --baseSolid: var(--gray-9);
+  --baseSolidHover: var(--gray-10);
+  --baseText: var(--gray-11);
+  --baseTextContrast: var(--gray-12);
 
-    --admonitionTipBg: var(--cyan4);
-    --admonitionTipBorder: var(--cyan8);
+  --admonitionTipBg: var(--cyan4);
+  --admonitionTipBorder: var(--cyan8);
 
-    --admonitionInfoBg: var(--grass4);
-    --admonitionInfoBorder: var(--grass8);
+  --admonitionInfoBg: var(--grass4);
+  --admonitionInfoBorder: var(--grass8);
 
-    --admonitionCautionBg: var(--amber4);
-    --admonitionCautionBorder: var(--amber8);
+  --admonitionCautionBg: var(--amber4);
+  --admonitionCautionBorder: var(--amber8);
 
-    --admonitionDangerBg: var(--red4);
-    --admonitionDangerBorder: var(--red8);
+  --admonitionDangerBg: var(--red4);
+  --admonitionDangerBorder: var(--red8);
 
-    --admonitionNoteBg: var(--gray-4);
-    --admonitionNoteBorder: var(--gray-8);
+  --admonitionNoteBg: var(--gray-4);
+  --admonitionNoteBorder: var(--gray-8);
 
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
-    --basePageBg: black;
+  --basePageBg: black;
 
-    color: var(--baseText);
-    background: var(--background);
+  color: var(--baseText);
+  background: var(--background);
 
-    .cm-editor {
-        .cm-selectionBackground {
-            background: var(--sky-10) !important; /* <- Override the default selection color */
-        }
-
-        background: var(--background);
-        color: var(--baseText);
-
-        .cm-activeLineGutter {
-            background: var(--baseBgSubtle);
-        }
+  .cm-editor {
+    .cm-selectionBackground {
+      background: var(--sky-10) !important; /* <- Override the default selection color */
     }
+
+    background: var(--background);
+    color: var(--baseText);
+
+    .cm-activeLineGutter {
+      background: var(--baseBgSubtle);
+    }
+  }
 }
