@@ -1,6 +1,7 @@
 import type { Tables, TablesInsert, TablesUpdate } from '@/types/';
 
 export type TPost = Tables<'posts'>;
+export type TPostId = Pick<TPost, 'id'>;
 
 export type TPostWithAuthor = TPost & {
   author:

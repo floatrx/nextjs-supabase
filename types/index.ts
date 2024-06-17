@@ -4,4 +4,4 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-export * from './schema';
+export * from './supabase';

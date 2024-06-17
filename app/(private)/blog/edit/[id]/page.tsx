@@ -1,13 +1,18 @@
 import { PostForm } from '@/components/features/post/PostForm';
 import { title } from '@/components/primitives';
 import { getMetadata } from '@/lib/getMetadata';
-import { createClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/supabase/server';
 
 export const metadata = getMetadata('Edit post');
 
-export default async function CreateArticle({ params }: { params: { id: string } }) {
-  const supabase = await createClient();
+export default async function EditPost({ params }: PageProps<{ id: string }>) {
+  const supabase = await createServerClient();
   const { id } = params;
+
+  if (!id || isNaN(parseInt(id))) {
+    return <h1>Invalid ID</h1>;
+  }
+
   const { data: post } = await supabase.from('posts').select().eq('id', id).single();
 
   if (!post) {

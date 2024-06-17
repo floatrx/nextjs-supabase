@@ -15,7 +15,7 @@ interface IProps {
   post: TPostWithAuthor;
 }
 
-export const PostCard: C<IProps> = ({ post }) => {
+export const PostCard: RC<IProps> = ({ post }) => {
   if (!post) return null;
   const { id, slug, created_at, title, content, thumbnail, author } = post;
 

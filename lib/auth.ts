@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation';
 
-import { createClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/supabase/server';
 
 // Get user UUId
 export const getUserId = async (): Promise<string | undefined> => {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const { data } = await supabase.auth.getUser();
 
   return data.user?.id;

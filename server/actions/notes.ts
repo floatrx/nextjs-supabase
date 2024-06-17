@@ -2,10 +2,10 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { createClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/supabase/server';
 
 export async function createNote(formData: FormData) {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
 
   const title = formData.get('title') as string;
   const { error } = await supabase.from('notes').insert(
@@ -25,7 +25,7 @@ export async function createNote(formData: FormData) {
 }
 
 export const removeNote = async (id: number) => {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const { error } = await supabase.from('notes').delete().eq('id', id);
 
   if (error) {

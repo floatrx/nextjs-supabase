@@ -1,11 +1,11 @@
 import { Link } from '@nextui-org/link';
 
 import { title } from '@/components/primitives';
-import { createClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/supabase/server';
 
 export default async function PostSinglePage({ params }: any) {
   const { slug } = params;
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const { error, data: post } = await supabase.from('posts').select().eq('slug', slug).single();
 
   if (error) {

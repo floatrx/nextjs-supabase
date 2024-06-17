@@ -1,12 +1,12 @@
 import { Input } from '@nextui-org/input';
 
-import { githubLogin, googleLogin, login, signup } from '@/actions/auth';
 import { Form } from '@/components/form/Form';
 import { Submit } from '@/components/form/Submit';
 import { GitHubIcon } from '@/components/icons/GithubIcon';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
+import { githubLogin, googleLogin, login, signup } from '@/server/actions/auth';
 
-export default function LoginPage({ searchParams }: { searchParams: { message: string } }) {
+export default function LoginPage({ searchParams }: PageProps<EmptyObj, { message?: string }>) {
   return (
     <div className="container flex w-full flex-col justify-center gap-4 px-8 sm:max-w-md">
       <h1 className="text-4xl">Login</h1>

@@ -1,6 +1,11 @@
 import { type CookieOptions, createServerClient } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
 
+/**
+ * Update the session with the latest user data
+ * @see https://supabase.com/docs/guides/auth/server-side/nextjs
+ * @param request
+ */
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
     request: {

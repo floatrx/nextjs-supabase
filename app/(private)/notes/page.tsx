@@ -1,10 +1,10 @@
 import { AddNoteForm } from '@/components/note/AddNoteForm';
 import NoteItem from '@/components/note/NoteItem';
-import { createClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/supabase/server';
 
 export default async function NotesSinglePage() {
   // Fetch notes from the database
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const { data: notes } = await supabase.from('notes').select();
 
   return (

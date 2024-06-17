@@ -10,7 +10,7 @@ export interface LoaderProps extends SpinnerProps {
  * @param props - all compatible nextui SpinnerProps
  * @constructor
  */
-export const Loader: C<LoaderProps> = ({ loading, ...props }) => {
+export const Loader: RC<LoaderProps> = ({ loading, ...props }) => {
   if (!loading) return null;
 
   return <Spinner {...props} />;

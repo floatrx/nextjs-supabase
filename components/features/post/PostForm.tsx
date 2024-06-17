@@ -1,3 +1,4 @@
+// TODO: Move logic up to the parent component -> Form should be responsible for the form state
 'use client';
 
 import type { TPostUpdate } from '@/types/post';
@@ -11,9 +12,9 @@ import { useFormState } from 'react-dom';
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { postCreate, postUpdate } from '@/actions/posts';
 import { Editor } from '@/components/editor/Editor';
-import { postCreateSchema } from '@/validators/postSchema';
+import { postCreateSchema } from '@/schemas/postSchema';
+import { postCreate, postUpdate } from '@/server/actions/posts';
 
 interface IProps {
   initialValues?: TPostUpdate;
@@ -29,7 +30,7 @@ interface IProps {
  */
 export const PostForm: FC<IProps> = ({ initialValues, id }) => {
   const action = id ? postUpdate : postCreate;
-  const [response, formAction] = useFormState(action, { statusText: '', status: 0, timestamp: Date.now() });
+  const [response, formAction] = useFormState(action, { statusText: '', status: 0 });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -85,8 +86,8 @@ export const PostForm: FC<IProps> = ({ initialValues, id }) => {
       setLoading(true);
       formAction(new FormData(formRef.current!));
     },
-    (...args) => {
-      console.log('error form submit', ...args);
+    (fieldErrors, _event) => {
+      console.log('error form submit', fieldErrors);
     },
   );
 
@@ -123,7 +124,7 @@ export const PostForm: FC<IProps> = ({ initialValues, id }) => {
           variant="bordered"
           {...register('title', { required: true })}
         />
-        <Controller control={control} name="content" render={({ field }) => <Editor {...field} />} />
+        <Controller control={control} name="content" render={({ field }) => <Editor errorMessage={errors.content?.message} {...field} />} />
         <Button disabled={!isDirty} isLoading={loading} size="lg" type="submit" variant="bordered">
           {loading ? 'Submitting...' : id ? 'Update' : 'Create'}
         </Button>

@@ -1,26 +1,26 @@
 import type { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
-import { NextResponse, NextRequest } from 'next/server';
+import { revalidatePath, revalidateTag } from 'next/cache';
+import { NextRequest } from 'next/server';
 
-import { createClient } from '@/lib/supabase/server';
+import { formatPostgrestResponse, formatBadRequestResponse } from '@/lib/supabase/formatResponse';
+import { createServerClient } from '@/lib/supabase/server';
+import { postService } from '@/server/services/post';
 
 export async function GET(_req: NextRequest, _ctx: { params: Params }) {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
 
-  // Select all posts fields from the posts table & join the author's profile with the role
-  const { error, data, status, statusText } = await supabase
+  const res = await supabase
+    // Select all posts fields from the posts table & join the author's profile with the role
     .from('posts')
     .select('*, author: profiles (*, role: roles (*))')
     .order('created_at', { ascending: false });
 
-  if (error) {
-    return NextResponse.json({ message: error.message }, { status, statusText });
-  }
-
-  return Response.json(data, { status, statusText });
+  return formatPostgrestResponse(res);
 }
 
-export async function POST(req: Request) {
+// Create
+export async function POST(req: NextRequest) {
   const data = req.body;
 
   console.log('data', data);
@@ -28,11 +28,28 @@ export async function POST(req: Request) {
   return Response.json({ res: 'create post route' });
 }
 
-export async function PUT(_req: Request) {}
+// Update
+export async function PUT(_req: NextRequest) {}
 
-export async function DELETE(_req: Request) {}
+// Remove
+export async function DELETE(req: NextRequest) {
+  try {
+    const { id } = await req.json();
 
-export async function PATCH(_req: Request) {}
+    if (!id) {
+      return formatBadRequestResponse('Post ID is required');
+    }
 
-// If `OPTIONS` is not defined, Next.js will automatically implement `OPTIONS` and  set the appropriate Response `Allow` header depending on the other methods defined in the route handler.
-export async function OPTIONS(_req: Request) {}
+    const res = await postService.delete(id);
+
+    // TODO: Review revalidation strategy
+    revalidatePath('/');
+    revalidateTag('posts');
+
+    console.log('deleted post', id);
+
+    return formatPostgrestResponse(res);
+  } catch ({ message }) {
+    return Response.json({ message }, { status: 500 });
+  }
+}

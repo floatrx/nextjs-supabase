@@ -4,9 +4,9 @@ import type { FormAction } from '@/types/form';
 
 import { revalidatePath } from 'next/cache';
 
-import { createClient } from '@/lib/supabase/server';
+import { createServerClient } from '@/lib/supabase/server';
 import { getMessageFromIssues } from '@/lib/utils';
-import { postCreateSchema, postUpdateSchema } from '@/validators/postSchema';
+import { postCreateSchema, postUpdateSchema } from '@/schemas/postSchema';
 
 export const postCreate: FormAction = async (_, data) => {
   const formData = Object.fromEntries(data);
@@ -20,18 +20,23 @@ export const postCreate: FormAction = async (_, data) => {
     };
   }
 
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   let payload: Record<string, string | number> = {
     title: parsed.data.title,
     slug: parsed.data.slug,
     content: parsed.data.content,
   };
 
+  // TODO: Move to postService
   const { status, statusText } = await supabase
     // Create a new post
     .from('posts')
     .insert(payload);
 
+  // TODO: Review revalidation strategy
+  revalidatePath('/');
+
+  // TODO: Use formatPostgrestResponse
   return { statusText, status };
 };
 
@@ -47,11 +52,12 @@ export const postUpdate: FormAction = async (_, data) => {
     };
   }
 
-  const supabase = await createClient();
+  const supabase = await createServerClient();
 
   const { id, title, content, slug } = parsed.data;
   const dto = { title, content, slug };
 
+  // TODO: Move to postService
   const { error, status, statusText } = await supabase
     // Update the post
     .from('posts')
@@ -60,6 +66,7 @@ export const postUpdate: FormAction = async (_, data) => {
 
   revalidatePath('/blog/edit/[id]');
 
+  // TODO: Use formatPostgrestResponse
   if (error) {
     return { statusText, status };
   }

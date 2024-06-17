@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import '@/styles/editor.css';
 import '@mdxeditor/editor/style.css';
 
-interface IProps extends Omit<MDXEditorProps, 'markdown'> {
+export interface MdEditorProps extends Omit<MDXEditorProps, 'markdown' | 'er'> {
   value: string;
   mode?: 'default' | 'view';
   name?: string;
@@ -18,7 +18,7 @@ interface IProps extends Omit<MDXEditorProps, 'markdown'> {
 /**
  * Markdown Editor "MDXEditor" wrapper
  */
-const MdEditor = forwardRef<MDXEditorMethods, IProps>(({ className, value = '', mode, ...props }, _) => {
+const MdEditor = forwardRef<MDXEditorMethods, MdEditorProps>(({ className, value = '', mode, ...props }, _) => {
   const editorRef = useRef<MDXEditorMethods | null>(null);
   const initialValue = useRef(value);
 

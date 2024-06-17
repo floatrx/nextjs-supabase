@@ -4,7 +4,7 @@ import type { TNote } from '@/types/note';
 
 import { useState } from 'react';
 
-import { removeNote } from '@/actions/notes';
+import { removeNote } from '@/server/actions/notes';
 
 export default function NoteItem({ note }: { note: TNote }) {
   const [loading, setLoading] = useState(false);

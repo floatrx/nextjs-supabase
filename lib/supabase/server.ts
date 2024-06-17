@@ -2,7 +2,7 @@
 
 import type { Database } from '@/types/';
 
-import { type CookieOptions, createServerClient } from '@supabase/ssr';
+import { type CookieOptions, createServerClient as create } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 import { SUPABASE_KEY, SUPABASE_URL } from '@/const';
@@ -12,10 +12,10 @@ import { SUPABASE_KEY, SUPABASE_URL } from '@/const';
  *  a Supabase client for server-side rendering.
  * @see https://supabase.com/docs/guides/auth/server-side/nextjs
  */
-export const createClient = async () => {
+export const createServerClient = async () => {
   const cookieStore = cookies();
 
-  return createServerClient<Database>(SUPABASE_URL, SUPABASE_KEY, {
+  return create<Database>(SUPABASE_URL, SUPABASE_KEY, {
     cookies: {
       get(name: string) {
         return cookieStore.get(name)?.value;

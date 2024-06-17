@@ -5,13 +5,15 @@ import type { SignInWithOAuthCredentials } from '@supabase/auth-js';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+import { emailLoginSchema } from '../../schemas';
+
 import { baseUrl } from '@/config';
-import { createClient } from '@/lib/supabase/server';
-import { emailLoginSchema } from '@/validators';
+import { createServerClient } from '@/lib/supabase/server';
+import { authService } from '@/server/services/auth';
 
 // Login with email
 const authBase = async (action: 'signInWithPassword' | 'signUp', formData: FormData) => {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
 
   const credentials = {
     email: formData.get('email') as string,
@@ -44,7 +46,7 @@ export const signup = async (formData: FormData) => authBase('signUp', formData)
 
 // Login with OAuth providers
 const oauthBase = async ({ options, ...credentials }: SignInWithOAuthCredentials) => {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     ...credentials,
@@ -77,4 +79,8 @@ export const githubLogin = async () => {
   return oauthBase({
     provider: 'github',
   });
+};
+
+export const signOut = async () => {
+  await authService.signOut();
 };

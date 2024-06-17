@@ -5,8 +5,9 @@ import { nextui } from '@nextui-org/theme';
 const config: Config = {
   darkMode: 'class',
   content: [
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    // This pattern is managed by NextUI script
     './node_modules/@nextui-org/theme/dist/components/(avatar|breadcrumbs|button|card|chip|code|image|input|kbd|link|navbar|pagination|popover|snippet|spinner|toggle|ripple).js',
   ],
   theme: {
