@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { PostsCards } from '@/app/PostsCards';
 import { title } from '@/components/primitives';
-import { getMetadata } from '@/lib/getMetadata';
+import { getMetadata } from '@/lib/next';
 import { postService } from '@/server/services/post';
 
 export const metadata = getMetadata('Home');

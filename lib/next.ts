@@ -1,3 +1,7 @@
+/**
+ * ✨Next.js specific utilities
+ */
+
 import type { Metadata } from 'next';
 
 import { siteConfig } from '@/config/site';

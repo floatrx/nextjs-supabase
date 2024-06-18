@@ -13,7 +13,8 @@ import { useForm, Controller, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { Editor } from '@/components/editor/Editor';
-import { postCreate, postUpdate } from '@/server/actions/posts';
+import { createSlug } from '@/lib/string';
+import { postCreate, postUpdate } from '@/server/actions/post';
 import { postCreateSchema } from '@/validations/post';
 
 interface IProps {
@@ -57,26 +58,29 @@ export const PostForm: FC<IProps> = ({ initialValues, id }) => {
     if (isSlugDirty || initialValues) return; // user has changed the slug manually
 
     // Replace spaces with hyphens and make lowercase for slug
-    const slug = title.replace(/\s+/g, '-').toLowerCase();
+    const slug = createSlug(title);
 
     form.setValue('slug', slug, { shouldValidate: !!title });
   }, [title]);
 
   // Handle form submission and display toast messages
   useEffect(() => {
-    setLoading(false);
+    // Post created successfully
+    if (response.status === 201) {
+      // TODO: Review it!
+      router.push('/'); // return to Home page
+
+      return;
+    }
+
+    // Other cases
+    setLoading(false); // reset spinner
+
     if (!response.status) return;
 
     const toastVariant = response.status <= 204 ? 'success' : 'error';
 
     toast[toastVariant](response.statusText); // Displays a success message
-
-    // On create
-    if (response.status === 201) {
-      router.push('/'); // Redirects to the current page
-
-      return;
-    }
   }, [response]);
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -93,9 +97,6 @@ export const PostForm: FC<IProps> = ({ initialValues, id }) => {
 
   return (
     <section className="mt-6">
-      <p>
-        title: {JSON.stringify({ initialValues })} <br />
-      </p>
       <form ref={formRef} action={formAction} className="space-y-8" onSubmit={handleSubmit}>
         {id && <input hidden readOnly name="id" value={id} />}
         <Controller

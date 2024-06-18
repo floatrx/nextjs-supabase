@@ -1,6 +1,6 @@
 import { PostForm } from '@/components/features/post/PostForm';
 import { title } from '@/components/primitives';
-import { getMetadata } from '@/lib/getMetadata';
+import { getMetadata } from '@/lib/next';
 import { createServerClient } from '@/lib/supabase/server';
 
 export const metadata = getMetadata('Edit post');

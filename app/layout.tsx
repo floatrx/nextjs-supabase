@@ -5,7 +5,7 @@ import { Providers } from '@/app/providers';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { fontSans } from '@/config/fonts';
-import { getMetadata } from '@/lib/getMetadata';
+import { getMetadata } from '@/lib/next';
 
 // Styles
 import '@/styles/globals.css';

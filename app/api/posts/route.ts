@@ -1,26 +1,26 @@
-import type { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
-
 import { revalidatePath, revalidateTag } from 'next/cache';
-import { NextRequest } from 'next/server';
 
 import { formatPostgrestResponse, formatBadRequestResponse } from '@/lib/supabase/formatResponse';
-import { createServerClient } from '@/lib/supabase/server';
 import { postService } from '@/server/services/post';
+import { postSearchSchema } from '@/validations/post';
 
-export async function GET(_req: NextRequest, _ctx: { params: Params }) {
-  const supabase = await createServerClient();
+// Search
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
 
-  const res = await supabase
-    // Select all posts fields from the posts table & join the author's profile with the role
-    .from('posts')
-    .select('*, author: profiles (*, role: roles (*))')
-    .order('created_at', { ascending: false });
+  // Parse search params
+  const parsed = postSearchSchema.safeParse({
+    title: searchParams.get('title'),
+  });
+
+  // Search posts
+  const res = await postService.search(parsed.data);
 
   return formatPostgrestResponse(res);
 }
 
 // Create
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const data = req.body;
 
   console.log('data', data);
@@ -29,10 +29,10 @@ export async function POST(req: NextRequest) {
 }
 
 // Update
-export async function PUT(_req: NextRequest) {}
+export async function PUT(_req: Request) {}
 
 // Remove
-export async function DELETE(req: NextRequest) {
+export async function DELETE(req: Request) {
   try {
     const { id } = await req.json();
 
@@ -45,8 +45,6 @@ export async function DELETE(req: NextRequest) {
     // TODO: Review revalidation strategy
     revalidatePath('/');
     revalidateTag('posts');
-
-    console.log('deleted post', id);
 
     return formatPostgrestResponse(res);
   } catch ({ message }) {

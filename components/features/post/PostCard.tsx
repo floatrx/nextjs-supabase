@@ -9,7 +9,7 @@ import { Link } from '@nextui-org/link';
 import { PenBox } from 'lucide-react';
 
 import { DeletePost } from '@/components/features/post/DeletePost';
-import { upperFirst, getExcerpt } from '@/lib/utils';
+import { getExcerpt, upperFirst } from '@/lib/string';
 
 interface IProps {
   post: TPostWithAuthor;
