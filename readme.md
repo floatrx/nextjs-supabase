@@ -9,13 +9,16 @@
 - [TypeScript](https://www.typescriptlang.org/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [next-themes](https://github.com/pacocoursey/next-themes)
+- [Supabase](https://supabase.com/docs/reference/javascript)
+- [MDXEditor](https://mdxeditor.dev/)
+- [ZOD](https://zod.dev/)
 
 ### Install dependencies
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `bun`:
 
 ```bash
-bun install
+bun install # or bun i
 ```
 
 ### Run the development server

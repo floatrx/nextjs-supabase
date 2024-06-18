@@ -5,8 +5,8 @@ import { createServerClient } from '@/lib/supabase/server';
 
 /**
  * Confirm the email OTP and redirect the user to the next page
- * @param request
- * @constructor
+ * NOTE: Email/password login not tested, coz -> supabase limits on the free plan...
+ * @returns redirect to the `next` URL or `/error` with an error message
  */
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
