@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache';
 
 import { createServerClient } from '@/lib/supabase/server';
 import { getMessageFromIssues } from '@/lib/utils';
-import { postCreateSchema, postUpdateSchema } from '@/schemas/postSchema';
+import { postCreateSchema, postUpdateSchema } from '@/validations/post';
 
 export const postCreate: FormAction = async (_, data) => {
   const formData = Object.fromEntries(data);

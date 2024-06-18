@@ -5,11 +5,10 @@ import type { SignInWithOAuthCredentials } from '@supabase/auth-js';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { emailLoginSchema } from '../../schemas';
-
 import { baseUrl } from '@/config';
 import { createServerClient } from '@/lib/supabase/server';
 import { authService } from '@/server/services/auth';
+import { emailLoginSchema } from '@/validations/auth';
 
 // Login with email
 const authBase = async (action: 'signInWithPassword' | 'signUp', formData: FormData) => {

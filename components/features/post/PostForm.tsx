@@ -13,8 +13,8 @@ import { useForm, Controller, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { Editor } from '@/components/editor/Editor';
-import { postCreateSchema } from '@/schemas/postSchema';
 import { postCreate, postUpdate } from '@/server/actions/posts';
+import { postCreateSchema } from '@/validations/post';
 
 interface IProps {
   initialValues?: TPostUpdate;
