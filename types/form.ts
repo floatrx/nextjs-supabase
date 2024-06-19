@@ -2,8 +2,7 @@
 export type FormState<T = null> = {
   statusText: string;
   status: number;
-  issues?: string[];
-  initialValues?: T;
+  data?: T | null;
 };
 
-export type FormAction = (prevState: FormState, data: FormData) => Promise<FormState>;
+export type FormAction<T = null> = (prevState: any, data: FormData) => Promise<FormState<T>>;

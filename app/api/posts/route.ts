@@ -1,5 +1,3 @@
-import { revalidatePath, revalidateTag } from 'next/cache';
-
 import { formatPostgrestResponse, formatBadRequestResponse } from '@/lib/supabase/formatResponse';
 import { postService } from '@/server/services/post';
 import { postSearchSchema } from '@/validations/post';
@@ -41,10 +39,6 @@ export async function DELETE(req: Request) {
     }
 
     const res = await postService.delete(id);
-
-    // TODO: Review revalidation strategy
-    revalidatePath('/');
-    revalidateTag('posts');
 
     return formatPostgrestResponse(res);
   } catch ({ message }) {
