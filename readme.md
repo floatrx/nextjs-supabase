@@ -28,20 +28,25 @@ bun dev
 ```
 
 ## Next app router
-### /(private)/*
+
+### /(private)/\*
+
 > Use this route group as a way to group routes
-that are only accessible to authenticated users.
+> that are only accessible to authenticated users.
+
 - /blog
-    - /create
-    - /edit/[id]
+  - /create
+  - /edit/[id]
 - /notes
 
 ### /api routes
+
 - `/api/auth/callback` – callback route for the OAuth providers;
 - `/api/auth/confirm` – confirm the email OTP and redirect the user to the next page;
 - `/api/posts` – get all blog posts;
 - `/api/post/[id]` – get a blog post by id;
 
 ### Blog
+
 - /blog/[slug] – view a blog post by slug;
 - /blog – view all blog posts;

@@ -5,103 +5,106 @@
 @tailwind utilities;
 
 @layer base {
-    * {
-        @apply border-foreground/20;
-        @apply border-border;
-    }
+  * {
+    @apply border-foreground/20;
+    @apply border-border;
+  }
 
-    body {
-        @apply bg-background text-foreground;
-    }
+  body {
+    @apply bg-background text-foreground;
+  }
 
-    body {
-        @apply h-screen text-foreground antialiased;
-    }
+  body {
+    @apply h-screen text-foreground antialiased;
+  }
 
-    button {
-        cursor: pointer;
+  button {
+    cursor: pointer;
 
-        &[disabled] {
-            @apply pointer-events-none cursor-not-allowed opacity-60;
-        }
+    &[disabled] {
+      @apply pointer-events-none cursor-not-allowed opacity-60;
     }
+  }
 
-    /* Remove chrome autofill color from inputs */
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    input:-webkit-autofill:active {
-        transition: background-color 5000000s ease-in-out 0s !important;
-    }
+  /* Remove chrome autofill color from inputs */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000000s ease-in-out 0s !important;
+  }
 }
 
-@layer components{
-    .article{
-        @apply prose-2xl dark:prose-invert;
+@layer components {
+  .article {
+    @apply prose-2xl dark:prose-invert;
+  }
+
+  .article,
+  .prose {
+    p a {
+      @apply break-words text-blue-500;
+    }
+  }
+
+  .fancy-scrollbar {
+    /* Hide default scrollbar */
+
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
     }
 
-    .article, .prose {
-        p a {
-            @apply break-words text-blue-500;
-        }
+    /* Style the scrollbar track */
+
+    &::-webkit-scrollbar-track {
+      background: hsl(var(--background));
     }
 
-    .fancy-scrollbar {
-        /* Hide default scrollbar */
-        &::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
+    /* Style the scrollbar thumb */
 
-        /* Style the scrollbar track */
-        &::-webkit-scrollbar-track {
-            background: hsl(var(--background));
-        }
-
-        /* Style the scrollbar thumb */
-        &::-webkit-scrollbar-thumb {
-            background: hsla(var(--foreground) / 10%);
-            border-radius: 10px;
-        }
-
-        /* Style the thumb on hover */
-        &::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
+    &::-webkit-scrollbar-thumb {
+      background: hsla(var(--foreground) / 10%);
+      border-radius: 10px;
     }
 
+    /* Style the thumb on hover */
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
 }
-
 
 @layer utilities {
-    .stack {
-        @apply flex items-center gap-2;
-    }
+  .stack {
+    @apply flex items-center gap-2;
+  }
 
-    .invisible-scrollbar {
-        &::-webkit-scrollbar {
-            width: 0;
-        }
+  .invisible-scrollbar {
+    &::-webkit-scrollbar {
+      width: 0;
     }
+  }
 
-    .grid-auto {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
-    }
+  .grid-auto {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
 }
 
 .animate-in {
-    animation: animateIn 0.3s ease 0.15s both;
+  animation: animateIn 0.3s ease 0.15s both;
 }
 
 @keyframes animateIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

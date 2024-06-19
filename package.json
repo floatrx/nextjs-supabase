@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix",
     "pretty": "prettier --write .",
+    "ts": "tsc --noEmit",
     "gen:types": "source .env && supabase gen types typescript --project-id=$SUPABASE_PROJECT_ID > types/supabase.ts"
   },
   "dependencies": {

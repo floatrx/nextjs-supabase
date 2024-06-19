@@ -1,6 +1,7 @@
 # Supabase notes
 
-### Sync profiles table with auth.users 
+### Sync profiles table with auth.users
+
 - fixed version (tested with github auth)
 
 ```plpgsql
@@ -8,7 +9,7 @@ DROP FUNCTION IF EXISTS public.handle_new_user();
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Log all data in NEW * (for debug / optional) 
+    -- Log all data in NEW * (for debug / optional)
     RAISE LOG 'Logged handle_new_user: %', to_jsonb(NEW.*);
 
     DECLARE
@@ -38,7 +39,9 @@ EXECUTE FUNCTION public.handle_new_user();
 ```
 
 ### RLS
+
 Role: `supabase_auth_admin`
+
 ```plpgsql
 alter policy "Enable insert for specific users only"
 on "public"."profiles"
