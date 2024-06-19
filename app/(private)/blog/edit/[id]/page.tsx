@@ -1,28 +1,23 @@
-import { PostForm } from '@/components/features/post/PostForm';
+import { EditPostForm } from '@/components/features/post/EditPostForm';
 import { title } from '@/components/primitives';
 import { getMetadata } from '@/lib/next';
-import { createServerClient } from '@/lib/supabase/server';
+import { postService } from '@/server/services/post';
 
 export const metadata = getMetadata('Edit post');
 
 export default async function EditPost({ params }: PageProps<{ id: string }>) {
-  const supabase = await createServerClient();
   const { id } = params;
 
-  if (!id || isNaN(parseInt(id))) {
-    return <h1>Invalid ID</h1>;
-  }
+  // Query post by id
+  const { data: post, status, statusText } = await postService.getById(id);
 
-  const { data: post } = await supabase.from('posts').select().eq('id', id).single();
-
-  if (!post) {
-    return <h1>Post not found</h1>;
-  }
+  // Error | Post not found | Default
+  const heading = status !== 200 ? statusText : !post ? 'Post not found' : 'Edit post';
 
   return (
     <>
-      <h1 className={title()}>Update the post</h1>
-      <PostForm id={post.id} initialValues={post} />
+      <h1 className={title()}>{heading}</h1>
+      {post && <EditPostForm id={id} initialValues={post} />}
     </>
   );
 }

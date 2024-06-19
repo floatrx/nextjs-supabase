@@ -1,3 +1,4 @@
+import type { FormState } from '@/types/form';
 import type { SafeParseError } from 'zod';
 
 import { PostgrestSingleResponse, type PostgrestResponseFailure, type PostgrestResponseSuccess } from '@supabase/postgrest-js';
@@ -26,7 +27,7 @@ export const formatPostgrestResponse = <T>(res: AllResponses<T>) => {
  * Format the response for bad request
  */
 export const formatBadRequestResponse = (message: string) => {
-  return Response.json({ statusText: message, status: 400 }, { status: 400 });
+  return Response.json({ statusText: message, status: 400, data: null }, { status: 400 });
 };
 
 /**
@@ -39,4 +40,10 @@ export const formatInvalidParseResponse = <T>(parsed: SafeParseError<T>) => {
 /**
  * Format the response status and statusText
  */
-export const formatStatusResponse = <T>({ status, statusText }: AllResponses<T>) => ({ status, statusText });
+export const formatStatusResponse = <T = null>(res: AllResponses<T>): FormState<T> => {
+  const { status = 500, statusText = 'Internal server error!' } = res;
+
+  if (res instanceof Response) return { status, statusText, data: null };
+
+  return { status, statusText, data: res.data };
+};

@@ -5,10 +5,10 @@
 
 import type { TPostUpdate, TPostCreate } from '@/types/post';
 
-import { revalidatePath, revalidateTag } from 'next/cache';
-
 import { formatInvalidParseResponse } from '@/lib/supabase/formatResponse';
+import { formatSupabaseErr } from '@/lib/supabase/formatSupabaseErr';
 import { createServerClient } from '@/lib/supabase/server';
+import { postId } from '@/validations/common';
 import { postSearchSchema, postUpdateSchema, postCreateSchema } from '@/validations/post';
 
 interface SearchParams {
@@ -27,16 +27,15 @@ export const postService = {
     }
 
     const supabase = await createServerClient();
-    const res = await supabase
-      // Create a new post
-      .from('posts')
-      .insert(parsed.data);
 
-    // TODO: Review revalidation strategy
-    revalidatePath('/');
-    revalidateTag('posts');
-
-    return res;
+    return (
+      supabase
+        // Create a new post
+        .from('posts')
+        .insert(parsed.data)
+        .select()
+        .single()
+    );
   },
 
   // Search posts with optional SearchParams
@@ -67,8 +66,7 @@ export const postService = {
     return query.order('created_at', { ascending: false });
   },
 
-  // Get single post by ID
-  async get(id: string) {
+  async get(column: 'id' | 'slug', value: string) {
     const supabase = await createServerClient();
 
     return supabase
@@ -77,7 +75,28 @@ export const postService = {
         `*,
       author: profiles (*, role: roles (*))`,
       )
-      .eq('id', id);
+      .eq(column, value)
+      .single();
+  },
+
+  // Get single post by ID
+  async getById(id?: string) {
+    // Return Bad Request if ID is invalid with statusText
+    if (!id || !postId.safeParse(id).success) {
+      return formatSupabaseErr('Invalid ID');
+    }
+
+    return this.get('id', id);
+  },
+
+  // Get single post by ID
+  async getBySlug(slug?: string) {
+    // Return Bad Request if ID is invalid with statusText
+    if (!slug) {
+      return formatSupabaseErr('Invalid slug');
+    }
+
+    return this.get('slug', slug);
   },
 
   // Update post by ID
@@ -91,7 +110,7 @@ export const postService = {
     const { id, ...changes } = parsed.data;
     const supabase = await createServerClient();
 
-    return supabase.from('posts').update(changes).eq('id', id);
+    return supabase.from('posts').update(changes).eq('id', id).select().single();
   },
 
   // Delete post by ID

@@ -1,12 +1,11 @@
-// TODO: Move logic up to the parent component -> Form should be responsible for the form state
 'use client';
 
-import type { TPostUpdate } from '@/types/post';
+import type { TPostUpdate, TPost } from '@/types/post';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
-import { useRouter } from 'next/navigation';
+import { RefreshCcw } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm, Controller, useWatch } from 'react-hook-form';
@@ -17,23 +16,23 @@ import { createSlug } from '@/lib/string';
 import { postCreate, postUpdate } from '@/server/actions/post';
 import { postCreateSchema } from '@/validations/post';
 
-interface IProps {
+export interface IPostFormProps {
   initialValues?: TPostUpdate;
-  id?: number;
-  isLoading?: boolean;
+  id?: string; // if provided, the form will be used for updating
+  onComplete?: (post?: TPost | null) => void;
 }
 
 /**
  * Post form component for creating and updating posts
  * @param initialValues
- * @param id
+ * @param id - Post ID for updating
+ * @param onFinish
  * @constructor
  */
-export const PostForm: FC<IProps> = ({ initialValues, id }) => {
+export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onComplete }) => {
   const action = id ? postUpdate : postCreate;
-  const [response, formAction] = useFormState(action, { statusText: '', status: 0 });
+  const [response, formAction] = useFormState(action, { statusText: '', status: 0, data: null });
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const {
     register,
@@ -52,25 +51,27 @@ export const PostForm: FC<IProps> = ({ initialValues, id }) => {
 
   // Sync slug with title if it's not dirty
   const title = useWatch({ control, name: 'title' });
-  const isSlugDirty = dirtyFields.slug;
+  const isSlugDirty = Boolean(dirtyFields.slug && form.getValues().slug);
+  const syncSlugWithTitle = () => form.setValue('slug', createSlug(title));
 
   useEffect(() => {
     if (isSlugDirty || initialValues) return; // user has changed the slug manually
 
-    // Replace spaces with hyphens and make lowercase for slug
-    const slug = createSlug(title);
-
-    form.setValue('slug', slug, { shouldValidate: !!title });
+    syncSlugWithTitle();
   }, [title]);
 
   // Handle form submission and display toast messages
   useEffect(() => {
+    console.log('onComplete', response.data);
+    onComplete?.(response.data);
+
     // Post created successfully
     if (response.status === 201) {
       // TODO: Review it!
-      router.push('/'); // return to Home page
+      // router.push('/'); // return to Home page
+      toast.success('Post created successfully!');
 
-      return;
+      // return;
     }
 
     // Other cases
@@ -106,12 +107,18 @@ export const PostForm: FC<IProps> = ({ initialValues, id }) => {
             <Input
               {...field}
               description="Provide post slug"
+              endContent={
+                <Button isIconOnly variant="light" onClick={syncSlugWithTitle}>
+                  <RefreshCcw size={18} />
+                </Button>
+              }
               errorMessage={errors.slug?.message}
               isInvalid={!!errors.slug}
               label="Slug"
               size="lg"
               startContent={<span className="text-muted-foreground">/blog/</span>}
               variant="bordered"
+              onDoubleClick={() => form.setValue('slug', createSlug(title), { shouldValidate: true })}
             />
           )}
         />
@@ -126,7 +133,7 @@ export const PostForm: FC<IProps> = ({ initialValues, id }) => {
           {...register('title', { required: true })}
         />
         <Controller control={control} name="content" render={({ field }) => <Editor errorMessage={errors.content?.message} {...field} />} />
-        <Button disabled={!isDirty} isLoading={loading} size="lg" type="submit" variant="bordered">
+        <Button color="primary" disabled={!isDirty} isLoading={loading} size="lg" type="submit" variant="shadow">
           {loading ? 'Submitting...' : id ? 'Update' : 'Create'}
         </Button>
       </form>
