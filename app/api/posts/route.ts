@@ -1,6 +1,6 @@
 import { formatPostgrestResponse, formatBadRequestResponse } from '@/lib/supabase/formatResponse';
 import { postService } from '@/server/services/post';
-import { postSearchSchema } from '@/validations/post';
+import { postSearchSchema } from '@/validators/post';
 
 // Search
 export async function GET(req: Request) {

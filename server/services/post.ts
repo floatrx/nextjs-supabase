@@ -8,8 +8,8 @@ import type { TPostUpdate, TPostCreate } from '@/types/post';
 import { formatInvalidParseResponse } from '@/lib/supabase/formatResponse';
 import { formatSupabaseErr } from '@/lib/supabase/formatSupabaseErr';
 import { createServerClient } from '@/lib/supabase/server';
-import { postId } from '@/validations/common';
-import { postSearchSchema, postUpdateSchema, postCreateSchema } from '@/validations/post';
+import { postId } from '@/validators/common';
+import { postSearchSchema, postUpdateSchema, postCreateSchema } from '@/validators/post';
 
 interface SearchParams {
   title?: string | null;

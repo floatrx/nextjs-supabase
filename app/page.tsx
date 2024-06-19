@@ -2,7 +2,7 @@ import { Button } from '@nextui-org/button';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 
-import { PostsCards } from '@/app/PostsCards';
+import { PostsCards } from '@/components/features/post/PostsCards';
 import { title } from '@/components/primitives';
 import { getMetadata } from '@/lib/next';
 import { postService } from '@/server/services/post';

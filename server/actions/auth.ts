@@ -11,7 +11,7 @@ import { redirect } from 'next/navigation';
 import { baseUrl } from '@/config';
 import { createServerClient } from '@/lib/supabase/server';
 import { authService } from '@/server/services/auth';
-import { emailLoginSchema } from '@/validations/auth';
+import { emailLoginSchema } from '@/validators/auth';
 
 // Login with email
 const authBase = async (action: 'signInWithPassword' | 'signUp', formData: FormData) => {

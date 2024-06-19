@@ -14,7 +14,7 @@ import { toast } from 'sonner';
 import { Editor } from '@/components/editor/Editor';
 import { createSlug } from '@/lib/string';
 import { postCreate, postUpdate } from '@/server/actions/post';
-import { postCreateSchema } from '@/validations/post';
+import { postCreateSchema } from '@/validators/post';
 
 export interface IPostFormProps {
   initialValues?: TPostUpdate;

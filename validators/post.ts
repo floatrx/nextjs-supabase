@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { createSlug } from '@/lib/string';
-import { postId } from '@/validations/common';
+import { postId } from '@/validators/common';
 
 export const postCreateSchema = z.object({
   slug: z.string().trim().min(1, 'Slug is required').transform(createSlug),

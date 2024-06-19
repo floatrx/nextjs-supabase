@@ -5,7 +5,7 @@ import type { Database } from '@/types/';
 import { type CookieOptions, createServerClient as create } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-import { SUPABASE_KEY, SUPABASE_URL } from '@/const';
+import { SUPABASE_KEY, SUPABASE_URL } from '@/config/const';
 
 /**
  * TODO: Research best practices to create
