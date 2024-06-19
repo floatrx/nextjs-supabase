@@ -1,3 +1,6 @@
+/**
+ * TODO: Move supabase queries into authService
+ */
 'use server';
 
 import type { SignInWithOAuthCredentials } from '@supabase/auth-js';
@@ -37,7 +40,6 @@ const authBase = async (action: 'signInWithPassword' | 'signUp', formData: FormD
   }
 
   revalidatePath('/', 'layout');
-  redirect('/notes');
 };
 
 export const login = async (formData: FormData) => authBase('signInWithPassword', formData);
