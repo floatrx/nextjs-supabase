@@ -7,7 +7,7 @@ import { Trash } from 'lucide-react';
 
 import { useApi } from '@/hooks/useApi';
 
-export const DeletePost = ({ id }: TPostId) => {
+export const DeletePostButton = ({ id }: TPostId) => {
   const [deletePost, pending] = useApi<TPostId>('delete', 'posts');
 
   return (
