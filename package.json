@@ -9,7 +9,20 @@
     "lint": "eslint . --ext .ts,.tsx -c eslint.config.js --fix",
     "pretty": "prettier --write .",
     "ts": "tsc --noEmit",
-    "gen:types": "source .env && supabase gen types typescript --project-id=$SUPABASE_PROJECT_ID > types/supabase.ts"
+    "gen:types": "source .env && supabase gen types typescript --project-id=$SUPABASE_PROJECT_ID > types/supabase.ts",
+    "prepare": "husky"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run lint",
+      "npm run ts",
+      "npm run pretty"
+    ]
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
@@ -69,7 +82,7 @@
     "@types/react-dom": "18.3.0",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@typescript-eslint/parser": "^7.13.1",
-    "eslint": "^8.57.0",
+    "eslint": "8.57.0",
     "eslint-config-next": "14.2.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -79,6 +92,8 @@
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-unused-imports": "^4.0.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
     "prettier": "^3.3.2",
     "typescript": "^5.4.5"
   }
