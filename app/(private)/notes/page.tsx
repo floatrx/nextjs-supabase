@@ -1,11 +1,10 @@
 import { AddNoteForm } from '@/components/note/AddNoteForm';
 import NoteItem from '@/components/note/NoteItem';
-import { createServerClient } from '@/lib/supabase/server';
+import { noteService } from '@/server/services/note';
 
 export default async function NotesSinglePage() {
   // Fetch notes from the database
-  const supabase = await createServerClient();
-  const { data: notes } = await supabase.from('notes').select();
+  const { data: notes } = await noteService.search();
 
   return (
     <div className="flex w-full flex-1 flex-col items-center gap-20">

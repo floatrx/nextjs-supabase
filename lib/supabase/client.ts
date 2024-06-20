@@ -1,4 +1,4 @@
-import type { Database } from '@/types/';
+import type { Database } from '@/types/supabase';
 
 import { createBrowserClient as create } from '@supabase/ssr';
 

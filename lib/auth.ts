@@ -1,13 +1,12 @@
 import { redirect } from 'next/navigation';
 
-import { createServerClient } from '@/lib/supabase/server';
+import { authService } from '@/server/services/auth';
 
 // Get user UUId
 export const getUserId = async (): Promise<string | undefined> => {
-  const supabase = await createServerClient();
-  const { data } = await supabase.auth.getUser();
+  const user = await authService.getUser();
 
-  return data.user?.id;
+  return user?.id;
 };
 
 // Redirect to the login page if the user is not authenticated

@@ -1,6 +1,9 @@
+'use server';
+
+import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
-import { createServerClient } from '@/lib/supabase/server';
+import { authService } from '@/server/services/auth';
 
 /**
  * `auth/callback` route - handles the callback from the OAuth providers
@@ -14,8 +17,13 @@ export async function GET(request: Request) {
   const next = searchParams.get('next') ?? '/';
 
   if (code) {
-    const supabase = await createServerClient();
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    console.log('code:', code);
+    const { error } = await authService.exchangeCode(code);
+
+    // revalidate the cache
+    console.log('revalidating path:', '/');
+
+    revalidatePath('/', 'layout');
 
     if (!error) {
       return NextResponse.redirect(`${origin}${next}`);

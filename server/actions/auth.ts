@@ -9,14 +9,12 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { baseUrl } from '@/config';
-import { createServerClient } from '@/lib/supabase/server';
 import { authService } from '@/server/services/auth';
+import { AuthServiceViaEmailAction } from '@/types/auth';
 import { emailLoginSchema } from '@/validators/auth';
 
 // Login with email
-const authBase = async (action: 'signInWithPassword' | 'signUp', formData: FormData) => {
-  const supabase = await createServerClient();
-
+const authBase = async (action: AuthServiceViaEmailAction, formData: FormData) => {
   const credentials = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
@@ -33,23 +31,25 @@ const authBase = async (action: 'signInWithPassword' | 'signUp', formData: FormD
     redirect('/login?message=Invalid credentials');
   }
 
-  const { error } = await supabase.auth[action](credentials);
+  const { error } = await authService.viaEmail(action, credentials);
 
   if (error) {
     redirect('/login?message=Invalid credentials');
   }
 
+  if (action === 'signUp') {
+    redirect('/login?message=Check your email for a verification link');
+  }
+
   revalidatePath('/', 'layout');
 };
 
-export const login = async (formData: FormData) => authBase('signInWithPassword', formData);
-export const signup = async (formData: FormData) => authBase('signUp', formData);
+export const login = async (formData: FormData) => authBase(AuthServiceViaEmailAction.SignIn, formData);
+export const signup = async (formData: FormData) => authBase(AuthServiceViaEmailAction.SignUp, formData);
 
 // Login with OAuth providers
 const oauthBase = async ({ options, ...credentials }: SignInWithOAuthCredentials) => {
-  const supabase = await createServerClient();
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  const { data, error } = await authService.signInWithOAuth({
     ...credentials,
     options: {
       ...options,
@@ -84,4 +84,5 @@ export const githubLogin = async () => {
 
 export const signOut = async () => {
   await authService.signOut();
+  revalidatePath('/', 'layout');
 };

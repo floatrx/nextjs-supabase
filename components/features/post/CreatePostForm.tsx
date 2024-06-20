@@ -9,7 +9,8 @@ export const CreatePostForm = () => {
 
   return (
     <PostForm
-      onComplete={(post) => {
+      onComplete={({ data: post, ...rest }) => {
+        console.log('Redirecting to post slug: ', post, rest);
         if (!post) return;
         router.push(`/blog/${post.slug}`);
       }}

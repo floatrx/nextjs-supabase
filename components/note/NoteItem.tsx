@@ -4,7 +4,7 @@ import type { TNote } from '@/types/note';
 
 import { useState } from 'react';
 
-import { removeNote } from '@/server/actions/note';
+import { noteService } from '@/server/services/note';
 
 export default function NoteItem({ note }: { note: TNote }) {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export default function NoteItem({ note }: { note: TNote }) {
   async function handleRemoveNote() {
     setLoading(true);
     try {
-      await removeNote(note.id);
+      await noteService.remove(note.id);
     } catch (error) {
       console.error('Failed to remove note:', error);
     } finally {

@@ -3,7 +3,7 @@ import { z } from 'zod';
 /**
  * Validate postId as a parsable positive number
  */
-export const postId = z.union([z.string(), z.number()]).refine(
+export const idScheme = z.union([z.string(), z.number()]).refine(
   (value) => {
     const parsed = typeof value === 'string' ? parseInt(value, 10) : value;
 

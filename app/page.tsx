@@ -19,6 +19,7 @@ export default async function HomePage() {
         <Button isIconOnly as={Link} href="/blog/create" variant="ghost">
           <Plus />
         </Button>
+        Count: {posts.count}
       </h1>
       <PostsCards posts={posts.data} />
     </section>

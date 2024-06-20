@@ -1,4 +1,4 @@
-import { formatPostgrestResponse, formatBadRequestResponse } from '@/lib/supabase/formatResponse';
+import { formatPostgrestResponse, formatBadRequestResponse } from '@/lib/supabase/formatters';
 import { postService } from '@/server/services/post';
 import { postSearchSchema } from '@/validators/post';
 

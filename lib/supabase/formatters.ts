@@ -1,4 +1,3 @@
-import type { FormState } from '@/types/form';
 import type { SafeParseError } from 'zod';
 
 import { PostgrestSingleResponse, type PostgrestResponseFailure, type PostgrestResponseSuccess } from '@supabase/postgrest-js';
@@ -32,18 +31,40 @@ export const formatBadRequestResponse = (message: string) => {
 
 /**
  * Format the response for invalid parse response
+ * using zod error issues
  */
 export const formatInvalidParseResponse = <T>(parsed: SafeParseError<T>) => {
   return formatBadRequestResponse(`Invalid form data. Check issues ${getMessageFromIssues(parsed.error.issues)}`);
 };
 
 /**
- * Format the response status and statusText
+ * Format the response status and statusText with error
+ * - PostgrestResponse
+ * - Response
+ * @param res - any PostgrestResponse or Response
  */
-export const formatStatusResponse = <T = null>(res: AllResponses<T>): FormState<T> => {
-  const { status = 500, statusText = 'Internal server error!' } = res;
+export const formatFormActionResponse = <T>(res: AllResponses<T>) => {
+  const { status = 500, statusText = 'Internal server error!' } = res; // defaults...
 
-  if (res instanceof Response) return { status, statusText, data: null };
+  // default Response
+  if (res instanceof Response)
+    return {
+      status,
+      statusText,
+      data: null,
+    };
 
-  return { status, statusText, data: res.data };
+  // Postgrest response
+  return res;
+};
+
+/**
+ * Format Supabase response error
+ * NOTE: This wrapper uses `formatStatusResponse` and extend
+ *  Use `formatInvalidParseResponse` with `zod` schema validation errors.
+ * @param message - error text message
+ * @param status - error status code (default: 400)
+ */
+export const formatStatusErrorResponse = (message: string, status: number = 400) => {
+  return formatFormActionResponse(new Response(null, { status, statusText: message }));
 };

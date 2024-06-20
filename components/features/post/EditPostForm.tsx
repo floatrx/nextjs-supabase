@@ -12,7 +12,7 @@ export const EditPostForm: RC<IProps> = (props) => {
   return (
     <PostForm
       {...props}
-      onComplete={(post) => {
+      onComplete={({ data: post }) => {
         if (!post) return;
         router.push(`/blog/${post.slug}`);
       }}

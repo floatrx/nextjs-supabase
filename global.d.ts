@@ -5,7 +5,7 @@ declare global {
   // Just empty object
   type EmptyObj = Record<string, unknown>;
   // Any object
-  type AnyObj = Record<string, string>;
+  type AnyObj = Record<string, any>;
   // React fn component with children
   type FC<T = object> = React.FunctionComponent<React.PropsWithChildren<T>>;
   // React fn component without children

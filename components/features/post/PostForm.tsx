@@ -1,5 +1,6 @@
 'use client';
 
+import type { FormState } from '@/types/form';
 import type { TPostUpdate, TPost } from '@/types/post';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,7 +20,7 @@ import { postCreateSchema } from '@/validators/post';
 export interface IPostFormProps {
   initialValues?: TPostUpdate;
   id?: string; // if provided, the form will be used for updating
-  onComplete?: (post?: TPost | null) => void;
+  onComplete?: (response: FormState<TPost>) => void; // expose response to parent component
 }
 
 /**
@@ -62,17 +63,7 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onComplete }) 
 
   // Handle form submission and display toast messages
   useEffect(() => {
-    console.log('onComplete', response.data);
-    onComplete?.(response.data);
-
-    // Post created successfully
-    if (response.status === 201) {
-      // TODO: Review it!
-      // router.push('/'); // return to Home page
-      toast.success('Post created successfully!');
-
-      // return;
-    }
+    onComplete?.(response);
 
     // Other cases
     setLoading(false); // reset spinner

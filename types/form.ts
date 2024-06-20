@@ -1,8 +1,13 @@
-// Server actions
-export type FormState<T = null> = {
-  statusText: string;
+export type FormState<T> = {
   status: number;
-  data?: T | null;
+  statusText: string;
+  data: T | null;
 };
 
+/**
+ * Server action function type
+ * @example
+ *  const postCreate: FormAction<TPost> = async (prevState, data) => {};
+ * @see ./server/actions/post.ts
+ */
 export type FormAction<T = null> = (prevState: any, data: FormData) => Promise<FormState<T>>;

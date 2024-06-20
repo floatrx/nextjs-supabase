@@ -23,16 +23,3 @@ export async function createNote(formData: FormData) {
 
   revalidatePath('/notes');
 }
-
-export const removeNote = async (id: number) => {
-  const supabase = await createServerClient();
-  const { error } = await supabase.from('notes').delete().eq('id', id);
-
-  if (error) {
-    console.error('Error deleting note:', error);
-
-    return;
-  }
-
-  revalidatePath('/notes');
-};
