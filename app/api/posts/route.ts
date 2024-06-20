@@ -1,4 +1,4 @@
-import { formatPostgrestResponse, formatBadRequestResponse } from '@/lib/supabase/formatters';
+import { formatPostgrestResponse, formatResponse } from '@/lib/supabase/formatters';
 import { postService } from '@/server/services/post';
 import { postSearchSchema } from '@/validators/post';
 
@@ -35,7 +35,7 @@ export async function DELETE(req: Request) {
     const { id } = await req.json();
 
     if (!id) {
-      return formatBadRequestResponse('Post ID is required');
+      return formatResponse('Post ID is required');
     }
 
     const res = await postService.delete(id);

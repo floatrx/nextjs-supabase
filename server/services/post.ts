@@ -1,6 +1,6 @@
 import type { TPostCreate, PostSearchParams, TPostUpdate } from '@/types/post';
 
-import { formatInvalidParseResponse, formatStatusErrorResponse } from '@/lib/supabase/formatters';
+import { formatInvalidParseResponse, formatStatusErrorResponse, formatResultWithPagesCount } from '@/lib/supabase/formatters';
 import { createServerClient } from '@/lib/supabase/server';
 import { idScheme } from '@/validators/common';
 import { postCreateSchema, postSearchSchema, postUpdateSchema } from '@/validators/post';
@@ -32,6 +32,7 @@ export const postService = {
 
   /**
    * Search posts
+   * TODO: Move defaults (page, limit) to a constants
    * @param title - Post title
    * @param page - Page number (default: 1)
    * @param limit - Number of items per page (default: 8)
@@ -59,12 +60,9 @@ export const postService = {
       query = query.range(startIndex, endIndex);
     }
 
-    const { data, count } = await query.order('created_at', { ascending: false });
+    const result = await query.order('created_at', { ascending: false });
 
-    console.log({ count });
-    const totalPages = Math.ceil((count ?? 1) / limit);
-
-    return { data, count, totalPages };
+    return formatResultWithPagesCount(result, limit);
   },
 
   /**

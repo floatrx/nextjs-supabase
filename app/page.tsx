@@ -7,10 +7,10 @@ import Link from 'next/link';
 
 import { PostsCards } from '@/components/features/post/PostsCards';
 import { PostSearchFilters } from '@/components/features/post/PostSearchFilters';
+import { Heading } from '@/components/ui/layout/headings/Heading';
 import { PagePagination } from '@/components/ui/PagePagination';
 import { getMetadata } from '@/lib/next';
 import { postService } from '@/server/services/post';
-import { Heading } from '@/components/ui/layout/headings/Heading';
 
 export const metadata = getMetadata('Home');
 
@@ -33,7 +33,7 @@ export default async function HomePage({ searchParams }: PageProps<EmptyObj, Pos
       </Heading>
       <PostSearchFilters />
       <PostsCards posts={posts.data} />
-      {!!posts.count && <PagePagination total={posts.totalPages} />}
+      {!!posts.count && <PagePagination total={posts.total} />}
     </section>
   );
 }

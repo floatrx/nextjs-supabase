@@ -25,8 +25,8 @@ export const formatPostgrestResponse = <T>(res: AllResponses<T>) => {
 /**
  * Format the response for bad request
  */
-export const formatBadRequestResponse = (message: string) => {
-  return Response.json({ statusText: message, status: 400, data: null }, { status: 400 });
+export const formatResponse = <T>(message: string, status: number = 400, data: T | null = null) => {
+  return Response.json({ statusText: message, status, data }, { status });
 };
 
 /**
@@ -34,7 +34,7 @@ export const formatBadRequestResponse = (message: string) => {
  * using zod error issues
  */
 export const formatInvalidParseResponse = <T>(parsed: SafeParseError<T>) => {
-  return formatBadRequestResponse(`Invalid form data. Check issues ${getMessageFromIssues(parsed.error.issues)}`);
+  return formatResponse(`Invalid form data. Check issues ${getMessageFromIssues(parsed.error.issues)}`);
 };
 
 /**
@@ -67,4 +67,18 @@ export const formatFormActionResponse = <T>(res: AllResponses<T>) => {
  */
 export const formatStatusErrorResponse = (message: string, status: number = 400) => {
   return formatFormActionResponse(new Response(null, { status, statusText: message }));
+};
+
+/**
+ * Calculate the total pages count and extend the response
+ * @param res - PostgrestSingleResponse (array)
+ * @param limit - number of items per page
+ */
+export const formatResultWithPagesCount = <T>(
+  res: PostgrestSingleResponse<T[]>,
+  limit: number,
+): PostgrestSingleResponse<T[]> & { total: number } => {
+  const total = Math.ceil((res.count ?? 1) / limit);
+
+  return { ...res, total };
 };
