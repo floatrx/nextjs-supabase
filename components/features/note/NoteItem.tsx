@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import { noteService } from '@/server/services/note';
 
-export default function NoteItem({ note }: { note: TNote }) {
+export const NoteItem = ({ note }: { note: TNote }) => {
   const [loading, setLoading] = useState(false);
 
   async function handleRemoveNote() {
@@ -36,4 +36,4 @@ export default function NoteItem({ note }: { note: TNote }) {
       </div>
     </div>
   );
-}
+};

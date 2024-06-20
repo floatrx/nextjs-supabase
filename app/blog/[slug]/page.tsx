@@ -1,8 +1,8 @@
-import { DateTime } from '@/components/DateTime';
+import { DateTime } from '@/components/ui/DateTime';
 import { EditPostButton } from '@/components/features/post/EditPostButton';
 import { PostAuthorInfo } from '@/components/features/post/PostAuthorInfo';
 import { title } from '@/components/primitives';
-import { RichText } from '@/components/RichText';
+import { RichText } from '@/components/ui/RichText';
 import { upperFirst } from '@/lib/string';
 import { cn } from '@/lib/utils';
 import { postService } from '@/server/services/post';

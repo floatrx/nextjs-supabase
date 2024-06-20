@@ -3,8 +3,8 @@
 import { Input } from '@nextui-org/input';
 import { useRef } from 'react';
 
-import { Form } from '@/components/form/Form';
-import { Submit } from '@/components/form/Submit';
+import { Form } from '@/components/ui/form/Form';
+import { Submit } from '@/components/ui/form/Submit';
 import { createNote } from '@/server/actions/note';
 
 export const AddNoteForm = () => {

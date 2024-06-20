@@ -12,7 +12,7 @@ import { useFormState } from 'react-dom';
 import { useForm, Controller, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { Editor } from '@/components/editor/Editor';
+import { Editor } from '@/components/ui/editor/Editor';
 import { createSlug } from '@/lib/string';
 import { postCreate, postUpdate } from '@/server/actions/post';
 import { postCreateSchema } from '@/validators/post';

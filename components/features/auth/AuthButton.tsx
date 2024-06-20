@@ -3,7 +3,7 @@ import { Button } from '@nextui-org/button';
 import { UserCircle, LogIn, LogOut } from 'lucide-react';
 import Link from 'next/link';
 
-import { Submit } from '@/components/form/Submit';
+import { Submit } from '@/components/ui/form/Submit';
 import { signOut } from '@/server/actions/auth';
 import { authService } from '@/server/services/auth';
 

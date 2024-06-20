@@ -1,5 +1,5 @@
-import { AddNoteForm } from '@/components/note/AddNoteForm';
-import NoteItem from '@/components/note/NoteItem';
+import { AddNoteForm } from '@/components/features/note/AddNoteForm';
+import { NoteItem } from '@/components/features/note/NoteItem';
 import { noteService } from '@/server/services/note';
 
 export default async function NotesSinglePage() {

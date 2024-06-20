@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import NextTopLoader from 'nextjs-toploader';
 
-import { Providers } from '@/app/providers';
-import { Footer } from '@/components/layout/Footer';
-import { Header } from '@/components/layout/Header';
+import { Providers } from '@/components/providers/Providers';
+import { Footer } from '@/components/ui/layout/Footer';
+import { Header } from '@/components/ui/layout/Header';
 import { fontSans } from '@/config/fonts';
 import { getMetadata } from '@/lib/next';
 

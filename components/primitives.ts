@@ -1,4 +1,4 @@
-import { tv } from 'tailwind-variants';
+import { tv, VariantProps } from 'tailwind-variants';
 
 export const title = tv({
   base: 'tracking-tight inline font-semibold mb-2',
@@ -16,13 +16,14 @@ export const title = tv({
       sm: 'text-3xl lg:text-4xl',
       md: 'text-[2.3rem] lg:text-5xl leading-9',
       lg: 'text-4xl lg:text-6xl',
+      xl: 'text-5xl lg:text-7xl',
     },
     fullWidth: {
       true: 'w-full block',
     },
   },
   defaultVariants: {
-    size: 'md',
+    size: 'lg',
   },
   compoundVariants: [
     {
@@ -43,3 +44,5 @@ export const subtitle = tv({
     fullWidth: true,
   },
 });
+
+export type TitleVariantType = VariantProps<typeof title>;

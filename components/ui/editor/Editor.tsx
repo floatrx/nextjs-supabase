@@ -1,4 +1,4 @@
-import type { MdEditorProps } from '@/components/editor/MdEditor';
+import type { MdEditorProps } from '@/components/ui/editor/MdEditor';
 
 import dynamic from 'next/dynamic';
 import { forwardRef } from 'react';
@@ -11,7 +11,7 @@ interface IProps extends Pick<MdEditorProps, 'value' | 'onChange'> {
 
 // Lazy load MarkdownEditor
 const MdEditorLazy = dynamic(
-  () => import('@/components/editor/MdEditor'),
+  () => import('@/components/ui/editor/MdEditor'),
   // Disable SSR for this component, use skeleton instead
   { ssr: false, loading: MarkdownEditorSkeleton },
 );

@@ -7,8 +7,8 @@
  */
 import { Input } from '@nextui-org/input';
 
-import { Form } from '@/components/form/Form';
-import { Submit } from '@/components/form/Submit';
+import { Form } from '@/components/ui/form/Form';
+import { Submit } from '@/components/ui/form/Submit';
 import { Logo } from '@/components/icons';
 import { GitHubIcon } from '@/components/icons/GithubIcon';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
