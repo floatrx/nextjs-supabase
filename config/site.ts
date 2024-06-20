@@ -12,10 +12,10 @@ export const siteConfig = {
     //   label: 'Notes',
     //   href: '/notes',
     // },
-    {
-      label: 'Blog',
-      href: '/blog',
-    },
+    // {
+    //   label: 'Blog',
+    //   href: '/blog',
+    // },
   ],
   navMenuItems: [
     {

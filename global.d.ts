@@ -14,7 +14,7 @@ declare global {
   type ComponentProps<T> = React.ComponentProps<T>;
   // Next page props
   type PageProps<Params = EmptyObj, SearchParams = EmptyObj> = {
-    params: Params;
-    searchParams: SearchParams;
+    params: Partial<Params>;
+    searchParams: Partial<SearchParams>;
   };
 }

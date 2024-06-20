@@ -1,6 +1,5 @@
 import type { TPostWithAuthor } from '@/types/post';
 
-import { Avatar } from '@nextui-org/avatar';
 import { Card, CardHeader, CardBody } from '@nextui-org/card';
 import { Chip } from '@nextui-org/chip';
 import { Image } from '@nextui-org/image';
@@ -8,6 +7,7 @@ import Link from 'next/link';
 
 import { DeletePostButton } from '@/components/features/post/DeletePostButton';
 import { EditPostButton } from '@/components/features/post/EditPostButton';
+import { PostAuthorAvatar } from '@/components/features/post/PostAuthorAvatar';
 import { upperFirst, safePostExcerpt } from '@/lib/string';
 
 interface IProps {
@@ -39,7 +39,7 @@ export const PostCard: RC<IProps> = ({ post }) => {
             </div>
           </div>
           <div className="stack font-bold">
-            <Avatar isBordered className="h-6 w-6 text-tiny" src={author?.avatar} />
+            <PostAuthorAvatar author={author} />
             <span>{author?.username || author?.email}</span>
             <Chip className="ml-2" size="sm">
               {author?.role?.name}

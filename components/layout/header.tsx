@@ -24,7 +24,6 @@ export const Header = () => {
               <NextLink
                 className={clsx(linkStyles({ color: 'foreground' }), 'data-[active=true]:font-medium data-[active=true]:text-primary')}
                 color="foreground"
-                // @ts-expect-error -> coz: next.config.mjs experimental.typedRoutes enabled
                 href={item.href}
               >
                 {item.label}

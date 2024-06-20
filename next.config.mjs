@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   experimental: {
-    typedRoutes: true,
+    // typedRoutes: true, <- This is not working as expected yet! After change this, you need tsc --noEmit to found the errors...
   },
   images: {
     remotePatterns: [

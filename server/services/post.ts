@@ -43,11 +43,13 @@ export const postService = {
     let query = supabase.from('posts').select(
       `*,
       author: profiles (*, role: roles (*))`,
-      { count: 'exact' }, // This option tells Supabase to return only the count of matching rows
+      { count: 'exact' },
     );
 
     if (parsed.data?.title) {
-      query = query.eq('title', parsed.data?.title);
+      // Exact
+      // query = query.eq('title', parsed.data?.title);
+      query = query.ilike('title', `%${parsed.data.title}%`);
     }
 
     if (page) {
@@ -57,7 +59,12 @@ export const postService = {
       query = query.range(startIndex, endIndex);
     }
 
-    return query.order('created_at', { ascending: false });
+    const { data, count } = await query.order('created_at', { ascending: false });
+
+    console.log({ count });
+    const totalPages = Math.ceil((count ?? 1) / limit);
+
+    return { data, count, totalPages };
   },
 
   /**
