@@ -1,6 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
-import { useTransition } from 'react';
+import { useCallback, useState } from 'react';
 
 interface RequestInitOptions<Payload> extends Omit<RequestInit, 'body'> {
   body?: Payload;
@@ -14,25 +13,42 @@ interface RequestInitOptions<Payload> extends Omit<RequestInit, 'body'> {
  * @param tags - Cache tags[]
  * @param init - RequestInit options (compatible with fetch)
  */
-export const useApi = <Payload>(
+export const useApi = <Payload, Result = null>(
   method: string = 'get',
   url: string,
   { tags, ...init }: RequestInitOptions<Payload> = {},
-): [(payload: Payload) => void, boolean] => {
+): [(payload: Payload) => Promise<{ result: Result | null; response: Response }>, boolean] => {
   const router = useRouter();
-  const [pending, startTransition] = useTransition();
+  const [pending, setPending] = useState(false);
 
   const trigger = useCallback(
-    (payload: Payload) => {
-      startTransition(async () => {
-        await fetch(`/api/${url}`, {
-          method,
-          next: { tags },
-          ...init, // override default options
-          body: JSON.stringify(payload), // always stringify body
-        });
-        router.refresh();
+    async (payload: Payload) => {
+      let body: string | FormData = JSON.stringify(payload); // stringify body by default
+
+      if (payload instanceof FormData) {
+        body = payload; // FormData is not stringifiable
+      }
+
+      setPending(true);
+
+      const response = await fetch(`/api/${url}`, {
+        method,
+        next: { tags },
+        ...init, // override default options
+        body,
       });
+
+      setPending(false);
+
+      if (response.ok && response.status !== 204) {
+        let result = await response.json();
+
+        return { result, response };
+      }
+
+      router.refresh();
+
+      return { result: null, response };
     },
     [url],
   );

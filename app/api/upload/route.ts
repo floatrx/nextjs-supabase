@@ -1,8 +1,7 @@
-import { SUPABASE_BUCKET } from '@/config/const';
-import { prepareFileForUpload, getFileFromRequest } from '@/lib/file';
+import { getFileFromRequest } from '@/lib/file';
 import { formatResponse } from '@/lib/supabase/formatters';
-import { createServerClient } from '@/lib/supabase/server';
 import { authService } from '@/server/services/auth';
+import { bucketService } from '@/server/services/bucket';
 
 export async function POST(req: Request) {
   const user = authService.getUser();
@@ -18,16 +17,7 @@ export async function POST(req: Request) {
       return formatResponse('No files received.', 400);
     }
 
-    const { filename, buffer } = await prepareFileForUpload(file);
-
-    const supabase = await createServerClient();
-    const { data, error } = await supabase.storage
-      // upload file to the assets bucket...
-      .from(SUPABASE_BUCKET)
-      .upload(`public/${filename}`, buffer, {
-        contentType: file.type,
-        upsert: true,
-      });
+    const { data, error } = await bucketService.upload(file);
 
     if (error) {
       return formatResponse(error.message, 400);
