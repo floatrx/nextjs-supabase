@@ -8,7 +8,9 @@ import Link from 'next/link';
 import { DeletePostButton } from '@/components/features/post/DeletePostButton';
 import { EditPostButton } from '@/components/features/post/EditPostButton';
 import { PostAuthorAvatar } from '@/components/features/post/PostAuthorAvatar';
+import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { upperFirst, safePostExcerpt } from '@/lib/string';
+import { getImgUrl } from '@/lib/supabase/getImgUrl';
 
 interface IProps {
   post: TPostWithAuthor;
@@ -20,8 +22,16 @@ export const PostCard: RC<IProps> = ({ post }) => {
 
   return (
     <article>
-      <Card className="h-full p-4">
+      <Card className="h-full overflow-visible p-4 px-1">
         <CardHeader className="flex-col items-start gap-2 px-4 pb-0 pt-2">
+          {thumbnail && (
+            <Image
+              alt="thumbnail"
+              className="m-auto -mt-8 aspect-video min-w-full rounded-2xl object-cover shadow-2xl"
+              src={getImgUrl(thumbnail)}
+              width="100%"
+            />
+          )}
           <div className="stack w-full">
             <small className="text-default-500">
               {new Date(created_at ?? '').toLocaleDateString('en-US', {
@@ -34,8 +44,10 @@ export const PostCard: RC<IProps> = ({ post }) => {
             </small>
             <span className="flex-1" />
             <div className="stack">
-              <DeletePostButton id={id} />
-              <EditPostButton id={id} />
+              <OnlyAuth>
+                <DeletePostButton id={id} />
+                <EditPostButton id={id} />
+              </OnlyAuth>
             </div>
           </div>
           <div className="stack font-bold">
@@ -50,7 +62,6 @@ export const PostCard: RC<IProps> = ({ post }) => {
           </Link>
         </CardHeader>
         <CardBody className="overflow-visible py-2">
-          {thumbnail && <Image alt="thumbnail" className="aspect-auto w-full rounded-xl object-cover" src={thumbnail} />}
           <p className="line-clamp-5 pt-4">{safePostExcerpt(content)}</p>
         </CardBody>
       </Card>

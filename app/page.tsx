@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 import { PostsCards } from '@/components/features/post/PostsCards';
 import { PostSearchFilters } from '@/components/features/post/PostSearchFilters';
+import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { Heading } from '@/components/ui/layout/headings/Heading';
 import { PagePagination } from '@/components/ui/PagePagination';
 import { getMetadata } from '@/lib/next';
@@ -27,9 +28,11 @@ export default async function HomePage({ searchParams }: PageProps<EmptyObj, Pos
       <Heading className="stack">
         <span>Latest posts</span>
         <Chip>{posts.count ?? 0}</Chip>
-        <Button isIconOnly as={Link} href="/blog/create" variant="ghost">
-          <Plus />
-        </Button>
+        <OnlyAuth>
+          <Button isIconOnly as={Link} href="/blog/create" variant="ghost">
+            <Plus />
+          </Button>
+        </OnlyAuth>
       </Heading>
       <PostSearchFilters />
       <PostsCards posts={posts.data} />

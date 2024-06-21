@@ -7,6 +7,7 @@ export const postCreateSchema = z.object({
   slug: z.string().trim().min(1, 'Slug is required').transform(createSlug),
   title: z.string().trim().min(1, 'Title is required'),
   content: z.string().trim().min(1, 'Content is required'),
+  thumbnail: z.any().optional(), // TODO: thumb should be a string
 });
 
 // extend the postCreateSchema as optional fields
