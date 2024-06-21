@@ -1,5 +1,5 @@
-import { Avatar } from '@nextui-org/avatar';
 import { Button } from '@nextui-org/button';
+import { Image } from '@nextui-org/image';
 import { LogIn, LogOut } from 'lucide-react';
 import Link from 'next/link';
 
@@ -13,7 +13,7 @@ export const AuthButton = async () => {
 
   return user ? (
     <div className="flex items-center gap-4">
-      <Avatar alt="User avatar" className="h-8 w-8 rounded-full" name={user.email} src={user.user_metadata.avatar_url} />
+      <Image alt="User avatar" className="h-8 w-8 rounded-full" src={user.user_metadata.avatar_url} />
       {user.email}
       <form>
         <Submit isIconOnly formAction={signOut} title="Logout" variant="bordered">
