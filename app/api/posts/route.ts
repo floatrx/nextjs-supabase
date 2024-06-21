@@ -38,7 +38,7 @@ export async function DELETE(req: Request) {
       return formatResponse('Post ID is required');
     }
 
-    const res = await postService.delete(id);
+    const res = await postService.remove(id);
 
     return formatPostgrestResponse(res);
   } catch ({ message }) {
