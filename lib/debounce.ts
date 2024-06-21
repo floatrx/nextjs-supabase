@@ -1,10 +1,11 @@
 import type { AnyFn } from '@/types';
+
 import { DEFAULT_DEBOUNCE_DELAY } from '@/config/const';
 
 /**
  * Debounce function
  * @param fn - function to debounce
- * @param delay - delay in milliseconds (default: 300)
+ * @param delay - delay in milliseconds
  * @returns debounced function
  */
 export const debounce = <T extends AnyFn>(fn: T, delay: number = DEFAULT_DEBOUNCE_DELAY): ((...args: Parameters<T>) => void) => {

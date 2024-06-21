@@ -9,7 +9,7 @@ import { debounce } from '@/lib/debounce';
  * Debounce function (hook)
  * NOTE: fn should be ignored in the deps array
  * @param fn - function to debounce
- * @param delay - delay in milliseconds (default: 300)
+ * @param delay - delay in milliseconds
  * @returns debounced function
  */
 export const useDebounce = <T extends AnyFn>(fn: T, delay: number = DEFAULT_DEBOUNCE_DELAY): T => {

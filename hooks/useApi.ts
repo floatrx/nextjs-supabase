@@ -29,6 +29,8 @@ export const useApi = <Payload, Result = null>(
         body = payload; // FormData is not stringifiable
       }
 
+      console.log('API request:', { method, url, body, tags, init });
+
       setPending(true);
 
       const response = await fetch(`/api/${url}`, {
