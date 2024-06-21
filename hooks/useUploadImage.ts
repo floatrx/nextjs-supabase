@@ -1,20 +1,38 @@
+import type { StorageUploadResponse } from '@/types/storage';
+
 import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { useApi } from '@/hooks/useApi';
-import { checkFileSize } from '@/lib/file';
+import { checkFileSize, getFormDataFromFile } from '@/lib/file';
 import { getImageUrl } from '@/lib/supabase/storage';
 
+/**
+ * Hook to handle image upload process
+ * - Upload image to the server
+ * - Get the full image URL
+ * - Reset the uploaded image
+ * - Show toaster on success/error
+ * - Check if the file size exceeds 2MB
+ * @param initialValue - initial image URL from parent form component
+ *
+ */
 export const useUploadImage = (initialValue?: string | null) => {
-  const [value, setValue] = useState(initialValue ?? '');
-  const [upload, isLoading] = useApi<FormData, { data: { path: string } }>('post', 'upload', { tags: ['post'] });
+  const [imgUrl, setImgUrl] = useState(initialValue ?? '');
+  const [upload, isLoading] = useApi<FormData, StorageUploadResponse>('post', 'upload');
 
-  const reset = () => setValue('');
+  // Reset imgUrl
+  const reset = () => setImgUrl('');
 
+  // Handle file upload → show toaster on success/error
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]; // Get the first file from the list
 
-    if (!file) return;
+    if (!file) {
+      toast.error('No file selected.');
+
+      return;
+    }
 
     // Check if the file size exceeds 2MB
     if (!checkFileSize(file)) {
@@ -23,15 +41,13 @@ export const useUploadImage = (initialValue?: string | null) => {
       return;
     }
 
-    const formData = new FormData(); // Create a new FormData instance
-
-    formData.append('file', file); // Append the file to the FormData instance
-
     try {
-      const { result } = await upload(formData); // Upload the file (API call
+      // Upload the file (API call
+      const { result } = await upload(getFormDataFromFile(file));
 
       if (result?.data) {
-        setValue(getImageUrl(result.data.path));
+        // Set the full supabase storage image URL as the value
+        setImgUrl(getImageUrl(result.data.path));
         toast.success('File uploaded successfully.');
       }
     } catch (e) {
@@ -39,6 +55,7 @@ export const useUploadImage = (initialValue?: string | null) => {
     }
   };
 
+  // Input file props to spread ...
   const inputProps: ComponentProps<'input'> = {
     onChange: handleUpload,
     hidden: true,
@@ -47,7 +64,7 @@ export const useUploadImage = (initialValue?: string | null) => {
   };
 
   return {
-    imgUrl: value,
+    imgUrl,
     isLoading,
     inputProps,
     reset,

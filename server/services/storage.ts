@@ -3,10 +3,10 @@ import { prepareFileForUpload } from '@/lib/file';
 import { createServerClient } from '@/lib/supabase/server';
 
 /**
- * Bucket service
+ * Storage service
  * - Upload to path (default: public)
  */
-export const bucketService = {
+export const storageService = {
   async upload(file: File, path: string = 'public') {
     const { filename, buffer } = await prepareFileForUpload(file);
 

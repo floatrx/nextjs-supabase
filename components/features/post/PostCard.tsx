@@ -2,15 +2,15 @@ import type { TPostWithAuthor } from '@/types/post';
 
 import { Card, CardHeader, CardBody } from '@nextui-org/card';
 import { Chip } from '@nextui-org/chip';
-import { Image } from '@nextui-org/image';
 import Link from 'next/link';
 
 import { DeletePostButton } from '@/components/features/post/DeletePostButton';
 import { EditPostButton } from '@/components/features/post/EditPostButton';
 import { PostAuthorAvatar } from '@/components/features/post/PostAuthorAvatar';
 import { OnlyAuth } from '@/components/guards/OnlyAuth';
+import { DateTime } from '@/components/ui/DateTime';
+import { StorageImage } from '@/components/ui/StorageImage';
 import { upperFirst, safePostExcerpt } from '@/lib/string';
-import { getImgUrl } from '@/lib/supabase/getImgUrl';
 
 interface IProps {
   post: TPostWithAuthor;
@@ -21,26 +21,13 @@ export const PostCard: RC<IProps> = ({ post }) => {
   const { id, slug, created_at, title, content, thumbnail, author } = post;
 
   return (
-    <article>
+    <article id={`post-${id}`}>
       <Card className="h-full overflow-visible p-4 px-1">
         <CardHeader className="flex-col items-start gap-2 px-4 pb-0 pt-2">
-          {thumbnail && (
-            <Image
-              alt="thumbnail"
-              className="m-auto -mt-8 aspect-video min-w-full rounded-2xl object-cover shadow-2xl"
-              src={getImgUrl(thumbnail)}
-              width="100%"
-            />
-          )}
+          <StorageImage src={thumbnail} />
           <div className="stack w-full">
             <small className="text-default-500">
-              {new Date(created_at ?? '').toLocaleDateString('en-US', {
-                day: '2-digit',
-                month: '2-digit',
-                year: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
+              <DateTime date={created_at} />
             </small>
             <span className="flex-1" />
             <div className="stack">

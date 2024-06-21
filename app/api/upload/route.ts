@@ -1,7 +1,7 @@
 import { getFileFromRequest } from '@/lib/file';
 import { formatResponse } from '@/lib/supabase/formatters';
 import { authService } from '@/server/services/auth';
-import { bucketService } from '@/server/services/bucket';
+import { storageService } from '@/server/services/storage';
 
 export async function POST(req: Request) {
   const user = authService.getUser();
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
       return formatResponse('No files received.', 400);
     }
 
-    const { data, error } = await bucketService.upload(file);
+    const { data, error } = await storageService.upload(file);
 
     if (error) {
       return formatResponse(error.message, 400);

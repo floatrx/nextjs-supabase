@@ -13,6 +13,19 @@ export const getFileFromRequest = async (req: Request, inputName: string = 'file
 };
 
 /**
+ * Get a FormData instance from a file
+ * @param file
+ * @returns FormData with the file
+ */
+export const getFormDataFromFile = (file: File): FormData => {
+  const formData = new FormData();
+
+  formData.append('file', file);
+
+  return formData;
+};
+
+/**
  * Generate a unique filename based on the original filename
  * @param filename
  * @returns string

@@ -1,8 +1,9 @@
-import { DateTime } from '@/components/ui/DateTime';
 import { EditPostButton } from '@/components/features/post/EditPostButton';
 import { PostAuthorInfo } from '@/components/features/post/PostAuthorInfo';
 import { title } from '@/components/primitives';
+import { DateTime } from '@/components/ui/DateTime';
 import { RichText } from '@/components/ui/RichText';
+import { StorageImage } from '@/components/ui/StorageImage';
 import { upperFirst } from '@/lib/string';
 import { cn } from '@/lib/utils';
 import { postService } from '@/server/services/post';
@@ -18,6 +19,7 @@ export default async function PostSinglePage({ params }: PageProps<{ slug: strin
   return (
     <article className="article">
       <header>
+        <StorageImage className="rounded-lg shadow-2xl" src={post.thumbnail} />
         <h1 className={cn(title(), 'stack')}>
           {upperFirst(post.title)}
           <EditPostButton id={post.id} />

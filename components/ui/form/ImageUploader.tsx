@@ -8,8 +8,8 @@ import { Button } from '@nextui-org/button';
 import { Upload, X } from 'lucide-react';
 import { forwardRef } from 'react';
 
-import { BucketImage } from '@/components/BucketImage';
 import { Loader } from '@/components/ui/Loader';
+import { StorageImage } from '@/components/ui/StorageImage';
 import { useUploadImage } from '@/hooks/useUploadImage';
 import { cn } from '@/lib/utils';
 
@@ -47,7 +47,7 @@ export const ImageUploader: Component = forwardRef(({ onChange, value, errorMess
       >
         {imgUrl ? (
           // Show preview image
-          <BucketImage className="size-fit rounded-lg" src={imgUrl} />
+          <StorageImage className="size-fit rounded-lg" src={imgUrl} />
         ) : (
           // Show trigger component if image is not uploaded
           !isLoading && (

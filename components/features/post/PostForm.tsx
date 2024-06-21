@@ -13,13 +13,14 @@ import { useForm, Controller, useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { Editor } from '@/components/ui/editor/Editor';
+import { ImageUploader } from '@/components/ui/form/ImageUploader';
 import { createSlug } from '@/lib/string';
 import { postCreate, postUpdate } from '@/server/actions/post';
 import { postCreateSchema } from '@/validators/post';
 
 export interface IPostFormProps {
   initialValues?: TPostUpdate;
-  id?: string; // if provided, the form will be used for updating
+  id?: string | number; // if provided, the form will be used for updating
   onComplete?: (response: FormState<TPost>) => void; // expose response to parent component
 }
 
@@ -46,6 +47,7 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onComplete }) 
       title: '',
       content: '',
       slug: '',
+      thumbnail: '',
       ...initialValues,
     },
   });
@@ -91,38 +93,51 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onComplete }) 
     <section className="mt-6">
       <form ref={formRef} action={formAction} className="space-y-8" onSubmit={handleSubmit}>
         {id && <input hidden readOnly name="id" value={id} />}
-        <Controller
-          control={control}
-          name="slug"
-          render={({ field }) => (
-            <Input
-              {...field}
-              description="Provide post slug"
-              endContent={
-                <Button isIconOnly variant="light" onClick={syncSlugWithTitle}>
-                  <RefreshCcw size={18} />
-                </Button>
-              }
-              errorMessage={errors.slug?.message}
-              isInvalid={!!errors.slug}
-              label="Slug"
-              size="lg"
-              startContent={<span className="text-muted-foreground">/blog/</span>}
-              variant="bordered"
-              onDoubleClick={() => form.setValue('slug', createSlug(title), { shouldValidate: true })}
+
+        <div className="flex gap-4">
+          <div className="left flex-1">
+            <Controller
+              control={control}
+              name="slug"
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  description="Provide post slug"
+                  endContent={
+                    <Button isIconOnly variant="light" onClick={syncSlugWithTitle}>
+                      <RefreshCcw size={18} />
+                    </Button>
+                  }
+                  errorMessage={errors.slug?.message}
+                  isInvalid={!!errors.slug}
+                  label="Slug"
+                  size="lg"
+                  startContent={<span className="text-muted-foreground">/blog/</span>}
+                  variant="bordered"
+                  onDoubleClick={() => form.setValue('slug', createSlug(title), { shouldValidate: true })}
+                />
+              )}
             />
-          )}
-        />
-        <Input
-          autoFocus
-          description="Provide post title"
-          errorMessage={errors.title?.message}
-          isInvalid={!!errors.title}
-          label="Title"
-          size="lg"
-          variant="bordered"
-          {...register('title', { required: true })}
-        />
+            <Input
+              autoFocus
+              description="Provide post title"
+              errorMessage={errors.title?.message}
+              isInvalid={!!errors.title}
+              label="Title"
+              size="lg"
+              variant="bordered"
+              {...register('title', { required: true })}
+            />
+          </div>
+          <div className="right min-w-[240px]">
+            <Controller
+              control={control}
+              name="thumbnail"
+              render={({ field }) => <ImageUploader errorMessage={errors.thumbnail?.message} {...field} />}
+            />
+          </div>
+        </div>
+
         <Controller control={control} name="content" render={({ field }) => <Editor errorMessage={errors.content?.message} {...field} />} />
         <Button color="primary" disabled={!isDirty} isLoading={loading} size="lg" type="submit" variant="shadow">
           {loading ? 'Submitting...' : id ? 'Update' : 'Create'}
