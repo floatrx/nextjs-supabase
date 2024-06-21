@@ -9,19 +9,21 @@ import { createNote } from '@/server/actions/note';
 
 export const AddNoteForm = () => {
   // Create a ref for resetting the form
-  const ref = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <Form ref={ref} className="stack mt-4 gap-5 text-xl">
-      <Input name="title" placeholder="Add new note..." type="text" />
+    <Form ref={formRef} className="stack mt-4 gap-5 text-xl">
+      <Input ref={inputRef} autoFocus name="title" placeholder="Add new note..." size="lg" type="text" variant="bordered" />
       <div className="stack">
         <Submit
-          className="rounded-md bg-success px-4 py-2 text-success-foreground hover:bg-success/90"
           formAction={async (formData) => {
             await createNote(formData);
-            ref.current?.reset();
+            formRef.current?.reset();
+            inputRef.current?.focus();
           }}
           pendingText="Adding note..."
+          size="lg"
         >
           Add Note
         </Submit>
