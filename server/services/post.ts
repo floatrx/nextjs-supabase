@@ -124,7 +124,7 @@ export const postService = {
    * Delete a post by ID
    * @param id
    */
-  async delete(id: string) {
+  async remove(id: string) {
     const supabase = await createServerClient();
 
     return supabase.from('posts').delete().eq('id', id);
