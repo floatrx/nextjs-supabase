@@ -6,7 +6,7 @@
 
 import { Button } from '@nextui-org/button';
 import { Upload, X } from 'lucide-react';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect } from 'react';
 
 import { Loader } from '@/components/ui/Loader';
 import { StorageImage } from '@/components/ui/StorageImage';
@@ -15,9 +15,9 @@ import { cn } from '@/lib/utils';
 
 interface IProps {
   value: string | null;
-  onChange: (thumbnail: string) => void;
   errorMessage?: string; // error message to display (received from the parent form)
   className?: string;
+  onChange?: (imgUrl: string) => void;
 }
 
 type Component = React.ForwardRefExoticComponent<IProps & React.RefAttributes<HTMLInputElement>>;
@@ -33,14 +33,19 @@ type Component = React.ForwardRefExoticComponent<IProps & React.RefAttributes<HT
  * - imgUrl - URL of the uploaded image
  * - reset - function to reset the uploaded image
  */
-export const ImageUploader: Component = forwardRef(({ onChange, value, errorMessage, className, ...props }, ref) => {
+export const ImageUploader: Component = forwardRef(({ value, errorMessage, className, onChange, ...props }, ref) => {
   const { isLoading, inputProps, imgUrl, reset } = useUploadImage(value);
+
+  // Expose URL to the form
+  useEffect(() => {
+    onChange?.(imgUrl);
+  }, [imgUrl]);
 
   return (
     <div className="relative">
       <label
         className={cn(
-          `stack relative size-[220px] max-h-[152px] w-full max-w-[220px] cursor-pointer justify-center overflow-hidden rounded-xl border-2 bg-foreground/5`,
+          `stack relative size-[220px] max-h-[152px] w-full max-w-[220px] cursor-pointer justify-center overflow-hidden rounded-xl border-2 bg-foreground/5 p-2`,
           className,
         )}
         htmlFor="file" // dialog trigger
@@ -64,14 +69,7 @@ export const ImageUploader: Component = forwardRef(({ onChange, value, errorMess
           <X size={14} />
         </Button>
       )}
-      <input
-        ref={ref}
-        hidden
-        value={imgUrl}
-        {...props}
-        // onChange required for suppressing React warning
-        onChange={(e) => onChange?.(e.target.value)}
-      />
+      <input {...props} ref={ref} readOnly value={imgUrl} />
       {errorMessage && <p className="m-0 text-danger">{errorMessage}</p>}
     </div>
   );

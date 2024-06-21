@@ -85,7 +85,7 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onComplete }) 
       formAction(new FormData(formRef.current!));
     },
     (fieldErrors, _event) => {
-      console.log('error form submit', fieldErrors);
+      console.log('Error form submit', fieldErrors);
     },
   );
 
