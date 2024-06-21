@@ -7,8 +7,7 @@ const config: Config = {
   content: [
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
-    // This pattern is managed by NextUI script
-    './node_modules/@nextui-org/theme/dist/components/(avatar|breadcrumbs|button|card|chip|code|image|input|kbd|link|navbar|pagination|popover|snippet|spinner|toggle|ripple).js',
+    './node_modules/@nextui-org/theme/dist/components/(accordion|avatar|breadcrumbs|button|card|chip|image|input|link|navbar|pagination|popover|snippet|spinner|toggle|divider|ripple).js',
   ],
   theme: {
     extend: {

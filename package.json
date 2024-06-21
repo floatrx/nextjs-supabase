@@ -27,6 +27,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
     "@mdxeditor/editor": "^3.4.2",
+    "@nextui-org/accordion": "^2.0.35",
     "@nextui-org/avatar": "^2.0.29",
     "@nextui-org/breadcrumbs": "^2.0.10",
     "@nextui-org/button": "^2.0.34",
