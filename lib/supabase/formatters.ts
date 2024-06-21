@@ -65,8 +65,8 @@ export const formatFormActionResponse = <T>(res: AllResponses<T>) => {
  * @param message - error text message
  * @param status - error status code (default: 400)
  */
-export const formatStatusErrorResponse = (message: string, status: number = 400) => {
-  return formatFormActionResponse(new Response(null, { status, statusText: message }));
+export const formatStatusErrorResponse = <T = null>(message: string, status: number = 400) => {
+  return formatFormActionResponse<T>(new Response(null, { status, statusText: message }));
 };
 
 /**
