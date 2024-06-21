@@ -4,6 +4,7 @@ import { NextUIProvider } from '@nextui-org/system';
 import { useRouter } from 'next/navigation';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { ThemeProviderProps } from 'next-themes/dist/types';
+import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from 'sonner';
 
 interface IProps extends ThemeProviderProps {
@@ -22,6 +23,7 @@ export function Providers({ children, ...props }: IProps) {
   return (
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider {...props}>
+        <NextTopLoader color={'#C55FFC'} />
         {children}
         <Toaster position="top-center" theme={props.defaultTheme} />
       </NextThemesProvider>

@@ -16,7 +16,7 @@ import { ThemeSwitch } from '@/components/ui/ThemeSwitch';
 import { siteConfig } from '@/config/site';
 
 export const Header = () => (
-  <NextUINavbar maxWidth="xl" position="sticky">
+  <NextUINavbar maxWidth="full" position="sticky">
     <NavbarContent className="basis-1/5 md:basis-full" justify="start">
       <NavbarBrand as="li" className="max-w-fit gap-3">
         <NavLink className="flex items-center justify-start gap-1" href="/">
