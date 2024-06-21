@@ -2,38 +2,20 @@
 
 import type { TNote } from '@/types/note';
 
-import { useState } from 'react';
+import { RemoveNoteButton } from '@/components/features/note/RemoveNoteButton';
+import { upperFirst } from '@/lib/string';
 
-import { noteService } from '@/server/services/note';
+interface IProps {
+  note: TNote;
+}
 
-export const NoteItem = ({ note }: { note: TNote }) => {
-  const [loading, setLoading] = useState(false);
-
-  async function handleRemoveNote() {
-    setLoading(true);
-    try {
-      await noteService.remove(note.id);
-    } catch (error) {
-      console.error('Failed to remove note:', error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <div key={note.id} className="rounded-xl border-b border-b-foreground/10 bg-slate-100 px-4 py-2">
-      <div className="stack">
-        <p>
-          {note.id}. {note.title}{' '}
-        </p>
-        <button
-          className="bg-btn text-btn-foreground mx-2 rounded-md border px-2 hover:bg-success/90"
-          disabled={loading}
-          onClick={handleRemoveNote}
-        >
-          {loading ? 'Deleting...' : 'Delete'}
-        </button>
-      </div>
+export const NoteItem: RC<IProps> = ({ note }) => (
+  <div key={note.id} className="rounded-xl border-b bg-foreground-50 px-4 py-2 shadow-sm">
+    <div className="stack">
+      <RemoveNoteButton id={note.id} />
+      <p className="flex w-full justify-between gap-2 text-xl">
+        {upperFirst(note.title)} <span className="opacity-20">{note.id}</span>
+      </p>
     </div>
-  );
-};
+  </div>
+);

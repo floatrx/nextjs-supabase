@@ -23,7 +23,7 @@ export const noteService = {
   async search() {
     const supabase = await createServerClient();
 
-    return supabase.from('notes').select();
+    return supabase.from('notes').select().order('id', { ascending: false });
   },
 
   /**

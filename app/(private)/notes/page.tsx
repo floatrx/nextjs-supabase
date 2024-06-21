@@ -1,20 +1,24 @@
+/**
+ * TODO: Add drag and drop functionality & animations (framer motion)
+ */
+
 import { AddNoteForm } from '@/components/features/note/AddNoteForm';
 import { NoteItem } from '@/components/features/note/NoteItem';
+import { Page } from '@/components/ui/layout/Page';
+import { getMetadata } from '@/lib/next';
 import { noteService } from '@/server/services/note';
 
+export const metadata = getMetadata('Notes');
+
 export default async function NotesSinglePage() {
-  // Fetch notes from the database
   const { data: notes } = await noteService.search();
 
   return (
-    <div className="flex w-full flex-1 flex-col items-center gap-20">
-      <div className="w-full">
-        <div className="container mt-5 space-y-4">
-          <h2 className="text-3xl">Notes {notes?.length}</h2>
-          {notes?.map((note) => <NoteItem key={note.id} note={note} />)}
-          <AddNoteForm />
-        </div>
+    <Page count={notes?.length} meta={metadata}>
+      <div className="container mt-5 h-full space-y-4">
+        <AddNoteForm />
+        {notes?.map((note) => <NoteItem key={note.id} note={note} />)}
       </div>
-    </div>
+    </Page>
   );
 }
