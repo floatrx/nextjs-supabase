@@ -24,10 +24,30 @@ import { siteConfig } from '@/config/site';
  *  }
  */
 export const getMetadata = (title: string, overrides?: Omit<Metadata, 'title'>): Metadata => ({
-  title: `${title} • ${siteConfig.name}`,
+  title: {
+    template: `%s • ${siteConfig.name}`,
+    default: title,
+  },
   description: siteConfig.description,
   icons: {
     icon: '/favicon.ico',
   },
   ...overrides,
 });
+
+/**
+ * Get title from metadata or fallback to the provided title
+ * @param meta - Next.js metadata
+ * @param fallback - Fallback title (default: 'Untitled page')
+ */
+export const getTitleFromNextMetadata = ({ title }: Metadata = {}, fallback: string = 'Untitled page'): string => {
+  if (typeof title === 'string') {
+    return title;
+  }
+
+  if (title && typeof title === 'object' && 'default' in title) {
+    return title.default;
+  }
+
+  return fallback;
+};
