@@ -3,7 +3,7 @@
 import { Button } from '@nextui-org/button';
 import { useEffect } from 'react';
 
-import { Heading } from '@/components/ui/layout/headings/Heading';
+import { Page } from '@/components/ui/layout/Page';
 
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
   useEffect(() => {
@@ -12,9 +12,8 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
   }, [error]);
 
   return (
-    <div>
-      <Heading>Something went wrong!</Heading>
+    <Page title="Error">
       <Button onClick={reset}>Try again</Button>
-    </div>
+    </Page>
   );
 }

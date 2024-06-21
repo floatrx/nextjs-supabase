@@ -7,12 +7,15 @@
  */
 import { Input } from '@nextui-org/input';
 
-import { Form } from '@/components/ui/form/Form';
-import { Submit } from '@/components/ui/form/Submit';
 import { Logo } from '@/components/icons';
 import { GitHubIcon } from '@/components/icons/GithubIcon';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
+import { Form } from '@/components/ui/form/Form';
+import { Submit } from '@/components/ui/form/Submit';
+import { getMetadata } from '@/lib/next';
 import { githubLogin, googleLogin, login, signup } from '@/server/actions/auth';
+
+export const metadata = getMetadata('Login');
 
 export default function LoginPage({ searchParams }: PageProps<EmptyObj, { message?: string }>) {
   return (
@@ -22,9 +25,9 @@ export default function LoginPage({ searchParams }: PageProps<EmptyObj, { messag
         <span className="sr-only">Login</span>
       </h1>
       <Form className="flex flex-col gap-2">
-        <Input name="email" placeholder="you@example.com" />
-        <Input name="password" placeholder="••••••••" type="password" />
-        <Submit color="primary" formAction={login} variant="bordered">
+        <Input name="email" placeholder="you@example.com" size="lg" />
+        <Input name="password" placeholder="••••••••" size="lg" type="password" />
+        <Submit formAction={login} variant="bordered">
           Sign In
         </Submit>
         <Submit formAction={signup}>Sign Up</Submit>

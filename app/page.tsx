@@ -1,19 +1,18 @@
 import type { PostSearchParams } from '@/types/post';
 
 import { Button } from '@nextui-org/button';
-import { Chip } from '@nextui-org/chip';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 
 import { PostsCards } from '@/components/features/post/PostsCards';
 import { PostSearchFilters } from '@/components/features/post/PostSearchFilters';
 import { OnlyAuth } from '@/components/guards/OnlyAuth';
-import { Heading } from '@/components/ui/layout/headings/Heading';
+import { Page } from '@/components/ui/layout/Page';
 import { PagePagination } from '@/components/ui/PagePagination';
 import { getMetadata } from '@/lib/next';
 import { postService } from '@/server/services/post';
 
-export const metadata = getMetadata('Home');
+export const metadata = getMetadata('Homepage');
 
 export default async function HomePage({ searchParams }: PageProps<EmptyObj, PostSearchParams>) {
   const filters = {
@@ -24,19 +23,21 @@ export default async function HomePage({ searchParams }: PageProps<EmptyObj, Pos
   const posts = await postService.search(filters);
 
   return (
-    <section className="flex flex-col justify-center gap-4 py-8 md:py-10">
-      <Heading className="stack">
-        <span>Latest posts</span>
-        <Chip>{posts.count ?? 0}</Chip>
+    <Page
+      actions={
         <OnlyAuth>
-          <Button isIconOnly as={Link} href="/blog/create" variant="ghost">
+          <Button isIconOnly as={Link} color="primary" href="/blog/create" variant="shadow">
             <Plus />
           </Button>
         </OnlyAuth>
-      </Heading>
+      }
+      className="space-y-4"
+      count={posts.count}
+      title="Latest posts"
+    >
       <PostSearchFilters />
       <PostsCards posts={posts.data} />
       {!!posts.count && <PagePagination total={posts.total} />}
-    </section>
+    </Page>
   );
 }

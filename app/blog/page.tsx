@@ -1,9 +1,8 @@
-import { title } from '@/components/primitives';
+import { Page } from '@/components/ui/layout/Page';
+import { getMetadata } from '@/lib/next';
+
+export const metadata = getMetadata('Blog');
 
 export default function BlogPage() {
-  return (
-    <div>
-      <h1 className={title()}>Blog</h1>
-    </div>
-  );
+  return <Page meta={metadata}>Move articles here...</Page>;
 }
