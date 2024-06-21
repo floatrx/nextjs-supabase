@@ -10,6 +10,7 @@ import { Input } from '@nextui-org/input';
 import { Logo } from '@/components/icons';
 import { GitHubIcon } from '@/components/icons/GithubIcon';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
+import { DividerText } from '@/components/ui/DividerText';
 import { Form } from '@/components/ui/form/Form';
 import { Submit } from '@/components/ui/form/Submit';
 import { getMetadata } from '@/lib/next';
@@ -31,11 +32,7 @@ export default function LoginPage({ searchParams }: PageProps<EmptyObj, { messag
           Sign In
         </Submit>
         <Submit formAction={signup}>Sign Up</Submit>
-        <div className="relative flex items-center py-2">
-          <div className="flex-grow border-t" />
-          <span className="mx-4 flex-shrink text-gray-400">Or</span>
-          <div className="flex-grow border-t" />
-        </div>
+        <DividerText text="or" />
         <Submit formAction={googleLogin}>
           <GoogleIcon /> Google
         </Submit>
