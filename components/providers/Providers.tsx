@@ -16,6 +16,7 @@ interface IProps extends ThemeProviderProps {
  *  1. NextUIProvider
  *  2. NextThemesProvider
  *  3. Toaster
+ *  4. NextTopLoader
  */
 export function Providers({ children, ...props }: IProps) {
   const router = useRouter();
@@ -23,7 +24,7 @@ export function Providers({ children, ...props }: IProps) {
   return (
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider {...props}>
-        <NextTopLoader color={'#C55FFC'} />
+        <NextTopLoader color={'hsl(var(--primary))'} height={1} showSpinner={false} />
         {children}
         <Toaster position="top-center" theme={props.defaultTheme} />
       </NextThemesProvider>
