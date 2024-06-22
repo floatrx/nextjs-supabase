@@ -9,7 +9,6 @@ import { authService } from '@/server/services/auth';
 
 export const AuthButton = async () => {
   const user = await authService.getUser();
-  const avatar = user?.user_metadata.avatar_url;
 
   return user ? (
     <div className="flex items-center gap-4">
