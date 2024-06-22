@@ -10,12 +10,12 @@
     @apply border-border;
   }
 
-  body {
+  html, body {
     @apply bg-background text-foreground;
   }
 
   body {
-    @apply h-screen text-foreground antialiased;
+    @apply h-full antialiased min-h-screen font-sans;
   }
 
   button {
