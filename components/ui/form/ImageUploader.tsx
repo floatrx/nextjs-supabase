@@ -69,7 +69,7 @@ export const ImageUploader: Component = forwardRef(({ value, errorMessage, class
           <X size={14} />
         </Button>
       )}
-      <input {...props} ref={ref} readOnly value={imgUrl} />
+      <input {...props} ref={ref} hidden readOnly value={imgUrl} />
       {errorMessage && <p className="m-0 text-danger">{errorMessage}</p>}
     </div>
   );

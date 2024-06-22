@@ -17,9 +17,9 @@ export default async function PostSinglePage({ params }: PageProps<{ slug: strin
   }
 
   return (
-    <article className="article container m-auto max-w-[920px] rounded-3xl border px-11">
+    <article className="article container m-auto max-w-[920px] rounded-3xl border px-11 py-5">
       <header>
-        <StorageImage className="rounded-lg shadow-2xl" src={post.thumbnail} />
+        <StorageImage className="-mt-10 rounded-lg shadow-2xl" src={post.thumbnail} />
         <h1 className={cn(title(), 'stack')}>
           {upperFirst(post.title)}
           <EditPostButton id={post.id} />

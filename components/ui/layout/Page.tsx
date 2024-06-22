@@ -21,12 +21,12 @@ interface IProps {
 }
 
 export const Page: FC<IProps> = ({ className, meta, title, actions, icon, before, count, children }) => (
-  <div className={cn('h-full', className)}>
+  <div className={cn(className)}>
     {before}
     <Heading className="stack">
       <div className="stack">
         {icon} {getTitleFromNextMetadata(meta, title)}
-        {!!count && <Chip>{count}</Chip>}
+        {!!count && <Chip variant="flat">{count}</Chip>}
       </div>
       {actions && <div className="stack">{actions}</div>}
     </Heading>

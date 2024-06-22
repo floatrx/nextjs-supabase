@@ -26,7 +26,7 @@ export default async function HomePage({ searchParams }: PageProps<EmptyObj, Pos
     <Page
       actions={
         <OnlyAuth>
-          <Button isIconOnly as={Link} color="primary" href="/blog/create" variant="shadow">
+          <Button isIconOnly as={Link} color="primary" href="/blog/create" size="sm" variant="shadow">
             <Plus />
           </Button>
         </OnlyAuth>

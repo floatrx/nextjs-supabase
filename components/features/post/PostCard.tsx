@@ -22,7 +22,7 @@ export const PostCard: RC<IProps> = ({ post }) => {
 
   return (
     <article id={`post-${id}`}>
-      <Card className="h-full overflow-visible p-4 px-1">
+      <Card className="h-full overflow-visible bg-card p-4 px-1">
         <CardHeader className="flex-col items-start gap-2 px-4 pb-0 pt-2">
           <StorageImage src={thumbnail} />
           <div className="stack w-full">
