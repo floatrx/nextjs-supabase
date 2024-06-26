@@ -13,8 +13,8 @@ import { GoogleIcon } from '@/components/icons/GoogleIcon';
 import { DividerText } from '@/components/ui/DividerText';
 import { Form } from '@/components/ui/form/Form';
 import { Submit } from '@/components/ui/form/Submit';
+import { githubLogin, googleLogin, login, signup } from '@/features/auth/actions/auth';
 import { getMetadata } from '@/lib/next';
-import { githubLogin, googleLogin, login, signup } from '@/server/actions/auth';
 
 export const metadata = getMetadata('Login');
 

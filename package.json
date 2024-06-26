@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .ts,.tsx -c eslint.config.js --fix",
     "pretty": "prettier --write .",
-    "ts": "tsc --noEmit",
-    "gen:types": "source .env && supabase gen types typescript --project-id=$SUPABASE_PROJECT_ID > types/supabase.ts",
+    "ts:check": "tsc --noEmit",
+    "lint:check": "eslint . --ext .ts,.tsx -c eslint.config.js --fix",
+    "gen:types": "pwd && source .env && supabase gen types typescript --project-id=$SUPABASE_PROJECT_ID > types/supabase.ts",
     "prepare": "husky"
   },
   "husky": {
@@ -19,8 +19,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "npm run lint",
-      "npm run ts",
+      "npm run lint:check",
+      "npm run ts:check",
       "npm run pretty"
     ]
   },

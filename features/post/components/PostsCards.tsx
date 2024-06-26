@@ -1,6 +1,6 @@
 import type { TPostWithAuthor } from '@/types/post';
 
-import { PostCard } from '@/components/features/post/PostCard';
+import { PostCard } from '@/features/post/components/PostCard';
 
 interface IProps {
   posts: TPostWithAuthor[] | null;

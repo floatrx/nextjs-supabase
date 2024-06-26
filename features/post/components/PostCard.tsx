@@ -4,12 +4,12 @@ import { Card, CardHeader, CardBody } from '@nextui-org/card';
 import { Chip } from '@nextui-org/chip';
 import Link from 'next/link';
 
-import { DeletePostButton } from '@/components/features/post/DeletePostButton';
-import { EditPostButton } from '@/components/features/post/EditPostButton';
-import { PostAuthorAvatar } from '@/components/features/post/PostAuthorAvatar';
 import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { DateTime } from '@/components/ui/DateTime';
 import { StorageImage } from '@/components/ui/StorageImage';
+import { DeletePostButton } from '@/features/post/components/DeletePostButton';
+import { EditPostButton } from '@/features/post/components/EditPostButton';
+import { PostAuthorAvatar } from '@/features/post/components/PostAuthorAvatar';
 import { upperFirst, safePostExcerpt } from '@/lib/string';
 
 interface IProps {

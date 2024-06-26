@@ -1,0 +1,29 @@
+@layer base {
+    body::before {
+        @apply fixed
+        left-1
+        top-0
+        z-50
+        rounded-b
+        bg-red-500
+        px-1
+        text-xs
+        font-black;
+
+        /* Custom breakpoint label */
+        @apply content-['xs']
+        sm:content-['sm']
+        md:content-['md']
+        lg:content-['lg']
+        xl:content-['xl']
+        2xl:content-['2xl'];
+    }
+
+    /* Debug */
+    .b1 {
+        @apply border border-red-500;
+    }
+    .b2 {
+        @apply border border-cyan-400;
+    }
+}

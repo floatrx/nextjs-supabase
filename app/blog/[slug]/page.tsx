@@ -1,12 +1,12 @@
-import { EditPostButton } from '@/components/features/post/EditPostButton';
-import { PostAuthorInfo } from '@/components/features/post/PostAuthorInfo';
 import { title } from '@/components/primitives';
 import { DateTime } from '@/components/ui/DateTime';
 import { RichText } from '@/components/ui/RichText';
 import { StorageImage } from '@/components/ui/StorageImage';
+import { EditPostButton } from '@/features/post/components/EditPostButton';
+import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
+import { postService } from '@/features/post/services/post';
 import { upperFirst } from '@/lib/string';
 import { cn } from '@/lib/utils';
-import { postService } from '@/server/services/post';
 
 export default async function PostSinglePage({ params }: PageProps<{ slug: string }>) {
   const { slug } = params;

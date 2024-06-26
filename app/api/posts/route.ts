@@ -1,5 +1,5 @@
+import { postService } from '@/features/post/services/post';
 import { formatPostgrestResponse, formatResponse } from '@/lib/supabase/formatters';
-import { postService } from '@/server/services/post';
 
 // Remove
 export async function DELETE(req: Request) {

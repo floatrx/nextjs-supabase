@@ -2,11 +2,11 @@
  * TODO: Add drag and drop functionality & animations (framer motion)
  */
 
-import { AddNoteForm } from '@/components/features/note/AddNoteForm';
-import { NoteItem } from '@/components/features/note/NoteItem';
 import { Page } from '@/components/ui/layout/Page';
+import { AddNoteForm } from '@/features/note/components/AddNoteForm';
+import { NoteItem } from '@/features/note/components/NoteItem';
+import { noteService } from '@/features/note/services/note';
 import { getMetadata } from '@/lib/next';
-import { noteService } from '@/server/services/note';
 
 export const metadata = getMetadata('Notes');
 

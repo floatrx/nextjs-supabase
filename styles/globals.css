@@ -1,4 +1,5 @@
 @import 'colors.css';
+@import 'globals.css';
 
 @tailwind base;
 @tailwind components;
@@ -108,3 +109,5 @@
     transform: translateY(0);
   }
 }
+
+

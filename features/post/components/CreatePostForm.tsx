@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { PostForm } from '@/components/features/post/PostForm';
+import { PostForm } from '@/features/post/components/PostForm';
 
 export const CreatePostForm = () => {
   const router = useRouter();

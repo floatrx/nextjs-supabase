@@ -4,8 +4,8 @@ import { LogIn, LogOut } from 'lucide-react';
 import Link from 'next/link';
 
 import { Submit } from '@/components/ui/form/Submit';
-import { signOut } from '@/server/actions/auth';
-import { authService } from '@/server/services/auth';
+import { signOut } from '@/features/auth/actions/auth';
+import { authService } from '@/features/auth/services/auth';
 
 export const AuthButton = async () => {
   const user = await authService.getUser();

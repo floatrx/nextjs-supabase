@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
+import { idSchema } from '@/features/post/validators/idSchema';
 import { createSlug } from '@/lib/string';
-import { idScheme } from '@/validators/common';
 
 export const postCreateSchema = z.object({
   slug: z.string().trim().min(1, 'Slug is required').transform(createSlug),
@@ -12,7 +12,7 @@ export const postCreateSchema = z.object({
 
 // extend the postCreateSchema as optional fields
 export const postUpdateSchema = postCreateSchema.partial().extend({
-  id: idScheme,
+  id: idSchema,
 });
 
 export const postSearchSchema = postCreateSchema.pick({

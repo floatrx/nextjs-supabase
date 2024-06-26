@@ -14,9 +14,10 @@ import { toast } from 'sonner';
 
 import { Editor } from '@/components/ui/editor/Editor';
 import { ImageUploader } from '@/components/ui/form/ImageUploader';
+import { postCreate } from '@/features/post/actions/postCreate';
+import { postUpdate } from '@/features/post/actions/postUpdate';
+import { postCreateSchema } from '@/features/post/validators/post';
 import { createSlug } from '@/lib/string';
-import { postCreate, postUpdate } from '@/server/actions/post';
-import { postCreateSchema } from '@/validators/post';
 
 export interface IPostFormProps {
   initialValues?: TPostUpdate;

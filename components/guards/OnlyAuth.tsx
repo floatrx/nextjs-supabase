@@ -1,6 +1,6 @@
 'use server';
 
-import { authService } from '@/server/services/auth';
+import { authService } from '@/features/auth/services/auth';
 
 export const OnlyAuth: FC = async ({ children }) => {
   const user = await authService.getUser();

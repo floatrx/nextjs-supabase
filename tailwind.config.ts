@@ -4,7 +4,12 @@ import { nextui } from '@nextui-org/theme';
 
 const config: Config = {
   darkMode: 'class',
-  content: ['./components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './components/**/*.{ts,tsx}',
+    './features/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
       borderOpacity: {

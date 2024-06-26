@@ -8,12 +8,12 @@ import {
   NavbarMenuItem,
 } from '@nextui-org/navbar';
 
-import { AuthButton } from '@/components/features/auth/AuthButton';
 import { GithubIcon, Logo } from '@/components/icons';
 import { ExtLink } from '@/components/ui/link/ExtLink';
 import { NavLink } from '@/components/ui/link/NavLink';
 import { ThemeSwitch } from '@/components/ui/ThemeSwitch';
 import { siteConfig } from '@/config/site';
+import { AuthButton } from '@/features/auth/components/AuthButton';
 
 export const Header = () => (
   <NextUINavbar maxWidth="full" position="sticky">

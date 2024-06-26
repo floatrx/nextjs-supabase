@@ -1,9 +1,9 @@
 import type { TPostCreate, PostSearchParams, TPostUpdate } from '@/types/post';
 
+import { idSchema } from '@/features/post/validators/idSchema';
+import { postCreateSchema, postSearchSchema, postUpdateSchema } from '@/features/post/validators/post';
 import { formatInvalidParseResponse, formatResultWithPagesCount, formatStatusErrorResponse } from '@/lib/supabase/formatters';
 import { createServerClient } from '@/lib/supabase/server';
-import { idScheme } from '@/validators/common';
-import { postCreateSchema, postSearchSchema, postUpdateSchema } from '@/validators/post';
 
 /**
  * Post service
@@ -88,7 +88,7 @@ export const postService = {
    * @param id
    */
   async getById(id?: string) {
-    if (!id || !idScheme.safeParse(id).success) {
+    if (!id || !idSchema.safeParse(id).success) {
       return formatStatusErrorResponse('Invalid ID');
     }
 

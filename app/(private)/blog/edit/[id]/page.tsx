@@ -1,7 +1,7 @@
-import { EditPostForm } from '@/components/features/post/EditPostForm';
 import { Page } from '@/components/ui/layout/Page';
+import { EditPostForm } from '@/features/post/components/EditPostForm';
+import { postService } from '@/features/post/services/post';
 import { getMetadata } from '@/lib/next';
-import { postService } from '@/server/services/post';
 
 export const metadata = getMetadata('Edit post');
 

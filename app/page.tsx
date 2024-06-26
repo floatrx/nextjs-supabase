@@ -4,13 +4,13 @@ import { Button } from '@nextui-org/button';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 
-import { PostsCards } from '@/components/features/post/PostsCards';
-import { PostSearchFilters } from '@/components/features/post/PostSearchFilters';
 import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { Page } from '@/components/ui/layout/Page';
 import { PagePagination } from '@/components/ui/PagePagination';
+import { PostsCards } from '@/features/post/components/PostsCards';
+import { PostSearchFilters } from '@/features/post/components/PostSearchFilters';
+import { postService } from '@/features/post/services/post';
 import { getMetadata } from '@/lib/next';
-import { postService } from '@/server/services/post';
 
 export const metadata = getMetadata('Homepage');
 

@@ -5,7 +5,7 @@ import { useRef } from 'react';
 
 import { Form } from '@/components/ui/form/Form';
 import { Submit } from '@/components/ui/form/Submit';
-import { createNote } from '@/server/actions/note';
+import { createNote } from '@/features/note/actions/note';
 
 export const AddNoteForm = () => {
   // Create a ref for resetting the form

@@ -1,5 +1,5 @@
+import { noteService } from '@/features/note/services/note';
 import { formatResponse, formatPostgrestResponse } from '@/lib/supabase/formatters';
-import { noteService } from '@/server/services/note';
 
 export async function DELETE(req: Request) {
   try {

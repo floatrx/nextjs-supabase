@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
-import { authService } from '@/server/services/auth';
+import { authService } from '@/features/auth/services/auth';
 
 /**
  * `auth/callback` route - handles the callback from the OAuth providers

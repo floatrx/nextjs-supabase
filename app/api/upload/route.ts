@@ -1,7 +1,7 @@
+import { authService } from '@/features/auth/services/auth';
+import { storageService } from '@/features/storage/service/storage';
 import { getFileFromRequest } from '@/lib/file';
 import { formatResponse } from '@/lib/supabase/formatters';
-import { authService } from '@/server/services/auth';
-import { storageService } from '@/server/services/storage';
 
 export async function POST(req: Request) {
   const user = authService.getUser();

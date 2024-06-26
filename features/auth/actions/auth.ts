@@ -9,9 +9,9 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { baseUrl } from '@/config';
-import { authService } from '@/server/services/auth';
+import { authService } from '@/features/auth/services/auth';
+import { emailLoginSchema } from '@/features/auth/validators/emailLoginSchema';
 import { AuthServiceViaEmailAction } from '@/types/auth';
-import { emailLoginSchema } from '@/validators/auth';
 
 // Login with email
 const authBase = async (action: AuthServiceViaEmailAction, formData: FormData) => {
