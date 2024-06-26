@@ -35,10 +35,10 @@ export const Header = () => (
 
     <NavbarContent className="basis-1/5 sm:flex sm:basis-full" justify="end">
       <NavbarItem className="hidden gap-2 md:flex">
+        <ThemeSwitch />
         <ExtLink isExternal aria-label="Github" href={siteConfig.links.github}>
           <GithubIcon className="text-default-500" />
         </ExtLink>
-        <ThemeSwitch />
       </NavbarItem>
       <NavbarItem className="hidden md:flex">
         <AuthButton />
@@ -46,10 +46,10 @@ export const Header = () => (
     </NavbarContent>
 
     <NavbarContent className="basis-1 pl-4 md:hidden" justify="end">
+      <ThemeSwitch />
       <ExtLink isExternal aria-label="Github" href={siteConfig.links.github}>
         <GithubIcon className="text-default-500" />
       </ExtLink>
-      <ThemeSwitch />
       <NavbarMenuToggle />
     </NavbarContent>
 

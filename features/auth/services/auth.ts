@@ -60,7 +60,23 @@ export const authService = {
   async getUser() {
     const supabase = await createServerClient();
 
-    return supabase.auth.getUser().then(({ data }) => data.user);
+    return supabase.auth.getUser().then(async ({ data }) => data.user);
+  },
+
+  /**
+   * Get user
+   */
+  async getProfile() {
+    const supabase = await createServerClient();
+
+    return supabase.auth.getUser().then(async ({ data }) => {
+      if (!data.user) return null;
+
+      // Get current user profile
+      const profile = await supabase.from('profiles').select().eq('id', data.user.id).single();
+
+      return { ...data.user, profile: profile.data! };
+    });
   },
 
   /**

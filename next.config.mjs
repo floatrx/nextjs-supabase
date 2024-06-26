@@ -18,6 +18,9 @@ const nextConfig = {
       {
         hostname: 'nextui.org',
       },
+      {
+        hostname: 'szonwoyyizcvkomytada.supabase.co',
+      },
     ],
   },
 };

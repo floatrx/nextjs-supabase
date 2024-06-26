@@ -14,7 +14,7 @@ import { useUploadImage } from '@/features/storage/hooks/useUploadImage';
 import { cn } from '@/lib/utils';
 
 interface IProps {
-  value: string | null;
+  value: string | null | undefined;
   errorMessage?: string; // error message to display (received from the parent form)
   className?: string;
   onChange?: (imgUrl: string) => void;

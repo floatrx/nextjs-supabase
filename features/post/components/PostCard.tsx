@@ -4,7 +4,7 @@ import { Card, CardHeader, CardBody } from '@nextui-org/card';
 import { Chip } from '@nextui-org/chip';
 import Link from 'next/link';
 
-import { OnlyAuth } from '@/components/guards/OnlyAuth';
+import { OnlyAuthor } from '@/components/guards/OnlyAuthor';
 import { DateTime } from '@/components/ui/DateTime';
 import { StorageImage } from '@/components/ui/StorageImage';
 import { DeletePostButton } from '@/features/post/components/DeletePostButton';
@@ -31,10 +31,10 @@ export const PostCard: RC<IProps> = ({ post }) => {
             </small>
             <span className="flex-1" />
             <div className="stack">
-              <OnlyAuth>
+              <OnlyAuthor id={author?.id}>
                 <DeletePostButton id={id} />
                 <EditPostButton id={id} />
-              </OnlyAuth>
+              </OnlyAuthor>
             </div>
           </div>
           <div className="stack font-bold">
