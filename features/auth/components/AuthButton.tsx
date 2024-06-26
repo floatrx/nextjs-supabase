@@ -15,15 +15,15 @@ export const AuthButton = async () => {
       <Image alt="User avatar" className="h-8 w-8 rounded-full" src={user.user_metadata.avatar_url} />
       {user.email}
       <form>
-        <Submit isIconOnly formAction={signOut} title="Logout" variant="bordered">
+        <Submit isIconOnly formAction={signOut} size="md" title="Logout" variant="bordered">
           <LogOut size={16} />
         </Submit>
       </form>
     </div>
   ) : (
-    <Button as={Link} href="/login" variant="bordered">
+    <Button as={Link} href="/login" size="md" variant="bordered">
       <LogIn size={16} />
-      Login
+      Sign In
     </Button>
   );
 };

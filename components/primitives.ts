@@ -1,5 +1,6 @@
 import { tv, VariantProps } from 'tailwind-variants';
 
+export type TitleVariantType = VariantProps<typeof title>;
 export const title = tv({
   base: 'tracking-tight inline font-semibold mb-2',
   variants: {
@@ -45,4 +46,9 @@ export const subtitle = tv({
   },
 });
 
-export type TitleVariantType = VariantProps<typeof title>;
+export const formVariants = tv({
+  base: 'flex w-full flex-col gap-4 rounded-xl border dark:border-foreground/30 border-foreground/10 p-4 shadow-xl transition-opacity relative',
+  variants: {
+    isSubmitting: { true: 'locked' },
+  },
+});

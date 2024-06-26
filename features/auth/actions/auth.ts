@@ -1,5 +1,5 @@
 /**
- * TODO: Move supabase queries into authService
+ * TODO: Test login via email/password
  */
 'use server';
 
@@ -11,14 +11,11 @@ import { redirect } from 'next/navigation';
 import { baseUrl } from '@/config';
 import { authService } from '@/features/auth/services/auth';
 import { emailLoginSchema } from '@/features/auth/validators/emailLoginSchema';
-import { AuthServiceViaEmailAction } from '@/types/auth';
+import { AuthServiceViaEmailAction, type TCredentials } from '@/types/auth';
 
 // Login with email
 const authBase = async (action: AuthServiceViaEmailAction, formData: FormData) => {
-  const credentials = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  };
+  const credentials = Object.fromEntries(formData) as TCredentials;
 
   try {
     // Validate the credentials object
@@ -28,17 +25,17 @@ const authBase = async (action: AuthServiceViaEmailAction, formData: FormData) =
       throw new Error('Invalid credentials');
     }
   } catch (e) {
-    redirect('/login?message=Invalid credentials');
+    return { error: e.message };
   }
 
   const { error } = await authService.viaEmail(action, credentials);
 
   if (error) {
-    redirect('/login?message=Invalid credentials');
+    return { error: 'Invalid credentials' };
   }
 
   if (action === 'signUp') {
-    redirect('/login?message=Check your email for a verification link');
+    return { success: true, message: 'Check your email for a verification link' };
   }
 
   revalidatePath('/', 'layout');
