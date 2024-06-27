@@ -1,33 +1,54 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
-import { useRef } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { Form } from '@/components/ui/form/Form';
-import { Submit } from '@/components/ui/form/Submit';
-import { createNote } from '@/features/note/actions/note';
+import { createNote } from '@/features/note/actions/createNote';
+import { noteCreateSchema } from '@/features/note/validators/noteCreateSchema';
+import { useServerAction } from '@/hooks/useServerAction';
+import { cn } from '@/lib/utils';
 
 export const AddNoteForm = () => {
-  // Create a ref for resetting the form
-  const formRef = useRef<HTMLFormElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const {
+    formState: { errors },
+    ...form
+  } = useForm({
+    defaultValues: { title: '' },
+    resolver: zodResolver(noteCreateSchema),
+  });
+  const { loading, execute } = useServerAction(createNote);
+
+  const handleSubmit = form.handleSubmit(async (values) => {
+    if (loading) return;
+    const res = await execute(values);
+
+    if (res?.error) return;
+    toast.success('Note added successfully');
+    form.reset();
+  });
 
   return (
-    <Form ref={formRef} className="stack mt-4 gap-5 text-xl">
-      <Input ref={inputRef} autoFocus name="title" placeholder="Add new note..." size="lg" type="text" variant="bordered" />
-      <div className="stack">
-        <Submit
-          formAction={async (formData) => {
-            await createNote(formData);
-            formRef.current?.reset();
-            inputRef.current?.focus();
-          }}
-          pendingText="Adding note..."
-          size="lg"
-        >
-          Add Note
-        </Submit>
-      </div>
+    <Form className={cn('mt-4 flex gap-3 text-xl', loading && 'lock')} size="lg" onSubmit={handleSubmit}>
+      <Controller
+        control={form.control}
+        name="title"
+        render={({ field }) => (
+          <Input
+            autoFocus
+            errorMessage={errors.title?.message}
+            isInvalid={!!errors.title}
+            placeholder="Add new note..."
+            size="lg"
+            variant="bordered"
+            {...field}
+          />
+        )}
+      />
+      <Button isLoading={loading}>Add Note</Button>
     </Form>
   );
 };

@@ -1,3 +1,6 @@
+import type { TNote } from '@/types/note';
+
+import { noteCreateSchema } from '@/features/note/validators/noteCreateSchema';
 import { createServerClient } from '@/lib/supabase/server';
 
 /**
@@ -11,10 +14,16 @@ export const noteService = {
    * Create a new note
    * @param title
    */
-  async create(title: string) {
+  async create(title?: string | null) {
+    const { error, data } = noteCreateSchema.safeParse({ title });
+
+    if (error) {
+      return { error };
+    }
+
     const supabase = await createServerClient();
 
-    return supabase.from('notes').insert({ title });
+    return supabase.from('notes').insert(data).select().single();
   },
 
   /**
@@ -30,7 +39,7 @@ export const noteService = {
    * Remove note by ID
    * @param id
    */
-  async remove(id: number) {
+  async remove(id: TNote['id']) {
     const supabase = await createServerClient();
 
     return supabase.from('notes').delete().eq('id', id);
