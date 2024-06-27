@@ -1,8 +1,8 @@
-import type { TPostCreate, PostSearchParams, TPostUpdate } from '@/types/post';
+import type { TPostCreate, PostSearchParams, TPostUpdate, TPost } from '@/types/post';
 
 import { idSchema } from '@/features/post/validators/idSchema';
 import { postCreateSchema, postSearchSchema, postUpdateSchema } from '@/features/post/validators/post';
-import { formatInvalidParseResponse, formatResultWithPagesCount, formatStatusErrorResponse } from '@/lib/supabase/formatters';
+import { formatResultWithPagesCount } from '@/lib/supabase/formatters';
 import { createServerClient } from '@/lib/supabase/server';
 
 /**
@@ -21,13 +21,13 @@ export const postService = {
    */
   async create(payload: TPostCreate) {
     const supabase = await createServerClient();
-    const parsed = postCreateSchema.safeParse(payload);
+    const { error, data } = postCreateSchema.safeParse(payload);
 
-    if (!parsed.success) {
-      return formatInvalidParseResponse(parsed);
+    if (error) {
+      return { error };
     }
 
-    return supabase.from('posts').insert(parsed.data).select().single();
+    return supabase.from('posts').insert(data).select().single();
   },
 
   /**
@@ -87,12 +87,14 @@ export const postService = {
    * Get a post by ID
    * @param id
    */
-  async getById(id?: string) {
-    if (!id || !idSchema.safeParse(id).success) {
-      return formatStatusErrorResponse('Invalid ID');
+  async getById(id: TPost['id']) {
+    const { error, data } = idSchema.safeParse(id);
+
+    if (error) {
+      return { error, data: null };
     }
 
-    return this.get('id', id);
+    return this.get('id', data);
   },
 
   /**
@@ -105,26 +107,26 @@ export const postService = {
 
   /**
    * Update a post from payload
-   * @param payload
+   * @param id - Post ID
+   * @param payload - changes
    */
-  async update(payload: TPostUpdate) {
-    const supabase = await createServerClient();
-    const parsed = postUpdateSchema.safeParse(payload);
+  async update(id: TPost['id'], payload: TPostUpdate) {
+    const { error, data } = postUpdateSchema.safeParse(payload);
 
-    if (!parsed.success) {
-      return formatInvalidParseResponse(parsed);
+    if (error) {
+      return { error };
     }
 
-    const { id, ...changes } = parsed.data;
+    const supabase = await createServerClient();
 
-    return supabase.from('posts').update(changes).eq('id', id).select().single();
+    return supabase.from('posts').update(data).eq('id', id).select().single();
   },
 
   /**
    * Delete a post by ID
    * @param id
    */
-  async remove(id: string) {
+  async delete(id: TPost['id']) {
     const supabase = await createServerClient();
 
     return supabase.from('posts').delete().eq('id', id);

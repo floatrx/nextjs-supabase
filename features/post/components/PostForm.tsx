@@ -1,42 +1,41 @@
 'use client';
 
-import type { FormState } from '@/types/form';
-import type { TPostUpdate, TPost } from '@/types/post';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
 import { RefreshCcw } from 'lucide-react';
-import { useRef, useEffect, useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useRef, useEffect } from 'react';
 import { useForm, Controller, useWatch } from 'react-hook-form';
-import { toast } from 'sonner';
 
 import { Editor } from '@/components/ui/editor/Editor';
 import { ImageUploader } from '@/components/ui/form/ImageUploader';
-import { postCreate } from '@/features/post/actions/postCreate';
-import { postUpdate } from '@/features/post/actions/postUpdate';
 import { postCreateSchema } from '@/features/post/validators/post';
 import { createSlug } from '@/lib/string';
+import { cn } from '@/lib/utils';
+
+interface FormValues {
+  title: string;
+  content: string;
+  slug: string;
+  thumbnail: string | null;
+}
 
 export interface IPostFormProps {
-  initialValues?: TPostUpdate;
-  id?: string | number; // if provided, the form will be used for updating
-  onComplete?: (response: FormState<TPost>) => void; // expose response to parent component
+  initialValues?: Partial<FormValues>;
+  id?: number; // if provided, the form will be used for updating
+  onSubmit?: (values: FormValues) => void; // expose response to parent component
+  loading?: boolean;
 }
 
 /**
  * Post form component for creating and updating posts
  * @param initialValues
  * @param id - Post ID for updating
- * @param onFinish
+ * @param onSubmit - Submit handler
+ * @param loading
  * @constructor
  */
-export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onComplete }) => {
-  const action = id ? postUpdate : postCreate;
-  const [response, formAction] = useFormState(action, { statusText: '', status: 0, data: null });
-  const [loading, setLoading] = useState(false);
-
+export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onSubmit, loading = true }) => {
   const {
     register,
     control,
@@ -64,26 +63,12 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onComplete }) 
     syncSlugWithTitle();
   }, [title]);
 
-  // Handle form submission and display toast messages
-  useEffect(() => {
-    onComplete?.(response);
-
-    // Other cases
-    setLoading(false); // reset spinner
-
-    if (!response.status) return;
-
-    const toastVariant = response.status <= 204 ? 'success' : 'error';
-
-    toast[toastVariant](response.statusText); // Displays a success message
-  }, [response]);
-
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = form.handleSubmit(
-    () => {
-      setLoading(true);
-      formAction(new FormData(formRef.current!));
+    async (values) => {
+      if (loading) return;
+      onSubmit?.(values);
     },
     (fieldErrors, _event) => {
       console.log('Error form submit', fieldErrors);
@@ -91,10 +76,8 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onComplete }) 
   );
 
   return (
-    <section className="mt-6">
-      <form ref={formRef} action={formAction} className="space-y-8" onSubmit={handleSubmit}>
-        {id && <input hidden readOnly name="id" value={id} />}
-
+    <section className="relative mt-6">
+      <form ref={formRef} className={cn('space-y-8', loading && 'locked')} onSubmit={handleSubmit}>
         <div className="flex gap-4">
           <div className="left flex-1">
             <Controller
@@ -119,15 +102,21 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onComplete }) 
                 />
               )}
             />
-            <Input
-              autoFocus
-              description="Provide post title"
-              errorMessage={errors.title?.message}
-              isInvalid={!!errors.title}
-              label="Title"
-              size="lg"
-              variant="bordered"
-              {...register('title', { required: true })}
+            <Controller
+              control={control}
+              name="title"
+              render={({ field }) => (
+                <Input
+                  autoFocus
+                  description="Provide post title"
+                  errorMessage={errors.title?.message}
+                  isInvalid={!!errors.title}
+                  label="Title"
+                  size="lg"
+                  variant="bordered"
+                  {...field}
+                />
+              )}
             />
           </div>
           <div className="right min-w-[240px]">

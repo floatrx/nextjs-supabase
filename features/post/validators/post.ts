@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-import { idSchema } from '@/features/post/validators/idSchema';
 import { createSlug } from '@/lib/string';
 
 export const postCreateSchema = z.object({
@@ -11,9 +10,7 @@ export const postCreateSchema = z.object({
 });
 
 // extend the postCreateSchema as optional fields
-export const postUpdateSchema = postCreateSchema.partial().extend({
-  id: idSchema,
-});
+export const postUpdateSchema = postCreateSchema.partial();
 
 export const postSearchSchema = postCreateSchema.pick({
   title: true,

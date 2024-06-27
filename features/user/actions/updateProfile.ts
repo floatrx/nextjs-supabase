@@ -12,7 +12,6 @@ import type { Tables } from '@/types/supabase';
 
 import { revalidatePath } from 'next/cache';
 
-import { formatFormActionResponse } from '@/lib/supabase/formatters';
 import { createServerClient } from '@/lib/supabase/server';
 
 type TPayload = Partial<Pick<Tables<'profiles'>, 'avatar' | 'username'>>;
@@ -24,5 +23,5 @@ export const updateProfile = async (idProfile: string, payload: TPayload) => {
 
   revalidatePath('/');
 
-  return formatFormActionResponse(res);
+  return res;
 };
