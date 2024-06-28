@@ -1,4 +1,4 @@
-export type TCredentials = {
+export type TAuthCredentials = {
   email: string;
   password: string;
 };

@@ -10,4 +10,8 @@ interface IProps {
 }
 
 export const UserAvatar: RC<IProps> = ({ src, className }) =>
-  src ? <Image alt="avatar" className={cn('size-6 rounded-full', className)} src={src} /> : <User className="text-default-500" size={22} />;
+  src ? (
+    <Image alt="avatar" className={cn('size-6 rounded-full', className)} src={src} />
+  ) : (
+    <User className="text-default-500" size={22} />
+  );

@@ -1,4 +1,4 @@
-import type { TPostWithAuthor } from '@/types/post';
+import type { TPostExtended } from '@/types/post';
 
 import Link from 'next/link';
 
@@ -9,7 +9,7 @@ import { TagItem, type TagItemProps } from '@/features/tag/components/TagItem';
 import { cn } from '@/lib/utils';
 
 interface IProps extends Omit<TagItemProps, 'tag'> {
-  post: TPostWithAuthor;
+  post: TPostExtended;
   interactive?: boolean;
   wrapperClassName?: string;
 }
@@ -43,7 +43,11 @@ export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, 
       ))}
       {interactive && (
         <OnlyAuth idUser={author?.id}>
-          <AddTagDropdown buttonProps={{ className: 'text-muted-foreground hover:text-foreground' }} idPost={post.id} skipTags={tagIds} />
+          <AddTagDropdown
+            buttonProps={{ className: 'text-muted-foreground hover:text-foreground' }}
+            idPost={post.id}
+            skipTags={tagIds}
+          />
         </OnlyAuth>
       )}
     </div>

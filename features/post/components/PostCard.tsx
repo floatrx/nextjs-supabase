@@ -1,4 +1,4 @@
-import type { TPostWithAuthor } from '@/types/post';
+import type { TPostExtended } from '@/types/post';
 
 import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ import { PostTagsList } from '@/features/post/components/PostTagsList';
 import { upperFirst, safePostExcerpt } from '@/lib/string';
 
 interface IProps {
-  post: TPostWithAuthor;
+  post: TPostExtended;
 }
 
 export const PostCard: RC<IProps> = ({ post }) => {

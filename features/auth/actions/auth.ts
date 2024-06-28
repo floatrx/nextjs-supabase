@@ -11,11 +11,11 @@ import { redirect } from 'next/navigation';
 import { baseUrl } from '@/config';
 import { authService } from '@/features/auth/services/auth';
 import { emailLoginSchema } from '@/features/auth/validators/emailLoginSchema';
-import { AuthServiceViaEmailAction, type TCredentials } from '@/types/auth';
+import { AuthServiceViaEmailAction, type TAuthCredentials } from '@/types/auth';
 
 // Login with email
 const authBase = async (action: AuthServiceViaEmailAction, formData: FormData) => {
-  const credentials = Object.fromEntries(formData) as TCredentials;
+  const credentials = Object.fromEntries(formData) as TAuthCredentials;
 
   try {
     // Validate the credentials object

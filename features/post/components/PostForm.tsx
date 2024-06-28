@@ -128,7 +128,11 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onSubmit, load
           </div>
         </div>
 
-        <Controller control={control} name="content" render={({ field }) => <Editor errorMessage={errors.content?.message} {...field} />} />
+        <Controller
+          control={control}
+          name="content"
+          render={({ field }) => <Editor errorMessage={errors.content?.message} {...field} />}
+        />
         <Button color="primary" disabled={!isDirty} isLoading={loading} size="lg" type="submit" variant="shadow">
           {loading ? 'Submitting...' : id ? 'Update' : 'Create'}
         </Button>

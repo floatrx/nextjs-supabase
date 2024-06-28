@@ -38,8 +38,17 @@ export const ProfileForm: RC<IProps> = ({ id, initialValues }) => {
   });
 
   return (
-    <Form className={cn(formVariants({ isSubmitting }), 'max-w-md')} size="lg" variant="bordered" onSubmit={handleSubmit}>
-      <Controller control={form.control} name="username" render={({ field }) => <Input required label="Username" {...field} />} />
+    <Form
+      className={cn(formVariants({ isSubmitting }), 'max-w-md')}
+      size="lg"
+      variant="bordered"
+      onSubmit={handleSubmit}
+    >
+      <Controller
+        control={form.control}
+        name="username"
+        render={({ field }) => <Input required label="Username" {...field} />}
+      />
       <Controller
         control={form.control}
         name="avatar"

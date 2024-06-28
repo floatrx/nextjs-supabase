@@ -1,9 +1,9 @@
-import type { TPostWithAuthor } from '@/types/post';
+import type { TPostExtended } from '@/types/post';
 
 import { PostCard } from '@/features/post/components/PostCard';
 
 interface IProps {
-  posts: TPostWithAuthor[] | null;
+  posts: TPostExtended[] | null;
 }
 
 export const PostsCards: RC<IProps> = ({ posts }) => (

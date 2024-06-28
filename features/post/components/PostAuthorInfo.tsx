@@ -1,10 +1,10 @@
-import type { TPostWithAuthor } from '@/types/post';
+import type { TPostExtended } from '@/types/post';
 
 import { Chip } from '@nextui-org/chip';
 
 import { UserAvatar } from '@/features/user/components/UserAvatar';
 
-interface IProps extends Pick<TPostWithAuthor, 'author'> {}
+interface IProps extends Pick<TPostExtended, 'author'> {}
 
 export const PostAuthorInfo: RC<IProps> = ({ author }) => {
   if (!author) return null;

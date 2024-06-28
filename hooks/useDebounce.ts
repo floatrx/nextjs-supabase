@@ -1,5 +1,3 @@
-import type { AnyFn } from '@/types';
-
 import { useCallback } from 'react';
 
 import { DEFAULT_DEBOUNCE_DELAY } from '@/config/const';

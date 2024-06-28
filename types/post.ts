@@ -1,20 +1,17 @@
+import type { TProfileWithRole } from '@/types/profile';
 import type { Tables, TablesInsert, TablesUpdate } from '@/types/supabase';
-import type { TTagId } from '@/types/tag';
+import type { TTagId, TTag } from '@/types/tag';
 
 export type TPost = Tables<'posts'>;
 
 export type TPostId = TPost['id'];
 
-export type TPostWithAuthor = TPost & {
+export type TPostExtended = TPost & {
   tags: {
     id: TTagId;
-    tag: Tables<'tags'> | null;
+    tag: TTag | null;
   }[];
-  author:
-    | (Tables<'profiles'> & {
-        role: Tables<'roles'> | null;
-      })
-    | null;
+  author: TProfileWithRole | null;
 };
 
 export type TPostCreate = TablesInsert<'posts'>;

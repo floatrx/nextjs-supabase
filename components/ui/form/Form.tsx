@@ -11,7 +11,10 @@ interface IProps extends ComponentProps<'form'>, Pick<ButtonProps, 'size' | 'var
  * NOTE: This component has a forwardRef, for reset() method
  * @param props - supports all <form> props
  */
-export const Form: FC<IProps> = forwardRef(function FormWrapper({ className, children, size, variant, ...props }, forwardedRef) {
+export const Form: FC<IProps> = forwardRef(function FormWrapper(
+  { className, children, size, variant, ...props },
+  forwardedRef,
+) {
   return (
     <form ref={forwardedRef} className={cn('w-full', className)} {...props}>
       {Children.map(children, (child) => {

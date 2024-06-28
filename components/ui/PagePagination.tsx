@@ -24,7 +24,14 @@ export const PagePagination: RC<IProps> = (props) => {
 
   return (
     <div className="stack justify-center py-4">
-      <Pagination color="primary" initialPage={Number(page) || 1} size="lg" variant="flat" onChange={setPage} {...props} />
+      <Pagination
+        color="primary"
+        initialPage={Number(page) || 1}
+        size="lg"
+        variant="flat"
+        onChange={setPage}
+        {...props}
+      />
       {isPending && (
         <div className="pointer-events-none fixed inset-0 z-50 flex touch-none items-center justify-center bg-background/20">
           <Spinner size="lg" />

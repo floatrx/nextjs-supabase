@@ -17,5 +17,7 @@ export default async function EditPost({ params }: PageProps<Pick<TPost, 'id'>>)
   // Query post by id
   const { data: post } = await postService.getById(id);
 
-  return <Page meta={metadata}>{post ? <EditPostForm id={id} initialValues={post} /> : <p>Post ${id} not found!</p>}</Page>;
+  return (
+    <Page meta={metadata}>{post ? <EditPostForm id={id} initialValues={post} /> : <p>Post ${id} not found!</p>}</Page>
+  );
 }

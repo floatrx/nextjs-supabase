@@ -12,7 +12,15 @@ export function Submit({ children, pendingText, ...props }: IProps) {
   const isPending = pending && action === props.formAction;
 
   return (
-    <Button aria-disabled={pending} disabled={pending} isLoading={isPending} size="lg" type="submit" variant="bordered" {...props}>
+    <Button
+      aria-disabled={pending}
+      disabled={pending}
+      isLoading={isPending}
+      size="lg"
+      type="submit"
+      variant="bordered"
+      {...props}
+    >
       {isPending ? pendingText || children : children}
     </Button>
   );

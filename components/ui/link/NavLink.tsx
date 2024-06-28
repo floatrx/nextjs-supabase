@@ -10,7 +10,10 @@ interface IProps extends LinkProps {
 }
 
 export const NavLink: FC<IProps> = ({ children, variant, color = 'foreground', ...linkProps }) => (
-  <Link className={cn(linkStyles({ ...variant, color }), 'data-[active=true]:font-medium data-[active=true]:text-primary')} {...linkProps}>
+  <Link
+    className={cn(linkStyles({ ...variant, color }), 'data-[active=true]:font-medium data-[active=true]:text-primary')}
+    {...linkProps}
+  >
     {children}
   </Link>
 );

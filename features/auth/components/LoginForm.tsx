@@ -1,7 +1,5 @@
 'use client';
 
-import type { AnyFn } from '@/types';
-
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
 import { Spinner } from '@nextui-org/spinner';
@@ -30,7 +28,8 @@ export const LoginForm: RC<IProps> = ({ message }) => {
     size: 19,
   };
 
-  const handleLogin = (fn: AnyFn) => () => {
+  // With transition wrapper allows tracking the transition pending state
+  const withTransition = (fn: AnyFn) => () => {
     startTransition(async () => {
       await fn(new FormData(formRef.current!));
     });
@@ -46,17 +45,17 @@ export const LoginForm: RC<IProps> = ({ message }) => {
       <Form ref={formRef} className={formVariants({ isSubmitting })} size="lg" variant="bordered">
         <Input name="email" placeholder="you@example.com" startContent={<Mail {...icoProps} />} />
         <InputPassword name="password" placeholder="••••••••" startContent={<Lock {...icoProps} />} />
-        <Button color="primary" variant="ghost" onClick={handleLogin(login)}>
+        <Button color="primary" variant="ghost" onClick={withTransition(login)}>
           <LogIn /> Sign In
         </Button>
-        <Button onClick={handleLogin(signup)}>
+        <Button onClick={withTransition(signup)}>
           <UserPlus /> Sign Up
         </Button>
         <DividerText text="or" />
-        <Button onClick={handleLogin(googleLogin)}>
+        <Button onClick={withTransition(googleLogin)}>
           <GoogleIcon /> Google
         </Button>
-        <Button onClick={handleLogin(githubLogin)}>
+        <Button onClick={withTransition(githubLogin)}>
           <GitHubIcon /> GitHub
         </Button>
       </Form>
