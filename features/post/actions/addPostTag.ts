@@ -1,13 +1,11 @@
 'use server';
 
-import type { TPostId } from '@/types/post';
-
 import { revalidatePath } from 'next/cache';
 
 import { postService } from '@/features/post/services/post';
 
-export const deletePost = async (id: TPostId) => {
-  const { error } = await postService.delete(id);
+export const addPostTag = async (...args: Parameters<typeof postService.addTag>) => {
+  const { error } = await postService.addTag(...args);
 
   if (error) return;
 

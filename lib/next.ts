@@ -4,6 +4,7 @@
 
 import type { Metadata } from 'next';
 
+import { TITLE_SEPARATOR } from '@/config/const';
 import { siteConfig } from '@/config/site';
 
 /**
@@ -24,10 +25,7 @@ import { siteConfig } from '@/config/site';
  *  }
  */
 export const getMetadata = (title: string, overrides?: Omit<Metadata, 'title'>): Metadata => ({
-  title: {
-    template: `%s • ${siteConfig.name}`,
-    default: title,
-  },
+  title: `${title} ${TITLE_SEPARATOR} ${siteConfig.name}`,
   description: siteConfig.description,
   icons: {
     icon: '/favicon.ico',
@@ -42,7 +40,7 @@ export const getMetadata = (title: string, overrides?: Omit<Metadata, 'title'>):
  */
 export const getTitleFromNextMetadata = ({ title }: Metadata = {}, fallback: string = 'Untitled page'): string => {
   if (typeof title === 'string') {
-    return title;
+    return title.split(TITLE_SEPARATOR).shift() || fallback;
   }
 
   if (title && typeof title === 'object' && 'default' in title) {

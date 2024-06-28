@@ -1,15 +1,15 @@
 import type { TPostWithAuthor } from '@/types/post';
 
-import { Card, CardHeader, CardBody } from '@nextui-org/card';
-import { Chip } from '@nextui-org/chip';
+import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card';
 import Link from 'next/link';
 
-import { OnlyAuthor } from '@/components/guards/OnlyAuthor';
+import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { DateTime } from '@/components/ui/DateTime';
 import { StorageImage } from '@/components/ui/StorageImage';
 import { DeletePostButton } from '@/features/post/components/DeletePostButton';
 import { EditPostButton } from '@/features/post/components/EditPostButton';
-import { PostAuthorAvatar } from '@/features/post/components/PostAuthorAvatar';
+import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
+import { PostTagsList } from '@/features/post/components/PostTagsList';
 import { upperFirst, safePostExcerpt } from '@/lib/string';
 
 interface IProps {
@@ -18,6 +18,7 @@ interface IProps {
 
 export const PostCard: RC<IProps> = ({ post }) => {
   if (!post) return null;
+
   const { id, slug, created_at, title, content, thumbnail, author } = post;
 
   return (
@@ -25,32 +26,30 @@ export const PostCard: RC<IProps> = ({ post }) => {
       <Card className="h-full overflow-visible bg-card p-4 px-1">
         <CardHeader className="flex-col items-start gap-2 px-4 pb-0 pt-2">
           <StorageImage src={thumbnail} />
-          <div className="stack w-full">
-            <small className="text-default-500">
-              <DateTime date={created_at} />
-            </small>
-            <span className="flex-1" />
-            <div className="stack">
-              <OnlyAuthor id={author?.id}>
-                <DeletePostButton id={id} />
-                <EditPostButton id={id} />
-              </OnlyAuthor>
-            </div>
-          </div>
-          <div className="stack font-bold">
-            <PostAuthorAvatar author={author} />
-            <span>{author?.username || author?.email}</span>
-            <Chip className="ml-2" size="sm">
-              {author?.role?.name}
-            </Chip>
-          </div>
           <Link className="line-clamp-2 text-2xl" href={`/blog/${slug}`}>
             {upperFirst(title)}
           </Link>
+          <PostAuthorInfo author={author} />
+          <DateTime className="text-sm text-muted-foreground" date={created_at} />
         </CardHeader>
-        <CardBody className="overflow-visible py-2">
-          <p className="line-clamp-5 pt-4">{safePostExcerpt(content)}</p>
+
+        <CardBody className="overflow-visible py-1">
+          <p className="line-clamp-4 pt-2">{safePostExcerpt(content)}</p>
         </CardBody>
+
+        <CardFooter>
+          <div className="flex-1 border-t-1 pt-3">
+            <div className="stack justify-between">
+              <PostTagsList post={post} />
+              <OnlyAuth idUser={author?.id}>
+                <div className="stack">
+                  <DeletePostButton id={id} size="sm" variant="light" />
+                  <EditPostButton id={id} size="sm" variant="light" />
+                </div>
+              </OnlyAuth>
+            </div>
+          </div>
+        </CardFooter>
       </Card>
     </article>
   );

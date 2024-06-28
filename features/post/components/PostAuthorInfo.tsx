@@ -1,5 +1,7 @@
 import type { TPostWithAuthor } from '@/types/post';
 
+import { Chip } from '@nextui-org/chip';
+
 import { UserAvatar } from '@/features/user/components/UserAvatar';
 
 interface IProps extends Pick<TPostWithAuthor, 'author'> {}
@@ -11,7 +13,11 @@ export const PostAuthorInfo: RC<IProps> = ({ author }) => {
   return (
     <span className="flex items-center gap-2 sm:inline-flex">
       <UserAvatar src={avatar} />
-      {username || email}
+      <strong>{username || email}</strong>
+
+      <Chip size="sm" variant="bordered">
+        {author?.role?.name}
+      </Chip>
     </span>
   );
 };

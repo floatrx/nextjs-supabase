@@ -18,13 +18,13 @@ export const AuthButton = async () => {
       </Link>
       <form>
         <Submit isIconOnly formAction={signOut} size="md" title="Logout" variant="light">
-          <LogOut size={16} />
+          <LogOut size="1.8cap" />
         </Submit>
       </form>
     </div>
   ) : (
     <Button as={Link} href="/login" size="md" variant="bordered">
-      <LogIn size={16} />
+      <LogIn size="1.8cap" />
       Sign In
     </Button>
   );

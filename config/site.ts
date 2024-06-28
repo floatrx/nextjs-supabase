@@ -13,6 +13,10 @@ export const siteConfig = {
       href: '/notes',
     },
     {
+      label: 'Tags',
+      href: '/tags',
+    },
+    {
       label: 'Blog',
       href: '/blog',
     },

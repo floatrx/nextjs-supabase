@@ -1,6 +1,7 @@
 import { tv, VariantProps } from 'tailwind-variants';
 
-export type TitleVariantType = VariantProps<typeof title>;
+export type TTitleVariant = VariantProps<typeof title>;
+
 export const title = tv({
   base: 'tracking-tight inline font-semibold mb-2',
   variants: {

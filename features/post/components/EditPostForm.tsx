@@ -1,6 +1,6 @@
 'use client';
 
-import type { TPost } from '@/types/post';
+import type { TPostId } from '@/types/post';
 
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
@@ -10,7 +10,7 @@ import { PostForm, type IPostFormProps } from '@/features/post/components/PostFo
 import { useServerAction } from '@/hooks/useServerAction';
 
 interface IProps extends IPostFormProps {
-  id: TPost['id'];
+  id: TPostId;
 }
 
 export const EditPostForm: RC<IProps> = (props) => {

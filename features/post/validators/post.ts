@@ -12,6 +12,11 @@ export const postCreateSchema = z.object({
 // extend the postCreateSchema as optional fields
 export const postUpdateSchema = postCreateSchema.partial();
 
-export const postSearchSchema = postCreateSchema.pick({
-  title: true,
-});
+export const postSearchSchema = postCreateSchema
+  .pick({
+    title: true,
+  })
+  .transform((data) => ({
+    // remove special characters from the title
+    title: data.title.trim().replace(/[^\w\s]/gi, ''),
+  }));

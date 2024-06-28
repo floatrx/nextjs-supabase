@@ -1,10 +1,15 @@
 import type { Tables, TablesInsert, TablesUpdate } from '@/types/supabase';
+import type { TTagId } from '@/types/tag';
 
 export type TPost = Tables<'posts'>;
 
-export type TPostId = Pick<TPost, 'id'>;
+export type TPostId = TPost['id'];
 
 export type TPostWithAuthor = TPost & {
+  tags: {
+    id: TTagId;
+    tag: Tables<'tags'> | null;
+  }[];
   author:
     | (Tables<'profiles'> & {
         role: Tables<'roles'> | null;

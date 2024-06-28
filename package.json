@@ -10,6 +10,7 @@
     "ts:check": "tsc --noEmit",
     "lint:check": "eslint . --ext .ts,.tsx -c eslint.config.js --fix",
     "gen:types": "pwd && source .env && supabase gen types typescript --project-id=$SUPABASE_PROJECT_ID > types/supabase.ts",
+    "types:check": "tsc --noEmit",
     "prepare": "husky"
   },
   "husky": {

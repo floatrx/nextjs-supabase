@@ -35,8 +35,8 @@ bun dev
 > that are only accessible to authenticated users.
 
 - /blog
-    - /create
-    - /edit/[id]
+  - /create
+  - /edit/[id]
 - /notes
 
 ### /api routes
@@ -88,8 +88,12 @@ import { postCreate, postUpdate } from '@/server/actions/post';
 
 const DummyExample = () => {
   const [response, formAction] = useFormState(action, { statusText: '', status: 0, data: null });
-  return <Form action={formAction}><Submit /></Form>;
-}
+  return (
+    <Form action={formAction}>
+      <Submit />
+    </Form>
+  );
+};
 ```
 
 #### Advantages:

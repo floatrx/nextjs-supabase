@@ -1,4 +1,5 @@
-import type { TPostCreate, PostSearchParams, TPostUpdate, TPost } from '@/types/post';
+import type { TPostCreate, PostSearchParams, TPostUpdate, TPostId } from '@/types/post';
+import type { TTagId } from '@/types/tag';
 
 import { idSchema } from '@/features/post/validators/idSchema';
 import { postCreateSchema, postSearchSchema, postUpdateSchema } from '@/features/post/validators/post';
@@ -38,18 +39,20 @@ export const postService = {
    * @param limit - Number of items per page (default: 8)
    */
   async search({ title, page = 1, limit = 8 }: PostSearchParams = {}) {
+    console.log('title', { page, limit });
+
     const supabase = await createServerClient();
     const parsed = postSearchSchema.safeParse({ title });
 
     let query = supabase.from('posts').select(
       `*,
-      author: profiles (*, role: roles (*))`,
+        author: profiles (*, role: roles (*)),
+        tags: post_tags (id:tag_id, tag: tags (id, name))
+      `,
       { count: 'exact' },
     );
 
     if (parsed.data?.title) {
-      // Exact
-      // query = query.eq('title', parsed.data?.title);
       query = query.ilike('title', `%${parsed.data.title}%`);
     }
 
@@ -77,7 +80,9 @@ export const postService = {
       .from('posts')
       .select(
         `*,
-      author: profiles (*, role: roles (*))`,
+        author: profiles (*, role: roles (*)),
+        tags: post_tags (id:tag_id, tag: tags (id, name))
+      `,
       )
       .eq(column, value)
       .single();
@@ -87,7 +92,7 @@ export const postService = {
    * Get a post by ID
    * @param id
    */
-  async getById(id: TPost['id']) {
+  async getById(id: TPostId) {
     const { error, data } = idSchema.safeParse(id);
 
     if (error) {
@@ -110,7 +115,7 @@ export const postService = {
    * @param id - Post ID
    * @param payload - changes
    */
-  async update(id: TPost['id'], payload: TPostUpdate) {
+  async update(id: TPostId, payload: TPostUpdate) {
     const { error, data } = postUpdateSchema.safeParse(payload);
 
     if (error) {
@@ -126,9 +131,31 @@ export const postService = {
    * Delete a post by ID
    * @param id
    */
-  async delete(id: TPost['id']) {
+  async delete(id: TPostId) {
     const supabase = await createServerClient();
 
     return supabase.from('posts').delete().eq('id', id);
+  },
+
+  /**
+   * Add a tag to a post
+   * @param postId
+   * @param tagId
+   */
+  async addTag(postId: TPostId, tagId: TTagId) {
+    const supabase = await createServerClient();
+
+    return supabase.from('post_tags').insert({ post_id: postId, tag_id: tagId });
+  },
+
+  /**
+   * Remove a tag from a post
+   * @param postId
+   * @param tagId
+   */
+  async removeTag(postId: TPostId, tagId: TTagId) {
+    const supabase = await createServerClient();
+
+    return supabase.from('post_tags').delete().eq('post_id', postId).eq('tag_id', tagId);
   },
 };

@@ -11,12 +11,13 @@
     @apply border-border;
   }
 
-  html, body {
+  html,
+  body {
     @apply bg-background text-foreground;
   }
 
   body {
-    @apply h-full antialiased min-h-screen font-sans;
+    @apply h-full min-h-screen font-sans antialiased;
   }
 
   button {
@@ -37,11 +38,11 @@
 }
 
 @layer components {
-  .article {
+  .article-content {
     @apply prose-2xl dark:prose-invert;
   }
 
-  .article,
+  .article-content,
   .prose {
     p a {
       @apply break-words text-blue-500;
@@ -79,7 +80,7 @@
 
 @layer utilities {
   .stack {
-    @apply flex items-center gap-2 flex-wrap;
+    @apply flex flex-wrap items-center gap-2;
   }
 
   .invisible-scrollbar {
@@ -95,7 +96,7 @@
   }
 
   .locked {
-    @apply pointer-events-none opacity-50 select-none;
+    @apply pointer-events-none select-none opacity-50;
   }
 }
 
@@ -113,5 +114,3 @@
     transform: translateY(0);
   }
 }
-
-
