@@ -79,7 +79,7 @@
 
 @layer utilities {
   .stack {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-2 flex-wrap;
   }
 
   .invisible-scrollbar {
