@@ -22,9 +22,9 @@ export const AddNoteForm = () => {
   });
   const { loading, execute } = useServerAction(createNote);
 
-  const handleSubmit = form.handleSubmit(async (values) => {
+  const handleSubmit = form.handleSubmit(async ({ title }) => {
     if (loading) return;
-    const res = await execute(values);
+    const res = await execute(title);
 
     if (res?.error) return;
     toast.success('Note added successfully');
@@ -48,7 +48,9 @@ export const AddNoteForm = () => {
           />
         )}
       />
-      <Button isLoading={loading}>Add Note</Button>
+      <Button isLoading={loading} type="submit">
+        Add Note
+      </Button>
     </Form>
   );
 };
