@@ -42,6 +42,36 @@ export type Database = {
           },
         ];
       };
+      post_tags: {
+        Row: {
+          post_id: number;
+          tag_id: number;
+        };
+        Insert: {
+          post_id: number;
+          tag_id: number;
+        };
+        Update: {
+          post_id?: number;
+          tag_id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'post_tags_post_id_fkey';
+            columns: ['post_id'];
+            isOneToOne: false;
+            referencedRelation: 'posts';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'post_tags_tag_id_fkey';
+            columns: ['tag_id'];
+            isOneToOne: false;
+            referencedRelation: 'tags';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       posts: {
         Row: {
           content: string;
