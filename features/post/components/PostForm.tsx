@@ -9,9 +9,9 @@ import { useForm, Controller, useWatch } from 'react-hook-form';
 
 import { Editor } from '@/components/ui/editor/Editor';
 import { ImageUploader } from '@/components/ui/form/ImageUploader';
+import { createSlug } from '@/features/post/lib/createSlug';
 import { PostCreateSchema } from '@/features/post/validators/postCreateSchema';
 import { cn } from '@/lib/utils/cn';
-import { createSlug } from '@/lib/utils/string';
 
 interface FormValues {
   title: string;

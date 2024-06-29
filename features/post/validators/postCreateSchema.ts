@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { createSlug } from '@/lib/utils/string';
+import { createSlug } from '@/features/post/lib/createSlug';
 
 /**
  * Post create schema

@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
 import { cn } from '@/lib/utils/cn';
-import { upperFirst } from '@/lib/utils/string';
+import { upperFirst } from '@/lib/utils/upperFirst';
 
 type Variants = VariantProps<typeof variants>;
 

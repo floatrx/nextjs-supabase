@@ -9,7 +9,7 @@ import { EditPostButton } from '@/features/post/components/EditPostButton';
 import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
 import { PostTagsList } from '@/features/post/components/PostTagsList';
 import { postService } from '@/features/post/services/postService';
-import { upperFirst } from '@/lib/utils/string';
+import { upperFirst } from '@/lib/utils/upperFirst';
 
 export default async function PostSinglePage({ params }: PageProps<{ slug: string }>) {
   const { slug } = params;
