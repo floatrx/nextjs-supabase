@@ -11,10 +11,10 @@ import { redirect } from 'next/navigation';
 import { baseUrl } from '@/config';
 import { authService } from '@/features/auth/services/auth';
 import { emailLoginSchema } from '@/features/auth/validators/emailLoginSchema';
-import { AuthServiceViaEmailAction, type TAuthCredentials } from '@/types/auth';
+import { EAuthServiceViaEmailAction, type TAuthCredentials } from '@/types/auth';
 
 // Login with email
-const authBase = async (action: AuthServiceViaEmailAction, formData: FormData) => {
+const authBase = async (action: EAuthServiceViaEmailAction, formData: FormData) => {
   const credentials = Object.fromEntries(formData) as TAuthCredentials;
 
   try {
@@ -41,8 +41,8 @@ const authBase = async (action: AuthServiceViaEmailAction, formData: FormData) =
   revalidatePath('/', 'layout');
 };
 
-export const login = async (formData: FormData) => authBase(AuthServiceViaEmailAction.SignIn, formData);
-export const signup = async (formData: FormData) => authBase(AuthServiceViaEmailAction.SignUp, formData);
+export const login = async (formData: FormData) => authBase(EAuthServiceViaEmailAction.SignIn, formData);
+export const signup = async (formData: FormData) => authBase(EAuthServiceViaEmailAction.SignUp, formData);
 
 // Login with OAuth providers
 const oauthBase = async ({ options, ...credentials }: SignInWithOAuthCredentials) => {

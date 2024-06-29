@@ -1,4 +1,4 @@
-import type { StorageUploadResponse } from '@/types/storage';
+import type { TStorageUploadResponse } from '@/types/storage';
 
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
@@ -19,7 +19,7 @@ import { getImageUrl } from '@/lib/supabase/storage';
  */
 export const useUploadImage = (initialValue?: string | null) => {
   const [imgUrl, setImgUrl] = useState(initialValue ?? '');
-  const [upload, isLoading] = useApi<FormData, StorageUploadResponse>('post', 'upload');
+  const [upload, isLoading] = useApi<FormData, TStorageUploadResponse>('post', 'upload');
 
   // Initial value could be updated from the parent component... Sync it!
   useEffect(() => setImgUrl(initialValue ?? ''), [initialValue]);

@@ -1,4 +1,4 @@
-import type { AuthServiceViaEmailAction, TAuthCredentials } from '@/types/auth';
+import type { EAuthServiceViaEmailAction, TAuthCredentials } from '@/types/auth';
 import type { SignInWithOAuthCredentials, VerifyOtpParams } from '@supabase/auth-js';
 
 import { createServerClient } from '@/lib/supabase/server';
@@ -25,10 +25,10 @@ export const authService = {
 
   /**
    * Sign in or sign up via email
-   * @param {AuthServiceViaEmailAction} action - The action to perform (sign in or sign up)
+   * @param {EAuthServiceViaEmailAction} action - The action to perform (sign in or sign up)
    * @param {TAuthCredentials} credentials - The user's credentials
    */
-  async viaEmail(action: AuthServiceViaEmailAction, credentials: TAuthCredentials) {
+  async viaEmail(action: EAuthServiceViaEmailAction, credentials: TAuthCredentials) {
     const supabase = await createServerClient();
 
     return supabase.auth[action](credentials);

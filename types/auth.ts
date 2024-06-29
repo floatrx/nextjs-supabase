@@ -3,7 +3,7 @@ export type TAuthCredentials = {
   password: string;
 };
 
-export enum AuthServiceViaEmailAction {
+export enum EAuthServiceViaEmailAction {
   SignIn = 'signInWithPassword',
   SignUp = 'signUp',
 }

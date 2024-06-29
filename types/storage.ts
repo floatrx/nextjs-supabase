@@ -1,4 +1,4 @@
-export type StorageUploadResponse = {
+export type TStorageUploadResponse = {
   status: number;
   statusText: string;
   data: {

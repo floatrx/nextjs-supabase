@@ -1,11 +1,9 @@
 import type { Tables, TablesUpdate } from '@/types/supabase';
 
-export type TProfile = Tables<'profiles'> & {
-  role: Tables<'roles'> | null;
-};
+export type TProfile = Tables<'profiles'>;
 
 export type TProfileWithRole = TProfile & {
   role: Tables<'roles'> | null;
 };
 
-export type TRoleUpdate = TablesUpdate<'profiles'>;
+export type TProfileUpdate = TablesUpdate<'profiles'>;
