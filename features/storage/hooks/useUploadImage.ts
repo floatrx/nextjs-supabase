@@ -1,10 +1,11 @@
+// TODO: Rewrite to server-action
 import type { TStorageUploadResponse } from '@/types/storage';
 
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 
-import { useApi } from '@/hooks/useApi';
-import { checkFileSize, getFormDataFromFile } from '@/lib/file';
+import { checkFileSize, getFormDataFromFile } from '@/features/storage/lib/file';
+import { useApi_deprecated } from '@/hooks/useApi_deprecated';
 import { getImageUrl } from '@/lib/supabase/storage';
 
 /**
@@ -19,7 +20,7 @@ import { getImageUrl } from '@/lib/supabase/storage';
  */
 export const useUploadImage = (initialValue?: string | null) => {
   const [imgUrl, setImgUrl] = useState(initialValue ?? '');
-  const [upload, isLoading] = useApi<FormData, TStorageUploadResponse>('post', 'upload');
+  const [upload, isLoading] = useApi_deprecated<FormData, TStorageUploadResponse>('post', 'upload');
 
   // Initial value could be updated from the parent component... Sync it!
   useEffect(() => setImgUrl(initialValue ?? ''), [initialValue]);

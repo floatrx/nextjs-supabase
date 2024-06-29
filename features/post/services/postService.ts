@@ -1,10 +1,12 @@
 import type { TPostCreate, PostSearchParams, TPostUpdate, TPostId } from '@/types/post';
 import type { TTagId } from '@/types/tag';
 
-import { idSchema } from '@/features/post/validators/idSchema';
-import { postCreateSchema, postSearchSchema, postUpdateSchema } from '@/features/post/validators/post';
+import { PostIDSchema } from '@/features/post/validators/postIDSchema';
 import { formatResultWithPagesCount } from '@/lib/supabase/formatters';
 import { createServerClient } from '@/lib/supabase/server';
+import { PostCreateSchema } from '@/features/post/validators/postCreateSchema';
+import { PostUpdateSchema } from '@/features/post/validators/postUpdateSchema';
+import { PostSearchSchema } from '@/features/post/validators/postSearchSchema';
 
 /**
  * Post service
@@ -22,7 +24,7 @@ export const postService = {
    */
   async create(payload: TPostCreate) {
     const supabase = await createServerClient();
-    const { error, data } = postCreateSchema.safeParse(payload);
+    const { error, data } = PostCreateSchema.safeParse(payload);
 
     if (error) {
       return { error };
@@ -42,7 +44,7 @@ export const postService = {
     console.log('title', { page, limit });
 
     const supabase = await createServerClient();
-    const parsed = postSearchSchema.safeParse({ title });
+    const parsed = PostSearchSchema.safeParse({ title });
 
     let query = supabase.from('posts').select(
       `*,
@@ -93,7 +95,7 @@ export const postService = {
    * @param id
    */
   async getById(id: TPostId) {
-    const { error, data } = idSchema.safeParse(id);
+    const { error, data } = PostIDSchema.safeParse(id);
 
     if (error) {
       return { error, data: null };
@@ -116,7 +118,7 @@ export const postService = {
    * @param payload - changes
    */
   async update(id: TPostId, payload: TPostUpdate) {
-    const { error, data } = postUpdateSchema.safeParse(payload);
+    const { error, data } = PostUpdateSchema.safeParse(payload);
 
     if (error) {
       return { error };

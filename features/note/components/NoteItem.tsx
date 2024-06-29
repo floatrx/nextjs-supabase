@@ -3,7 +3,7 @@
 import type { TNote } from '@/types/note';
 
 import { DeleteNoteButton } from '@/features/note/components/DeleteNoteButton';
-import { upperFirst } from '@/lib/string';
+import { upperFirst } from '@/lib/utils/string';
 
 interface IProps {
   note: TNote;

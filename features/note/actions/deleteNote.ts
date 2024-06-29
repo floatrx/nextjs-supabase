@@ -4,7 +4,7 @@ import type { TNote } from '@/types/note';
 
 import { revalidatePath } from 'next/cache';
 
-import { noteService } from '@/features/note/services/note';
+import { noteService } from '@/features/note/services/noteService';
 
 export async function deleteNote(id: TNote['id']) {
   const { error } = await noteService.remove(id);

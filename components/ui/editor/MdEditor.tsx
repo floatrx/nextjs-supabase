@@ -3,11 +3,11 @@ import { useEffect, useRef, forwardRef } from 'react';
 
 // Import all plugins
 import { getMarkdownEditorPlugins } from '@/components/ui/editor/mdEditor.plugins';
-import { cn } from '@/lib/utils';
 
 // Styles
 import '@/styles/editor.css';
 import '@mdxeditor/editor/style.css';
+import { cn } from '@/lib/utils/cn';
 
 export interface MdEditorProps extends Omit<MDXEditorProps, 'markdown' | 'er'> {
   value: string;

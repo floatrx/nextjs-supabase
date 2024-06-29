@@ -2,7 +2,7 @@ import type { ButtonProps } from '@nextui-org/button';
 
 import { forwardRef, Children, isValidElement, cloneElement } from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 interface IProps extends ComponentProps<'form'>, Pick<ButtonProps, 'size' | 'variant'> {}
 

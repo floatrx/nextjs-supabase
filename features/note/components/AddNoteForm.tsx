@@ -8,9 +8,9 @@ import { toast } from 'sonner';
 
 import { Form } from '@/components/ui/form/Form';
 import { createNote } from '@/features/note/actions/createNote';
-import { noteCreateSchema } from '@/features/note/validators/noteCreateSchema';
+import { NoteCreateSchema } from '@/features/note/validators/noteCreateSchema';
 import { useServerAction } from '@/hooks/useServerAction';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 export const AddNoteForm = () => {
   const {
@@ -18,7 +18,7 @@ export const AddNoteForm = () => {
     ...form
   } = useForm({
     defaultValues: { title: '' },
-    resolver: zodResolver(noteCreateSchema),
+    resolver: zodResolver(NoteCreateSchema),
   });
   const { loading, execute } = useServerAction(createNote);
 

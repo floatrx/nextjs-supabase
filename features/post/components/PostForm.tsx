@@ -9,9 +9,9 @@ import { useForm, Controller, useWatch } from 'react-hook-form';
 
 import { Editor } from '@/components/ui/editor/Editor';
 import { ImageUploader } from '@/components/ui/form/ImageUploader';
-import { postCreateSchema } from '@/features/post/validators/post';
-import { createSlug } from '@/lib/string';
-import { cn } from '@/lib/utils';
+import { PostCreateSchema } from '@/features/post/validators/postCreateSchema';
+import { cn } from '@/lib/utils/cn';
+import { createSlug } from '@/lib/utils/string';
 
 interface FormValues {
   title: string;
@@ -42,7 +42,7 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onSubmit, load
     formState: { errors, isDirty, dirtyFields },
     ...form
   } = useForm({
-    resolver: zodResolver(postCreateSchema),
+    resolver: zodResolver(PostCreateSchema),
     defaultValues: {
       title: '',
       content: '',

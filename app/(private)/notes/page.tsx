@@ -5,8 +5,8 @@
 import { Page } from '@/components/ui/layout/Page';
 import { AddNoteForm } from '@/features/note/components/AddNoteForm';
 import { NoteItem } from '@/features/note/components/NoteItem';
-import { noteService } from '@/features/note/services/note';
-import { getMetadata } from '@/lib/next';
+import { noteService } from '@/features/note/services/noteService';
+import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Notes');
 

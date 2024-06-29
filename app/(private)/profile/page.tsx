@@ -1,6 +1,6 @@
 import { Page } from '@/components/ui/layout/Page';
-import { authService } from '@/features/auth/services/auth';
-import { ProfileForm } from '@/features/user/components/ProfileForm';
+import { authService } from '@/features/auth/services/authService';
+import { UserProfileForm } from '@/features/user/components/UserProfileForm';
 
 export default async function ProfilePage() {
   const user = await authService.getProfile();
@@ -9,7 +9,7 @@ export default async function ProfilePage() {
 
   return (
     <Page title="Profile page">
-      <ProfileForm id={user.id} initialValues={user.profile} />
+      <UserProfileForm id={user.id} initialValues={user.profile} />
     </Page>
   );
 }

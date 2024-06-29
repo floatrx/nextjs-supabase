@@ -1,7 +1,7 @@
 import { Image, ImageProps } from '@nextui-org/image';
 
 import { getImageUrl } from '@/lib/supabase/storage';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 interface IProps extends Omit<ImageProps, 'src'> {
   src?: string | null; // src can be null (supabase)

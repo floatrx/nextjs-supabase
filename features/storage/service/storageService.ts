@@ -1,5 +1,5 @@
 import { SUPABASE_DEFAULT_BUCKET } from '@/config/const';
-import { prepareFileForUpload } from '@/lib/file';
+import { prepareFileForUpload } from '@/features/storage/lib/file';
 import { createServerClient } from '@/lib/supabase/server';
 
 /**

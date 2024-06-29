@@ -1,6 +1,3 @@
-/**
- * TODO: Test login via email/password
- */
 'use server';
 
 import type { SignInWithOAuthCredentials } from '@supabase/auth-js';
@@ -9,8 +6,8 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { baseUrl } from '@/config';
-import { authService } from '@/features/auth/services/auth';
-import { emailLoginSchema } from '@/features/auth/validators/emailLoginSchema';
+import { authService } from '@/features/auth/services/authService';
+import { EmailLoginSchema } from '@/features/auth/validators/emailLoginSchema';
 import { EAuthServiceViaEmailAction, type TAuthCredentials } from '@/types/auth';
 
 // Login with email
@@ -19,7 +16,7 @@ const authBase = async (action: EAuthServiceViaEmailAction, formData: FormData) 
 
   try {
     // Validate the credentials object
-    const isValidCredentials = emailLoginSchema.parse(credentials);
+    const isValidCredentials = EmailLoginSchema.parse(credentials);
 
     if (!isValidCredentials) {
       throw new Error('Invalid credentials');

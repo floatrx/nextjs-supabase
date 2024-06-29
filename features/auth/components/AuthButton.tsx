@@ -3,8 +3,8 @@ import { LogIn, LogOut } from 'lucide-react';
 import Link from 'next/link';
 
 import { Submit } from '@/components/ui/form/Submit';
-import { signOut } from '@/features/auth/actions/auth';
-import { authService } from '@/features/auth/services/auth';
+import { signOut } from '@/features/auth/actions/authActions';
+import { authService } from '@/features/auth/services/authService';
 import { UserAvatar } from '@/features/user/components/UserAvatar';
 
 export const AuthButton = async () => {

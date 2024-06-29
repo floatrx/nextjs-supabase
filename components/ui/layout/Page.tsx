@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { Chip } from '@nextui-org/chip';
 
 import { Heading } from '@/components/ui/layout/headings/Heading';
-import { getTitleFromNextMetadata } from '@/lib/next';
-import { cn } from '@/lib/utils';
+import { getTitleFromNextMetadata } from '@/lib/next/metadata';
+import { cn } from '@/lib/utils/cn';
 
 interface IProps {
   className?: string;

@@ -5,8 +5,8 @@ import { PagePagination } from '@/components/ui/PagePagination';
 import { PostCreateButton } from '@/features/post/components/PostCreateButton';
 import { PostsCards } from '@/features/post/components/PostsCards';
 import { PostSearchFilters } from '@/features/post/components/PostSearchFilters';
-import { postService } from '@/features/post/services/post';
-import { getMetadata } from '@/lib/next';
+import { postService } from '@/features/post/services/postService';
+import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Homepage');
 

@@ -9,7 +9,7 @@ import dark from 'react-syntax-highlighter/dist/esm/styles/prism/dracula';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 const languageParserMap = {
   js: tsx,

@@ -1,6 +1,6 @@
 'use server';
 
-import { authService } from '@/features/auth/services/auth';
+import { authService } from '@/features/auth/services/authService';
 
 interface IProps {
   idUser?: string;

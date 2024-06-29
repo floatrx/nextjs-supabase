@@ -1,4 +1,4 @@
-import { requireLogin } from '@/features/auth/lib/auth';
+import { requireLogin } from '@/features/auth/lib/requireLogin';
 
 export default async function ({ children }: React.PropsWithChildren) {
   await requireLogin();

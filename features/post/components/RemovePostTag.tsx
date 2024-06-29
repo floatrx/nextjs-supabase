@@ -5,7 +5,7 @@ import { X } from 'lucide-react';
 
 import { removePostTag } from '@/features/post/actions/removePostTag';
 import { useServerAction } from '@/hooks/useServerAction';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 interface IProps extends ButtonProps {
   idPost: number;

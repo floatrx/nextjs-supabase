@@ -1,6 +1,6 @@
 import type { TNote } from '@/types/note';
 
-import { noteCreateSchema } from '@/features/note/validators/noteCreateSchema';
+import { NoteCreateSchema } from '@/features/note/validators/noteCreateSchema';
 import { createServerClient } from '@/lib/supabase/server';
 
 /**
@@ -15,7 +15,7 @@ export const noteService = {
    * @param title
    */
   async create(title?: string | null) {
-    const { error, data } = noteCreateSchema.safeParse({ title });
+    const { error, data } = NoteCreateSchema.safeParse({ title });
 
     if (error) {
       return { error };

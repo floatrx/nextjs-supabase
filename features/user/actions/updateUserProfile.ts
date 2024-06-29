@@ -16,7 +16,7 @@ import { createServerClient } from '@/lib/supabase/server';
 
 type TPayload = Partial<Pick<Tables<'profiles'>, 'avatar' | 'username'>>;
 
-export const updateProfile = async (idProfile: string, payload: TPayload) => {
+export const updateUserProfile = async (idProfile: string, payload: TPayload) => {
   const supabase = await createServerClient();
 
   const res = await supabase.from('profiles').update(payload).eq('id', idProfile);

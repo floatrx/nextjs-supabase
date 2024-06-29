@@ -2,8 +2,8 @@ import type { TPost } from '@/types/post';
 
 import { Page } from '@/components/ui/layout/Page';
 import { EditPostForm } from '@/features/post/components/EditPostForm';
-import { postService } from '@/features/post/services/post';
-import { getMetadata } from '@/lib/next';
+import { postService } from '@/features/post/services/postService';
+import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Edit post');
 

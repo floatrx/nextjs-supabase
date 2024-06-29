@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-import { authService } from '@/features/auth/services/auth';
+import { authService } from '@/features/auth/services/authService';
 
 // Redirect to the login page if the user is not authenticated
 export const requireLogin = async () => {

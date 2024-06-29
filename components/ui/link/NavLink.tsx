@@ -1,7 +1,7 @@
 import { link as linkStyles, type LinkVariantProps } from '@nextui-org/theme';
 import Link, { LinkProps } from 'next/link';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 interface IProps extends LinkProps {
   className?: string;

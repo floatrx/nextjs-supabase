@@ -1,6 +1,6 @@
 import type { TTagId } from '@/types/tag';
 
-import { tagCreateSchema } from '@/features/tag/validators/tagCreateSchema';
+import { TagCreateSchema } from '@/features/tag/validators/tagCreateSchema';
 import { createServerClient } from '@/lib/supabase/server';
 
 /**
@@ -15,7 +15,7 @@ export const tagService = {
    * @param name
    */
   async create(name?: string | null) {
-    const { error, data } = tagCreateSchema.safeParse({ name });
+    const { error, data } = TagCreateSchema.safeParse({ name });
 
     if (error) {
       return { error };

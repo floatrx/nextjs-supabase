@@ -9,9 +9,9 @@ import { mutate } from 'swr';
 
 import { Form } from '@/components/ui/form/Form';
 import { createTag } from '@/features/tag/actions/createTag';
-import { tagCreateSchema } from '@/features/tag/validators/tagCreateSchema';
+import { TagCreateSchema } from '@/features/tag/validators/tagCreateSchema';
 import { useServerAction } from '@/hooks/useServerAction';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 export const AddTagForm = () => {
   const {
@@ -19,7 +19,7 @@ export const AddTagForm = () => {
     ...form
   } = useForm({
     defaultValues: { name: '' },
-    resolver: zodResolver(tagCreateSchema),
+    resolver: zodResolver(TagCreateSchema),
   });
   const { loading, execute } = useServerAction(createTag);
 

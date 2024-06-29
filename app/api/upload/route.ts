@@ -1,6 +1,6 @@
-import { authService } from '@/features/auth/services/auth';
-import { storageService } from '@/features/storage/service/storage';
-import { getFileFromRequest } from '@/lib/file';
+import { authService } from '@/features/auth/services/authService';
+import { getFileFromRequest } from '@/features/storage/lib/file';
+import { storageService } from '@/features/storage/service/storageService';
 import { formatResponse } from '@/lib/supabase/formatters';
 
 export async function POST(req: Request) {

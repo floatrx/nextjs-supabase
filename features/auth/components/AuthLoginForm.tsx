@@ -13,13 +13,13 @@ import { formVariants } from '@/components/primitives';
 import { DividerText } from '@/components/ui/DividerText';
 import { Form } from '@/components/ui/form/Form';
 import { InputPassword } from '@/components/ui/form/InputPassword';
-import { login, signup, googleLogin, githubLogin } from '@/features/auth/actions/auth';
+import { login, signup, googleLogin, githubLogin } from '@/features/auth/actions/authActions';
 
 interface IProps {
   message?: string;
 }
 
-export const LoginForm: RC<IProps> = ({ message }) => {
+export const AuthLoginForm: RC<IProps> = ({ message }) => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [isSubmitting, startTransition] = useTransition();
 

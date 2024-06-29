@@ -10,7 +10,7 @@ import { DeletePostButton } from '@/features/post/components/DeletePostButton';
 import { EditPostButton } from '@/features/post/components/EditPostButton';
 import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
 import { PostTagsList } from '@/features/post/components/PostTagsList';
-import { upperFirst, safePostExcerpt } from '@/lib/string';
+import { upperFirst, safePostExcerpt } from '@/lib/utils/string';
 
 interface IProps {
   post: TPostExtended;

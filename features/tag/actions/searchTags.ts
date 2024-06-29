@@ -1,6 +1,6 @@
 'use server';
 
-import { tagService } from '@/features/tag/services/tag';
+import { tagService } from '@/features/tag/services/tagService';
 
 /**
  * Search tags

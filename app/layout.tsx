@@ -2,7 +2,7 @@ import { Providers } from '@/components/providers/Providers';
 import { Footer } from '@/components/ui/layout/Footer';
 import { Header } from '@/components/ui/layout/Header';
 import { fontSans } from '@/config/fonts';
-import { getMetadata } from '@/lib/next';
+import { getMetadata } from '@/lib/next/metadata';
 
 // Styles
 import '@/styles/globals.css';

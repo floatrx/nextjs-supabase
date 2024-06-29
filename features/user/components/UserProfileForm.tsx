@@ -16,15 +16,15 @@ import { useForm, Controller } from 'react-hook-form';
 import { formVariants } from '@/components/primitives';
 import { Form } from '@/components/ui/form/Form';
 import { ImageUploader } from '@/components/ui/form/ImageUploader';
-import { updateProfile } from '@/features/user/actions/updateProfile';
-import { cn } from '@/lib/utils';
+import { updateUserProfile } from '@/features/user/actions/updateUserProfile';
+import { cn } from '@/lib/utils/cn';
 
 interface IProps {
   id: string;
   initialValues: Partial<Tables<'profiles'>>;
 }
 
-export const ProfileForm: RC<IProps> = ({ id, initialValues }) => {
+export const UserProfileForm: RC<IProps> = ({ id, initialValues }) => {
   const [isSubmitting, startTransition] = useTransition();
   const form = useForm({
     defaultValues: initialValues,
@@ -32,7 +32,7 @@ export const ProfileForm: RC<IProps> = ({ id, initialValues }) => {
 
   const handleSubmit = form.handleSubmit(async ({ username = '', avatar = '' }) => {
     startTransition(async () => {
-      await updateProfile(id, { username, avatar });
+      await updateUserProfile(id, { username, avatar });
       form.reset({ username }); // reset with new values...
     });
   });

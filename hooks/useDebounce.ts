@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { DEFAULT_DEBOUNCE_DELAY } from '@/config/const';
-import { debounce } from '@/lib/debounce';
+import { debounce } from '@/lib/timing/debounce';
 
 /**
  * Debounce function (hook)

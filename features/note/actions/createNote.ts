@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { noteService } from '@/features/note/services/note';
+import { noteService } from '@/features/note/services/noteService';
 
 export async function createNote(...args: Parameters<typeof noteService.create>) {
   const res = await noteService.create(...args);

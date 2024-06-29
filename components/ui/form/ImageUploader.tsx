@@ -11,7 +11,7 @@ import { forwardRef, useEffect } from 'react';
 import { Loader } from '@/components/ui/Loader';
 import { StorageImage } from '@/components/ui/StorageImage';
 import { useUploadImage } from '@/features/storage/hooks/useUploadImage';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 interface IProps {
   value: string | null | undefined;

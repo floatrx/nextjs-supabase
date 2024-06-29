@@ -4,7 +4,7 @@ import type { TPostId } from '@/types/post';
 
 import { revalidatePath } from 'next/cache';
 
-import { postService } from '@/features/post/services/post';
+import { postService } from '@/features/post/services/postService';
 
 export const deletePost = async (id: TPostId) => {
   const { error } = await postService.delete(id);

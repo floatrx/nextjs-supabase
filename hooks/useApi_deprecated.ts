@@ -8,12 +8,14 @@ interface RequestInitOptions<Payload> extends Omit<RequestInit, 'body'> {
 
 /**
  * ✨ Use API hook
+ * @deprecated
+ * TODO: Rewrite to use server-action
  * @param method - HTTP method (string)
  * @param url - API endpoint (/api/...)
  * @param tags - Cache tags[]
  * @param init - RequestInit options (compatible with fetch)
  */
-export const useApi = <Payload, Result = null>(
+export const useApi_deprecated = <Payload, Result = null>(
   method: string = 'get',
   url: string,
   { tags, ...init }: RequestInitOptions<Payload> = {},

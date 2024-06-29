@@ -8,8 +8,8 @@ import { DeletePostButton } from '@/features/post/components/DeletePostButton';
 import { EditPostButton } from '@/features/post/components/EditPostButton';
 import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
 import { PostTagsList } from '@/features/post/components/PostTagsList';
-import { postService } from '@/features/post/services/post';
-import { upperFirst } from '@/lib/string';
+import { postService } from '@/features/post/services/postService';
+import { upperFirst } from '@/lib/utils/string';
 
 export default async function PostSinglePage({ params }: PageProps<{ slug: string }>) {
   const { slug } = params;

@@ -2,8 +2,8 @@ import { Page } from '@/components/ui/layout/Page';
 import { AddTagForm } from '@/features/tag/components/AddTagForm';
 import { DeleteTagButton } from '@/features/tag/components/DeleteTagButton';
 import { TagItem } from '@/features/tag/components/TagItem';
-import { tagService } from '@/features/tag/services/tag';
-import { getMetadata } from '@/lib/next';
+import { tagService } from '@/features/tag/services/tagService';
+import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Tags');
 
