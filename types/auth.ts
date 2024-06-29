@@ -7,3 +7,5 @@ export enum EAuthServiceViaEmailAction {
   SignIn = 'signInWithPassword',
   SignUp = 'signUp',
 }
+
+export type TAuthResponse = { message?: string; error?: string };

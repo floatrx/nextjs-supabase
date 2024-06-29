@@ -1,10 +1,13 @@
 'use client';
 
+import type { TAuthResponse } from '@/types/auth';
+
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
 import { Spinner } from '@nextui-org/spinner';
 import { LogIn, UserPlus, Mail, Lock } from 'lucide-react';
 import { useTransition, useRef } from 'react';
+import { toast } from 'sonner';
 
 import { Logo } from '@/components/icons';
 import { GitHubIcon } from '@/components/icons/GithubIcon';
@@ -29,9 +32,20 @@ export const AuthLoginForm: RC<IProps> = ({ message }) => {
   };
 
   // With transition wrapper allows tracking the transition pending state
-  const withTransition = (fn: AnyFn) => () => {
+  const withTransition = (fn: AnyFormAction<TAuthResponse>) => () => {
     startTransition(async () => {
-      await fn(new FormData(formRef.current!));
+      try {
+        const res = await fn(new FormData(formRef.current!));
+
+        // Login failed
+        if (!res || res?.error) {
+          throw new Error(res?.error ?? 'Login failed');
+        }
+
+        toast.success(res.message);
+      } catch (e) {
+        toast.error(e.message);
+      }
     });
   };
 

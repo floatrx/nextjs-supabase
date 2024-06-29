@@ -8,21 +8,15 @@ import { redirect } from 'next/navigation';
 import { baseUrl } from '@/config';
 import { authService } from '@/features/auth/services/authService';
 import { EmailLoginSchema } from '@/features/auth/validators/emailLoginSchema';
-import { EAuthServiceViaEmailAction, type TAuthCredentials } from '@/types/auth';
+import { parseFormData } from '@/lib/utils/parseFormData';
+import { EAuthServiceViaEmailAction, type TAuthResponse } from '@/types/auth';
 
 // Login with email
-const authBase = async (action: EAuthServiceViaEmailAction, formData: FormData) => {
-  const credentials = Object.fromEntries(formData) as TAuthCredentials;
+const authBase = async (action: EAuthServiceViaEmailAction, formData: FormData): Promise<TAuthResponse> => {
+  const credentials = parseFormData(formData, EmailLoginSchema);
 
-  try {
-    // Validate the credentials object
-    const isValidCredentials = EmailLoginSchema.parse(credentials);
-
-    if (!isValidCredentials) {
-      throw new Error('Invalid credentials');
-    }
-  } catch (e) {
-    return { error: e.message };
+  if (!credentials) {
+    return { error: 'Invalid data provided' };
   }
 
   const { error } = await authService.viaEmail(action, credentials);
@@ -32,10 +26,12 @@ const authBase = async (action: EAuthServiceViaEmailAction, formData: FormData) 
   }
 
   if (action === 'signUp') {
-    return { success: true, message: 'Check your email for a verification link' };
+    return { message: 'Check your email for a verification link' };
   }
 
   revalidatePath('/', 'layout');
+
+  return { message: 'Logged in successfully' };
 };
 
 export const login = async (formData: FormData) => authBase(EAuthServiceViaEmailAction.SignIn, formData);
@@ -54,7 +50,7 @@ const oauthBase = async ({ options, ...credentials }: SignInWithOAuthCredentials
   if (error) {
     console.error(`${credentials.provider} login failed`);
 
-    return;
+    return { error: 'Login failed' };
   }
 
   // Proceed to the URL provided by the OAuth provider

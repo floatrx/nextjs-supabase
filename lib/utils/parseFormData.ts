@@ -5,13 +5,13 @@ import { ZodSchema, z } from 'zod';
  * @param formData - FormData
  * @param schema - Zod validation schema
  */
-export const parseFormData = (formData: FormData, schema: ZodSchema) => {
+export const parseFormData = <T extends ZodSchema<any>>(formData: FormData, schema: T) => {
   const data = Object.fromEntries(formData);
   const result = schema.safeParse(data);
 
   if (!result.success) {
-    throw new Error('Validation failed');
+    return null;
   }
 
-  return result.data as z.infer<typeof schema>;
+  return result.data as z.infer<T>;
 };
