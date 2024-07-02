@@ -21,7 +21,7 @@ export const noteService = {
       return { error };
     }
 
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('notes').insert(data).select().single();
   },
@@ -30,7 +30,7 @@ export const noteService = {
    * Search notes
    */
   async search() {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('notes').select().order('id', { ascending: false });
   },
@@ -40,7 +40,7 @@ export const noteService = {
    * @param id
    */
   async remove(id: TNote['id']) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('notes').delete().eq('id', id);
   },

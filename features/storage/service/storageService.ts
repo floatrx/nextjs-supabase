@@ -10,7 +10,7 @@ export const storageService = {
   async upload(file: File, path: string = 'public') {
     const { filename, buffer } = await prepareFileForUpload(file);
 
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.storage.from(SUPABASE_DEFAULT_BUCKET).upload(`${path}/${filename}`, buffer, {
       contentType: file.type,

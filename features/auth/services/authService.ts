@@ -18,7 +18,7 @@ export const authService = {
    * @param {SignInWithOAuthCredentials} credentials - The OAuth credentials
    */
   async signInWithOAuth(credentials: SignInWithOAuthCredentials) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.auth.signInWithOAuth(credentials);
   },
@@ -29,7 +29,7 @@ export const authService = {
    * @param {TAuthCredentials} credentials - The user's credentials
    */
   async viaEmail(action: EAuthServiceViaEmailAction, credentials: TAuthCredentials) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.auth[action](credentials);
   },
@@ -39,7 +39,7 @@ export const authService = {
    * @param {string} code - The code to exchange
    */
   async exchangeCode(code: string) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.auth.exchangeCodeForSession(code);
   },
@@ -49,7 +49,7 @@ export const authService = {
    * @param {VerifyOtpParams} params - The OTP parameters
    */
   async verifyOtp(params: VerifyOtpParams) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.auth.verifyOtp(params);
   },
@@ -58,7 +58,7 @@ export const authService = {
    * Get user
    */
   async getUser() {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.auth.getUser().then(async ({ data }) => data.user);
   },
@@ -67,7 +67,7 @@ export const authService = {
    * Get user
    */
   async getProfile() {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.auth.getUser().then(async ({ data }) => {
       if (!data.user) return null;
@@ -83,7 +83,7 @@ export const authService = {
    * Sign out
    */
   async signOut() {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.auth.signOut();
   },

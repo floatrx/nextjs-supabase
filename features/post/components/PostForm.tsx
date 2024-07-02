@@ -37,7 +37,6 @@ export interface IPostFormProps {
  */
 export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onSubmit, loading = true }) => {
   const {
-    register,
     control,
     formState: { errors, isDirty, dirtyFields },
     ...form

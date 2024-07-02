@@ -1,12 +1,12 @@
 import type { TPostCreate, PostSearchParams, TPostUpdate, TPostId } from '@/types/post';
 import type { TTagId } from '@/types/tag';
 
+import { PostCreateSchema } from '@/features/post/validators/postCreateSchema';
 import { PostIDSchema } from '@/features/post/validators/postIDSchema';
+import { PostSearchSchema } from '@/features/post/validators/postSearchSchema';
+import { PostUpdateSchema } from '@/features/post/validators/postUpdateSchema';
 import { formatResultWithPagesCount } from '@/lib/supabase/formatters';
 import { createServerClient } from '@/lib/supabase/server';
-import { PostCreateSchema } from '@/features/post/validators/postCreateSchema';
-import { PostUpdateSchema } from '@/features/post/validators/postUpdateSchema';
-import { PostSearchSchema } from '@/features/post/validators/postSearchSchema';
 
 /**
  * Post service
@@ -23,7 +23,7 @@ export const postService = {
    * @param payload
    */
   async create(payload: TPostCreate) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
     const { error, data } = PostCreateSchema.safeParse(payload);
 
     if (error) {
@@ -43,7 +43,7 @@ export const postService = {
   async search({ title, page = 1, limit = 8 }: PostSearchParams = {}) {
     console.log('title', { page, limit });
 
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
     const parsed = PostSearchSchema.safeParse({ title });
 
     let query = supabase.from('posts').select(
@@ -76,7 +76,7 @@ export const postService = {
    * @param value
    */
   async get(column: 'id' | 'slug', value: string) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase
       .from('posts')
@@ -124,7 +124,7 @@ export const postService = {
       return { error };
     }
 
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('posts').update(data).eq('id', id).select().single();
   },
@@ -134,7 +134,7 @@ export const postService = {
    * @param id
    */
   async delete(id: TPostId) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('posts').delete().eq('id', id);
   },
@@ -145,7 +145,7 @@ export const postService = {
    * @param tagId
    */
   async addTag(postId: TPostId, tagId: TTagId) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('post_tags').insert({ post_id: postId, tag_id: tagId });
   },
@@ -156,7 +156,7 @@ export const postService = {
    * @param tagId
    */
   async removeTag(postId: TPostId, tagId: TTagId) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('post_tags').delete().eq('post_id', postId).eq('tag_id', tagId);
   },

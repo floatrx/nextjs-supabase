@@ -1,5 +1,3 @@
-'use client';
-
 import type { TNote } from '@/types/note';
 
 import { DeleteNoteButton } from '@/features/note/components/DeleteNoteButton';

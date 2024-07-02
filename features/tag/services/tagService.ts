@@ -21,7 +21,7 @@ export const tagService = {
       return { error };
     }
 
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('tags').insert(data).select().single();
   },
@@ -30,7 +30,7 @@ export const tagService = {
    * Search tags
    */
   async search() {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('tags').select().order('id', { ascending: false });
   },
@@ -40,7 +40,7 @@ export const tagService = {
    * @param id
    */
   async remove(id: TTagId) {
-    const supabase = await createServerClient();
+    const supabase = createServerClient();
 
     return supabase.from('tags').delete().eq('id', id);
   },
