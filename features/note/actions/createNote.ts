@@ -2,14 +2,10 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { noteService } from '@/features/note/services/noteService';
+import { NoteCreateSchema } from '@/features/note/actions/validators/noteCreateSchema';
+import { authedProcedure } from '@/lib/zsa/authedProcedure';
 
-export async function createNote(...args: Parameters<typeof noteService.create>) {
-  const res = await noteService.create(...args);
-
-  if (res.error) return;
-
-  revalidatePath('/notes');
-
-  return res;
-}
+export const createNote = authedProcedure
+  .input(NoteCreateSchema)
+  .onSuccess(() => revalidatePath('/notes'))
+  .handler(async ({ ctx, input }) => ctx.supabase.from('notes').insert(input).select().single());

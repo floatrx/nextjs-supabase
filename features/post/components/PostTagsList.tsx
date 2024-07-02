@@ -29,7 +29,7 @@ export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, 
             actions={
               interactive && (
                 <OnlyAuth idUser={author?.id}>
-                  <RemovePostTag className="-mr-2" idPost={post.id} idTag={tag.id} />
+                  <RemovePostTag className="-mr-2" postId={post.id} tagId={tag.id} />
                 </OnlyAuth>
               )
             }

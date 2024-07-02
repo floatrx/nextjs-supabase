@@ -1,15 +1,13 @@
 'use server';
 
-import type { TPostId } from '@/types/post';
+import { z } from 'zod';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePosts } from '@/features/post/actions/revalidatePosts';
+import { authedProcedure } from '@/lib/zsa/authedProcedure';
 
-import { postService } from '@/features/post/services/postService';
-
-export const deletePost = async (id: TPostId) => {
-  const { error } = await postService.delete(id);
-
-  if (error) return;
-
-  revalidatePath('/');
-};
+export const deletePost = authedProcedure
+  .input(z.number())
+  .onComplete(revalidatePosts)
+  .handler(({ ctx, input }) => {
+    return ctx.supabase.from('posts').delete().eq('id', input);
+  });

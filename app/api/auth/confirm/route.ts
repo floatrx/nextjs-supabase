@@ -1,7 +1,7 @@
 import { type EmailOtpType } from '@supabase/supabase-js';
 import { type NextRequest, NextResponse } from 'next/server';
 
-import { authService } from '@/features/auth/services/authService';
+import { verifyOTP } from '@/features/auth/actions/verifyOTP';
 
 /**
  * Confirm the email OTP and redirect the user to the next page
@@ -21,9 +21,9 @@ export async function GET(request: NextRequest) {
   redirectTo.searchParams.delete('type');
 
   if (token_hash && type) {
-    const { error } = await authService.verifyOtp({ type, token_hash });
+    const [data] = await verifyOTP({ type, token_hash });
 
-    if (!error) {
+    if (!data?.error) {
       redirectTo.searchParams.delete('next');
 
       return NextResponse.redirect(redirectTo);

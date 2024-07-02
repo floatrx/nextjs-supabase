@@ -1,10 +1,10 @@
-import { authService } from '@/features/auth/services/authService';
+import { getUser } from '@/features/auth/actions/getUser';
 import { getFileFromRequest } from '@/features/storage/lib/file';
 import { storageService } from '@/features/storage/service/storageService';
 import { formatResponse } from '@/lib/supabase/formatters';
 
 export async function POST(req: Request) {
-  const user = authService.getUser();
+  const [user] = await getUser();
 
   if (!user) {
     return formatResponse('Unauthorized', 401);

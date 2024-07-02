@@ -9,8 +9,8 @@ import { useForm, Controller, useWatch } from 'react-hook-form';
 
 import { Editor } from '@/components/ui/editor/Editor';
 import { ImageUploader } from '@/components/ui/form/ImageUploader';
+import { PostCreateSchema } from '@/features/post/actions/validators/postCreateSchema';
 import { createSlug } from '@/features/post/lib/createSlug';
-import { PostCreateSchema } from '@/features/post/validators/postCreateSchema';
 import { cn } from '@/lib/utils/cn';
 
 interface FormValues {

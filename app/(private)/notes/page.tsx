@@ -3,15 +3,19 @@
  */
 
 import { Page } from '@/components/ui/layout/Page';
+import { searchNotes } from '@/features/note/actions/searchNotes';
 import { AddNoteForm } from '@/features/note/components/AddNoteForm';
 import { NoteItem } from '@/features/note/components/NoteItem';
-import { noteService } from '@/features/note/services/noteService';
 import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Notes');
 
 export default async function NotesSinglePage() {
-  const { data: notes } = await noteService.search();
+  const [notes, error] = await searchNotes();
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <Page count={notes?.length} meta={metadata}>

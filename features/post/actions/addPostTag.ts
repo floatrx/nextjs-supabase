@@ -1,13 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePosts } from '@/features/post/actions/revalidatePosts';
+import { AddPostTagSchema } from '@/features/post/actions/validators/addPostTagSchema';
+import { baseProcedure } from '@/lib/zsa/baseProcedure';
 
-import { postService } from '@/features/post/services/postService';
-
-export const addPostTag = async (...args: Parameters<typeof postService.addTag>) => {
-  const { error } = await postService.addTag(...args);
-
-  if (error) return;
-
-  revalidatePath('/');
-};
+export const addPostTag = baseProcedure
+  .input(AddPostTagSchema)
+  .onSuccess(revalidatePosts)
+  .handler(async ({ ctx, input }) => {
+    return ctx.supabase.from('post_tags').insert({ post_id: input.postId, tag_id: input.tagId });
+  });

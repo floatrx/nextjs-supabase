@@ -9,7 +9,7 @@ import { mutate } from 'swr';
 
 import { Form } from '@/components/ui/form/Form';
 import { createTag } from '@/features/tag/actions/createTag';
-import { TagCreateSchema } from '@/features/tag/validators/tagCreateSchema';
+import { TagCreateSchema } from '@/features/tag/actions/validators/tagCreateSchema';
 import { useServerAction } from '@/hooks/useServerAction';
 import { cn } from '@/lib/utils/cn';
 

@@ -1,4 +1,5 @@
-import 'server-only';
+'use server';
+
 import type { Database } from '@/types/supabase';
 
 import { type CookieOptions, createServerClient as create } from '@supabase/ssr';
@@ -11,7 +12,7 @@ import { SUPABASE_KEY, SUPABASE_URL } from '@/config/const';
  *  a Supabase client for server-side rendering.
  * @see https://supabase.com/docs/guides/auth/server-side/nextjs
  */
-export const createServerClient = () => {
+export const createServerClient = async () => {
   const cookieStore = cookies();
 
   return create<Database>(SUPABASE_URL, SUPABASE_KEY, {

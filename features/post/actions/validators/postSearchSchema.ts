@@ -1,4 +1,4 @@
-import { PostCreateSchema } from '@/features/post/validators/postCreateSchema';
+import { PostCreateSchema } from '@/features/post/actions/validators/postCreateSchema';
 
 /**
  * Schema for searching posts

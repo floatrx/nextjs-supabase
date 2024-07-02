@@ -1,15 +1,12 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePosts } from '@/features/post/actions/revalidatePosts';
+import { PostCreateSchema } from '@/features/post/actions/validators/postCreateSchema';
+import { baseProcedure } from '@/lib/zsa/baseProcedure';
 
-import { postService } from '@/features/post/services/postService';
-
-export const createPost = async (...args: Parameters<typeof postService.create>) => {
-  const res = await postService.create(...args);
-
-  if (res.error) return;
-
-  revalidatePath('/');
-
-  return res;
-};
+export const createPost = baseProcedure
+  .input(PostCreateSchema)
+  .onSuccess(revalidatePosts)
+  .handler(async ({ ctx, input }) => {
+    return ctx.supabase.from('posts').insert(input).select().single();
+  });

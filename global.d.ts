@@ -9,7 +9,7 @@ declare global {
   // Any function
   export type AnyFn<RT = any> = (...args: any[]) => RT;
   // Form action
-  export type AnyFormAction<RT = any> = (formData: FormData) => Promise<RT>;
+  export type AnyFormAction<RT = any> = (formData: FormData) => romise<[RT, null]>;
   // React fn component with children
   type FC<T = object> = React.FunctionComponent<React.PropsWithChildren<T>>;
   // React fn component without children

@@ -1,7 +1,5 @@
 'use client';
 
-import type { TAuthResponse } from '@/types/auth';
-
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
 import { Spinner } from '@nextui-org/spinner';
@@ -16,7 +14,8 @@ import { formVariants } from '@/components/primitives';
 import { DividerText } from '@/components/ui/DividerText';
 import { Form } from '@/components/ui/form/Form';
 import { InputPassword } from '@/components/ui/form/InputPassword';
-import { login, signup, googleLogin, githubLogin } from '@/features/auth/actions/authActions';
+import { login, signup, type AuthActionFn } from '@/features/auth/actions/baseAuth';
+import { githubLogin, googleLogin } from '@/features/auth/actions/baseOAuth';
 
 interface IProps {
   message?: string;
@@ -32,17 +31,15 @@ export const AuthLoginForm: RC<IProps> = ({ message }) => {
   };
 
   // With transition wrapper allows tracking the transition pending state
-  const withTransition = (fn: AnyFormAction<TAuthResponse>) => () => {
+  const withTransition = (fn: AuthActionFn) => () => {
     startTransition(async () => {
       try {
-        const res = await fn(new FormData(formRef.current!));
+        const [, err] = (await fn(new FormData(formRef.current!))) ?? []; // next.js redirects from sa -> returns undefined, so we use empty array as fallback
 
-        // Login failed
-        if (!res || res?.error) {
-          throw new Error(res?.error ?? 'Login failed');
+        if (err) {
+          throw new Error(err.message); // coz: fn is safe async function
         }
-
-        toast.success(res.message);
+        toast.success('Login successful');
       } catch (e) {
         toast.error(e.message);
       }

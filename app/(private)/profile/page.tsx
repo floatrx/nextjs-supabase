@@ -1,9 +1,9 @@
 import { Page } from '@/components/ui/layout/Page';
-import { authService } from '@/features/auth/services/authService';
+import { getProfile } from '@/features/auth/actions/getProfile';
 import { UserProfileForm } from '@/features/user/components/UserProfileForm';
 
 export default async function ProfilePage() {
-  const user = await authService.getProfile();
+  const [user] = await getProfile();
 
   if (!user) return null;
 

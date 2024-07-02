@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
-import { authService } from '@/features/auth/services/authService';
+import { exchangeCode } from '@/features/auth/actions/exchangeCode';
 
 /**
  * `auth/callback` route - handles the callback from the OAuth providers
@@ -17,15 +17,11 @@ export async function GET(request: Request) {
   const next = searchParams.get('next') ?? '/';
 
   if (code) {
-    console.log('code:', code);
-    const { error } = await authService.exchangeCode(code);
-
-    // revalidate the cache
-    console.log('revalidating path:', '/');
+    const [res] = await exchangeCode(code);
 
     revalidatePath('/', 'layout');
 
-    if (!error) {
+    if (!res?.error) {
       return NextResponse.redirect(`${origin}${next}`);
     }
   }

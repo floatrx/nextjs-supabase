@@ -1,38 +1,18 @@
-import type { TPostCreate, PostSearchParams, TPostUpdate, TPostId } from '@/types/post';
-import type { TTagId } from '@/types/tag';
+import type { PostSearchParams, TPostId } from '@/types/post';
 
-import { PostCreateSchema } from '@/features/post/validators/postCreateSchema';
-import { PostIDSchema } from '@/features/post/validators/postIDSchema';
-import { PostSearchSchema } from '@/features/post/validators/postSearchSchema';
-import { PostUpdateSchema } from '@/features/post/validators/postUpdateSchema';
+import { PostIDSchema } from '@/features/post/actions/validators/postIDSchema';
+import { PostSearchSchema } from '@/features/post/actions/validators/postSearchSchema';
 import { formatResultWithPagesCount } from '@/lib/supabase/formatters';
 import { createServerClient } from '@/lib/supabase/server';
 
 /**
  * Post service
- * - Create
  * - Search
  * - Get by ID
  * - Get by slug
- * - Update
- * - Delete
  */
+
 export const postService = {
-  /**
-   * Create a new post
-   * @param payload
-   */
-  async create(payload: TPostCreate) {
-    const supabase = createServerClient();
-    const { error, data } = PostCreateSchema.safeParse(payload);
-
-    if (error) {
-      return { error };
-    }
-
-    return supabase.from('posts').insert(data).select().single();
-  },
-
   /**
    * Search posts
    * TODO: Move defaults (page, limit) to a constants
@@ -41,9 +21,7 @@ export const postService = {
    * @param limit - Number of items per page (default: 8)
    */
   async search({ title, page = 1, limit = 8 }: PostSearchParams = {}) {
-    console.log('title', { page, limit });
-
-    const supabase = createServerClient();
+    const supabase = await createServerClient();
     const parsed = PostSearchSchema.safeParse({ title });
 
     let query = supabase.from('posts').select(
@@ -76,7 +54,7 @@ export const postService = {
    * @param value
    */
   async get(column: 'id' | 'slug', value: string) {
-    const supabase = createServerClient();
+    const supabase = await createServerClient();
 
     return supabase
       .from('posts')
@@ -110,54 +88,5 @@ export const postService = {
    */
   async getBySlug(slug: string = '') {
     return this.get('slug', slug);
-  },
-
-  /**
-   * Update a post from payload
-   * @param id - Post ID
-   * @param payload - changes
-   */
-  async update(id: TPostId, payload: TPostUpdate) {
-    const { error, data } = PostUpdateSchema.safeParse(payload);
-
-    if (error) {
-      return { error };
-    }
-
-    const supabase = createServerClient();
-
-    return supabase.from('posts').update(data).eq('id', id).select().single();
-  },
-
-  /**
-   * Delete a post by ID
-   * @param id
-   */
-  async delete(id: TPostId) {
-    const supabase = createServerClient();
-
-    return supabase.from('posts').delete().eq('id', id);
-  },
-
-  /**
-   * Add a tag to a post
-   * @param postId
-   * @param tagId
-   */
-  async addTag(postId: TPostId, tagId: TTagId) {
-    const supabase = createServerClient();
-
-    return supabase.from('post_tags').insert({ post_id: postId, tag_id: tagId });
-  },
-
-  /**
-   * Remove a tag from a post
-   * @param postId
-   * @param tagId
-   */
-  async removeTag(postId: TPostId, tagId: TTagId) {
-    const supabase = createServerClient();
-
-    return supabase.from('post_tags').delete().eq('post_id', postId).eq('tag_id', tagId);
   },
 };

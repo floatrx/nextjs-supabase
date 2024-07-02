@@ -3,12 +3,12 @@ import { LogIn, LogOut } from 'lucide-react';
 import Link from 'next/link';
 
 import { Submit } from '@/components/ui/form/Submit';
-import { signOut } from '@/features/auth/actions/authActions';
-import { authService } from '@/features/auth/services/authService';
+import { getProfile } from '@/features/auth/actions/getProfile';
+import { signOut } from '@/features/auth/actions/signOut';
 import { UserAvatar } from '@/features/user/components/UserAvatar';
 
 export const AuthButton = async () => {
-  const user = await authService.getProfile();
+  const [user] = await getProfile();
 
   return user ? (
     <div className="flex items-center gap-2">

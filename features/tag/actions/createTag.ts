@@ -2,10 +2,9 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { noteService } from '@/features/note/services/noteService';
 import { tagService } from '@/features/tag/services/tagService';
 
-export async function createTag(...args: Parameters<typeof noteService.create>) {
+export async function createTag(...args: Parameters<typeof tagService.create>) {
   const res = await tagService.create(...args);
 
   if (res.error) return;

@@ -1,6 +1,6 @@
 'use server';
 
-import { authService } from '@/features/auth/services/authService';
+import { getUser } from '@/features/auth/actions/getUser';
 
 interface IProps {
   idUser?: string;
@@ -15,7 +15,7 @@ interface IProps {
  * @constructor
  */
 export const OnlyAuth: FC<IProps> = async ({ children, when = true, idUser }) => {
-  const user = await authService.getUser();
+  const [user] = await getUser();
 
   // Check auth
   if (!user) return null;

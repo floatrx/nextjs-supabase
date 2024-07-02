@@ -1,6 +1,9 @@
+/**
+ * TODO: Refactor to ZSA and remove it!
+ */
 import type { TTagId } from '@/types/tag';
 
-import { TagCreateSchema } from '@/features/tag/validators/tagCreateSchema';
+import { TagCreateSchema } from '@/features/tag/actions/validators/tagCreateSchema';
 import { createServerClient } from '@/lib/supabase/server';
 
 /**
@@ -21,7 +24,7 @@ export const tagService = {
       return { error };
     }
 
-    const supabase = createServerClient();
+    const supabase = await createServerClient();
 
     return supabase.from('tags').insert(data).select().single();
   },
@@ -30,7 +33,7 @@ export const tagService = {
    * Search tags
    */
   async search() {
-    const supabase = createServerClient();
+    const supabase = await createServerClient();
 
     return supabase.from('tags').select().order('id', { ascending: false });
   },
@@ -40,7 +43,7 @@ export const tagService = {
    * @param id
    */
   async remove(id: TTagId) {
-    const supabase = createServerClient();
+    const supabase = await createServerClient();
 
     return supabase.from('tags').delete().eq('id', id);
   },

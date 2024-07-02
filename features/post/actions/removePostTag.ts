@@ -2,12 +2,12 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { postService } from '@/features/post/services/postService';
+import { RemovePostTagSchema } from '@/features/post/actions/validators/removePostTagSchema';
+import { authedProcedure } from '@/lib/zsa/authedProcedure';
 
-export const removePostTag = async (...args: Parameters<typeof postService.removeTag>) => {
-  const { error } = await postService.removeTag(...args);
-
-  if (error) return;
-
-  revalidatePath('/');
-};
+export const removePostTag = authedProcedure
+  .input(RemovePostTagSchema)
+  .onComplete(() => revalidatePath('/'))
+  .handler(({ ctx, input }) => {
+    return ctx.supabase.from('post_tags').delete().eq('post_id', input.postId).eq('tag_id', input.tagId);
+  });
