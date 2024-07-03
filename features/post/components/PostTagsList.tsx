@@ -20,7 +20,7 @@ export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, 
   const tagIds = tags.map((tag) => tag.id);
 
   return (
-    <div className={cn('flex flex-wrap', wrapperClassName)}>
+    <div className={cn('flex flex-wrap gap-2', wrapperClassName)}>
       {tags.length === 0 && interactive && <span className="stack text-muted-foreground">Add post tags</span>}
       {tags.map((tag) => (
         // TODO: Tags could be non-interactive

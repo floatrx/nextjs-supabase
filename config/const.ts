@@ -11,3 +11,5 @@ export const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 export const DEFAULT_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000';
 export const DEFAULT_DEBOUNCE_DELAY = 300; // milliseconds
 export const TITLE_SEPARATOR = '•';
+
+export const POST_PER_PAGE = 4;

@@ -11,8 +11,9 @@ import { EAuthServiceViaEmailAction } from '@/types/auth';
 export type AuthActionFn = typeof login | typeof signup | typeof googleLogin | typeof githubLogin;
 
 /**
- * Base OAuth procedure for Google and GitHub login
+ * Base OAuth procedure for `Google` and `GitHub` login actions
  * @param action - Auth action (login or signup)
+ * @see https://supabase.com/docs/guides/auth/passwords
  */
 const baseAuthProcedure = (action: EAuthServiceViaEmailAction) => {
   return baseProcedure
@@ -24,10 +25,19 @@ const baseAuthProcedure = (action: EAuthServiceViaEmailAction) => {
 
       // Expose error
       if (error) {
-        throw new Error(error.message);
+        throw error.message;
       }
     });
 };
 
+/**
+ * Email login
+ * @tag server-action
+ */
 export const login = baseAuthProcedure(EAuthServiceViaEmailAction.SignIn);
+
+/**
+ * Email signup
+ * @tag server-action
+ */
 export const signup = baseAuthProcedure(EAuthServiceViaEmailAction.SignUp);

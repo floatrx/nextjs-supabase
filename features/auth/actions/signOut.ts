@@ -6,6 +6,10 @@ import { z } from 'zod';
 
 import { authedProcedure } from '@/lib/zsa/authedProcedure';
 
+/**
+ * Sign out
+ * @tag server-action
+ */
 export const signOut = authedProcedure
   .input(z.any(), { type: 'formData' })
   .onSuccess(() => revalidatePath('/', 'layout'))

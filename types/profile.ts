@@ -1,4 +1,7 @@
 import type { Tables, TablesUpdate } from '@/types/supabase';
+import type { User } from '@supabase/auth-js/src/lib/types';
+
+export type TUser = User;
 
 export type TProfile = Tables<'profiles'>;
 

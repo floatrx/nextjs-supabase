@@ -4,6 +4,13 @@ import { revalidatePosts } from '@/features/post/actions/revalidatePosts';
 import { AddPostTagSchema } from '@/features/post/actions/validators/addPostTagSchema';
 import { baseProcedure } from '@/lib/zsa/baseProcedure';
 
+/**
+ * Add tag to post
+ * @tag server-action
+ * @param postId - Post ID
+ * @param tagId - Tag ID
+ * @returns Supabase response
+ */
 export const addPostTag = baseProcedure
   .input(AddPostTagSchema)
   .onSuccess(revalidatePosts)

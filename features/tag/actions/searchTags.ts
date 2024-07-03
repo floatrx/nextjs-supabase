@@ -1,6 +1,6 @@
 'use server';
 
-import { tagService } from '@/features/tag/services/tagService';
+import { tagService_deprecated } from '@/features/tag/services/tagService_deprecated';
 
 /**
  * Search tags
@@ -17,5 +17,5 @@ import { tagService } from '@/features/tag/services/tagService';
  * };
  */
 export async function searchTags() {
-  return tagService.search();
+  return tagService_deprecated.search();
 }

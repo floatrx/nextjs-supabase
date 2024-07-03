@@ -17,9 +17,3 @@ export type TPostExtended = TPost & {
 export type TPostCreate = TablesInsert<'posts'>;
 
 export type TPostUpdate = TablesUpdate<'posts'>;
-
-export interface PostSearchParams {
-  title?: string | null;
-  page?: number;
-  limit?: number;
-}

@@ -8,12 +8,12 @@ import { DeletePostButton } from '@/features/post/components/DeletePostButton';
 import { EditPostButton } from '@/features/post/components/EditPostButton';
 import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
 import { PostTagsList } from '@/features/post/components/PostTagsList';
-import { postService } from '@/features/post/services/postService';
+import { postService_deprecated } from '@/features/post/services/postService_deprecated';
 import { upperFirst } from '@/lib/utils/upperFirst';
 
 export default async function PostSinglePage({ params }: PageProps<{ slug: string }>) {
   const { slug } = params;
-  const { error, data: post } = await postService.getBySlug(slug);
+  const { error, data: post } = await postService_deprecated.getBySlug(slug);
 
   if (error) {
     return <p>{error.message}</p>;

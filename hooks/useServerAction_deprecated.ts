@@ -5,6 +5,8 @@ type AsyncFn = (...args: any) => Promise<any>;
 /**
  * Use this hook to execute server actions in the client side
  * It will handle loading, error and data states...
+ * TODO: Refactor to zsa -> useServerAction
+ * @deprecated
  * @param action
  * @example
  *    export const DeleteButton = ({id}) => {
@@ -14,7 +16,7 @@ type AsyncFn = (...args: any) => Promise<any>;
  *      );
  *    };
  */
-export const useServerAction = <T extends AsyncFn>(action: T) => {
+export const useServerAction_deprecated = <T extends AsyncFn>(action: T) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [response, setResponse] = useState<Awaited<ReturnType<T>> | null>(null);

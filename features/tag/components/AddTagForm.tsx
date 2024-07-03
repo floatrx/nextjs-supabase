@@ -10,7 +10,7 @@ import { mutate } from 'swr';
 import { Form } from '@/components/ui/form/Form';
 import { createTag } from '@/features/tag/actions/createTag';
 import { TagCreateSchema } from '@/features/tag/actions/validators/tagCreateSchema';
-import { useServerAction } from '@/hooks/useServerAction';
+import { useServerAction_deprecated } from '@/hooks/useServerAction_deprecated';
 import { cn } from '@/lib/utils/cn';
 
 export const AddTagForm = () => {
@@ -21,7 +21,7 @@ export const AddTagForm = () => {
     defaultValues: { name: '' },
     resolver: zodResolver(TagCreateSchema),
   });
-  const { loading, execute } = useServerAction(createTag);
+  const { loading, execute } = useServerAction_deprecated(createTag);
 
   const handleSubmit = form.handleSubmit(async ({ name }) => {
     if (loading) return;

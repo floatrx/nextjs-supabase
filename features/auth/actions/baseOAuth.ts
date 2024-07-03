@@ -11,8 +11,9 @@ import { baseProcedure } from '@/lib/zsa/baseProcedure';
 
 /**
  * Base OAuth procedure for Google and GitHub login
- * @param options - OAuth options
- * @param credentials - OAuth credentials
+ * @param options - OAuth options (scopes etc.)
+ * @param credentials - OAuth credentials (provider)
+ * @see https://supabase.com/docs/reference/javascript/auth-signinwithoauth
  */
 const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredentials) => {
   return baseProcedure
@@ -30,7 +31,7 @@ const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredenti
 
       // Expose error
       if (error) {
-        throw new Error(error.message);
+        throw error.message;
       }
 
       // Proceed to the URL provided by the OAuth provider
@@ -38,6 +39,10 @@ const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredenti
     });
 };
 
+/**
+ * Google login
+ * @tag server-action
+ */
 export const googleLogin = baseOAuthProcedure({
   provider: 'google',
   options: {
@@ -45,6 +50,10 @@ export const googleLogin = baseOAuthProcedure({
   },
 });
 
+/**
+ * GitHub login
+ * @tag server-action
+ */
 export const githubLogin = baseOAuthProcedure({
   provider: 'github',
 });

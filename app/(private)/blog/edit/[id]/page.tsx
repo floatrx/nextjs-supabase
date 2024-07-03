@@ -2,7 +2,7 @@ import type { TPost } from '@/types/post';
 
 import { Page } from '@/components/ui/layout/Page';
 import { EditPostForm } from '@/features/post/components/EditPostForm';
-import { postService } from '@/features/post/services/postService';
+import { postService_deprecated } from '@/features/post/services/postService_deprecated';
 import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Edit post');
@@ -15,7 +15,7 @@ export default async function EditPost({ params }: PageProps<Pick<TPost, 'id'>>)
   }
 
   // Query post by id
-  const { data: post } = await postService.getById(id);
+  const { data: post } = await postService_deprecated.getById(id);
 
   return (
     <Page meta={metadata}>{post ? <EditPostForm id={id} initialValues={post} /> : <p>Post ${id} not found!</p>}</Page>

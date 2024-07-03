@@ -8,11 +8,12 @@ import { createServerClient } from '@/lib/supabase/server';
 
 /**
  * Tag service
+ * @deprecated
  * - Create
  * - Search
  * - Remove
  */
-export const tagService = {
+export const tagService_deprecated = {
   /**
    * Create a new tag
    * @param name

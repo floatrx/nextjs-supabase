@@ -1,4 +1,4 @@
-import { createServerActionProcedure } from 'zsa';
+import { createServerActionProcedure, ZSAError } from 'zsa';
 
 import { createServerClient } from '@/lib/supabase/server';
 
@@ -11,7 +11,7 @@ export const authedProcedure = createServerActionProcedure()
 
       return { user, supabase };
     } catch (e) {
-      throw new Error('Not authorized');
+      throw new ZSAError('NOT_AUTHORIZED', 'You are not authorized to perform this action');
     }
   })
   .createServerAction();

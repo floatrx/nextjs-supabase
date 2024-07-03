@@ -7,7 +7,7 @@ import { Plus } from 'lucide-react';
 import { addPostTag } from '@/features/post/actions/addPostTag';
 import { TagItem } from '@/features/tag/components/TagItem';
 import { usePostTags } from '@/features/tag/hooks/usePostTags';
-import { useServerAction } from '@/hooks/useServerAction';
+import { useServerAction_deprecated } from '@/hooks/useServerAction_deprecated';
 
 interface IProps extends Omit<DropdownProps, 'children'> {
   postId: number;
@@ -16,7 +16,7 @@ interface IProps extends Omit<DropdownProps, 'children'> {
 }
 
 export const AddTagDropdown: RC<IProps> = ({ skipTags, postId, buttonProps, ...props }) => {
-  const { loading, execute } = useServerAction(addPostTag);
+  const { loading, execute } = useServerAction_deprecated(addPostTag);
   const { tags, isFetchingTags } = usePostTags();
 
   const filteredTags = tags.filter((tag) => !skipTags?.includes(tag.id));

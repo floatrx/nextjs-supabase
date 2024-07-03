@@ -6,10 +6,10 @@ import { Button } from '@nextui-org/button';
 import { Trash2 } from 'lucide-react';
 
 import { deleteTag } from '@/features/tag/actions/deleteTag';
-import { useServerAction } from '@/hooks/useServerAction';
+import { useServerAction_deprecated } from '@/hooks/useServerAction_deprecated';
 
 export const DeleteTagButton = (props: Pick<TTag, 'id'>) => {
-  const { loading, execute } = useServerAction(deleteTag);
+  const { loading, execute } = useServerAction_deprecated(deleteTag);
 
   return (
     <Button isIconOnly isLoading={loading} size="sm" variant="ghost" onClick={() => execute(props.id)}>
