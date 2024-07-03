@@ -28,7 +28,7 @@ export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, 
           <TagItem
             actions={
               interactive && (
-                <OnlyAuth idUser={author?.id}>
+                <OnlyAuth userId={author?.id}>
                   <RemovePostTag className="-mr-2" postId={post.id} tagId={tag.id} />
                 </OnlyAuth>
               )
@@ -42,10 +42,10 @@ export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, 
         </Link>
       ))}
       {interactive && (
-        <OnlyAuth idUser={author?.id}>
+        <OnlyAuth userId={author?.id}>
           <AddTagDropdown
             buttonProps={{ className: 'text-muted-foreground hover:text-foreground' }}
-            idPost={post.id}
+            postId={post.id}
             skipTags={tagIds}
           />
         </OnlyAuth>

@@ -10,20 +10,20 @@ import { usePostTags } from '@/features/tag/hooks/usePostTags';
 import { useServerAction } from '@/hooks/useServerAction';
 
 interface IProps extends Omit<DropdownProps, 'children'> {
-  idPost: number;
+  postId: number;
   skipTags?: number[];
   buttonProps?: ButtonProps;
 }
 
-export const AddTagDropdown: RC<IProps> = ({ skipTags, idPost, buttonProps, ...props }) => {
+export const AddTagDropdown: RC<IProps> = ({ skipTags, postId, buttonProps, ...props }) => {
   const { loading, execute } = useServerAction(addPostTag);
   const { tags, isFetchingTags } = usePostTags();
 
   const filteredTags = tags.filter((tag) => !skipTags?.includes(tag.id));
 
-  const handleAddTag = (idTag: number) => {
-    if (!idTag) return;
-    execute(idPost, idTag);
+  const handleAddTag = (tagId: number) => {
+    if (!tagId) return;
+    execute({ postId: postId, tagId });
   };
 
   if (isFetchingTags) return <Button isIconOnly isLoading size="sm" />;

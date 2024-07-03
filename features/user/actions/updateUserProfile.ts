@@ -9,7 +9,7 @@ export const updateUserProfile = authedProcedure
   .input(UserProfileUpdateSchema)
   .onSuccess(() => revalidatePath('/'))
   .handler(({ ctx, input }) => {
-    const { idProfile, payload } = input;
+    const { id, payload } = input;
 
-    return ctx.supabase.from('profiles').update(payload).eq('id', idProfile);
+    return ctx.supabase.from('profiles').update(payload).eq('id', id);
   });

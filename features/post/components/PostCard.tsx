@@ -42,7 +42,7 @@ export const PostCard: RC<IProps> = ({ post }) => {
           <div className="flex-1 border-t-1 pt-3">
             <div className="stack justify-between">
               <PostTagsList post={post} />
-              <OnlyAuth idUser={author?.id}>
+              <OnlyAuth userId={author?.id}>
                 <div className="stack">
                   <DeletePostButton id={id} size="sm" variant="light" />
                   <EditPostButton id={id} size="sm" variant="light" />

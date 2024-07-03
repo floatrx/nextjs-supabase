@@ -32,7 +32,7 @@ export const UserProfileForm: RC<IProps> = ({ id, initialValues }) => {
 
   const handleSubmit = form.handleSubmit(async ({ username = '', avatar = '' }) => {
     startTransition(async () => {
-      await updateUserProfile(id, { username, avatar });
+      await updateUserProfile({ id, payload: { username, avatar } });
       form.reset({ username }); // reset with new values...
     });
   });

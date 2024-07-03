@@ -23,8 +23,6 @@ export default async function PostSinglePage({ params }: PageProps<{ slug: strin
     return <p>Post not found</p>;
   }
 
-  const idAuthor = post.author?.id;
-
   return (
     <article className="container m-auto max-w-[920px] rounded-3xl border px-11 py-5">
       <header className="space-y-6">
@@ -42,7 +40,7 @@ export default async function PostSinglePage({ params }: PageProps<{ slug: strin
 
         <hr />
 
-        <OnlyAuth idUser={idAuthor}>
+        <OnlyAuth userId={post.author?.id}>
           <div className="stack mt-2">
             <EditPostButton id={post.id} size="lg" title="Edit" />
             <DeletePostButton id={post.id} size="lg" title="Delete" />
