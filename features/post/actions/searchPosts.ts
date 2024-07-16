@@ -2,7 +2,6 @@
 
 import type { TPostExtended } from '@/types/post';
 
-import { revalidatePosts } from '@/features/post/actions/revalidatePosts';
 import { PostSearchSchema } from '@/features/post/actions/validators/postSearchSchema';
 import { formatResultWithPagesCount } from '@/lib/supabase/formatters';
 import { baseProcedure } from '@/lib/zsa/baseProcedure';
@@ -14,36 +13,33 @@ import { baseProcedure } from '@/lib/zsa/baseProcedure';
  * @param limit - Number of items per page (default: 8)
  * @returns PostgrestResponse<TPostExtended[]>
  */
-export const searchPosts = baseProcedure
-  .input(PostSearchSchema)
-  .onSuccess(revalidatePosts)
-  .handler(async ({ ctx, input }) => {
-    const { title, page, limit } = input;
+export const searchPosts = baseProcedure.input(PostSearchSchema).handler(async ({ ctx, input }) => {
+  const { title, page, limit } = input;
 
-    let query = ctx.supabase.from('posts').select(
-      `*,
+  let query = ctx.supabase.from('posts').select(
+    `*,
         author: profiles (*, role: roles (*)),
         tags: post_tags (id:tag_id, tag: tags (id, name))
       `,
-      { count: 'exact' },
-    );
+    { count: 'exact' },
+  );
 
-    if (title) {
-      query = query.ilike('title', `%${title}%`);
-    }
+  if (title) {
+    query = query.ilike('title', `%${title}%`);
+  }
 
-    if (page) {
-      const startIndex = (page - 1) * limit;
-      const endIndex = startIndex + limit - 1;
+  if (page) {
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit - 1;
 
-      query = query.range(startIndex, endIndex);
-    }
+    query = query.range(startIndex, endIndex);
+  }
 
-    const result = await query.order('created_at', { ascending: false });
+  const result = await query.order('created_at', { ascending: false });
 
-    if (result.error) {
-      throw result.error.message;
-    }
+  if (result.error) {
+    throw result.error.message;
+  }
 
-    return formatResultWithPagesCount<TPostExtended>(result, limit); // unwrap the data
-  });
+  return formatResultWithPagesCount<TPostExtended>(result, limit); // unwrap the data
+});
