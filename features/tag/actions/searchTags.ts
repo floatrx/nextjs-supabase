@@ -1,21 +1,19 @@
 'use server';
 
-import { tagService_deprecated } from '@/features/tag/services/tagService_deprecated';
+import { z } from 'zod';
+
+import { baseProcedure } from '@/lib/zsa/baseProcedure';
 
 /**
  * Search tags
- * NOTE: Recommended to use with `useSWR` for caching
- * @example
- * export const usePostTags = () => {
- *   const { data, error, isLoading } = useSWR('tags', searchTags);
- *
- *   return {
- *     tags: data?.data ?? [],
- *     isFetchingTags: isLoading,
- *     error: data?.error ?? error,
- *   };
- * };
+ * @tag server-action
  */
-export async function searchTags() {
-  return tagService_deprecated.search();
-}
+export const searchTags = baseProcedure.input(z.union([z.string(), z.void()]).optional()).handler(async ({ ctx }) => {
+  const res = await ctx.supabase.from('tags').select().order('id', { ascending: false });
+
+  if (res.error) {
+    throw res.error.message;
+  }
+
+  return res.data;
+});

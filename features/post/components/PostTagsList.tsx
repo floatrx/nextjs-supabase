@@ -20,8 +20,8 @@ export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, 
   const tagIds = tags.map((tag) => tag.id);
 
   return (
-    <div className={cn('flex flex-wrap gap-2', wrapperClassName)}>
-      {tags.length === 0 && interactive && <span className="stack text-muted-foreground">Add post tags</span>}
+    <div className={cn('stack flex-wrap items-center gap-2', wrapperClassName)}>
+      {tags.length === 0 && interactive && <span className="stack text-muted-foreground">Add Tag</span>}
       {tags.map((tag) => (
         // TODO: Tags could be non-interactive
         <Link key={tag.id} className="stack" href={`/tags/${tag.name}`}>

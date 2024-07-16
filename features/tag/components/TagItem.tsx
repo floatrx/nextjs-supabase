@@ -17,15 +17,15 @@ export interface TagItemProps extends Variants {
 }
 
 const variants = tv({
-  base: 'inline-flex items-center',
+  base: 'inline-flex items-center py-[2px]',
   variants: {
     size: {
-      sm: 'text-sm gap-1 px-2 rounded-md',
+      sm: 'text-sm gap-1 px-1 rounded-md',
       md: 'text-md px-2 gap-1 rounded-lg',
-      lg: 'text-lg px-4 gap-2',
+      lg: 'text-lg px-3 gap-2 rounded-lg',
     },
     variant: {
-      flat: 'bg-foreground-50 shadow-sm',
+      flat: 'shadow-sm',
       light: '',
       plain: 'px-0',
     },

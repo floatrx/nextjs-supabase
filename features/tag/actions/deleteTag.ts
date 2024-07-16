@@ -1,15 +1,18 @@
 'use server';
 
-import type { TNote } from '@/types/note';
+import { z } from 'zod';
 
-import { revalidatePath } from 'next/cache';
+import { revalidateTags } from '@/features/tag/actions/revalidateTags';
+import { authedProcedure } from '@/lib/zsa/authedProcedure';
 
-import { tagService_deprecated } from '@/features/tag/services/tagService_deprecated';
-
-export async function deleteTag(id: TNote['id']) {
-  const { error } = await tagService_deprecated.remove(id);
-
-  if (error) return;
-
-  revalidatePath('/notes');
-}
+/**
+ * Delete tag by ID
+ * @param id - Tag ID
+ * @tag server-action
+ */
+export const deleteTag = authedProcedure
+  .input(z.object({ id: z.number() }))
+  .onSuccess(revalidateTags)
+  .handler(({ ctx, input }) => {
+    return ctx.supabase.from('tags').delete().eq('id', input.id);
+  });

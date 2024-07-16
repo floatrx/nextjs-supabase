@@ -3,11 +3,11 @@
 import { Button, type ButtonProps } from '@nextui-org/button';
 import { DropdownTrigger, Dropdown, DropdownMenu, DropdownItem, type DropdownProps } from '@nextui-org/dropdown';
 import { Plus } from 'lucide-react';
+import { useServerAction } from 'zsa-react';
 
 import { addPostTag } from '@/features/post/actions/addPostTag';
 import { TagItem } from '@/features/tag/components/TagItem';
 import { usePostTags } from '@/features/tag/hooks/usePostTags';
-import { useServerAction_deprecated } from '@/hooks/useServerAction_deprecated';
 
 interface IProps extends Omit<DropdownProps, 'children'> {
   postId: number;
@@ -16,7 +16,7 @@ interface IProps extends Omit<DropdownProps, 'children'> {
 }
 
 export const AddTagDropdown: RC<IProps> = ({ skipTags, postId, buttonProps, ...props }) => {
-  const { loading, execute } = useServerAction_deprecated(addPostTag);
+  const { isPending, execute } = useServerAction(addPostTag);
   const { tags, isFetchingTags } = usePostTags();
 
   const filteredTags = tags.filter((tag) => !skipTags?.includes(tag.id));
@@ -38,11 +38,11 @@ export const AddTagDropdown: RC<IProps> = ({ skipTags, postId, buttonProps, ...p
         content:
           'py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black',
       }}
-      size="lg"
+      size="md"
       {...props}
     >
       <DropdownTrigger>
-        <Button isIconOnly isLoading={loading} size="sm" variant="light" {...buttonProps}>
+        <Button isIconOnly isLoading={isPending} size="sm" variant="light" {...buttonProps}>
           <Plus size="1.8cap" />
         </Button>
       </DropdownTrigger>

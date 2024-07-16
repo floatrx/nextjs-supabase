@@ -1,7 +1,6 @@
 'use server';
 
 import { z } from 'zod';
-import { ZSAError } from 'zsa';
 
 import { authedProcedure } from '@/lib/zsa/authedProcedure';
 
@@ -37,7 +36,7 @@ const getPost = authedProcedure
       .single();
 
     if (res.error) {
-      throw new ZSAError('ERROR', res.error.message);
+      throw res.error.message;
     }
 
     return res.data; // extract data from the response

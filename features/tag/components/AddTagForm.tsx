@@ -6,11 +6,11 @@ import { Input } from '@nextui-org/input';
 import { useForm, Controller } from 'react-hook-form';
 import { toast } from 'sonner';
 import { mutate } from 'swr';
+import { useServerAction } from 'zsa-react';
 
 import { Form } from '@/components/ui/form/Form';
 import { createTag } from '@/features/tag/actions/createTag';
 import { TagCreateSchema } from '@/features/tag/actions/validators/tagCreateSchema';
-import { useServerAction_deprecated } from '@/hooks/useServerAction_deprecated';
 import { cn } from '@/lib/utils/cn';
 
 export const AddTagForm = () => {
@@ -21,11 +21,11 @@ export const AddTagForm = () => {
     defaultValues: { name: '' },
     resolver: zodResolver(TagCreateSchema),
   });
-  const { loading, execute } = useServerAction_deprecated(createTag);
+  const { isPending, execute } = useServerAction(createTag);
 
-  const handleSubmit = form.handleSubmit(async ({ name }) => {
-    if (loading) return;
-    const res = await execute(name);
+  const handleSubmit = form.handleSubmit(async (payload) => {
+    if (isPending) return;
+    const [res] = await execute(payload);
 
     if (res?.error) return;
     toast.success('Tag added successfully');
@@ -34,7 +34,7 @@ export const AddTagForm = () => {
   });
 
   return (
-    <Form className={cn('mt-4 flex gap-3 text-xl', loading && 'lock')} size="lg" onSubmit={handleSubmit}>
+    <Form className={cn('mt-4 flex gap-3 text-xl', isPending && 'lock')} size="lg" onSubmit={handleSubmit}>
       <Controller
         control={form.control}
         name="name"
@@ -50,7 +50,7 @@ export const AddTagForm = () => {
           />
         )}
       />
-      <Button isLoading={loading} type="submit">
+      <Button isLoading={isPending} type="submit">
         Add Tag
       </Button>
     </Form>
