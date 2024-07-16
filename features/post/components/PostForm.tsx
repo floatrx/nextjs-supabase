@@ -22,7 +22,6 @@ interface FormValues {
 
 export interface IPostFormProps {
   initialValues?: Partial<FormValues>;
-  id?: number; // if provided, the form will be used for updating
   onSubmit?: (values: FormValues) => void; // expose response to parent component
   loading?: boolean;
 }
@@ -35,7 +34,9 @@ export interface IPostFormProps {
  * @param loading
  * @constructor
  */
-export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onSubmit, loading = true }) => {
+export const PostForm: FC<IPostFormProps> = ({ initialValues, onSubmit, loading = true }) => {
+  const isEditMode = !!initialValues;
+
   const {
     control,
     formState: { errors, isDirty, dirtyFields },
@@ -133,7 +134,7 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, id, onSubmit, load
           render={({ field }) => <Editor errorMessage={errors.content?.message} {...field} />}
         />
         <Button color="primary" disabled={!isDirty} isLoading={loading} size="lg" type="submit" variant="shadow">
-          {loading ? 'Submitting...' : id ? 'Update' : 'Create'}
+          {loading ? 'Submitting...' : isEditMode ? 'Update' : 'Create'}
         </Button>
       </form>
     </section>

@@ -1,26 +1,26 @@
+import type { TPost } from '@/types/post';
+
 import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { DateTime } from '@/components/ui/DateTime';
 import { Dot } from '@/components/ui/Dot';
 import { Heading } from '@/components/ui/layout/headings/Heading';
 import { RichText } from '@/components/ui/RichText';
 import { StorageImage } from '@/components/ui/StorageImage';
+import { getPostBySlug } from '@/features/post/actions/getPost';
 import { DeletePostButton } from '@/features/post/components/DeletePostButton';
 import { EditPostButton } from '@/features/post/components/EditPostButton';
 import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
 import { PostTagsList } from '@/features/post/components/PostTagsList';
-import { postService_deprecated } from '@/features/post/services/postService_deprecated';
 import { upperFirst } from '@/lib/utils/upperFirst';
 
-export default async function PostSinglePage({ params }: PageProps<{ slug: string }>) {
+export default async function PostSinglePage({ params }: PageProps<Pick<TPost, 'slug'>>) {
   const { slug } = params;
-  const { error, data: post } = await postService_deprecated.getBySlug(slug);
+
+  // Query post by slug
+  const [post, error] = await getPostBySlug(slug);
 
   if (error) {
     return <p>{error.message}</p>;
-  }
-
-  if (!post) {
-    return <p>Post not found</p>;
   }
 
   return (
