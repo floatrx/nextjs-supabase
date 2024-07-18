@@ -1,7 +1,3 @@
-/**
- * TODO: Refactor styles
- */
-
 'use client';
 
 import { Button } from '@nextui-org/button';
@@ -34,7 +30,7 @@ type Component = React.ForwardRefExoticComponent<IProps & React.RefAttributes<HT
  * - reset - function to reset the uploaded image
  */
 export const ImageUploader: Component = forwardRef(({ value, errorMessage, className, onChange, ...props }, ref) => {
-  const { isLoading, inputProps, imgUrl, reset } = useUploadImage(value);
+  const { isUploading, inputProps, imgUrl, reset } = useUploadImage(value);
 
   // Expose URL to the form
   useEffect(() => {
@@ -55,14 +51,14 @@ export const ImageUploader: Component = forwardRef(({ value, errorMessage, class
           <StorageImage className="size-fit rounded-lg" src={imgUrl} />
         ) : (
           // Show trigger component if image is not uploaded
-          !isLoading && (
+          !isUploading && (
             <span className="flex flex-col">
               <Upload className="m-auto opacity-30" size={32} /> Upload thumbnail
             </span>
           )
         )}
         <input id="file" {...inputProps} />
-        <Loader className={cn(imgUrl && 'absolute z-10')} loading={isLoading} size="md" />
+        <Loader className={cn(imgUrl && 'absolute z-10')} loading={isUploading} size="md" />
       </label>
       {imgUrl && (
         <Button isIconOnly className="absolute -left-2 -top-2 z-10" size="sm" onClick={reset}>

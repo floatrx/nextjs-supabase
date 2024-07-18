@@ -1,11 +1,11 @@
-// TODO: Rewrite to server-action
-import type { TStorageUploadResponse } from '@/types/storage';
+'use client';
 
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
+import { useServerAction } from 'zsa-react';
 
-import { checkFileSize, getFormDataFromFile } from '@/features/storage/lib/file';
-import { useApi_deprecated } from '@/hooks/useApi_deprecated';
+import { uploadImage } from '@/features/storage/actions/uploadImage';
+import { checkFileSize, wrapFileWithFormData } from '@/features/storage/lib/file';
 import { getImageUrl } from '@/lib/supabase/storage';
 
 /**
@@ -20,7 +20,8 @@ import { getImageUrl } from '@/lib/supabase/storage';
  */
 export const useUploadImage = (initialValue?: string | null) => {
   const [imgUrl, setImgUrl] = useState(initialValue ?? '');
-  const [upload, isLoading] = useApi_deprecated<FormData, TStorageUploadResponse>('post', 'upload');
+  // const [upload, isLoading] = useApi_deprecated<FormData, TStorageUploadResponse>('post', 'upload');
+  const { isPending, execute } = useServerAction(uploadImage);
 
   // Initial value could be updated from the parent component... Sync it!
   useEffect(() => setImgUrl(initialValue ?? ''), [initialValue]);
@@ -47,13 +48,15 @@ export const useUploadImage = (initialValue?: string | null) => {
 
     try {
       // Upload the file (API call
-      const { result } = await upload(getFormDataFromFile(file));
+      const [result, error] = await execute({ file: wrapFileWithFormData(file) });
 
-      if (result?.data) {
-        // Set the full supabase storage image URL as the value
-        setImgUrl(getImageUrl(result.data.path));
-        toast.success('File uploaded successfully.');
+      if (error) {
+        throw new Error(error.message);
       }
+
+      // Set the full supabase storage image URL as the value
+      setImgUrl(getImageUrl(result.path));
+      toast.success('File uploaded successfully.');
     } catch (e) {
       toast.error('Error uploading file:', e.message);
     }
@@ -69,7 +72,7 @@ export const useUploadImage = (initialValue?: string | null) => {
 
   return {
     imgUrl,
-    isLoading,
+    isUploading: isPending,
     inputProps,
     reset,
   };

@@ -14,10 +14,11 @@ export const getFileFromRequest = async (req: Request, inputName: string = 'file
 
 /**
  * Get a FormData instance from a file
+ * NOTE: Server-actions not accept File instances directly, so we need to wrap it to FormData...
  * @param file
  * @returns FormData with the file
  */
-export const getFormDataFromFile = (file: File): FormData => {
+export const wrapFileWithFormData = (file: File): FormData => {
   const formData = new FormData();
 
   formData.append('file', file);
