@@ -13,5 +13,5 @@ export const UploadFileSchema = z.object({
     .refine((formData) => formData.has('file'), 'Expected FormData to contain a file')
     .transform((formData) => formData.get('file') as File)
     .refine((f) => f instanceof File, 'Expected FormData `file` to be an instance of File')
-    .refine(({ size }) => size <= MAX_FILE_SIZE, 'File size exceeds 2MB'),
+    .refine(({ size }) => size <= MAX_FILE_SIZE, 'File size exceeds max size'),
 });

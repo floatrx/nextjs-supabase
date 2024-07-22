@@ -1,8 +1,6 @@
-'use server';
-
 import type { Database } from '@/types/supabase';
 
-import { type CookieOptions, createServerClient as create } from '@supabase/ssr';
+import { createServerClient as create } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 import { SUPABASE_KEY, SUPABASE_URL } from '@/config/const';
@@ -12,32 +10,23 @@ import { SUPABASE_KEY, SUPABASE_URL } from '@/config/const';
  *  a Supabase client for server-side rendering.
  * @see https://supabase.com/docs/guides/auth/server-side/nextjs
  */
-export const createServerClient = async () => {
+export function createServerClient() {
   const cookieStore = cookies();
 
   return create<Database>(SUPABASE_URL, SUPABASE_KEY, {
     cookies: {
-      get(name: string) {
-        return cookieStore.get(name)?.value;
+      getAll() {
+        return cookieStore.getAll();
       },
-      set(name: string, value: string, options: CookieOptions) {
+      setAll(cookiesToSet) {
         try {
-          cookieStore.set({ name, value, ...options });
-        } catch (error) {
-          // The `set` method was called from a Server Component.
-          // This can be ignored if you have middleware refreshing
-          // user sessions.
-        }
-      },
-      remove(name: string, options: CookieOptions) {
-        try {
-          cookieStore.delete({ name, ...options });
-        } catch (error) {
-          // The `delete` method was called from a Server Component.
+          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
+        } catch {
+          // The `setAll` method was called from a Server Component.
           // This can be ignored if you have middleware refreshing
           // user sessions.
         }
       },
     },
   });
-};
+}
