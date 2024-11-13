@@ -1,10 +1,9 @@
 import { Button } from '@nextui-org/button';
-import { LogIn, LogOut } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import Link from 'next/link';
 
-import { Submit } from '@/components/ui/form/Submit';
 import { getProfile } from '@/features/auth/actions/getProfile';
-import { signOut } from '@/features/auth/actions/signOut';
+import { LogoutButton } from '@/features/auth/components/LogoutButton';
 import { UserAvatar } from '@/features/user/components/UserAvatar';
 
 export const AuthButton = async () => {
@@ -16,16 +15,12 @@ export const AuthButton = async () => {
         <UserAvatar src={user.profile?.avatar} />
         <strong>{user.profile?.username || user.email}</strong>
       </Link>
-      <form>
-        <Submit isIconOnly formAction={signOut} size="md" title="Logout" variant="light">
-          <LogOut size="1.8cap" />
-        </Submit>
-      </form>
+      <LogoutButton />
     </div>
   ) : (
     <Button as={Link} href="/login" size="md" variant="bordered">
       <LogIn size="1.8cap" />
-      Sign In
+      Login
     </Button>
   );
 };

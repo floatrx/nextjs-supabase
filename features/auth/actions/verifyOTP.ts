@@ -8,6 +8,6 @@ import { baseProcedure } from '@/lib/zsa/baseProcedure';
  * @tag server-action
  * @see https://supabase.com/docs/reference/javascript/auth-verifyotp
  */
-export const verifyOTP = baseProcedure.input(VerifyOTPSchema).handler(async ({ ctx, input }) => {
-  return ctx.supabase.auth.verifyOtp(input);
-});
+export const verifyOTP = baseProcedure
+  .input(VerifyOTPSchema)
+  .handler(async ({ ctx, input }) => ctx.supabase.auth.verifyOtp(input));

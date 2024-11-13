@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "pretty": "prettier --write .",
@@ -46,6 +47,7 @@
     "@nextui-org/spinner": "^2.0.30",
     "@nextui-org/switch": "^2.0.31",
     "@nextui-org/system": "2.2.2",
+    "@nextui-org/tabs": "^2.0.35",
     "@nextui-org/theme": "2.2.6",
     "@react-aria/ssr": "^3.9.4",
     "@react-aria/visually-hidden": "^3.8.12",

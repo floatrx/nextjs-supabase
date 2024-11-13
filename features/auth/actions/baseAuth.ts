@@ -17,9 +17,10 @@ export type AuthActionFn = typeof login | typeof signup | typeof googleLogin | t
  */
 const baseAuthProcedure = (action: EAuthServiceViaEmailAction) => {
   return baseProcedure
-    .input(EmailLoginSchema, { type: 'formData' })
+    .input(EmailLoginSchema)
     .output(z.void())
     .onSuccess(() => revalidatePath('/', 'layout'))
+    .onError((error) => console.error(error))
     .handler(async ({ ctx, input }) => {
       const { error } = await ctx.supabase.auth[action](input);
 

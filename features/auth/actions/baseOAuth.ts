@@ -17,7 +17,7 @@ import { baseProcedure } from '@/lib/zsa/baseProcedure';
  */
 const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredentials) => {
   return baseProcedure
-    .input(z.any(), { type: 'formData' })
+    .input(z.void())
     .output(z.void())
     .onSuccess(() => revalidatePath('/', 'layout'))
     .handler(async ({ ctx }): Promise<void> => {

@@ -2,19 +2,19 @@
 
 import { type InputProps, Input } from '@nextui-org/input';
 import { EyeFilledIcon, EyeSlashFilledIcon } from '@nextui-org/shared-icons';
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 
 interface IProps extends InputProps {}
 
-export const InputPassword: FC<IProps> = (props) => {
+export const InputPassword = forwardRef<HTMLInputElement, IProps>((props, forwardedRef) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
     <Input
-      placeholder="••••••••"
       {...props}
+      ref={forwardedRef}
       endContent={
         <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
           {isVisible ? (
@@ -24,7 +24,10 @@ export const InputPassword: FC<IProps> = (props) => {
           )}
         </button>
       }
+      placeholder="••••••••"
       type={isVisible ? 'text' : 'password'}
     />
   );
-};
+});
+
+InputPassword.displayName = 'InputPassword';

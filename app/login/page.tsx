@@ -9,7 +9,7 @@
 import { redirect } from 'next/navigation';
 
 import { getUser } from '@/features/auth/actions/getUser';
-import { AuthLoginForm } from '@/features/auth/components/AuthLoginForm';
+import { AuthController } from '@/features/auth/components/AuthController';
 import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Login');
@@ -21,5 +21,5 @@ export default async function LoginPage({ searchParams }: PageProps<EmptyObj, { 
   if (user) return redirect('/');
 
   // Show login form for unauthorized users
-  return <AuthLoginForm message={searchParams.message} />;
+  return <AuthController message={searchParams.message} />;
 }
