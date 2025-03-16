@@ -30,7 +30,7 @@ export type Database = {
             foreignKeyName: 'notes_id_author_fkey';
             columns: ['id_author'];
             isOneToOne: false;
-            referencedRelation: 'users';
+            referencedRelation: 'profiles';
             referencedColumns: ['id'];
           },
           {
@@ -117,7 +117,7 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: 'posts_id_author_fkey1';
+            foreignKeyName: 'posts_id_author_fkey';
             columns: ['id_author'];
             isOneToOne: false;
             referencedRelation: 'profiles';
@@ -139,7 +139,7 @@ export type Database = {
           avatar?: string;
           created_at?: string;
           email?: string;
-          id: string;
+          id?: string;
           id_role?: number;
           updated_at?: string | null;
           username?: string;
@@ -154,20 +154,6 @@ export type Database = {
           username?: string;
         };
         Relationships: [
-          {
-            foreignKeyName: 'profiles_auth_users_id_fkey';
-            columns: ['id'];
-            isOneToOne: true;
-            referencedRelation: 'users';
-            referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'profiles_email_fkey';
-            columns: ['email'];
-            isOneToOne: true;
-            referencedRelation: 'users';
-            referencedColumns: ['email'];
-          },
           {
             foreignKeyName: 'profiles_id_role_fkey';
             columns: ['id_role'];
@@ -308,4 +294,17 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
     ? PublicSchema['Enums'][PublicEnumNameOrOptions]
+    : never;
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends keyof PublicSchema['CompositeTypes'] | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database;
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes']
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions['schema']]['CompositeTypes'][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema['CompositeTypes']
+    ? PublicSchema['CompositeTypes'][PublicCompositeTypeNameOrOptions]
     : never;

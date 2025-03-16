@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { useServerAction } from 'zsa-react';
 
+import { MAX_FILE_SIZE_MB } from '@/config/const';
 import { uploadImage } from '@/features/storage/actions/uploadImage';
 import { checkFileSize, wrapFileWithFormData } from '@/features/storage/lib/file';
 import { getImageUrl } from '@/lib/supabase/storage';
@@ -41,7 +42,7 @@ export const useUploadImage = (initialValue?: string | null) => {
 
     // Check if the file size exceeds 2MB
     if (!checkFileSize(file)) {
-      toast.error('File size exceeds 2MB.');
+      toast.error(`File size exceeds ${MAX_FILE_SIZE_MB}MB.`);
 
       return;
     }
@@ -58,7 +59,8 @@ export const useUploadImage = (initialValue?: string | null) => {
       setImgUrl(getImageUrl(result.path));
       toast.success('File uploaded successfully.');
     } catch (e) {
-      toast.error('Error uploading file:', e.message);
+      toast.error(`Error uploading file: ${e.message}`);
+      console.log(e);
     }
   };
 

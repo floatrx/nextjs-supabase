@@ -1,5 +1,12 @@
 # Next.js, NextUI with Supabase
 
+## Screenshots
+
+![Screenshot 1](screenshots/scr-login.png)
+![Screenshot 2](screenshots/scr-1.png)
+![Screenshot 2](screenshots/scr-2.png)
+![Screenshot 2](screenshots/scr-editor.png)
+
 ## Technologies Used
 
 - [Next.js 14](https://nextjs.org/docs/getting-started)

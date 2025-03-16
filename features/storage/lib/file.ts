@@ -1,4 +1,4 @@
-import { MAX_FILE_SIZE } from '@/config/const';
+import { MAX_FILE_SIZE_BYTES } from '@/config/const';
 
 /**
  * Get a file from a request by input name (key)
@@ -43,7 +43,7 @@ const safeFileName = (filename: string): string => {
  * @param file
  * @param maxSize - Maximum file size in bytes (default: 2MB / const.ts)
  */
-export const checkFileSize = (file: File, maxSize: number = MAX_FILE_SIZE): boolean => {
+export const checkFileSize = (file: File, maxSize: number = MAX_FILE_SIZE_BYTES): boolean => {
   return file.size <= maxSize;
 };
 

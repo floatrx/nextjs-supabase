@@ -50,3 +50,54 @@ with check (
   true
 );
 ```
+
+### Tables 
+```sql
+CREATE TABLE public.posts (
+    id integer NOT NULL,
+    title text DEFAULT ''::text NOT NULL,
+    content text DEFAULT ''::text NOT NULL,
+    slug text DEFAULT ''::text NOT NULL,
+    id_author uuid DEFAULT auth.uid() NOT NULL,
+    published_at timestamp without time zone,
+    created_at timestamp without time zone DEFAULT (now() AT TIME ZONE 'utc'::text) NOT NULL,
+    updated_at timestamp without time zone DEFAULT (now() AT TIME ZONE 'utc'::text) NOT NULL,
+    is_published boolean DEFAULT false NOT NULL,
+    seo_title text,
+    seo_description text,
+    thumbnail text
+);
+
+CREATE TABLE public.notes (
+    id bigint NOT NULL,
+    title text,
+    id_author uuid DEFAULT auth.uid(),
+    is_done boolean,
+    id_status smallint DEFAULT '1'::smallint
+);
+
+CREATE TABLE public.post_tags (
+    post_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+CREATE TABLE public.profiles (
+    id uuid NOT NULL,
+    id_role smallint DEFAULT '1'::smallint NOT NULL,
+    username text DEFAULT ''::text NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    avatar text DEFAULT ''::text NOT NULL,
+    updated_at timestamp with time zone,
+    created_at timestamp with time zone DEFAULT (now() AT TIME ZONE 'utc'::text) NOT NULL
+);
+
+CREATE TABLE public.roles (
+    id smallint NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+CREATE TABLE public.statuses (
+    id smallint NOT NULL,
+    name text
+);
+```
