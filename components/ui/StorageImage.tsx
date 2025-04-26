@@ -1,4 +1,4 @@
-import { Image, ImageProps } from '@nextui-org/image';
+import { Image, ImageProps } from '@heroui/image';
 
 import { getImageUrl } from '@/lib/supabase/storage';
 import { cn } from '@/lib/utils/cn';

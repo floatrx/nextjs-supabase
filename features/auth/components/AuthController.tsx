@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@nextui-org/button';
+import { Button } from '@heroui/button';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 
@@ -37,7 +37,7 @@ export const AuthController: FC<IProps> = (props) => {
       const [, err] = await { login, signup }[action](credentials);
 
       if (err) {
-        throw new Error(err.message); // coz: fn is safe async function
+        throw err.message; // coz: fn is safe async function
       }
       toast.success('Login successful');
     } catch (e) {
@@ -50,11 +50,11 @@ export const AuthController: FC<IProps> = (props) => {
       {/* OAUTH */}
       <DividerText text="or" />
 
-      <Button onClick={withTransition(googleLogin)}>
+      <Button onPress={withTransition(googleLogin)}>
         <GoogleIcon /> Google
       </Button>
 
-      <Button onClick={withTransition(githubLogin)}>
+      <Button onPress={withTransition(githubLogin)}>
         <GitHubIcon /> GitHub
       </Button>
     </AuthLoginForm>

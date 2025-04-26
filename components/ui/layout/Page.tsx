@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Chip } from '@nextui-org/chip';
+import { Chip } from '@heroui/chip';
 
 import { Heading } from '@/components/ui/layout/headings/Heading';
 import { getTitleFromNextMetadata } from '@/lib/next/metadata';

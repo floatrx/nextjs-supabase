@@ -2,11 +2,11 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Navbar as NextUINavbar,
+  Navbar as HeroUINavbar,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-} from '@nextui-org/navbar';
+} from '@heroui/navbar';
 
 import { GithubIcon, Logo } from '@/components/icons';
 import { ExtLink } from '@/components/ui/link/ExtLink';
@@ -16,7 +16,7 @@ import { siteConfig } from '@/config/site';
 import { AuthButton } from '@/features/auth/components/AuthButton';
 
 export const Header = () => (
-  <NextUINavbar maxWidth="full" position="sticky">
+  <HeroUINavbar maxWidth="full" position="sticky">
     <NavbarContent className="basis-1/5 md:basis-full" justify="start">
       <NavbarBrand as="li" className="max-w-fit gap-3">
         <NavLink className="flex items-center justify-start gap-1" href="/">
@@ -66,5 +66,5 @@ export const Header = () => (
         </NavbarItem>
       </div>
     </NavbarMenu>
-  </NextUINavbar>
+  </HeroUINavbar>
 );

@@ -1,6 +1,6 @@
 'use client';
 
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from '@heroui/spinner';
 import { useQueryState, parseAsInteger } from 'nuqs';
 import { useTransition } from 'react';
 
@@ -20,8 +20,8 @@ export const LoadMoreButton: RC<IProps> = ({ defaultLimit, max }) => {
     }),
   );
 
-  const handleLoadMore = () => {
-    setLimit(limit + 2);
+  const handleLoadMore = async () => {
+    await setLimit(limit + 2);
   };
 
   if (limit >= max) return null;

@@ -1,4 +1,4 @@
-import { Button, type ButtonProps } from '@nextui-org/button';
+import { Button, type ButtonProps } from '@heroui/button';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@nextui-org/button';
+import { Button } from '@heroui/button';
 import { useEffect } from 'react';
 
 import { Page } from '@/components/ui/layout/Page';
@@ -13,7 +13,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
 
   return (
     <Page title="Error">
-      <Button onClick={reset}>Try again</Button>
+      <Button onPress={reset}>Try again</Button>
     </Page>
   );
 }

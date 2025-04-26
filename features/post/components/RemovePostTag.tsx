@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, type ButtonProps } from '@nextui-org/button';
+import { Button, type ButtonProps } from '@heroui/button';
 import { X } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
@@ -22,10 +22,8 @@ export const RemovePostTag: RC<IProps> = ({ postId, tagId, className, ...props }
       isLoading={isPending}
       size="sm"
       variant="light"
-      onClick={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        execute({ postId, tagId });
+      onPress={async () => {
+        await execute({ postId, tagId });
       }}
       {...props}
     >

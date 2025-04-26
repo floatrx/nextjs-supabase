@@ -1,4 +1,4 @@
-import type { ButtonProps } from '@nextui-org/button';
+import type { ButtonProps } from '@heroui/button';
 
 import { forwardRef, Children, isValidElement, cloneElement } from 'react';
 

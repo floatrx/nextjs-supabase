@@ -1,4 +1,4 @@
-import { link as linkStyles, type LinkVariantProps } from '@nextui-org/theme';
+import { link as linkStyles, type LinkVariantProps } from '@heroui/theme';
 import Link, { LinkProps } from 'next/link';
 
 import { cn } from '@/lib/utils/cn';

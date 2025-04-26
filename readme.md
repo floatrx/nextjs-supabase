@@ -1,4 +1,4 @@
-# Next.js, NextUI with Supabase
+# Next.js, HeroUI with Supabase
 
 ## Screenshots
 
@@ -10,7 +10,7 @@
 ## Technologies Used
 
 - [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
+- [HeroUI](https://www.heroui.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Tailwind Variants](https://tailwind-variants.org)
 - [TypeScript](https://www.typescriptlang.org/)

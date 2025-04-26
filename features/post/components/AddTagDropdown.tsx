@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, type ButtonProps } from '@nextui-org/button';
-import { DropdownTrigger, Dropdown, DropdownMenu, DropdownItem, type DropdownProps } from '@nextui-org/dropdown';
+import { Button, type ButtonProps } from '@heroui/button';
+import { DropdownTrigger, Dropdown, DropdownMenu, DropdownItem, type DropdownProps } from '@heroui/dropdown';
 import { Plus } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
@@ -21,9 +21,9 @@ export const AddTagDropdown: RC<IProps> = ({ skipTags, postId, buttonProps, ...p
 
   const filteredTags = tags.filter((tag) => !skipTags?.includes(tag.id));
 
-  const handleAddTag = (tagId: number) => {
+  const handleAddTag = async (tagId: number) => {
     if (!tagId) return;
-    execute({ postId: postId, tagId });
+    await execute({ postId: postId, tagId });
   };
 
   if (isFetchingTags) return <Button isIconOnly isLoading size="sm" />;

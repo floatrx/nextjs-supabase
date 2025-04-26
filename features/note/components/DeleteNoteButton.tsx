@@ -2,7 +2,7 @@
 
 import type { TNote } from '@/types/note';
 
-import { Button } from '@nextui-org/button';
+import { Button } from '@heroui/button';
 import { Trash2 } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
@@ -12,7 +12,7 @@ export const DeleteNoteButton = (props: Pick<TNote, 'id'>) => {
   const { isPending, execute } = useServerAction(deleteNote);
 
   return (
-    <Button isIconOnly isLoading={isPending} size="sm" variant="ghost" onClick={() => execute(props.id)}>
+    <Button isIconOnly isLoading={isPending} size="sm" variant="ghost" onPress={() => execute(props.id)}>
       <Trash2 size={15} />
     </Button>
   );

@@ -1,4 +1,4 @@
-import { Spinner, SpinnerProps } from '@nextui-org/spinner';
+import { Spinner, SpinnerProps } from '@heroui/spinner';
 
 export interface LoaderProps extends SpinnerProps {
   loading?: boolean;

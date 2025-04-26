@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@nextui-org/button';
+import { Button } from '@heroui/button';
 import { LogOut } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
@@ -10,7 +10,7 @@ export const LogoutButton = () => {
   const { isPending, execute: logout } = useServerAction(signOut);
 
   return (
-    <Button isIconOnly isLoading={isPending} size="md" title="Logout" variant="light" onClick={() => logout()}>
+    <Button isIconOnly isLoading={isPending} size="md" title="Logout" variant="light" onPress={() => logout()}>
       <LogOut size="1.8cap" />
     </Button>
   );

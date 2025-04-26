@@ -1,7 +1,7 @@
 'use client';
 
-import { Input } from '@nextui-org/input';
-import { Spinner } from '@nextui-org/spinner';
+import { Input } from '@heroui/input';
+import { Spinner } from '@heroui/spinner';
 import { Search } from 'lucide-react';
 import { parseAsString, useQueryState } from 'nuqs';
 import { useTransition } from 'react';

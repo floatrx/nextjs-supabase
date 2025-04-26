@@ -1,9 +1,9 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@nextui-org/button';
-import { Input } from '@nextui-org/input';
-import { Spinner } from '@nextui-org/spinner';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
+import { Spinner } from '@heroui/spinner';
 import { LogIn, UserPlus, Mail, Lock } from 'lucide-react';
 import { useRef, useState, useTransition } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -64,7 +64,7 @@ export const AuthLoginForm: RC<IAuthLoginFormProps> = ({ message, onSubmit, chil
         <span className="sr-only">Login</span>
       </h1>
 
-      {isSubmitting && <Spinner className="absolute inset-0 m-auto" size="lg" title="Logging in..." />}
+      {isSubmitting && <Spinner className="absolute inset-0 z-50 m-auto" size="lg" title="Logging in..." />}
 
       <AuthTabs active={activeTab} onTabChange={setActiveTab} />
 

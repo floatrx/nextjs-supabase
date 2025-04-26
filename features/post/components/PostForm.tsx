@@ -1,8 +1,8 @@
 'use client';
 
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@nextui-org/button';
-import { Input } from '@nextui-org/input';
 import { RefreshCcw } from 'lucide-react';
 import { useRef, useEffect } from 'react';
 import { useForm, Controller, useWatch } from 'react-hook-form';
@@ -88,7 +88,7 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, onSubmit, loading 
                   {...field}
                   description="Provide post slug"
                   endContent={
-                    <Button isIconOnly variant="light" onClick={syncSlugWithTitle}>
+                    <Button isIconOnly variant="light" onPress={syncSlugWithTitle}>
                       <RefreshCcw size={18} />
                     </Button>
                   }

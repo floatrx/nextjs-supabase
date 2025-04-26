@@ -1,6 +1,6 @@
 import type { TPostExtended } from '@/types/post';
 
-import { Chip } from '@nextui-org/chip';
+import { Chip } from '@heroui/chip';
 
 import { UserAvatar } from '@/features/user/components/UserAvatar';
 

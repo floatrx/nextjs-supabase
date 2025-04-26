@@ -1,4 +1,4 @@
-import { Image } from '@nextui-org/image';
+import { Image } from '@heroui/image';
 import { User } from 'lucide-react';
 
 import { cn } from '@/lib/utils/cn';

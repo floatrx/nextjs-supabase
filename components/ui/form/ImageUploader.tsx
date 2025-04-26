@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@nextui-org/button';
+import { Button } from '@heroui/button';
 import { Upload, X } from 'lucide-react';
 import { forwardRef, useEffect } from 'react';
 
@@ -53,7 +53,8 @@ export const ImageUploader: Component = forwardRef(({ value, errorMessage, class
           // Show trigger component if image is not uploaded
           !isUploading && (
             <span className="flex flex-col">
-              <Upload className="m-auto opacity-30" size={32} /> Upload thumbnail
+              <Upload className="m-auto opacity-30" size={32} />
+              Upload thumbnail
             </span>
           )
         )}
@@ -61,7 +62,7 @@ export const ImageUploader: Component = forwardRef(({ value, errorMessage, class
         <Loader className={cn(imgUrl && 'absolute z-10')} loading={isUploading} size="md" />
       </label>
       {imgUrl && (
-        <Button isIconOnly className="absolute -left-2 -top-2 z-10" size="sm" onClick={reset}>
+        <Button isIconOnly className="absolute -left-2 -top-2 z-10" size="sm" onPress={reset}>
           <X size={14} />
         </Button>
       )}

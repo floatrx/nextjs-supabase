@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: 'SupaBlog',
-  description: 'Supabase, Next.js, NextUI and Tailwind CSS Blog',
+  name: 'SupabaseBlog',
+  description: 'Supabase, Next.js, HeroUI and Tailwind CSS Blog',
   navItems: [
     {
       label: 'Home',
@@ -29,6 +29,6 @@ export const siteConfig = {
   ],
   links: {
     github: 'https://github.com/floatrx',
-    docs: 'https://nextui.org',
+    docs: 'https://heroui.org',
   },
 };

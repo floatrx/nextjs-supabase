@@ -1,6 +1,6 @@
 import type { TPostId } from '@/types/post';
 
-import { type ButtonProps, Button } from '@nextui-org/button';
+import { type ButtonProps, Button } from '@heroui/button';
 import { PenBox } from 'lucide-react';
 import Link from 'next/link';
 

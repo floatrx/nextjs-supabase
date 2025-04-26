@@ -1,6 +1,6 @@
 'use client';
 
-import { NextUIProvider } from '@nextui-org/system';
+import { HeroUIProvider } from '@heroui/system';
 import { useRouter } from 'next/navigation';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { ThemeProviderProps } from 'next-themes/dist/types';
@@ -13,7 +13,7 @@ interface IProps extends ThemeProviderProps {
 
 /**
  * Providers composition
- *  1. NextUIProvider
+ *  1. HeroUIProvider
  *  2. NextThemesProvider
  *  3. Toaster
  *  4. NextTopLoader
@@ -22,12 +22,12 @@ export function Providers({ children, ...props }: IProps) {
   const router = useRouter();
 
   return (
-    <NextUIProvider navigate={router.push}>
+    <HeroUIProvider navigate={router.push}>
       <NextThemesProvider {...props}>
         <NextTopLoader color={'hsl(var(--primary))'} height={3} showSpinner={false} />
         {children}
         <Toaster position="top-center" theme={props.defaultTheme} />
       </NextThemesProvider>
-    </NextUIProvider>
+    </HeroUIProvider>
   );
 }

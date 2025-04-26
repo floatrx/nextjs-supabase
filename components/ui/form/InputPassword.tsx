@@ -1,7 +1,7 @@
 'use client';
 
-import { type InputProps, Input } from '@nextui-org/input';
-import { EyeFilledIcon, EyeSlashFilledIcon } from '@nextui-org/shared-icons';
+import { type InputProps, Input } from '@heroui/input';
+import { EyeFilledIcon, EyeSlashFilledIcon } from '@heroui/shared-icons';
 import { useState, forwardRef } from 'react';
 
 interface IProps extends InputProps {}

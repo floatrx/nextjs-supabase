@@ -1,4 +1,4 @@
-import { Link, LinkProps } from '@nextui-org/link';
+import { Link, LinkProps } from '@heroui/link';
 
 export interface ExtLinkProps extends LinkProps {}
 

@@ -51,7 +51,8 @@ with check (
 );
 ```
 
-### Tables 
+### Tables
+
 ```sql
 CREATE TABLE public.posts (
     id integer NOT NULL,

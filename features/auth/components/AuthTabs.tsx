@@ -1,4 +1,4 @@
-import { Tabs, Tab } from '@nextui-org/tabs';
+import { Tabs, Tab } from '@heroui/tabs';
 
 import { upperFirst } from '@/lib/utils/upperFirst';
 

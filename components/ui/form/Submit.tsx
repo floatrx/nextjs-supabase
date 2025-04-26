@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, type ButtonProps } from '@nextui-org/button';
+import { Button, type ButtonProps } from '@heroui/button';
 import { useFormStatus } from 'react-dom';
 
 interface IProps extends ButtonProps {

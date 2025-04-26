@@ -39,7 +39,7 @@ export default async function PostSinglePage({ params }: PageProps<Pick<TPost, '
         </div>
 
         <hr />
-
+        <PostTagsList interactive post={post} size="lg" variant="flat" wrapperClassName="gap-4" />
         <OnlyAuth userId={post.author?.id}>
           <div className="stack mt-2">
             <EditPostButton id={post.id} size="lg" title="Edit" />
@@ -50,11 +50,6 @@ export default async function PostSinglePage({ params }: PageProps<Pick<TPost, '
       <main className="article-content mt-5">
         <RichText content={post.content} />
       </main>
-
-      <footer>
-        <hr className="my-4" />
-        <PostTagsList interactive post={post} size="lg" variant="flat" wrapperClassName="gap-4" />
-      </footer>
     </article>
   );
 }

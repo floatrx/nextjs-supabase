@@ -1,7 +1,7 @@
 'use client';
 
-import { Pagination, type PaginationProps } from '@nextui-org/pagination';
-import { Spinner } from '@nextui-org/spinner';
+import { Pagination, type PaginationProps } from '@heroui/pagination';
+import { Spinner } from '@heroui/spinner';
 import { useQueryState, parseAsInteger } from 'nuqs';
 import { useTransition } from 'react';
 

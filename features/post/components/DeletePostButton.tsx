@@ -2,7 +2,7 @@
 
 import type { TPostId } from '@/types/post';
 
-import { Button, type ButtonProps } from '@nextui-org/button';
+import { Button, type ButtonProps } from '@heroui/button';
 import { Trash } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
@@ -17,7 +17,7 @@ export const DeletePostButton: RC<IProps> = ({ id, title, ...props }) => {
   const { isPending, execute } = useServerAction(deletePost);
 
   return (
-    <Button isIconOnly={!title} isLoading={isPending} variant="ghost" onClick={() => execute(id)} {...props}>
+    <Button isIconOnly={!title} isLoading={isPending} variant="ghost" onPress={() => execute(id)} {...props}>
       <Trash size="1.8cap" />
       {title}
     </Button>

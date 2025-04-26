@@ -8,8 +8,8 @@
 
 import type { Tables } from '@/types/supabase';
 
-import { Button } from '@nextui-org/button';
-import { Input } from '@nextui-org/input';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 import { useTransition } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -57,7 +57,7 @@ export const UserProfileForm: RC<IProps> = ({ id, initialValues }) => {
       <Button disabled={!form.formState.isDirty} isLoading={isSubmitting} type="submit">
         Save settings
       </Button>
-      <Button type="reset" onClick={() => form.reset(initialValues)}>
+      <Button type="reset" onPress={() => form.reset(initialValues)}>
         Reset
       </Button>
     </Form>

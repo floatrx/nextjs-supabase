@@ -1,6 +1,6 @@
 import type { TPostExtended } from '@/types/post';
 
-import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card';
+import { Card, CardHeader, CardBody, CardFooter } from '@heroui/card';
 import Link from 'next/link';
 
 import { OnlyAuth } from '@/components/guards/OnlyAuth';

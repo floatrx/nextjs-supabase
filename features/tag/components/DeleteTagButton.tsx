@@ -2,7 +2,7 @@
 
 import type { TTag } from '@/types/tag';
 
-import { Button } from '@nextui-org/button';
+import { Button } from '@heroui/button';
 import { Trash2 } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
@@ -12,7 +12,7 @@ export const DeleteTagButton = ({ id }: Pick<TTag, 'id'>) => {
   const { isPending, execute } = useServerAction(deleteTag);
 
   return (
-    <Button isIconOnly isLoading={isPending} size="sm" variant="ghost" onClick={() => execute({ id })}>
+    <Button isIconOnly isLoading={isPending} size="sm" variant="ghost" onPress={() => execute({ id })}>
       <Trash2 size={15} />
     </Button>
   );
