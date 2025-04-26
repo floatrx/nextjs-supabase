@@ -23,6 +23,23 @@ cp .env.example .env
 pnpm dev
 ```
 
+[Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started) is required to run the database locally. You can install it using the following .
+```bash
+# Install Supabase CLI
+brew install supabase/tap/supabase
+
+# Upgrade
+brew upgrade supabase
+
+# Login
+supabase login
+
+# Press enter to open the browser and login to your Supabase account
+# paste the OTP code into the terminal
+# Try to run the command again
+pnpm gen:types
+```
+
 ## Technologies Used
 
 - [Next.js 14](https://nextjs.org/docs/getting-started)
