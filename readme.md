@@ -1,11 +1,27 @@
-# Next.js, HeroUI with Supabase
+# 📝 Nextjs, HeroUI with Supabase
 
-## Screenshots
-
+## 📸 Screenshots
 ![Screenshot 1](screenshots/scr-login.png)
 ![Screenshot 2](screenshots/scr-1.png)
 ![Screenshot 2](screenshots/scr-2.png)
 ![Screenshot 2](screenshots/scr-editor.png)
+
+> A modern fullstack Next.js + Supabase application for managing Notes, Blog Posts, and User Profiles with Tags and Media Uploads.
+
+## 🛠️ Installation
+
+```bash
+# Install dependencies
+pnpm install
+
+# Create .env file
+cp .env.example .env
+
+# Configure environment variables inside .env
+
+# Run development server
+pnpm dev
+```
 
 ## Technologies Used
 
@@ -20,46 +36,31 @@
 - [MDXEditor](https://mdxeditor.dev/)
 - [ZOD](https://zod.dev/)
 
-### Install dependencies
+## ✨ Features
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `bun`:
+- 🔥 Authentication (Supabase OAuth / Email)
+- 📝 Create and manage Notes
+- 📰 Create, edit, delete Blog Posts
+- 🏷️ Tags management
+- 📂 Upload and manage images
+- 👤 User Profile update
+- 🎨 TailwindCSS UI
+- ⚡ Fast and typed APIs (TypeScript + Zod)
+- 🧹 Linting (ESLint, Prettier, Husky hooks)
 
-```bash
-bun install # or bun i
-```
+## 🚀 Tech Stack
 
-### Run the development server
+- **Framework**: Next.js (App Router)
+- **Styling**: TailwindCSS
+- **Authentication**: Supabase
+- **Database**: Supabase Postgres
+- **Language**: TypeScript
+- **Validation**: Zod
+- **Code Quality**: ESLint, Prettier, Husky
 
-```bash
-bun dev
-```
 
-## Next app router
 
-### /(private)/\*
-
-> Use this route group as a way to group routes
-> that are only accessible to authenticated users.
-
-- /blog
-  - /create
-  - /edit/[id]
-- /notes
-
-### /api routes
-
-- `[GET]` `/api/auth/callback` – callback route for the OAuth providers;
-- `[GET]` `/api/auth/confirm` – confirm the email OTP and redirect the user to the next page;
-- `[DELETE]` `/api/posts` – delete a blog post by id;
-- `[DELETE]` `/api/notes` – delete a note by id;
-- `[POST]` `/upload` – upload an image to the supabase storage;
-
-### Blog
-
-- /blog/[slug] – view a blog post by slug;
-- /blog – view all blog posts;
-
-## Project Structure
+## 📂 Project Structure
 
 ```
 .
@@ -73,8 +74,36 @@ bun dev
 ├── styles (global styles, tailwind config)
 ├── types (typescript types grouped by entity or purpose)
 └── validators (entity validators using zod)
-
 ```
+
+## Next app router
+
+### /(private)/\*
+
+> Use this route group as a way to group routes
+> that are only accessible to authenticated users.
+```
+- login
+- /blog
+  - /create
+  - /edit/[id]
+- /notes
+- profile
+- tags
+```
+
+### /api routes
+
+- `[GET]` `/api/auth/callback` – callback route for the OAuth providers;
+- `[GET]` `/api/auth/confirm` – confirm the email OTP and redirect the user to the next page;
+- `[DELETE]` `/api/posts` – delete a blog post by id;
+- `[DELETE]` `/api/notes` – delete a note by id;
+- `[POST]` `/upload` – upload an image to the supabase storage;
+
+### Blog
+
+- /blog/[slug] – view a blog post by slug;
+- /blog – view all blog posts;
 
 ## Server-Side Interaction Approaches
 
@@ -141,3 +170,6 @@ export const DeletePostButton = ({ id }: TPostId) => {
 Both methods, server-actions and browser requests, are effective for interacting with the server-side but cater to different needs and
 complexities in application architecture. Server-actions offer more robust handling at the cost of tighter coupling, while browser requests
 provide flexibility and simplicity, ideal for scenarios where rapid development and deployment are prioritized.
+
+
+Made with ❤️ by [floatrx].

@@ -8,10 +8,12 @@
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
-    "pretty": "prettier --write .",
-    "ts": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix",
     "gen:types": "pwd && source .env && supabase gen types typescript --project-id=$SUPABASE_PROJECT_ID > types/supabase.ts",
+    "eslint": "next lint --fix",
+    "type:check": "tsc --noEmit",
+    "type:build": "tsc -b",
+    "lint": "lint-staged",
+    "pretty": "prettier --write  '**/*.{ts,tsx}'",
     "prepare": "husky"
   },
   "husky": {
@@ -20,15 +22,16 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "npm run lint",
-      "npm run ts",
-      "npm run pretty"
+    "*.ts?(x)": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "prettier --write"
     ]
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.6.0",
-    "@mdxeditor/editor": "^3.31.0",
     "@heroui/accordion": "2.2.14",
     "@heroui/avatar": "2.2.13",
     "@heroui/breadcrumbs": "2.2.13",
@@ -49,12 +52,12 @@
     "@heroui/system": "2.4.13",
     "@heroui/tabs": "2.2.14",
     "@heroui/theme": "2.4.13",
+    "@hookform/resolvers": "^3.6.0",
+    "@mdxeditor/editor": "^3.31.0",
     "@react-aria/ssr": "^3.9.8",
     "@react-aria/visually-hidden": "^3.8.22",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.4",
-    "@tailwindcss/typography": "^0.5.16",
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
     "autoprefixer": "10.4.21",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -66,7 +69,6 @@
     "nextjs-toploader": "^3.8.16",
     "nuqs": "^2.4.3",
     "postcss": "8.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.56.1",
@@ -87,25 +89,24 @@
     "zsa-react": "^0.2.3"
   },
   "devDependencies": {
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "@eslint/eslintrc": "^3",
     "@next/eslint-plugin-next": "15.3.1",
     "@types/node": "22.15.2",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@typescript-eslint/parser": "^7.13.1",
-    "eslint": "^8",
-    "eslint-config-next": "15.3.1",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-node": "^11.1.0",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.4",
+    "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.6",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-unused-imports": "^4.1.4",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1",
     "prettier": "^3.5.3",
+    "@tailwindcss/typography": "^0.5.16",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
     "typescript": "^5.8.3"
   },
   "overrides": {

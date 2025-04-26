@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(tsx?|css)$' | sed 's| |\\ |g')
+
+if [ -z "$STAGED_FILES" ]; then
+  echo "No staged files to check."
+  exit 0
+fi
+
+echo "1. Checking staged files..."
+tsc --noEmit
+
+echo "2. Running lint-staged..."
+npx lint-staged
+
+git update-index --again
