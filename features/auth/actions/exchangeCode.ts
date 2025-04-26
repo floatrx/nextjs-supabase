@@ -6,6 +6,6 @@ import { baseProcedure } from '@/lib/zsa/baseProcedure';
  * @tag server-action
  * @see https://supabase.com/docs/reference/javascript/auth-exchangecodeforsession
  */
-export const exchangeCode = baseProcedure.input(ExchangeCodeSchema).handler(({ ctx, input }) => {
+export const exchangeCode = baseProcedure.input(ExchangeCodeSchema).handler(async ({ ctx, input }) => {
   return ctx.supabase.auth.exchangeCodeForSession(input);
 });

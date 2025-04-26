@@ -46,10 +46,10 @@ const getPost = authedProcedure
  * Get a post by ID
  * @param id
  */
-export const getPostById = (id?: number) => getPost({ column: 'id', eq: id });
+export const getPostById = async (id?: number) => getPost({ column: 'id', eq: id });
 
 /**
  * Get a post by slug
  * @param slug
  */
-export const getPostBySlug = (slug?: string) => getPost({ column: 'slug', eq: slug });
+export const getPostBySlug = async (slug?: string) => getPost({ column: 'slug', eq: slug });

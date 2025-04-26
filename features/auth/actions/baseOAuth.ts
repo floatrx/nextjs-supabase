@@ -19,7 +19,7 @@ const baseOAuthProcedure = ({ options, ...credentials }: SignInWithOAuthCredenti
   return baseProcedure
     .input(z.void())
     .output(z.void())
-    .onSuccess(() => revalidatePath('/', 'layout'))
+    .onSuccess(async () => revalidatePath('/', 'layout'))
     .handler(async ({ ctx }): Promise<void> => {
       const { data, error } = await ctx.supabase.auth.signInWithOAuth({
         ...credentials,

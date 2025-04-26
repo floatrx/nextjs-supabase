@@ -12,7 +12,7 @@ import { authedProcedure } from '@/lib/zsa/authedProcedure';
  */
 export const deleteNote = authedProcedure
   .input(NoteDeleteSchema)
-  .onSuccess(() => revalidatePath('/notes'))
+  .onSuccess(async () => revalidatePath('/notes'))
   .handler(async ({ ctx, input: id }) => {
     return ctx.supabase.from('notes').delete().eq('id', id);
   });

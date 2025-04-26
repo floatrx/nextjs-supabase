@@ -13,5 +13,5 @@ import { authedProcedure } from '@/lib/zsa/authedProcedure';
  */
 export const createNote = authedProcedure
   .input(NoteCreateSchema)
-  .onSuccess(() => revalidatePath('/notes'))
+  .onSuccess(async () => revalidatePath('/notes'))
   .handler(async ({ ctx, input }) => ctx.supabase.from('notes').insert(input).select().single());

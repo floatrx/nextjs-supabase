@@ -13,14 +13,15 @@ import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
 import { PostTagsList } from '@/features/post/components/PostTagsList';
 import { upperFirst } from '@/lib/utils/upperFirst';
 
-export default async function PostSinglePage({ params }: PageProps<Pick<TPost, 'slug'>>) {
+export default async function PostSinglePage(props: PageProps<Pick<TPost, 'slug'>>) {
+  const params = await props.params;
   const { slug } = params;
 
   // Query post by slug
   const [post, error] = await getPostBySlug(slug);
 
   if (error) {
-    return <p>{error.message}</p>;
+    return <h1>Post not found or deleted</h1>;
   }
 
   return (

@@ -13,6 +13,6 @@ import { authedProcedure } from '@/lib/zsa/authedProcedure';
 export const deleteTag = authedProcedure
   .input(z.object({ id: z.number() }))
   .onSuccess(revalidateTags)
-  .handler(({ ctx, input }) => {
+  .handler(async ({ ctx, input }) => {
     return ctx.supabase.from('tags').delete().eq('id', input.id);
   });

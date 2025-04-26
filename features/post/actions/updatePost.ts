@@ -18,7 +18,7 @@ export const updatePost = baseProcedure
   .handler(async ({ ctx, input }) => {
     const { id, values } = input;
 
-    const res = await ctx.supabase.from('posts').update(values).eq('id', id).select().single();
+    const res = await ctx.supabase.from('posts').update(values).eq('id', Number(id)).select().single();
 
     // Expose error
     if (res?.error) {

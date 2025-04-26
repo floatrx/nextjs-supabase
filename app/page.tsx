@@ -10,7 +10,8 @@ import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Homepage');
 
-export default async function HomePage({ searchParams }: PageProps<EmptyObj, PostSearchParams>) {
+export default async function HomePage(props: PageProps<EmptyObj, PostSearchParams>) {
+  const searchParams = await props.searchParams;
   const filters = PostSearchSchema.parse(searchParams);
 
   const [posts, error] = await searchPosts(filters);

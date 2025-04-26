@@ -48,39 +48,40 @@ export const RichText = ({ content, className, excerpt }: RichTextProps) => {
   const allowedElements = excerpt ? ['p', 'a', 'strong', 'em', 'code'] : undefined;
 
   return (
-    <Markdown
-      allowedElements={allowedElements}
-      className={cn(className, 'prose max-w-[860px] dark:prose-invert lg:prose-2xl', excerpt && 'line-clamp-3')}
-      components={{
-        code(props) {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const { children, className, node, style, ref, ...rest } = props;
-          const match = /language-(\w+)/.exec(className || '');
+    <article className={cn(className, 'prose max-w-[860px] dark:prose-invert lg:prose-2xl', excerpt && 'line-clamp-3')}>
+      <Markdown
+        allowedElements={allowedElements}
+        components={{
+          code(props) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { children, className, node, style, ref, ...rest } = props;
+            const match = /language-(\w+)/.exec(className || '');
 
-          return match ? (
-            <SyntaxHighlighter
-              {...rest}
-              showLineNumbers
-              PreTag="div"
-              customStyle={{ background: 'black' }}
-              language={match[1]}
-              lineProps={{ style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' } }}
-              style={dark}
-            >
-              {String(children).replace(/\n$/, '')}
-            </SyntaxHighlighter>
-          ) : (
-            <code {...rest} className={className}>
-              {children}
-            </code>
-          );
-        },
-      }}
-      rehypePlugins={[rehypeRaw]}
-      remarkPlugins={[remarkGfm]}
-      remarkRehypeOptions={{ allowDangerousHtml: true }}
-    >
-      {content}
-    </Markdown>
+            return match ? (
+              <SyntaxHighlighter
+                {...rest}
+                showLineNumbers
+                PreTag="div"
+                customStyle={{ background: 'black' }}
+                language={match[1]}
+                lineProps={{ style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' } }}
+                style={dark}
+              >
+                {String(children).replace(/\n$/, '')}
+              </SyntaxHighlighter>
+            ) : (
+              <code {...rest} className={className}>
+                {children}
+              </code>
+            );
+          },
+        }}
+        rehypePlugins={[rehypeRaw]}
+        remarkPlugins={[remarkGfm]}
+        remarkRehypeOptions={{ allowDangerousHtml: true }}
+      >
+        {content}
+      </Markdown>
+    </article>
   );
 };

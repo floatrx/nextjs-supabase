@@ -14,7 +14,7 @@ import { authedProcedure } from '@/lib/zsa/authedProcedure';
  */
 export const removePostTag = authedProcedure
   .input(RemovePostTagSchema)
-  .onComplete(() => revalidatePath('/'))
-  .handler(({ ctx, input }) => {
+  .onComplete(async () => revalidatePath('/'))
+  .handler(async ({ ctx, input }) => {
     return ctx.supabase.from('post_tags').delete().eq('post_id', input.postId).eq('tag_id', input.tagId);
   });

@@ -5,4 +5,4 @@ import { revalidatePath } from 'next/cache';
  * NOTE: This invalidation should be updated to be more specific
  * @tag invalidation
  */
-export const revalidatePosts = () => revalidatePath('/');
+export const revalidatePosts = async () => revalidatePath('/');

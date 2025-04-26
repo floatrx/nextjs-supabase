@@ -14,7 +14,8 @@ import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Login');
 
-export default async function LoginPage({ searchParams }: PageProps<EmptyObj, { message?: string }>) {
+export default async function LoginPage(props: PageProps<EmptyObj, { message?: string }>) {
+  const searchParams = await props.searchParams;
   const [user] = await getUser();
 
   // Redirect to home if user is already logged in

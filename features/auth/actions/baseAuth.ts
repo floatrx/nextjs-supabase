@@ -19,7 +19,7 @@ const baseAuthProcedure = (action: EAuthServiceViaEmailAction) => {
   return baseProcedure
     .input(EmailLoginSchema)
     .output(z.void())
-    .onSuccess(() => revalidatePath('/', 'layout'))
+    .onSuccess(async () => revalidatePath('/', 'layout'))
     .onError((error) => console.error(error))
     .handler(async ({ ctx, input }) => {
       const { error } = await ctx.supabase.auth[action](input);

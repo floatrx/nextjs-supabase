@@ -10,8 +10,8 @@ import { SUPABASE_KEY, SUPABASE_URL } from '@/config/const';
  *  a Supabase client for server-side rendering.
  * @see https://supabase.com/docs/guides/auth/server-side/nextjs
  */
-export function createServerClient() {
-  const cookieStore = cookies();
+export async function createServerClient() {
+  const cookieStore = await cookies();
 
   return create<Database>(SUPABASE_URL, SUPABASE_KEY, {
     cookies: {

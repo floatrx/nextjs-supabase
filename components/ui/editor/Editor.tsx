@@ -36,7 +36,7 @@ export const Editor = forwardRef<HTMLTextAreaElement, IProps>(({ errorMessage, .
       readOnly
       {...props} // pass all props from parent controller wrapper
       // override default onChange event
-      onChange={(e) => props.onChange?.(e.target.value)}
+      onChange={(e) => props.onChange?.(e.target.value, false)}
     />
     {!!errorMessage && <p className="m-0 text-danger">{errorMessage}</p>}
   </>

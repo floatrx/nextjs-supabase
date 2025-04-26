@@ -10,7 +10,7 @@ import { authedProcedure } from '@/lib/zsa/authedProcedure';
  * @tag server-action
  */
 export const signOut = authedProcedure
-  .onSuccess(() => {
+  .onSuccess(async () => {
     revalidatePath('/', 'layout');
     redirect('/login');
   })

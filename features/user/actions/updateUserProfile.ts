@@ -12,8 +12,8 @@ import { authedProcedure } from '@/lib/zsa/authedProcedure';
  */
 export const updateUserProfile = authedProcedure
   .input(UserProfileUpdateSchema)
-  .onSuccess(() => revalidatePath('/'))
-  .handler(({ ctx, input }) => {
+  .onSuccess(async () => revalidatePath('/'))
+  .handler(async ({ ctx, input }) => {
     const { id, payload } = input;
 
     return ctx.supabase.from('profiles').update(payload).eq('id', id);

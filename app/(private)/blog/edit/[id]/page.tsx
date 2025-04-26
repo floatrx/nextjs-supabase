@@ -7,7 +7,8 @@ import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Edit post');
 
-export default async function EditPost({ params }: PageProps<Pick<TPost, 'id'>>) {
+export default async function EditPost(props: PageProps<Pick<TPost, 'id'>>) {
+  const params = await props.params;
   const { id } = params;
 
   // Query post by id
