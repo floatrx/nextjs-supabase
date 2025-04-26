@@ -1,7 +1,7 @@
 # 📝 Nextjs, HeroUI with Supabase
 
 ## 📸 Screenshots
-![Screenshot 1](screenshots/scr-login.png)
+![Screenshot 1](screenshots/scr-auth.png)
 ![Screenshot 2](screenshots/scr-1.png)
 ![Screenshot 2](screenshots/scr-2.png)
 ![Screenshot 2](screenshots/scr-editor.png)
@@ -28,7 +28,7 @@ pnpm dev
 # Install Supabase CLI
 brew install supabase/tap/supabase
 
-# Upgrade
+# Upgrade (if already installed)
 brew upgrade supabase
 
 # Login
@@ -36,7 +36,8 @@ supabase login
 
 # Press enter to open the browser and login to your Supabase account
 # paste the OTP code into the terminal
-# Try to run the command again
+
+# Try to run the command
 pnpm gen:types
 ```
 
