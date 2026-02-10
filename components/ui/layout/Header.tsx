@@ -20,7 +20,7 @@ export const Header = () => (
       <NavbarBrand as="li" className="max-w-fit gap-3">
         <NavLink className="flex items-center justify-start gap-1" href="/">
           <Logo />
-          <p className="font-bold text-inherit">Blog</p>
+          <p className="font-bold text-inherit">{siteConfig.name}</p>
         </NavLink>
       </NavbarBrand>
       <ul className="ml-2 hidden justify-start gap-4 md:flex">

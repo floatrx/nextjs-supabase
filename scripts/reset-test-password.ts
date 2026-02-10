@@ -17,15 +17,15 @@ const TEST_EMAIL = process.env.E2E_TEST_EMAIL;
 const NEW_PASSWORD = process.env.E2E_TEST_PASSWORD || '123456';
 
 async function resetPassword() {
-  if (\!TEST_EMAIL) {
+  if (!TEST_EMAIL) {
     console.error('E2E_TEST_EMAIL must be set in .env');
     process.exit(1);
   }
 
-  if (\!SUPABASE_URL || \!SERVICE_ROLE_KEY) {
+  if (!SUPABASE_URL || !SERVICE_ROLE_KEY) {
     console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env');
-    console.log('\\nGet your service_role key from Supabase Dashboard → Project Settings → API');
-    console.log('\\nThen add to .env:');
+    console.log('\nGet your service_role key from Supabase Dashboard → Project Settings → API');
+    console.log('\nThen add to .env:');
     console.log('SUPABASE_SERVICE_ROLE_KEY=your-key-here');
     process.exit(1);
   }
@@ -43,7 +43,7 @@ async function resetPassword() {
 
   const user = users.users.find((u) => u.email === TEST_EMAIL);
 
-  if (\!user) {
+  if (!user) {
     console.error(`User ${TEST_EMAIL} not found`);
     process.exit(1);
   }
@@ -60,7 +60,7 @@ async function resetPassword() {
   }
 
   console.log(`✅ Password reset to "${NEW_PASSWORD}" for ${TEST_EMAIL}`);
-  console.log('\\nUpdate your .env:');
+  console.log('\nUpdate your .env:');
   console.log(`E2E_TEST_PASSWORD=${NEW_PASSWORD}`);
 }
 
