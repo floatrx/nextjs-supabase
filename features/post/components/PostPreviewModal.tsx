@@ -3,8 +3,8 @@
 import type { TPostExtended } from '@/types/post';
 
 import { motion } from 'motion/react';
-import Link from 'next/link';
 
+import { LinkComponent } from '@/components/ui/link/LinkComponent';
 import { PostArticle } from '@/features/post/components/PostArticle';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { Button } from '@heroui/button';
@@ -35,7 +35,7 @@ export const PostPreviewModal: RC<IProps> = ({ post, isOpen, onClose }) => (
     <ModalContent>
       <ModalHeader className="flex justify-between gap-4">
         <span className="line-clamp-1">{upperFirst(post.title)}</span>
-        <Button as={Link} href={`/blog/${post.slug}`} size="sm" variant="flat">
+        <Button as={LinkComponent} href={`/blog/${post.slug}`} size="sm" variant="flat">
           Open full article
         </Button>
       </ModalHeader>

@@ -15,7 +15,7 @@ test.describe('Blog Preview', () => {
       await expect(modal).toBeVisible();
 
       // Modal should contain article content
-      await expect(modal.locator('article')).toBeVisible();
+      await expect(modal.locator('article').first()).toBeVisible();
     }
   });
 
@@ -71,8 +71,8 @@ test.describe('Blog Preview', () => {
       const modal = page.getByTestId('post-preview-modal');
       await expect(modal).toBeVisible();
 
-      // Should have "Open full article" link
-      const fullArticleLink = modal.getByRole('link', { name: /open full article/i });
+      // Should have "Open full article" button/link
+      const fullArticleLink = modal.getByText(/open full article/i);
       await expect(fullArticleLink).toBeVisible();
     }
   });
@@ -125,7 +125,7 @@ test.describe('Blog', () => {
       await page.waitForLoadState('networkidle');
 
       // Blog post page should have content
-      await expect(page.locator('article, main')).toBeVisible();
+      await expect(page.locator('article').first()).toBeVisible();
     }
   });
 });

@@ -1,8 +1,8 @@
 import type { TPostId } from '@/types/post';
 
+import { LinkComponent } from '@/components/ui/link/LinkComponent';
 import { type ButtonProps, Button } from '@heroui/button';
 import { PenBox } from 'lucide-react';
-import Link from 'next/link';
 
 interface IProps extends Omit<ButtonProps, 'id'> {
   title?: string;
@@ -10,7 +10,7 @@ interface IProps extends Omit<ButtonProps, 'id'> {
 }
 
 export const EditPostButton: RC<IProps> = ({ id, title, ...props }) => (
-  <Button as={Link} className="stack" href={`/blog/edit/${id}`} isIconOnly={!title} variant="ghost" {...props}>
+  <Button as={LinkComponent} className="stack" href={`/blog/edit/${id}`} isIconOnly={!title} variant="ghost" {...props}>
     <PenBox size="1.8cap" />
     {title}
   </Button>

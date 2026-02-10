@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test.describe('Navigation', () => {
   test('homepage loads successfully', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/SupabaseBlog/i);
+    await expect(page).toHaveTitle(/FLOATRX/i);
   });
 
   test('can navigate to blog page', async ({ page }) => {

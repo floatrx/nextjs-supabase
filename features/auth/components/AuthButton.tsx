@@ -1,6 +1,7 @@
 import { LogIn } from 'lucide-react';
 import Link from 'next/link';
 
+import { LinkComponent } from '@/components/ui/link/LinkComponent';
 import { getProfile } from '@/features/auth/actions/getProfile';
 import { LogoutButton } from '@/features/auth/components/LogoutButton';
 import { UserAvatar } from '@/features/user/components/UserAvatar';
@@ -18,7 +19,7 @@ export const AuthButton = async () => {
       <LogoutButton />
     </div>
   ) : (
-    <Button as={Link} data-testid="login-button" href="/login" size="md" variant="bordered">
+    <Button as={LinkComponent} data-testid="login-button" href="/login" size="md" variant="bordered">
       <LogIn size="1.8cap" />
       Login
     </Button>
