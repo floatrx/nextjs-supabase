@@ -1,8 +1,9 @@
 import { Page } from '@/components/ui/layout/Page';
 import { LoadMoreButton } from '@/components/ui/LoadMoreButton';
 import { PagePagination } from '@/components/ui/PagePagination';
+import { getUser } from '@/features/auth/actions/getUser';
 import { searchPosts } from '@/features/post/actions/searchPosts';
-import { PostSearchSchema, type PostSearchParams } from '@/features/post/actions/validators/postSearchSchema';
+import { type PostSearchParams, PostSearchSchema } from '@/features/post/actions/validators/postSearchSchema';
 import { PostCreateButton } from '@/features/post/components/PostCreateButton';
 import { PostsCards } from '@/features/post/components/PostsCards';
 import { PostSearchFilters } from '@/features/post/components/PostSearchFilters';
@@ -14,7 +15,7 @@ export default async function HomePage(props: PageProps<EmptyObj, PostSearchPara
   const searchParams = await props.searchParams;
   const filters = PostSearchSchema.parse(searchParams);
 
-  const [posts, error] = await searchPosts(filters);
+  const [[user], [posts, error]] = await Promise.all([getUser(), searchPosts(filters)]);
 
   if (error) {
     return <p>{error?.message}</p>;
@@ -23,7 +24,7 @@ export default async function HomePage(props: PageProps<EmptyObj, PostSearchPara
   return (
     <Page actions={<PostCreateButton />} className="space-y-4" count={posts.count} title="Latest posts">
       <PostSearchFilters />
-      <PostsCards posts={posts.data} />
+      <PostsCards currentUserId={user?.id} posts={posts.data} />
       {!!posts.count && <PagePagination total={posts.total} />}
       <LoadMoreButton defaultLimit={filters.limit} max={posts.total} />
     </Page>

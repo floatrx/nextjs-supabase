@@ -1,22 +1,29 @@
-import { Image, ImageProps } from '@heroui/image';
+'use client';
+
+import { motion } from 'motion/react';
 
 import { getImageUrl } from '@/lib/supabase/storage';
 import { cn } from '@/lib/utils/cn';
+import { Image, ImageProps } from '@heroui/image';
 
 interface IProps extends Omit<ImageProps, 'src'> {
   src?: string | null; // src can be null (supabase)
+  layoutId?: string; // for shared element transitions
+  onClick?: () => void; // click handler
+  'data-testid'?: string; // test id for e2e tests
 }
 
 /**
  * StorageImage component to display images from the supabase storage
  * @param src - image path or full URL
+ * @param layoutId - unique ID for shared element transitions
  * @param className - additional class names
  * @param props - other compatible ImageProps
  */
-export const StorageImage: RC<IProps> = ({ src, className, ...props }) => {
+export const StorageImage: RC<IProps> = ({ src, layoutId, className, onClick, 'data-testid': testId, ...props }) => {
   if (!src) return null;
 
-  return (
+  const image = (
     <Image
       alt="thumbnail"
       className={cn('min-w-full rounded-2xl shadow-2xl', className)}
@@ -25,4 +32,27 @@ export const StorageImage: RC<IProps> = ({ src, className, ...props }) => {
       {...props}
     />
   );
+
+  if (layoutId) {
+    return (
+      <motion.div
+        data-testid={testId}
+        layoutId={layoutId}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        onClick={onClick}
+      >
+        {image}
+      </motion.div>
+    );
+  }
+
+  if (onClick) {
+    return (
+      <div data-testid={testId} onClick={onClick}>
+        {image}
+      </div>
+    );
+  }
+
+  return image;
 };

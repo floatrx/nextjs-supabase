@@ -12,9 +12,10 @@ interface IProps extends Omit<TagItemProps, 'tag'> {
   post: TPostExtended;
   interactive?: boolean;
   wrapperClassName?: string;
+  onTagClick?: () => void;
 }
 
-export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, ...tagProps }) => {
+export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, onTagClick, ...tagProps }) => {
   const { author } = post;
   const tags = post?.tags.map(({ tag }) => tag!) || [];
   const tagIds = tags.map((tag) => tag.id);
@@ -22,9 +23,8 @@ export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, 
   return (
     <div className={cn('stack flex-wrap items-center gap-2', wrapperClassName)}>
       {!tags.length && interactive && <span className="stack text-muted-foreground">Add Tag</span>}
-      {tags.map((tag) => (
-        // TODO: Tags could be non-interactive
-        <Link key={tag.id} className="stack" href={`/tags/${tag.name}`}>
+      {tags.map((tag) => {
+        const tagElement = (
           <TagItem
             actions={
               interactive && (
@@ -39,8 +39,23 @@ export const PostTagsList: RC<IProps> = ({ post, interactive, wrapperClassName, 
             variant={interactive ? 'light' : 'plain'}
             {...tagProps}
           />
-        </Link>
-      ))}
+        );
+
+        // When onTagClick is provided, clicking opens preview instead of navigating
+        if (onTagClick) {
+          return (
+            <button key={tag.id} className="stack cursor-pointer" type="button" onClick={onTagClick}>
+              {tagElement}
+            </button>
+          );
+        }
+
+        return (
+          <Link key={tag.id} className="stack" href={`/tags/${tag.name}`}>
+            {tagElement}
+          </Link>
+        );
+      })}
       {interactive && (
         <OnlyAuth userId={author?.id}>
           <AddTagDropdown
