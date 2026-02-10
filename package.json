@@ -3,9 +3,6 @@
   "description": "Next.js Blog with Supabase",
   "version": "0.0.1",
   "private": true,
-  "engines": {
-    "node": ">=22"
-  },
   "scripts": {
     "dev": "next dev --turbopack",
     "debug": "NODE_OPTIONS='--inspect' next dev",

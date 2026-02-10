@@ -1,8 +1,16 @@
-import { type NextRequest } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 
 import { updateSession } from '@/lib/supabase/middleware';
 
 export async function proxy(request: NextRequest) {
+  const { searchParams, pathname, origin } = request.nextUrl;
+
+  // Handle OAuth PKCE code at root - redirect to callback handler
+  if (pathname === '/' && searchParams.has('code')) {
+    const code = searchParams.get('code');
+    return NextResponse.redirect(`${origin}/api/auth/callback?code=${code}`);
+  }
+
   return await updateSession(request);
 }
 
