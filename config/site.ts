@@ -9,10 +9,12 @@ export const siteConfig = {
     {
       label: 'Notes',
       href: '/notes',
+      auth: true,
     },
     {
       label: 'Tags',
       href: '/tags',
+      auth: true,
     },
     {
       label: 'Blog',
