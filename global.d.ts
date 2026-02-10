@@ -16,9 +16,6 @@ declare global {
   type RC<T = object> = React.FunctionComponent<T>;
   // Get available props from element (e.g. button, input, div, etc.)
   type ComponentProps<T> = React.ComponentProps<T>;
-  // Next page props
-  type PageProps<Params = EmptyObj, SearchParams = EmptyObj> = {
-    params: Promise<Partial<Params>>;
-    searchParams: Promise<Partial<SearchParams>>;
-  };
+  // Note: PageProps is now globally provided by Next.js 16 in .next/types/routes.d.ts
+  // Usage: PageProps<'/blog/[slug]'> - pass the route path as type parameter
 }

@@ -1,14 +1,12 @@
-import type { TPost } from '@/types/post';
-
 import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { getPostBySlug } from '@/features/post/actions/getPost';
 import { DeletePostButton } from '@/features/post/components/DeletePostButton';
 import { EditPostButton } from '@/features/post/components/EditPostButton';
 import { PostArticle } from '@/features/post/components/PostArticle';
 
-export default async function PostSinglePage(props: PageProps<Pick<TPost, 'slug'>>) {
+export default async function PostSinglePage(props: PageProps<'/blog/[slug]'>) {
   const params = await props.params;
-  const { slug } = params;
+  const slug = params.slug;
 
   // Query post by slug
   const [post, error] = await getPostBySlug(slug);

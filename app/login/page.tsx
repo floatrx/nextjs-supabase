@@ -14,7 +14,7 @@ import { getMetadata } from '@/lib/next/metadata';
 
 export const metadata = getMetadata('Login');
 
-export default async function LoginPage(props: PageProps<EmptyObj, { message?: string }>) {
+export default async function LoginPage(props: PageProps<'/login'>) {
   const searchParams = await props.searchParams;
   const [user] = await getUser();
 
@@ -22,5 +22,6 @@ export default async function LoginPage(props: PageProps<EmptyObj, { message?: s
   if (user) return redirect('/');
 
   // Show login form for unauthorized users
-  return <AuthController message={searchParams.message} />;
+  const message = typeof searchParams.message === 'string' ? searchParams.message : undefined;
+  return <AuthController message={message} />;
 }

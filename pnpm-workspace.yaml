@@ -1,5 +1,0 @@
-onlyBuiltDependencies:
-  - '@heroui/shared-utils'
-  - es5-ext
-  - sharp
-  - unrs-resolver

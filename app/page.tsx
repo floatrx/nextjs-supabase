@@ -12,7 +12,7 @@ import { createServerClient } from '@/lib/supabase/server';
 
 export const metadata = getMetadata('Homepage');
 
-export default async function HomePage(props: PageProps<EmptyObj, PostSearchParams>) {
+export default async function HomePage(props: PageProps<'/'>) {
   const searchParams = await props.searchParams;
   const filters = PostSearchSchema.parse(searchParams);
 
