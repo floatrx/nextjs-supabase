@@ -36,14 +36,22 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const excludedPaths = ['/login', '/api/auth'];
+  // Public routes - accessible without authentication
+  const publicPaths = [
+    '/', // Homepage
+    '/login', // Login page
+    '/blog', // Blog listing and individual posts
+    '/api/auth', // Auth API endpoints
+  ];
 
-  if (!user && !excludedPaths.some((path) => request.nextUrl.pathname.startsWith(path))) {
-    // no user, potentially respond by redirecting the user to the login page
+  const isPublicPath = publicPaths.some(
+    (path) => request.nextUrl.pathname === path || request.nextUrl.pathname.startsWith(path + '/'),
+  );
+
+  if (!user && !isPublicPath) {
+    // no user and not a public path, redirect to login
     const url = request.nextUrl.clone();
-
     url.pathname = '/login';
-
     return NextResponse.redirect(url);
   }
 
