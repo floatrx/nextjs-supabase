@@ -1,24 +1,20 @@
 'use client';
 
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { RefreshCcw } from 'lucide-react';
-import { useRef, useEffect } from 'react';
-import { useForm, Controller, useWatch } from 'react-hook-form';
+import { useEffect, useRef } from 'react';
+import { Controller, useForm, useWatch } from 'react-hook-form';
+import { z } from 'zod';
 
 import { Editor } from '@/components/ui/editor/Editor';
 import { ImageUploader } from '@/components/ui/form/ImageUploader';
 import { PostCreateSchema } from '@/features/post/actions/validators/postCreateSchema';
 import { createSlug } from '@/features/post/lib/createSlug';
 import { cn } from '@/lib/utils/cn';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-interface FormValues {
-  title: string;
-  content: string;
-  slug: string;
-  thumbnail: string | null;
-}
+type FormValues = z.infer<typeof PostCreateSchema>;
 
 export interface IPostFormProps {
   initialValues?: Partial<FormValues>;
@@ -41,14 +37,13 @@ export const PostForm: FC<IPostFormProps> = ({ initialValues, onSubmit, loading 
     control,
     formState: { errors, isDirty, dirtyFields },
     ...form
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: zodResolver(PostCreateSchema),
     defaultValues: {
-      title: '',
-      content: '',
-      slug: '',
-      thumbnail: '',
-      ...initialValues,
+      title: initialValues?.title ?? '',
+      content: initialValues?.content ?? '',
+      slug: initialValues?.slug ?? '',
+      thumbnail: initialValues?.thumbnail ?? null,
     },
   });
 

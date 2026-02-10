@@ -1,11 +1,12 @@
 'use client';
 
-import { Pagination, type PaginationProps } from '@heroui/pagination';
-import { Spinner } from '@heroui/spinner';
-import { useQueryState, parseAsInteger } from 'nuqs';
+import { parseAsInteger, useQueryState } from 'nuqs';
 import { useTransition } from 'react';
 
-interface IProps extends PaginationProps {}
+import { Pagination, type PaginationProps } from '@heroui/pagination';
+import { Spinner } from '@heroui/spinner';
+
+type IProps = PaginationProps;
 
 export const PagePagination: RC<IProps> = (props) => {
   const [isPending, startTransition] = useTransition();
@@ -33,7 +34,7 @@ export const PagePagination: RC<IProps> = (props) => {
         {...props}
       />
       {isPending && (
-        <div className="pointer-events-none fixed inset-0 z-50 flex touch-none items-center justify-center bg-background/20">
+        <div className="bg-background/20 pointer-events-none fixed inset-0 z-50 flex touch-none items-center justify-center">
           <Spinner size="lg" />
         </div>
       )}

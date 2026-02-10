@@ -1,12 +1,13 @@
 'use client';
 
+import clsx from 'clsx';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { FC } from 'react';
+
 import { SwitchProps, useSwitch } from '@heroui/switch';
 import { useIsSSR } from '@react-aria/ssr';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
-import clsx from 'clsx';
-import { Sun, Moon } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { FC } from 'react';
 
 export interface ThemeSwitchProps {
   className?: string;
@@ -18,7 +19,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ className, classNames }) => 
   const isSSR = useIsSSR();
 
   const onChange = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light');
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   const { Component, slots, isSelected, getBaseProps, getInputProps, getWrapperProps } = useSwitch({

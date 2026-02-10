@@ -1,5 +1,6 @@
 import type { FieldErrors } from 'react-hook-form';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const humanizeError = (errors: FieldErrors<any>) => {
   const messages: string[] = [];
 

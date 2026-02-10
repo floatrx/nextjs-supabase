@@ -1,6 +1,6 @@
 import type { ButtonProps } from '@heroui/button';
 
-import { forwardRef, Children, isValidElement, cloneElement } from 'react';
+import { Children, cloneElement, forwardRef, isValidElement } from 'react';
 
 import { cn } from '@/lib/utils/cn';
 
@@ -19,7 +19,7 @@ export const Form: FC<IProps> = forwardRef(function FormWrapper(
     <form ref={forwardedRef} className={cn('w-full', className)} {...props}>
       {Children.map(children, (child) => {
         if (isValidElement(child)) {
-          // @ts-ignore -> add custom props to children, but keep original props if conflict
+          // @ts-expect-error add custom props to children, but keep original props if conflict
           return cloneElement(child, { size, variant, ...child.props });
         }
 

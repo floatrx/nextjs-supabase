@@ -1,5 +1,3 @@
-interface IProps {}
-
-export const Dot: RC<IProps> = () => {
+export const Dot: RC = () => {
   return <span className="opacity-50">•</span>;
 };
