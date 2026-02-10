@@ -19,7 +19,9 @@ export default async function TagsSinglePage() {
       <div className="container mt-5 h-full space-y-4">
         <AddTagForm />
         <div className="stack flex-wrap">
-          {tags?.map((tag) => <TagItem key={tag.id} actions={<DeleteTagButton id={tag.id} />} tag={tag} />)}
+          {tags?.map((tag) => (
+            <TagItem key={tag.id} actions={<DeleteTagButton id={tag.id} />} tag={tag} />
+          ))}
         </div>
       </div>
     </Page>

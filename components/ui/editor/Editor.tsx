@@ -38,7 +38,7 @@ export const Editor = forwardRef<HTMLTextAreaElement, IProps>(({ errorMessage, .
       // override default onChange event
       onChange={(e) => props.onChange?.(e.target.value, false)}
     />
-    {!!errorMessage && <p className="m-0 text-danger">{errorMessage}</p>}
+    {!!errorMessage && <p className="text-danger m-0">{errorMessage}</p>}
   </>
 ));
 

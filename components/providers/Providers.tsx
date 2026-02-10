@@ -1,11 +1,12 @@
 'use client';
 
-import { HeroUIProvider } from '@heroui/system';
 import { useRouter } from 'next/navigation';
 import { ThemeProvider as NextThemesProvider, ThemeProviderProps } from 'next-themes';
 import NextTopLoader from 'nextjs-toploader';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Toaster } from 'sonner';
+
+import { HeroUIProvider } from '@heroui/system';
 
 interface IProps extends ThemeProviderProps {
   defaultTheme: 'light' | 'dark' | 'system' | undefined; // compatible with Toaster theme prop

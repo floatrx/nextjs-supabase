@@ -1,5 +1,5 @@
 /**
- * TODO: Add drag and drop functionality & animations (framer motion)
+ * TODO: Add drag and drop functionality & animations (motion)
  */
 
 import { Page } from '@/components/ui/layout/Page';
@@ -21,7 +21,9 @@ export default async function NotesSinglePage() {
     <Page count={notes?.length} meta={metadata}>
       <div className="container mt-5 h-full space-y-4">
         <AddNoteForm />
-        {notes?.map((note) => <NoteItem key={note.id} note={note} />)}
+        {notes?.map((note) => (
+          <NoteItem key={note.id} note={note} />
+        ))}
       </div>
     </Page>
   );

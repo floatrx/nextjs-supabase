@@ -1,7 +1,7 @@
-import { type EmailOtpType } from '@supabase/supabase-js';
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { verifyOTP } from '@/features/auth/actions/verifyOTP';
+import { type EmailOtpType } from '@supabase/supabase-js';
 
 /**
  * Confirm the email OTP and redirect the user to the next page

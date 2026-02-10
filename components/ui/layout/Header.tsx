@@ -1,19 +1,18 @@
-import {
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Navbar as HeroUINavbar,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-} from '@heroui/navbar';
-
 import { GithubIcon, Logo } from '@/components/icons';
 import { ExtLink } from '@/components/ui/link/ExtLink';
 import { NavLink } from '@/components/ui/link/NavLink';
 import { ThemeSwitch } from '@/components/ui/ThemeSwitch';
 import { siteConfig } from '@/config/site';
 import { AuthButton } from '@/features/auth/components/AuthButton';
+import {
+  Navbar as HeroUINavbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+} from '@heroui/navbar';
 
 export const Header = () => (
   <HeroUINavbar maxWidth="full" position="sticky">

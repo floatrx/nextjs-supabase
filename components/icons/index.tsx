@@ -1,6 +1,6 @@
-import * as React from 'react';
-
 import { TIconSvgProps } from '@/types';
+
+import * as React from 'react';
 
 export const Logo: React.FC<TIconSvgProps> = ({ size = 36, width, height, ...props }) => (
   <svg fill="none" height={size || height} viewBox="0 0 32 32" width={size || width} {...props}>

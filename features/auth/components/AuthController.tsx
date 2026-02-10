@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@heroui/button';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 
@@ -8,10 +7,11 @@ import { GitHubIcon } from '@/components/icons/GithubIcon';
 import { GoogleIcon } from '@/components/icons/GoogleIcon';
 import { DividerText } from '@/components/ui/DividerText';
 import { login, signup } from '@/features/auth/actions/baseAuth';
-import { googleLogin, githubLogin } from '@/features/auth/actions/baseOAuth';
+import { githubLogin, googleLogin } from '@/features/auth/actions/baseOAuth';
 import { AuthLoginForm, type IAuthLoginFormProps } from '@/features/auth/components/AuthLoginForm';
+import { Button } from '@heroui/button';
 
-interface IProps extends IAuthLoginFormProps {}
+type IProps = IAuthLoginFormProps;
 
 type LoginHandler = IAuthLoginFormProps['onSubmit'];
 type AuthActionFn = typeof googleLogin | typeof githubLogin;
@@ -33,16 +33,14 @@ export const AuthController: FC<IProps> = (props) => {
   };
 
   const handleLogin: LoginHandler = async (action, credentials) => {
-    try {
-      const [, err] = await { login, signup }[action](credentials);
+    const [, err] = await { login, signup }[action](credentials);
 
-      if (err) {
-        throw err.message; // coz: fn is safe async function
-      }
-      toast.success('Login successful');
-    } catch (e) {
-      toast.error(e.message);
+    if (err) {
+      toast.error(err.data || err.message || 'Login failed');
+      return;
     }
+
+    toast.success('Login successful');
   };
 
   return (
@@ -50,11 +48,11 @@ export const AuthController: FC<IProps> = (props) => {
       {/* OAUTH */}
       <DividerText text="or" />
 
-      <Button onPress={withTransition(googleLogin)}>
+      <Button data-testid="google-login" onPress={withTransition(googleLogin)}>
         <GoogleIcon /> Google
       </Button>
 
-      <Button onPress={withTransition(githubLogin)}>
+      <Button data-testid="github-login" onPress={withTransition(githubLogin)}>
         <GitHubIcon /> GitHub
       </Button>
     </AuthLoginForm>

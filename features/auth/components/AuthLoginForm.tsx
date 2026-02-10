@@ -1,12 +1,8 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
-import { Spinner } from '@heroui/spinner';
-import { LogIn, UserPlus, Mail, Lock } from 'lucide-react';
+import { Lock, LogIn, Mail, UserPlus } from 'lucide-react';
 import { useRef, useState, useTransition } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -15,9 +11,13 @@ import { formVariants } from '@/components/primitives';
 import { Form } from '@/components/ui/form/Form';
 import { InputPassword } from '@/components/ui/form/InputPassword';
 import { EmailLoginSchema } from '@/features/auth/actions/validators/emailLoginSchema';
-import { AuthTabs, type AuthTabKey } from '@/features/auth/components/AuthTabs';
+import { type AuthTabKey, AuthTabs } from '@/features/auth/components/AuthTabs';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { humanizeError } from '@/lib/zod/humanizeError';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
+import { Spinner } from '@heroui/spinner';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export interface IAuthLoginFormProps {
   message?: string;
@@ -58,7 +58,7 @@ export const AuthLoginForm: RC<IAuthLoginFormProps> = ({ message, onSubmit, chil
   );
 
   return (
-    <div className="container relative flex w-full flex-col justify-center gap-4 px-8 sm:max-w-sm">
+    <div className="relative container flex w-full flex-col justify-center gap-4 px-8 sm:max-w-sm">
       <h1 className="text-center text-4xl">
         <Logo className="m-auto size-20" />
         <span className="sr-only">Login</span>
@@ -73,16 +73,24 @@ export const AuthLoginForm: RC<IAuthLoginFormProps> = ({ message, onSubmit, chil
           control={control}
           name="email"
           render={({ field }) => (
-            <Input {...field} name="email" placeholder="you@example.com" startContent={<Mail {...icoProps} />} />
+            <Input
+              {...field}
+              data-testid="email-input"
+              name="email"
+              placeholder="you@example.com"
+              startContent={<Mail {...icoProps} />}
+            />
           )}
         />
         <Controller
           control={control}
           name="password"
-          render={({ field }) => <InputPassword {...field} startContent={<Lock {...icoProps} />} />}
+          render={({ field }) => (
+            <InputPassword {...field} data-testid="password-input" startContent={<Lock {...icoProps} />} />
+          )}
         />
 
-        <Button color="primary" type="submit" variant="ghost">
+        <Button color="primary" data-testid="auth-submit-button" type="submit" variant="ghost">
           {activeTab === 'login' ? <LogIn /> : <UserPlus />}
           {upperFirst(activeTab)}
         </Button>
@@ -90,7 +98,7 @@ export const AuthLoginForm: RC<IAuthLoginFormProps> = ({ message, onSubmit, chil
         {children}
       </Form>
 
-      {message && <p className="mt-4 bg-foreground/10 p-4 text-center text-foreground">{message}</p>}
+      {message && <p className="bg-foreground/10 text-foreground mt-4 p-4 text-center">{message}</p>}
     </div>
   );
 };

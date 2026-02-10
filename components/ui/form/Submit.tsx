@@ -1,7 +1,8 @@
 'use client';
 
-import { Button, type ButtonProps } from '@heroui/button';
 import { useFormStatus } from 'react-dom';
+
+import { Button, type ButtonProps } from '@heroui/button';
 
 interface IProps extends ButtonProps {
   pendingText?: string;

@@ -1,8 +1,9 @@
 'use client';
 
-import { Spinner } from '@heroui/spinner';
-import { useQueryState, parseAsInteger } from 'nuqs';
+import { parseAsInteger, useQueryState } from 'nuqs';
 import { useTransition } from 'react';
+
+import { Spinner } from '@heroui/spinner';
 
 interface IProps {
   defaultLimit: number;
@@ -32,7 +33,7 @@ export const LoadMoreButton: RC<IProps> = ({ defaultLimit, max }) => {
         {isPending ? 'Loading...' : 'Load more'}
       </button>
       {isPending && (
-        <div className="pointer-events-none fixed inset-0 z-50 flex touch-none items-center justify-center bg-background/20">
+        <div className="bg-background/20 pointer-events-none fixed inset-0 z-50 flex touch-none items-center justify-center">
           <Spinner size="lg" />
         </div>
       )}

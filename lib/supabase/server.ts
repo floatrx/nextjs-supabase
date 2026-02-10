@@ -1,9 +1,9 @@
 import type { Database } from '@/types/supabase';
 
-import { createServerClient as create } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 import { SUPABASE_KEY, SUPABASE_URL } from '@/config/const';
+import { createServerClient as create } from '@supabase/ssr';
 
 /**
  * TODO: Research best practices to create

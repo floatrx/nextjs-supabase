@@ -1,7 +1,7 @@
-import { createServerClient } from '@supabase/ssr';
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { SUPABASE_KEY, SUPABASE_URL } from '@/config/const';
+import { createServerClient } from '@supabase/ssr';
 
 /**
  * Update the session with the latest user data

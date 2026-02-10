@@ -1,9 +1,6 @@
 'use client';
 
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useServerAction } from 'zsa-react';
 
@@ -11,6 +8,9 @@ import { Form } from '@/components/ui/form/Form';
 import { createNote } from '@/features/note/actions/createNote';
 import { NoteCreateSchema } from '@/features/note/actions/validators/noteCreateSchema';
 import { cn } from '@/lib/utils/cn';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const AddNoteForm = () => {
   const {
@@ -39,6 +39,7 @@ export const AddNoteForm = () => {
         render={({ field }) => (
           <Input
             autoFocus
+            data-testid="note-input"
             errorMessage={errors.title?.message}
             isInvalid={!!errors.title}
             placeholder="Add new note..."
@@ -48,7 +49,7 @@ export const AddNoteForm = () => {
           />
         )}
       />
-      <Button isLoading={isPending} type="submit">
+      <Button data-testid="add-note-button" isLoading={isPending} type="submit">
         Add Note
       </Button>
     </Form>

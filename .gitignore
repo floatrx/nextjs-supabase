@@ -7,6 +7,9 @@
 
 # testing
 /coverage
+/tests/.auth/
+/test-results/
+/playwright-report/
 
 # next.js
 /.next/
@@ -38,3 +41,5 @@ next-env.d.ts
 
 *.gz
 *.backup
+
+*.log

@@ -48,12 +48,11 @@ export const RichText = ({ content, className, excerpt }: RichTextProps) => {
   const allowedElements = excerpt ? ['p', 'a', 'strong', 'em', 'code'] : undefined;
 
   return (
-    <article className={cn(className, 'prose max-w-[860px] dark:prose-invert lg:prose-2xl', excerpt && 'line-clamp-3')}>
+    <article className={cn(className, 'prose dark:prose-invert lg:prose-2xl max-w-[860px]', excerpt && 'line-clamp-3')}>
       <Markdown
         allowedElements={allowedElements}
         components={{
           code(props) {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { children, className, node, style, ref, ...rest } = props;
             const match = /language-(\w+)/.exec(className || '');
 

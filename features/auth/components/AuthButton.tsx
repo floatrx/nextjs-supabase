@@ -1,10 +1,10 @@
-import { Button } from '@heroui/button';
 import { LogIn } from 'lucide-react';
 import Link from 'next/link';
 
 import { getProfile } from '@/features/auth/actions/getProfile';
 import { LogoutButton } from '@/features/auth/components/LogoutButton';
 import { UserAvatar } from '@/features/user/components/UserAvatar';
+import { Button } from '@heroui/button';
 
 export const AuthButton = async () => {
   const [user] = await getProfile();
@@ -18,7 +18,7 @@ export const AuthButton = async () => {
       <LogoutButton />
     </div>
   ) : (
-    <Button as={Link} href="/login" size="md" variant="bordered">
+    <Button as={Link} data-testid="login-button" href="/login" size="md" variant="bordered">
       <LogIn size="1.8cap" />
       Login
     </Button>

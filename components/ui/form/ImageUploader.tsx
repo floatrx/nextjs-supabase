@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@heroui/button';
 import { Upload, X } from 'lucide-react';
 import { forwardRef, useEffect } from 'react';
 
@@ -8,6 +7,7 @@ import { Loader } from '@/components/ui/Loader';
 import { StorageImage } from '@/components/ui/StorageImage';
 import { useUploadImage } from '@/features/storage/hooks/useUploadImage';
 import { cn } from '@/lib/utils/cn';
+import { Button } from '@heroui/button';
 
 interface IProps {
   value: string | null | undefined;
@@ -41,7 +41,7 @@ export const ImageUploader: Component = forwardRef(({ value, errorMessage, class
     <div className="relative">
       <label
         className={cn(
-          `stack relative size-[220px] max-h-[152px] w-full max-w-[220px] cursor-pointer justify-center overflow-hidden rounded-xl border-2 bg-foreground/5 p-2`,
+          `stack bg-foreground/5 relative size-[220px] max-h-[152px] w-full max-w-[220px] cursor-pointer justify-center overflow-hidden rounded-xl border-2 p-2`,
           className,
         )}
         htmlFor="file" // dialog trigger
@@ -62,12 +62,12 @@ export const ImageUploader: Component = forwardRef(({ value, errorMessage, class
         <Loader className={cn(imgUrl && 'absolute z-10')} loading={isUploading} size="md" />
       </label>
       {imgUrl && (
-        <Button isIconOnly className="absolute -left-2 -top-2 z-10" size="sm" onPress={reset}>
+        <Button isIconOnly className="absolute -top-2 -left-2 z-10" size="sm" onPress={reset}>
           <X size={14} />
         </Button>
       )}
       <input {...props} ref={ref} hidden readOnly value={imgUrl} />
-      {errorMessage && <p className="m-0 text-danger">{errorMessage}</p>}
+      {errorMessage && <p className="text-danger m-0">{errorMessage}</p>}
     </div>
   );
 });
