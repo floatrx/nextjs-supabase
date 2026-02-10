@@ -1,7 +1,9 @@
+import { APP_NAME } from '@/config/const';
+
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: 'SupabaseBlog',
+  name: APP_NAME,
   description: 'Supabase, Next.js, HeroUI and Tailwind CSS Blog',
   navItems: [
     {

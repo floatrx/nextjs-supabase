@@ -1,3 +1,6 @@
+// App
+export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'FLOATRX';
+
 // Supabase auth
 // TODO: make it private
 export const SUPABASE_URL: string = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
