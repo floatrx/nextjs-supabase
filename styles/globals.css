@@ -1,30 +1,45 @@
-@import 'colors.css';
-@import 'globals.css';
+@import 'tailwindcss';
+@import './colors.css';
+@import './theme.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@plugin './hero.ts';
+@plugin '@tailwindcss/typography';
+
+/* Content sources */
+@source '../components/**/*.{ts,tsx}';
+@source '../features/**/*.{ts,tsx}';
+@source '../app/**/*.{ts,tsx}';
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+
+/* Dark mode variant */
+@custom-variant dark (&:is(.dark *));
 
 @layer base {
   * {
-    @apply border-foreground/20;
-    @apply border-border;
+    border-color: color-mix(in srgb, var(--color-foreground) 20%, transparent);
+    border-color: var(--color-border);
   }
 
   html,
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 
   body {
-    @apply h-full min-h-screen font-sans antialiased;
+    height: 100%;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
 
   button {
     cursor: pointer;
 
     &[disabled] {
-      @apply pointer-events-none cursor-not-allowed opacity-60;
+      pointer-events: none;
+      cursor: not-allowed;
+      opacity: 0.6;
     }
   }
 
@@ -45,32 +60,25 @@
   .article-content,
   .prose {
     p a {
-      @apply break-words text-blue-500;
+      overflow-wrap: break-word;
+      color: #3b82f6;
     }
   }
 
   .fancy-scrollbar {
-    /* Hide default scrollbar */
-
     &::-webkit-scrollbar {
       width: 5px;
       height: 5px;
     }
 
-    /* Style the scrollbar track */
-
     &::-webkit-scrollbar-track {
       background: hsl(var(--background));
     }
-
-    /* Style the scrollbar thumb */
 
     &::-webkit-scrollbar-thumb {
       background: hsla(var(--foreground) / 10%);
       border-radius: 10px;
     }
-
-    /* Style the thumb on hover */
 
     &::-webkit-scrollbar-thumb:hover {
       background: #555;
@@ -78,9 +86,18 @@
   }
 }
 
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: 1400px;
+}
+
 @layer utilities {
   .stack {
-    @apply flex flex-wrap items-center gap-2;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .invisible-scrollbar {
@@ -96,7 +113,9 @@
   }
 
   .locked {
-    @apply pointer-events-none select-none opacity-50;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.5;
   }
 }
 
