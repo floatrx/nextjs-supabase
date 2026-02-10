@@ -1,11 +1,13 @@
+@reference "./globals.css";
+
 /* Toolbar */
 div.mdxeditor-toolbar {
-  @apply rounded-xl border-2 bg-background text-card-foreground;
+  @apply bg-background text-card-foreground rounded-xl border-2;
 }
 
 /* Editor */
 .mdxeditor-root-contenteditable {
-  @apply prose mt-2 max-w-full rounded-xl border-2 bg-transparent p-3 text-xl dark:prose-invert;
+  @apply prose dark:prose-invert mt-2 max-w-full rounded-xl border-2 bg-transparent p-3 text-xl;
 
   div[class*='_placeholder'] {
     @apply pt-6; /* perfect pixel */
@@ -17,7 +19,7 @@ div.mdxeditor-toolbar {
     @apply text-xl;
   }
   .cm-line {
-    @apply text-xl text-foreground;
+    @apply text-foreground text-xl;
   }
   .cm-lineNumbers {
     @apply text-foreground;
