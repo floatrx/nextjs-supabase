@@ -34,9 +34,9 @@ export const PostCard: RC<IProps> = ({ post, currentUserId }) => {
         <CardHeader className="flex-col items-start gap-2 px-4 pt-2 pb-0">
           <StorageImage
             className="cursor-pointer"
-            data-testid="post-thumbnail"
             layoutId={`post-thumbnail-${slug}`}
             src={thumbnail}
+            testId="post-thumbnail"
             onClick={onOpen}
           />
           <Link className="line-clamp-2 text-2xl" data-testid="post-title" href={`/blog/${slug}`}>

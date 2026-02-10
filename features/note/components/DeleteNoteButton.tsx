@@ -9,10 +9,10 @@ import { deleteNote } from '@/features/note/actions/deleteNote';
 import { Button } from '@heroui/button';
 
 interface IProps extends Pick<TNote, 'id'> {
-  'data-testid'?: string;
+  testId?: string;
 }
 
-export const DeleteNoteButton = ({ id, 'data-testid': testId }: IProps) => {
+export const DeleteNoteButton = ({ id, testId }: IProps) => {
   const { isPending, execute } = useServerAction(deleteNote);
 
   return (

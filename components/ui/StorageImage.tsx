@@ -10,7 +10,7 @@ interface IProps extends Omit<ImageProps, 'src'> {
   src?: string | null; // src can be null (supabase)
   layoutId?: string; // for shared element transitions
   onClick?: () => void; // click handler
-  'data-testid'?: string; // test id for e2e tests
+  testId?: string; // test id for e2e tests
 }
 
 /**
@@ -18,9 +18,11 @@ interface IProps extends Omit<ImageProps, 'src'> {
  * @param src - image path or full URL
  * @param layoutId - unique ID for shared element transitions
  * @param className - additional class names
+ * @param onClick - click handler
+ * @param testId - test id for e2e tests
  * @param props - other compatible ImageProps
  */
-export const StorageImage: RC<IProps> = ({ src, layoutId, className, onClick, 'data-testid': testId, ...props }) => {
+export const StorageImage: RC<IProps> = ({ src, layoutId, className, onClick, testId, ...props }) => {
   if (!src) return null;
 
   const image = (
