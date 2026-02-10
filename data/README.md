@@ -18,6 +18,7 @@ Run these files in order in your [Supabase SQL Editor](https://supabase.com/dash
 1. **schema.sql** - Creates tables and indexes
 2. **policies.sql** - Enables RLS and creates policies
 3. **seed.sql** - Inserts lookup data (roles, statuses, sample tags)
+4. **triggers.sql** - Creates triggers (auto-create profile on signup)
 
 ## Storage Setup
 

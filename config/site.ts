@@ -7,18 +7,9 @@ export const siteConfig = {
   description: 'Supabase, Next.js, HeroUI and Tailwind CSS Blog',
   navItems: [
     {
-      label: 'Notes',
-      href: '/notes',
-      auth: true,
-    },
-    {
       label: 'Tags',
       href: '/tags',
       auth: true,
-    },
-    {
-      label: 'Blog',
-      href: '/blog',
     },
   ],
   navMenuItems: [

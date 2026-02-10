@@ -3,15 +3,15 @@
 import { z } from 'zod';
 
 import { revalidatePosts } from '@/features/post/actions/revalidatePosts';
-import { authedProcedure } from '@/lib/zsa/authedProcedure';
+import { adminProcedure } from '@/lib/zsa/adminProcedure';
 
 /**
- * Delete post
+ * Delete post (admin only)
  * @tag server-action
  * @param postId - Post ID
  * @returns Supabase response
  */
-export const deletePost = authedProcedure
+export const deletePost = adminProcedure
   .input(z.number())
   .onComplete(revalidatePosts)
   .handler(async ({ ctx, input }) => {

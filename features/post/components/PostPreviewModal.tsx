@@ -40,7 +40,13 @@ export const PostPreviewModal: RC<IProps> = ({ post, isOpen, onClose }) => (
         </Button>
       </ModalHeader>
       <ModalBody>
-        <motion.div animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} transition={{ duration: 0.2 }}>
+        <motion.div
+          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          // layoutId={`post-${post.slug}`}
+          layout="size"
+          transition={{ duration: 0.2 }}
+        >
           <PostArticle
             className="rounded-3xl border px-8 py-5"
             interactiveTags={false}

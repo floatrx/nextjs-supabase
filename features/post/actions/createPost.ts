@@ -2,7 +2,7 @@
 
 import { revalidatePosts } from '@/features/post/actions/revalidatePosts';
 import { PostCreateSchema } from '@/features/post/actions/validators/postCreateSchema';
-import { baseProcedure } from '@/lib/zsa/baseProcedure';
+import { authedProcedure } from '@/lib/zsa/authedProcedure';
 
 /**
  * Create post
@@ -13,7 +13,7 @@ import { baseProcedure } from '@/lib/zsa/baseProcedure';
  * @param thumbnail - Post thumbnail
  * @returns Created post
  */
-export const createPost = baseProcedure
+export const createPost = authedProcedure
   .input(PostCreateSchema)
   .onSuccess(revalidatePosts)
   .handler(async ({ ctx, input }) => {

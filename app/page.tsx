@@ -7,6 +7,7 @@ import { PostCreateButton } from '@/features/post/components/PostCreateButton';
 import { PostsCards } from '@/features/post/components/PostsCards';
 import { PostSearchFilters } from '@/features/post/components/PostSearchFilters';
 import { getMetadata } from '@/lib/next/metadata';
+import { isModerator, type RoleId } from '@/lib/rbac/permissions';
 import { createServerClient } from '@/lib/supabase/server';
 
 export const metadata = getMetadata('Homepage');
@@ -22,16 +23,27 @@ export default async function HomePage(props: PageProps<EmptyObj, PostSearchPara
     return <p>{error?.message}</p>;
   }
 
-  // Get current user for edit/delete permissions (optional, no error if not logged in)
+  // Get current user and role for permissions
   const supabase = await createServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
+  let userRole: RoleId | undefined;
+  if (user) {
+    const { data: profile } = await supabase.from('profiles').select('id_role').eq('id', user.id).single();
+    userRole = profile?.id_role as RoleId;
+  }
+
   return (
-    <Page actions={<PostCreateButton />} className="space-y-4" count={posts.count} title="Latest posts">
+    <Page
+      actions={isModerator(userRole) && <PostCreateButton />}
+      className="space-y-4"
+      count={posts.count}
+      title="Latest posts"
+    >
       <PostSearchFilters />
-      <PostsCards currentUserId={user?.id} posts={posts.data} />
+      <PostsCards currentUserId={user?.id} posts={posts.data} userRole={userRole} />
       {!!posts.count && <PagePagination total={posts.total} />}
       <LoadMoreButton defaultLimit={filters.limit} max={posts.total} />
     </Page>

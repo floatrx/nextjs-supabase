@@ -2,14 +2,14 @@
 
 import { revalidateTags } from '@/features/tag/actions/revalidateTags';
 import { TagCreateSchema } from '@/features/tag/actions/validators/tagCreateSchema';
-import { authedProcedure } from '@/lib/zsa/authedProcedure';
+import { adminProcedure } from '@/lib/zsa/adminProcedure';
 
 /**
- * Create tag
+ * Create tag (admin only)
  * @param name - Tag name
  * @tag server-action
  */
-export const createTag = authedProcedure
+export const createTag = adminProcedure
   .input(TagCreateSchema)
   .onSuccess(revalidateTags)
   .handler(async ({ ctx, input }) => {

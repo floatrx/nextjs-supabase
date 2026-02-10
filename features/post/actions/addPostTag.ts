@@ -2,7 +2,7 @@
 
 import { revalidatePosts } from '@/features/post/actions/revalidatePosts';
 import { AddPostTagSchema } from '@/features/post/actions/validators/addPostTagSchema';
-import { baseProcedure } from '@/lib/zsa/baseProcedure';
+import { authedProcedure } from '@/lib/zsa/authedProcedure';
 
 /**
  * Add tag to post
@@ -11,7 +11,7 @@ import { baseProcedure } from '@/lib/zsa/baseProcedure';
  * @param tagId - Tag ID
  * @returns Supabase response
  */
-export const addPostTag = baseProcedure
+export const addPostTag = authedProcedure
   .input(AddPostTagSchema)
   .onSuccess(revalidatePosts)
   .handler(async ({ ctx, input }) => {

@@ -3,14 +3,14 @@
 import { z } from 'zod';
 
 import { revalidateTags } from '@/features/tag/actions/revalidateTags';
-import { authedProcedure } from '@/lib/zsa/authedProcedure';
+import { adminProcedure } from '@/lib/zsa/adminProcedure';
 
 /**
- * Delete tag by ID
+ * Delete tag by ID (admin only)
  * @param id - Tag ID
  * @tag server-action
  */
-export const deleteTag = authedProcedure
+export const deleteTag = adminProcedure
   .input(z.object({ id: z.number() }))
   .onSuccess(revalidateTags)
   .handler(async ({ ctx, input }) => {

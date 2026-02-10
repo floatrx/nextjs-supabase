@@ -40,7 +40,7 @@ export async function updateSession(request: NextRequest) {
   const publicPaths = [
     '/', // Homepage
     '/login', // Login page
-    '/blog', // Blog listing and individual posts
+    '/blog', // Individual post pages (SEO)
     '/api/auth', // Auth API endpoints
   ];
 

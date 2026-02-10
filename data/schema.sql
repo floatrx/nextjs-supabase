@@ -25,7 +25,7 @@ COMMENT ON TABLE public.statuses IS 'Statuses';
 -- Profiles (extends auth.users)
 CREATE TABLE public.profiles (
     id uuid DEFAULT auth.uid() PRIMARY KEY REFERENCES auth.users(id),
-    id_role smallint DEFAULT 1 NOT NULL REFERENCES public.roles(id),
+    id_role smallint DEFAULT 3 NOT NULL REFERENCES public.roles(id),
     username text DEFAULT '' NOT NULL,
     email varchar DEFAULT '' NOT NULL UNIQUE,
     avatar text DEFAULT '' NOT NULL,

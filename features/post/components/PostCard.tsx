@@ -2,6 +2,7 @@
 
 import type { TPostExtended } from '@/types/post';
 
+import { motion } from 'motion/react';
 import Link from 'next/link';
 
 import { DateTime } from '@/components/ui/DateTime';
@@ -12,6 +13,7 @@ import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
 import { PostPreviewModal } from '@/features/post/components/PostPreviewModal';
 import { PostTagsList } from '@/features/post/components/PostTagsList';
 import { safePostExcerpt } from '@/features/post/lib/safePostExcerpt';
+import { canDelete, type RoleId } from '@/lib/rbac/permissions';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card';
 import { useDisclosure } from '@heroui/modal';
@@ -19,17 +21,19 @@ import { useDisclosure } from '@heroui/modal';
 interface IProps {
   post: TPostExtended;
   currentUserId?: string;
+  userRole?: RoleId;
 }
 
-export const PostCard: RC<IProps> = ({ post, currentUserId }) => {
+export const PostCard: RC<IProps> = ({ post, currentUserId, userRole }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   if (!post) return null;
 
   const { id, slug, created_at, title, content, thumbnail, author } = post;
   const isOwner = currentUserId && author?.id === currentUserId;
+  const showDelete = canDelete(userRole);
 
   return (
-    <article data-testid="post-card" id={`post-${id}`}>
+    <motion.article data-testid="post-card" id={`post-${id}`} layoutId={`post-${slug}`} layout="position">
       <Card className="bg-card h-full overflow-visible p-4 px-1">
         <CardHeader className="flex-col items-start gap-2 px-4 pt-2 pb-0">
           <StorageImage
@@ -56,7 +60,7 @@ export const PostCard: RC<IProps> = ({ post, currentUserId }) => {
               <PostTagsList onTagClick={onOpen} post={post} />
               {isOwner && (
                 <div className="stack">
-                  <DeletePostButton id={id} size="sm" variant="light" />
+                  {showDelete && <DeletePostButton id={id} size="sm" variant="light" />}
                   <EditPostButton id={id} size="sm" variant="light" />
                 </div>
               )}
@@ -65,6 +69,6 @@ export const PostCard: RC<IProps> = ({ post, currentUserId }) => {
         </CardFooter>
       </Card>
       <PostPreviewModal isOpen={isOpen} post={post} onClose={onClose} />
-    </article>
+    </motion.article>
   );
 };

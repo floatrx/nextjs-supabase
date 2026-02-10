@@ -45,8 +45,12 @@ echo "2/3 Running policies.sql..."
 psql "$DB_URL" -f "$SCRIPT_DIR/policies.sql" -q 2>&1 | grep -v "^NOTICE" || true
 
 # Run seed
-echo "3/3 Running seed.sql..."
+echo "3/4 Running seed.sql..."
 psql "$DB_URL" -f "$SCRIPT_DIR/seed.sql" -q 2>&1 | grep -v "^NOTICE" || true
+
+# Run triggers
+echo "4/4 Running triggers.sql..."
+psql "$DB_URL" -f "$SCRIPT_DIR/triggers.sql" -q 2>&1 | grep -v "^NOTICE" || true
 
 echo ""
 echo "Database initialized successfully!"
