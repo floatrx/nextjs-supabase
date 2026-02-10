@@ -22,7 +22,7 @@ interface IProps {
 export const Page: FC<IProps> = ({ className, meta, title, actions, icon, before, count, children }) => (
   <div className={cn(className)}>
     {before}
-    <Heading className="stack">
+    <Heading className="stack mb-4">
       <div className="stack">
         {icon} {getTitleFromNextMetadata(meta, title)}
         {!!count && <Chip variant="flat">{count}</Chip>}

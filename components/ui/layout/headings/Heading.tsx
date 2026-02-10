@@ -8,5 +8,5 @@ interface IProps {
 }
 
 export const Heading: FC<IProps> = ({ tag: Tag = 'h1', variant, className, ...props }) => (
-  <Tag className={cn(className, title(variant))} {...props} />
+  <Tag className={cn(title(variant), className)} {...props} />
 );
