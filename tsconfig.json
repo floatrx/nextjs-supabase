@@ -17,7 +17,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "useUnknownInCatchVariables": false,
+    "useUnknownInCatchVariables": true,
     "plugins": [
       {
         "name": "next"

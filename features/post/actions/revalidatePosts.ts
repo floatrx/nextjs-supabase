@@ -1,8 +1,7 @@
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 
 /**
- * Revalidate posts
- * NOTE: This invalidation should be updated to be more specific
- * @tag invalidation
+ * Revalidate posts cache
+ * Uses tag-based invalidation with stale-while-revalidate semantics
  */
-export const revalidatePosts = async () => revalidatePath('/');
+export const revalidatePosts = async () => revalidateTag('posts', 'max');

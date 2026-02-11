@@ -29,7 +29,7 @@ export const AuthController: FC<IProps> = (props) => {
 
         toast.success('Processing...');
       } catch (e) {
-        toast.error(e.message);
+        toast.error(e instanceof Error ? e.message : 'An error occurred');
       }
     });
   };

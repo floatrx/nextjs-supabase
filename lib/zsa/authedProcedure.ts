@@ -7,7 +7,7 @@ export const authedProcedure = createServerActionProcedure()
     const supabase = await createServerClient();
 
     try {
-      const user = supabase.auth.getUser();
+      const { data: user } = await supabase.auth.getUser();
 
       return { user, supabase };
     } catch (e) {

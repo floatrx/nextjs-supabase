@@ -59,8 +59,8 @@ export const useUploadImage = (initialValue?: string | null) => {
       setImgUrl(getImageUrl(result.path));
       toast.success('File uploaded successfully.');
     } catch (e) {
-      toast.error(`Error uploading file: ${e.message}`);
-      console.log(e);
+      const message = e instanceof Error ? e.message : 'Unknown error';
+      toast.error(`Error uploading file: ${message}`);
     }
   };
 

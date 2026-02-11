@@ -1,8 +1,33 @@
+import type { Metadata } from 'next';
+
+import { notFound } from 'next/navigation';
+
 import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { getPostBySlug } from '@/features/post/actions/getPost';
 import { DeletePostButton } from '@/features/post/components/DeletePostButton';
 import { EditPostButton } from '@/features/post/components/EditPostButton';
 import { PostArticle } from '@/features/post/components/PostArticle';
+
+export async function generateMetadata(props: PageProps<'/blog/[slug]'>): Promise<Metadata> {
+  const params = await props.params;
+  const [post] = await getPostBySlug(params.slug);
+
+  if (!post) {
+    return { title: 'Post not found' };
+  }
+
+  const description = post.seo_description || post.content?.slice(0, 160);
+
+  return {
+    title: post.seo_title || post.title,
+    description,
+    openGraph: {
+      title: post.title,
+      description,
+      images: post.thumbnail ? [post.thumbnail] : undefined,
+    },
+  };
+}
 
 export default async function PostSinglePage(props: PageProps<'/blog/[slug]'>) {
   const params = await props.params;
@@ -11,8 +36,8 @@ export default async function PostSinglePage(props: PageProps<'/blog/[slug]'>) {
   // Query post by slug
   const [post, error] = await getPostBySlug(slug);
 
-  if (error) {
-    return <h1>Post not found or deleted</h1>;
+  if (error || !post) {
+    notFound();
   }
 
   return (
