@@ -1,7 +1,7 @@
 {
   "name": "next-supabase",
   "description": "Next.js Blog with Supabase",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "type": "module",
   "scripts": {
@@ -28,10 +28,7 @@
     "@supabase/postgrest-js": "2.95.3",
     "@supabase/ssr": "0.8.0",
     "@supabase/supabase-js": "2.95.3",
-    "autoprefixer": "10.4.24",
-    "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
-    "intl-messageformat": "11.1.2",
     "lucide-react": "0.563.0",
     "motion": "12.34.0",
     "next": "16.1.6",
@@ -75,7 +72,6 @@
     "eslint-plugin-react-hooks": "7.0.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "husky": "9.1.7",
-    "postcss-import": "16.1.1",
     "prettier": "3.8.1",
     "prettier-plugin-tailwindcss": "0.7.2",
     "tailwindcss": "4.1.18",
@@ -87,9 +83,6 @@
       "es5-ext",
       "sharp",
       "unrs-resolver"
-    ],
-    "overrides": {
-      "zod-validation-error": "5.0.0"
-    }
+    ]
   }
 }
