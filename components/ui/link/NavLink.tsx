@@ -1,3 +1,5 @@
+'use client';
+
 import type { LinkVariantProps } from '@/lib/heroui';
 
 import Link, { LinkProps } from 'next/link';
