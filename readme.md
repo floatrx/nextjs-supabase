@@ -41,9 +41,19 @@ supabase login
 pnpm gen:types
 ```
 
+## Database Setup
+
+See [lib/supabase/data/README.md](lib/supabase/data/README.md) for database schema, triggers, policies, and seed data.
+
+## Admin Scripts
+
+Scripts for database administration are located in `lib/supabase/scripts/`:
+- `delete-user.ts` — Delete a user and their related data
+- `reset-test-password.ts` — Reset E2E test user password
+
 ## Technologies Used
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
+- [Next.js 16](https://nextjs.org/docs/getting-started)
 - [HeroUI](https://www.heroui.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Tailwind Variants](https://tailwind-variants.org)
