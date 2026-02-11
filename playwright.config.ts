@@ -1,19 +1,23 @@
 // Load .env file
 import { config } from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 import { defineConfig, devices } from '@playwright/test';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 config({ path: path.resolve(__dirname, '.env') });
 
-export const STORAGE_STATE = path.join(__dirname, 'tests/.auth/user.json');
+export const STORAGE_STATE = path.join(__dirname, 'e2e/.auth/user.json');
 
 export default defineConfig({
-  testDir: './tests/e2e',
+  testDir: './e2e',
+  outputDir: './e2e/.results',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: [['html', { outputFolder: './e2e/.report' }]],
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',

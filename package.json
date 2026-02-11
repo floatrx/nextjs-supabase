@@ -3,34 +3,20 @@
   "description": "Next.js Blog with Supabase",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "gen:types": "pwd && source .env && supabase gen types typescript --project-id=$SUPABASE_PROJECT_ID > types/supabase.ts",
-    "eslint": "next lint --fix",
+    "eslint": "eslint . --fix",
     "type:check": "tsc --noEmit",
     "type:build": "tsc -b",
-    "lint": "lint-staged",
     "pretty": "prettier --write  '**/*.{ts,tsx}'",
     "prepare": "husky",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.ts?(x)": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.css": [
-      "prettier --write"
-    ]
   },
   "dependencies": {
     "@heroui/accordion": "2.2.27",
@@ -88,12 +74,11 @@
     "tailwind-variants": "3.2.2",
     "tailwindcss-animate": "1.0.7",
     "zod": "3.25.76",
-    "zod-validation-error": "3.5.4",
+    "zod-validation-error": "5.0.0",
     "zsa": "0.6.0",
     "zsa-react": "0.2.3"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "3.3.3",
     "@next/eslint-plugin-next": "16.1.6",
     "@playwright/test": "1.58.2",
     "@tailwindcss/postcss": "4.1.18",
@@ -106,21 +91,16 @@
     "@typescript-eslint/parser": "8.55.0",
     "dotenv": "17.2.4",
     "eslint": "9.39.2",
-    "eslint-config-next": "16.1.6",
-    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.5",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.0.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "husky": "9.1.7",
-    "lint-staged": "16.2.7",
     "postcss-import": "16.1.1",
     "prettier": "3.8.1",
     "prettier-plugin-tailwindcss": "0.7.2",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3"
-  },
-  "overrides": {
-    "@types/react": "19.2.13",
-    "@types/react-dom": "19.2.3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -128,6 +108,9 @@
       "es5-ext",
       "sharp",
       "unrs-resolver"
-    ]
+    ],
+    "overrides": {
+      "zod-validation-error": "5.0.0"
+    }
   }
 }

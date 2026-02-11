@@ -2,7 +2,7 @@ import { Page } from '@/components/ui/layout/Page';
 import { LoadMoreButton } from '@/components/ui/LoadMoreButton';
 import { PagePagination } from '@/components/ui/PagePagination';
 import { searchPosts } from '@/features/post/actions/searchPosts';
-import { type PostSearchParams, PostSearchSchema } from '@/features/post/actions/validators/postSearchSchema';
+import { PostSearchSchema } from '@/features/post/actions/validators/postSearchSchema';
 import { PostCreateButton } from '@/features/post/components/PostCreateButton';
 import { PostsCards } from '@/features/post/components/PostsCards';
 import { PostSearchFilters } from '@/features/post/components/PostSearchFilters';

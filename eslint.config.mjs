@@ -1,15 +1,10 @@
+import nextPlugin from '@next/eslint-plugin-next';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import prettierPlugin from 'eslint-plugin-prettier';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
-import { FlatCompat } from '@eslint/eslintrc';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
 
 const eslintConfig = [
   {
@@ -20,7 +15,7 @@ const eslintConfig = [
       'dist',
       'esm/*',
       'public/*',
-      'tests/*',
+      'e2e/*',
       'scripts/*',
       '*.config.js',
       '.DS_Store',
@@ -30,10 +25,30 @@ const eslintConfig = [
       'build',
     ],
   },
-  ...compat.extends('next/core-web-vitals', 'next/typescript', 'plugin:prettier/recommended', 'prettier'),
   {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
     plugins: {
+      '@typescript-eslint': tseslint,
+      '@next/next': nextPlugin,
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+      prettier: prettierPlugin,
       'simple-import-sort': simpleImportSort,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
     rules: {
       /**

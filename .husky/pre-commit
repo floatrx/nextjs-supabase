@@ -1,15 +1,25 @@
 #!/usr/bin/env sh
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(tsx?|css)$' | sed 's| |\\ |g')
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.tsx?$' | sed 's| |\\ |g')
 
 if [ -z "$STAGED_FILES" ]; then
-  echo "No staged files to check."
-  exit 0
+  echo "No staged files to test."
+else
+  echo "Testing staged files..."
+  tsc -b
+  echo "Running eslint and prettier on staged files..."
+  eslint $STAGED_FILES --fix
+  prettier $STAGED_FILES --write --ignore-unknown
+  git update-index --again
 fi
 
-echo "1. Checking staged files..."
-tsc -b
+# --- autoincrement version ---
+# If any diff (staged or working) already contains a change to "version", skip auto-increment
+if git diff --cached | grep -q '"version"' || git diff | grep -q '"version"'; then
+  echo "Skipping package.json auto-increment because version change detected in diff."
+else
+  echo "Incrementing package.json version..."
+  npm version patch --no-git-tag-version --no-commit-hooks
 
-echo "2. Running lint-staged..."
-npx lint-staged
-
-git update-index --again
+  # add package.json to the commit
+  git add package.json
+fi

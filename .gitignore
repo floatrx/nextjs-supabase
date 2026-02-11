@@ -7,9 +7,9 @@
 
 # testing
 /coverage
-/tests/.auth/
-/test-results/
-/playwright-report/
+/e2e/.auth/
+/e2e/.results/
+/e2e/.report/
 
 # next.js
 /.next/
