@@ -12,6 +12,10 @@ else
   git update-index --again
 fi
 
+# --- run e2e tests ---
+echo "Running e2e tests..."
+pnpm test:e2e
+
 # --- autoincrement version ---
 # If any diff (staged or working) already contains a change to "version", skip auto-increment
 if git diff --cached | grep -q '"version"' || git diff | grep -q '"version"'; then
