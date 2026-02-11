@@ -1,4 +1,4 @@
-import type { ButtonProps } from '@heroui/button';
+import type { ButtonProps } from '@/lib/heroui';
 
 import { Children, cloneElement, forwardRef, isValidElement } from 'react';
 

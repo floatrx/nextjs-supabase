@@ -1,8 +1,10 @@
-import { Button, type ButtonProps } from '@heroui/button';
+import type { ButtonProps } from '@/lib/heroui';
+
 import { Plus } from 'lucide-react';
 
 import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { LinkComponent } from '@/components/ui/link/LinkComponent';
+import { Button } from '@/lib/heroui';
 
 interface IProps extends Omit<ButtonProps, 'as' | 'href'> {}
 

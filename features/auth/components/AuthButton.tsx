@@ -5,7 +5,7 @@ import { LinkComponent } from '@/components/ui/link/LinkComponent';
 import { getProfile } from '@/features/auth/actions/getProfile';
 import { LogoutButton } from '@/features/auth/components/LogoutButton';
 import { UserAvatar } from '@/features/user/components/UserAvatar';
-import { Button } from '@heroui/button';
+import { Button } from '@/lib/heroui';
 
 export const AuthButton = async () => {
   const [user] = await getProfile();

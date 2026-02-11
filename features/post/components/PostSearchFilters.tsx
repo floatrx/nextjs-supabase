@@ -1,10 +1,11 @@
 'use client';
 
-import { Input } from '@heroui/input';
-import { Spinner } from '@heroui/spinner';
 import { Search } from 'lucide-react';
 import { parseAsString, useQueryState } from 'nuqs';
 import { useTransition } from 'react';
+
+import { Input } from '@/lib/heroui';
+import { Spinner } from '@/lib/heroui';
 
 interface IProps {}
 export const PostSearchFilters: RC<IProps> = () => {

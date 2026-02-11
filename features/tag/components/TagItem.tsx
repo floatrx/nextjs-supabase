@@ -1,7 +1,7 @@
 'use client';
 
-import type { TTag } from '@/types/tag';
 import type { ReactNode } from 'react';
+import type { TTag } from '@/types/tag';
 
 import { tv, VariantProps } from 'tailwind-variants';
 

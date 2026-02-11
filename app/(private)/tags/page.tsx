@@ -1,10 +1,12 @@
+import type { RoleId } from '@/lib/rbac/permissions';
+
 import { Page } from '@/components/ui/layout/Page';
 import { searchTags } from '@/features/tag/actions/searchTags';
 import { AddTagForm } from '@/features/tag/components/AddTagForm';
 import { DeleteTagButton } from '@/features/tag/components/DeleteTagButton';
 import { TagItem } from '@/features/tag/components/TagItem';
 import { getMetadata } from '@/lib/next/metadata';
-import { isModerator, type RoleId } from '@/lib/rbac/permissions';
+import { isModerator } from '@/lib/rbac/permissions';
 import { createServerClient } from '@/lib/supabase/server';
 
 export const metadata = getMetadata('Tags');

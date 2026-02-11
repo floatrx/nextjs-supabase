@@ -1,6 +1,6 @@
 import type { TProfileWithRole } from '@/types/profile';
 import type { Tables, TablesInsert, TablesUpdate } from '@/types/supabase';
-import type { TTagId, TTag } from '@/types/tag';
+import type { TTag, TTagId } from '@/types/tag';
 
 export type TPost = Tables<'posts'>;
 

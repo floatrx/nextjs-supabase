@@ -1,5 +1,5 @@
-import type { Tables, TablesUpdate } from '@/types/supabase';
 import type { User } from '@supabase/auth-js/src/lib/types';
+import type { Tables, TablesUpdate } from '@/types/supabase';
 
 export type TUser = User;
 

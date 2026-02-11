@@ -1,7 +1,9 @@
+import type { LinkVariantProps } from '@/lib/heroui';
+
 import Link, { LinkProps } from 'next/link';
 
+import { link as linkStyles } from '@/lib/heroui';
 import { cn } from '@/lib/utils/cn';
-import { link as linkStyles, type LinkVariantProps } from '@heroui/theme';
 
 interface IProps extends LinkProps {
   className?: string;

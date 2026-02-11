@@ -6,7 +6,7 @@ import { Trash2 } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
 import { deleteNote } from '@/features/note/actions/deleteNote';
-import { Button } from '@heroui/button';
+import { Button } from '@/lib/heroui';
 
 interface IProps extends Pick<TNote, 'id'> {
   testId?: string;

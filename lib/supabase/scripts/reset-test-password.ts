@@ -7,6 +7,7 @@
  * Requires SUPABASE_SERVICE_ROLE_KEY in .env
  */
 import { config } from 'dotenv';
+
 import { createClient } from '@supabase/supabase-js';
 
 config();

@@ -1,12 +1,13 @@
 'use client';
 
+import type { ButtonProps } from '@/lib/heroui';
 import type { TPostId } from '@/types/post';
 
-import { Button, type ButtonProps } from '@heroui/button';
 import { Trash } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
 import { deletePost } from '@/features/post/actions/deletePost';
+import { Button } from '@/lib/heroui';
 
 interface IProps extends Omit<ButtonProps, 'id'> {
   title?: string;

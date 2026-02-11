@@ -1,10 +1,11 @@
 'use client';
 
+import type { PaginationProps } from '@/lib/heroui';
+
 import { parseAsInteger, useQueryState } from 'nuqs';
 import { useTransition } from 'react';
 
-import { Pagination, type PaginationProps } from '@heroui/pagination';
-import { Spinner } from '@heroui/spinner';
+import { Pagination, Spinner } from '@/lib/heroui';
 
 type IProps = PaginationProps;
 

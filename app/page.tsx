@@ -1,3 +1,5 @@
+import type { RoleId } from '@/lib/rbac/permissions';
+
 import { Page } from '@/components/ui/layout/Page';
 import { LoadMoreButton } from '@/components/ui/LoadMoreButton';
 import { PagePagination } from '@/components/ui/PagePagination';
@@ -7,7 +9,7 @@ import { PostCreateButton } from '@/features/post/components/PostCreateButton';
 import { PostsCards } from '@/features/post/components/PostsCards';
 import { PostSearchFilters } from '@/features/post/components/PostSearchFilters';
 import { getMetadata } from '@/lib/next/metadata';
-import { isModerator, type RoleId } from '@/lib/rbac/permissions';
+import { isModerator } from '@/lib/rbac/permissions';
 import { createServerClient } from '@/lib/supabase/server';
 
 export const metadata = getMetadata('Homepage');

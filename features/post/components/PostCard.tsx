@@ -1,5 +1,6 @@
 'use client';
 
+import type { RoleId } from '@/lib/rbac/permissions';
 import type { TPostExtended } from '@/types/post';
 
 import { motion } from 'motion/react';
@@ -13,10 +14,10 @@ import { PostAuthorInfo } from '@/features/post/components/PostAuthorInfo';
 import { PostPreviewModal } from '@/features/post/components/PostPreviewModal';
 import { PostTagsList } from '@/features/post/components/PostTagsList';
 import { safePostExcerpt } from '@/features/post/lib/safePostExcerpt';
-import { canDelete, type RoleId } from '@/lib/rbac/permissions';
+import { Card, CardBody, CardFooter, CardHeader } from '@/lib/heroui';
+import { useDisclosure } from '@/lib/heroui';
+import { canDelete } from '@/lib/rbac/permissions';
 import { upperFirst } from '@/lib/utils/upperFirst';
-import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card';
-import { useDisclosure } from '@heroui/modal';
 
 interface IProps {
   post: TPostExtended;

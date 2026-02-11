@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 import { Page } from '@/components/ui/layout/Page';
-import { Button } from '@heroui/button';
+import { Button } from '@/lib/heroui';
 
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
   useEffect(() => {

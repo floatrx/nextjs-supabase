@@ -7,9 +7,9 @@ import { useServerAction } from 'zsa-react';
 import { Form } from '@/components/ui/form/Form';
 import { createNote } from '@/features/note/actions/createNote';
 import { NoteCreateSchema } from '@/features/note/actions/validators/noteCreateSchema';
+import { Button } from '@/lib/heroui';
+import { Input } from '@/lib/heroui';
 import { cn } from '@/lib/utils/cn';
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export const AddNoteForm = () => {

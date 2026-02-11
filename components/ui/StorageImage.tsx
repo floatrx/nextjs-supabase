@@ -2,9 +2,9 @@
 
 import { motion } from 'motion/react';
 
+import { Image, ImageProps } from '@/lib/heroui';
 import { getImageUrl } from '@/lib/supabase/storage';
 import { cn } from '@/lib/utils/cn';
-import { Image, ImageProps } from '@heroui/image';
 
 interface IProps extends Omit<ImageProps, 'src'> {
   src?: string | null; // src can be null (supabase)

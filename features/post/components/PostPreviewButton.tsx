@@ -5,8 +5,8 @@ import type { TPostExtended } from '@/types/post';
 import { Eye } from 'lucide-react';
 
 import { PostPreviewModal } from '@/features/post/components/PostPreviewModal';
-import { Button, ButtonProps } from '@heroui/button';
-import { useDisclosure } from '@heroui/modal';
+import { Button, ButtonProps } from '@/lib/heroui';
+import { useDisclosure } from '@/lib/heroui';
 
 interface IProps extends Omit<ButtonProps, 'onPress'> {
   post: TPostExtended;

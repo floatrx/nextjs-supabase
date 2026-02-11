@@ -2,11 +2,11 @@
 
 import type { TTag } from '@/types/tag';
 
-import { Button } from '@heroui/button';
 import { Trash2 } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
 import { deleteTag } from '@/features/tag/actions/deleteTag';
+import { Button } from '@/lib/heroui';
 
 export const DeleteTagButton = ({ id }: Pick<TTag, 'id'>) => {
   const { isPending, execute } = useServerAction(deleteTag);

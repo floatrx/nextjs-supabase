@@ -3,7 +3,7 @@
 import { parseAsInteger, useQueryState } from 'nuqs';
 import { useTransition } from 'react';
 
-import { Spinner } from '@heroui/spinner';
+import { Spinner } from '@/lib/heroui';
 
 interface IProps {
   defaultLimit: number;

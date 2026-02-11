@@ -12,11 +12,11 @@ import { Form } from '@/components/ui/form/Form';
 import { InputPassword } from '@/components/ui/form/InputPassword';
 import { EmailLoginSchema } from '@/features/auth/actions/validators/emailLoginSchema';
 import { type AuthTabKey, AuthTabs } from '@/features/auth/components/AuthTabs';
+import { Button } from '@/lib/heroui';
+import { Input } from '@/lib/heroui';
+import { Spinner } from '@/lib/heroui';
 import { upperFirst } from '@/lib/utils/upperFirst';
 import { humanizeError } from '@/lib/zod/humanizeError';
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
-import { Spinner } from '@heroui/spinner';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export interface IAuthLoginFormProps {

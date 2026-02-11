@@ -2,9 +2,9 @@ import { Page } from '@/components/ui/layout/Page';
 import { getProfile } from '@/features/auth/actions/getProfile';
 import { UserAvatar } from '@/features/user/components/UserAvatar';
 import { UserProfileForm } from '@/features/user/components/UserProfileForm';
+import { Card, CardBody } from '@/lib/heroui';
+import { Chip } from '@/lib/heroui';
 import { upperFirst } from '@/lib/utils/upperFirst';
-import { Card, CardBody } from '@heroui/card';
-import { Chip } from '@heroui/chip';
 
 export default async function ProfilePage() {
   const [user] = await getProfile();

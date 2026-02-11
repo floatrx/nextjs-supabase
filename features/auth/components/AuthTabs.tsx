@@ -1,5 +1,4 @@
-import { Tabs, Tab } from '@heroui/tabs';
-
+import { Tab, Tabs } from '@/lib/heroui';
 import { upperFirst } from '@/lib/utils/upperFirst';
 
 const TABS = ['login', 'signup'] as const;

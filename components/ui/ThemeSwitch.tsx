@@ -5,7 +5,7 @@ import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { FC } from 'react';
 
-import { SwitchProps, useSwitch } from '@heroui/switch';
+import { SwitchProps, useSwitch } from '@/lib/heroui';
 import { useIsSSR } from '@react-aria/ssr';
 import { VisuallyHidden } from '@react-aria/visually-hidden';
 

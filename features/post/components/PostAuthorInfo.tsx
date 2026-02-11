@@ -1,8 +1,7 @@
 import type { TPostExtended } from '@/types/post';
 
-import { Chip } from '@heroui/chip';
-
 import { UserAvatar } from '@/features/user/components/UserAvatar';
+import { Chip } from '@/lib/heroui';
 
 interface IProps extends Pick<TPostExtended, 'author'> {}
 

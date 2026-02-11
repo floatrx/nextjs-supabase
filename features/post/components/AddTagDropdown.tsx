@@ -1,13 +1,14 @@
 'use client';
 
-import { Button, type ButtonProps } from '@heroui/button';
-import { DropdownTrigger, Dropdown, DropdownMenu, DropdownItem, type DropdownProps } from '@heroui/dropdown';
+import type { ButtonProps, DropdownProps } from '@/lib/heroui';
+
 import { Plus } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
 import { addPostTag } from '@/features/post/actions/addPostTag';
 import { TagItem } from '@/features/tag/components/TagItem';
 import { usePostTags } from '@/features/tag/hooks/usePostTags';
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@/lib/heroui';
 
 interface IProps extends Omit<DropdownProps, 'children'> {
   postId: number;

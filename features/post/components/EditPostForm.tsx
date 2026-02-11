@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 
 import { updatePost } from '@/features/post/actions/updatePost';
-import { PostForm, type IPostFormProps } from '@/features/post/components/PostForm';
+import { type IPostFormProps, PostForm } from '@/features/post/components/PostForm';
 
 interface IProps extends IPostFormProps {
   id: TPostId;

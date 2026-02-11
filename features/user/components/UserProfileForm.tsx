@@ -8,15 +8,15 @@
 
 import type { Tables } from '@/types/supabase';
 
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
 import { useTransition } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import { formVariants } from '@/components/primitives';
 import { Form } from '@/components/ui/form/Form';
 import { ImageUploader } from '@/components/ui/form/ImageUploader';
 import { updateUserProfile } from '@/features/user/actions/updateUserProfile';
+import { Button } from '@/lib/heroui';
+import { Input } from '@/lib/heroui';
 import { cn } from '@/lib/utils/cn';
 
 interface IProps {

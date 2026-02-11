@@ -6,9 +6,9 @@ import { motion } from 'motion/react';
 
 import { LinkComponent } from '@/components/ui/link/LinkComponent';
 import { PostArticle } from '@/features/post/components/PostArticle';
+import { Button } from '@/lib/heroui';
+import { Modal, ModalBody, ModalContent, ModalHeader } from '@/lib/heroui';
 import { upperFirst } from '@/lib/utils/upperFirst';
-import { Button } from '@heroui/button';
-import { Modal, ModalBody, ModalContent, ModalHeader } from '@heroui/modal';
 
 interface IProps {
   post: TPostExtended;

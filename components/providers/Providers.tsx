@@ -6,7 +6,7 @@ import NextTopLoader from 'nextjs-toploader';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Toaster } from 'sonner';
 
-import { HeroUIProvider } from '@heroui/system';
+import { HeroUIProvider } from '@/lib/heroui';
 
 interface IProps extends ThemeProviderProps {
   defaultTheme: 'light' | 'dark' | 'system' | undefined; // compatible with Toaster theme prop

@@ -1,4 +1,4 @@
-import { Spinner } from '@heroui/spinner';
+import { Spinner } from '@/lib/heroui';
 
 /**
  * Markdown editor skeleton

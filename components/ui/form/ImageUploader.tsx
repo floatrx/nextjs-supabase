@@ -6,8 +6,8 @@ import { forwardRef, useEffect } from 'react';
 import { Loader } from '@/components/ui/Loader';
 import { StorageImage } from '@/components/ui/StorageImage';
 import { useUploadImage } from '@/features/storage/hooks/useUploadImage';
+import { Button } from '@/lib/heroui';
 import { cn } from '@/lib/utils/cn';
-import { Button } from '@heroui/button';
 
 interface IProps {
   value: string | null | undefined;

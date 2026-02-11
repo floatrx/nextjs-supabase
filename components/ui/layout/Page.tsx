@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 import { Heading } from '@/components/ui/layout/headings/Heading';
+import { Chip } from '@/lib/heroui';
 import { getTitleFromNextMetadata } from '@/lib/next/metadata';
 import { cn } from '@/lib/utils/cn';
-import { Chip } from '@heroui/chip';
 
 interface IProps {
   className?: string;

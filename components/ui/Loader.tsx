@@ -1,4 +1,4 @@
-import { Spinner, SpinnerProps } from '@heroui/spinner';
+import { Spinner, SpinnerProps } from '@/lib/heroui';
 
 export interface LoaderProps extends SpinnerProps {
   loading?: boolean;

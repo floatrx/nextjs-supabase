@@ -1,6 +1,6 @@
-import { Image } from '@heroui/image';
 import { User } from 'lucide-react';
 
+import { Image } from '@/lib/heroui';
 import { cn } from '@/lib/utils/cn';
 
 interface IProps {

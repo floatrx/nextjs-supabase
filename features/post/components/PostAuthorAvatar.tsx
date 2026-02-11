@@ -9,12 +9,12 @@ export const PostAuthorAvatar: RC<IProps> = ({ author, ...avatarProps }) =>
   author?.avatar ? (
     <Image
       alt="avatar"
-      className="size-[32px] rounded-3xl text-tiny"
+      className="text-tiny size-[32px] rounded-3xl"
       height={64}
       src={author?.avatar}
       width={64}
       {...avatarProps}
     />
   ) : (
-    <UserIcon className="size-[32px] text-tiny" />
+    <UserIcon className="text-tiny size-[32px]" />
   );

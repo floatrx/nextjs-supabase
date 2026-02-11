@@ -1,9 +1,6 @@
 'use client';
 
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { mutate } from 'swr';
 import { useServerAction } from 'zsa-react';
@@ -11,7 +8,10 @@ import { useServerAction } from 'zsa-react';
 import { Form } from '@/components/ui/form/Form';
 import { createTag } from '@/features/tag/actions/createTag';
 import { TagCreateSchema } from '@/features/tag/actions/validators/tagCreateSchema';
+import { Button } from '@/lib/heroui';
+import { Input } from '@/lib/heroui';
 import { cn } from '@/lib/utils/cn';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const AddTagForm = () => {
   const {

@@ -1,8 +1,10 @@
+import type { ButtonProps } from '@/lib/heroui';
 import type { TPostId } from '@/types/post';
 
-import { LinkComponent } from '@/components/ui/link/LinkComponent';
-import { type ButtonProps, Button } from '@heroui/button';
 import { PenBox } from 'lucide-react';
+
+import { LinkComponent } from '@/components/ui/link/LinkComponent';
+import { Button } from '@/lib/heroui';
 
 interface IProps extends Omit<ButtonProps, 'id'> {
   title?: string;

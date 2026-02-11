@@ -1,5 +1,7 @@
 'use client';
 
+import type { IAuthLoginFormProps } from '@/features/auth/components/AuthLoginForm';
+
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 
@@ -8,8 +10,8 @@ import { GoogleIcon } from '@/components/icons/GoogleIcon';
 import { DividerText } from '@/components/ui/DividerText';
 import { login, signup } from '@/features/auth/actions/baseAuth';
 import { githubLogin, googleLogin } from '@/features/auth/actions/baseOAuth';
-import { AuthLoginForm, type IAuthLoginFormProps } from '@/features/auth/components/AuthLoginForm';
-import { Button } from '@heroui/button';
+import { AuthLoginForm } from '@/features/auth/components/AuthLoginForm';
+import { Button } from '@/lib/heroui';
 
 type IProps = IAuthLoginFormProps;
 

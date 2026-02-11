@@ -1,8 +1,10 @@
+import type { MDXEditorMethods, MDXEditorProps } from '@mdxeditor/editor';
+
 import { forwardRef, useEffect, useRef } from 'react';
 
 import { getMarkdownEditorPlugins } from '@/components/ui/editor/mdEditor.plugins';
 import { cn } from '@/lib/utils/cn';
-import { MDXEditor, type MDXEditorMethods, type MDXEditorProps } from '@mdxeditor/editor';
+import { MDXEditor } from '@mdxeditor/editor';
 
 import '@/styles/editor.css';
 import '@mdxeditor/editor/style.css';

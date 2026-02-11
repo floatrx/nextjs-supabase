@@ -1,4 +1,4 @@
-import { Link, LinkProps } from '@heroui/link';
+import { Link, LinkProps } from '@/lib/heroui';
 
 export type ExtLinkProps = LinkProps;
 

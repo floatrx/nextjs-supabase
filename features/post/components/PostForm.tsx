@@ -9,9 +9,9 @@ import { Editor } from '@/components/ui/editor/Editor';
 import { ImageUploader } from '@/components/ui/form/ImageUploader';
 import { PostCreateSchema } from '@/features/post/actions/validators/postCreateSchema';
 import { createSlug } from '@/features/post/lib/createSlug';
+import { Button } from '@/lib/heroui';
+import { Input } from '@/lib/heroui';
 import { cn } from '@/lib/utils/cn';
-import { Button } from '@heroui/button';
-import { Input } from '@heroui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 type FormValues = z.infer<typeof PostCreateSchema>;

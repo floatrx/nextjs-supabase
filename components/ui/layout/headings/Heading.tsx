@@ -1,4 +1,6 @@
-import { title, type TTitleVariant } from '@/components/primitives';
+import type { TTitleVariant } from '@/components/primitives';
+
+import { title } from '@/components/primitives';
 import { cn } from '@/lib/utils/cn';
 
 interface IProps {

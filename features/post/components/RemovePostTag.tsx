@@ -1,10 +1,12 @@
 'use client';
 
-import { Button, type ButtonProps } from '@heroui/button';
+import type { ButtonProps } from '@/lib/heroui';
+
 import { X } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
 import { removePostTag } from '@/features/post/actions/removePostTag';
+import { Button } from '@/lib/heroui';
 import { cn } from '@/lib/utils/cn';
 
 interface IProps extends ButtonProps {

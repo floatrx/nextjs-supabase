@@ -4,7 +4,6 @@ import { NavLink } from '@/components/ui/link/NavLink';
 import { ThemeSwitch } from '@/components/ui/ThemeSwitch';
 import { siteConfig } from '@/config/site';
 import { AuthButton } from '@/features/auth/components/AuthButton';
-import { createServerClient } from '@/lib/supabase/server';
 import {
   Navbar as HeroUINavbar,
   NavbarBrand,
@@ -13,7 +12,8 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-} from '@heroui/navbar';
+} from '@/lib/heroui';
+import { createServerClient } from '@/lib/supabase/server';
 
 export const Header = async () => {
   const supabase = await createServerClient();

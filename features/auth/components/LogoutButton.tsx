@@ -4,7 +4,7 @@ import { LogOut } from 'lucide-react';
 import { useServerAction } from 'zsa-react';
 
 import { signOut } from '@/features/auth/actions/signOut';
-import { Button } from '@heroui/button';
+import { Button } from '@/lib/heroui';
 
 export const LogoutButton = () => {
   const { isPending, execute: logout } = useServerAction(signOut);

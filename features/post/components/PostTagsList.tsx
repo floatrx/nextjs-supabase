@@ -1,3 +1,4 @@
+import type { TagItemProps } from '@/features/tag/components/TagItem';
 import type { TPostExtended } from '@/types/post';
 
 import Link from 'next/link';
@@ -5,7 +6,7 @@ import Link from 'next/link';
 import { OnlyAuth } from '@/components/guards/OnlyAuth';
 import { AddTagDropdown } from '@/features/post/components/AddTagDropdown';
 import { RemovePostTag } from '@/features/post/components/RemovePostTag';
-import { TagItem, type TagItemProps } from '@/features/tag/components/TagItem';
+import { TagItem } from '@/features/tag/components/TagItem';
 import { cn } from '@/lib/utils/cn';
 
 interface IProps extends Omit<TagItemProps, 'tag'> {
