@@ -86,7 +86,29 @@ Scripts for database administration are located in `lib/supabase/scripts/`:
 - **Validation**: Zod
 - **Code Quality**: ESLint, Prettier, Husky
 
+## Next.js 16 Migration
 
+This project was migrated from Next.js 15 to Next.js 16. Key changes:
+
+### Breaking Changes Addressed
+
+- **Middleware → Proxy**: Renamed `middleware.ts` to `proxy.ts` and exported `proxy` function instead of `middleware`
+- **Typed Routes**: Updated `PageProps` to use Next.js 16 typed routes syntax (`PageProps<'/blog/[slug]'>` instead of custom generic)
+- **Client Component Boundaries**: Created `LinkComponent` wrapper for passing Next.js `Link` to HeroUI's `as` prop (functions can't be passed directly to Client Components in Next.js 16)
+
+### Files Changed
+
+| File | Change |
+|------|--------|
+| `proxy.ts` | New file (renamed from `middleware.ts`), handles OAuth PKCE code redirect |
+| `global.d.ts` | Removed custom `PageProps` type (now provided by Next.js) |
+| `components/ui/link/LinkComponent.tsx` | New client wrapper for `Link` component |
+| `app/page.tsx`, `app/login/page.tsx`, `app/blog/[slug]/page.tsx`, `app/(private)/blog/edit/[id]/page.tsx` | Updated to use typed route `PageProps` |
+| `features/*/components/*.tsx` | Updated `as={Link}` to `as={LinkComponent}` |
+
+### New Environment Variable
+
+- `NEXT_PUBLIC_SITE_URL` — Production site URL for OAuth redirects (required for custom domains)
 
 ## 📂 Project Structure
 
