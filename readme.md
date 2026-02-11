@@ -1,10 +1,10 @@
 # 📝 Nextjs, HeroUI with Supabase
 
 ## 📸 Screenshots
-![Screenshot 1](screenshots/scr-auth.png)
-![Screenshot 2](screenshots/scr-1.png)
-![Screenshot 2](screenshots/scr-2.png)
-![Screenshot 2](screenshots/scr-editor.png)
+![Screenshot 1](public/screenshots/scr-auth.png)
+![Screenshot 2](public/screenshots/scr-1.png)
+![Screenshot 2](public/screenshots/scr-2.png)
+![Screenshot 2](public/screenshots/scr-editor.png)
 
 > A modern fullstack Next.js + Supabase application for managing Notes, Blog Posts, and User Profiles with Tags and Media Uploads.
 
