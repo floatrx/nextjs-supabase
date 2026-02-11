@@ -1,7 +1,7 @@
 {
   "name": "next-supabase",
   "description": "Next.js Blog with Supabase",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": true,
   "type": "module",
   "scripts": {
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@heroui/react": "^2.8.8",
+    "@heroui/theme": "^2.4.26",
     "@hookform/resolvers": "5.2.2",
     "@mdxeditor/editor": "3.52.3",
     "@react-aria/ssr": "3.9.10",
